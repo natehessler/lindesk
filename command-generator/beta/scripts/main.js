@@ -1,6 +1,6 @@
 window.onload = function() {
     // initial state
-    let type, functions, command, desc, ns, pod = null;
+    let type, functions, command, command2, desc, ns, pod = null;
     let podDiv = $("#pod-name"), namespace = $("#namespace"), check = $("#namespace-check");
     podDiv.hide(), namespace.hide(), check.hide();
 
@@ -17,14 +17,15 @@ window.onload = function() {
         // when a function is selected
         functions.change(() => {
             command = functions.val();
+            $(`#${type} option:selected`).attr("value2") ? command2 = $(`#${type} option:selected`).attr("value2") : command2 = "";
             $("#copy-btn").removeClass("d-none")
             // if pod name is required
-            if(($(`#${type} option:selected`).attr("pod"))) {
+            if($(`#${type} option:selected`).attr("pod")) {
                 podDiv.show();
                 pod = podDiv.val();
             } else pod = "";
             // display command line
-            ns ? $('#output').val(command+pod+" -n "+ns) : $('#output').val(command+pod);
+            ns ? $('#output').val(command+pod+command2+" -n "+ns) : $('#output').val(command+pod+command2);
             // display description text
             // desc = ($(`#${type} option:selected`).attr("title"))
             // $('#description').text(desc)
@@ -34,7 +35,7 @@ window.onload = function() {
     // when pod name is updated
     podDiv.change(() => {
         pod = podDiv.val();
-        ns ? $('#output').val(command+pod+" -n "+ns) : $('#output').val(command+pod);
+        ns ? $('#output').val(command+pod+command2+" -n "+ns) : $('#output').val(command+pod+command2);
     })
 
     // when namespace checkbox is updated
