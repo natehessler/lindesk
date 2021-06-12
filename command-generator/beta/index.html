@@ -40,7 +40,7 @@
                     <option value="docker ps -a" data-toggle="tooltip" data-placement="right" title="List services">List Services</option>
                     <option value="docker run" data-toggle="tooltip" data-placement="right" title="The docker run command first creates a writeable container layer over the specified image, and then starts it using the specified command.">Start Sourcegraph</option>
                     <option value="docker restart " pod=true data-toggle="tooltip" data-placement="right" title="Restart one or more containers">Restart Sourcegraph</option>
-                    <option value="docker exec -it $CONTAINER_NAME bash" data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
+                    <option value="docker exec -it " value2=" bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                 </select>
                 <!-- Docker Compose -->
                 <select id="t2" class="form-select d-none" aria-label="Default select example">
@@ -49,7 +49,7 @@
                     <option value="docker-compose ps" data-toggle="tooltip" data-placement="right" title="List containers">List Containers</option>
                     <option value="docker-compose up -d" data-toggle="tooltip" data-placement="right" title="Builds, (re)creates, starts, and attaches to containers for a service.">Start/Restart Sourcegraph</option>
                     <option value="docker-compose down" data-toggle="tooltip" data-placement="right" title="Stops containers and removes containers, networks, volumes, and images created by up.">Shutdown Sourcegraph</option>
-                    <option value="docker-compose exec -it $CONTAINER_NAME bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
+                    <option value="docker-compose exec -it " value2=" bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                 </select>
                 <!-- Kubernetes -->
                 <select id="t3" class="form-select d-none" aria-label="Default select example">
@@ -63,7 +63,7 @@
                     <option value="kubectl get pvc" data-toggle="tooltip" data-placement="right" title="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
                     <option value="kubectl get pv" data-toggle="tooltip" data-placement="right" title="List all Persistent Volumes (PVs) that have been provisioned. In a healthy cluster, there should be a one-to-one mapping between PVs and PVCs">Persistent Volumes (PVs) List</option>
                     <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access Sourcegraph in your cluster locally.">Post Forward</option>
-                    <option value="kubectl exec -it  " value2=" /bin/bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
+                    <option value="kubectl exec -it  " value2=" sh" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                     <option value="kubectl exec " value2=" -- psql -U sg -c 'SELECT * FROM schema_migrations'" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to check for database.">Check Dirty Database</option>
                     <option value="kubectl exec " value2=" -- psql -U sg -c" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to run psql query.">Run PSQL Queries in Pod</option>
                 </select>
@@ -82,7 +82,7 @@
                     </div>
                     <!-- description -->
                     <text id="description" class="text-primary"></text>
-                    <div class="alert alert-success alert-dismissible fade" role="alert">
+                    <div class="alert alert-success alert-dismissible fade mt-2" role="alert">
                         <strong>Copied Successfully!</strong>
                         <button id="close" type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

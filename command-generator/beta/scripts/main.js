@@ -54,6 +54,7 @@ window.onload = function() {
     $('#copy-btn').click(() => {
         $('#output').select();
         document.execCommand("copy");
+        // display warning
         $('.alert').addClass("show");
     })
 
