@@ -12,7 +12,8 @@
     <title>Command Line Generator</title>
 </head>
 <body class="p-5">
-    <div class="container m-5">
+    <h1 class="m-3 text-center">Command Line Generator</h1>
+    <div class="container">
         <div class="row">
             <!-- Deployment Types -->
             <div class="col card m-5 p-5">
@@ -22,46 +23,68 @@
                     <option id="dc" value="t2">Docker Compose</option>
                     <option id="k8s" value="t3">Kubernetes</option>
                 </select>
+                <input id="namespace" class="mt-3" value="$NAMESPACE"></input>
+                <div id="namespace-check" class="form-check">
+                    <input id="namespace-box" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Namespace?
+                    </label>
+                </div>
             </div>
             <!-- Functions -->
-            <div class="col card m-5 p-5">
+            <div id="functions" class="col card m-5 p-5">
+                <!-- Docker -->
                 <select id="t1" class="form-select d-none" aria-label="Default select example">
                     <option selected>Function</option>
-                    <option value="t1-1">Check Logs</option>
-                    <option value="t1-2">List Pods</option>
-                    <option value="t1-3">Restart Sourcegraph</option>
-                    <option value="t1-4">Get Events</option>
-                    <option value="t1-5">Delete Pod</option>
+                    <option value="docker logs" data-toggle="tooltip" data-placement="right" title="Get the logs of a container">Check Logs</option>
+                    <option value="docker ps -a" data-toggle="tooltip" data-placement="right" title="List services">List Services</option>
+                    <option value="docker run" data-toggle="tooltip" data-placement="right" title="The docker run command first creates a writeable container layer over the specified image, and then starts it using the specified command.">Start Sourcegraph</option>
+                    <option value="docker restart " pod=true data-toggle="tooltip" data-placement="right" title="Restart one or more containers">Restart Sourcegraph</option>
+                    <option value="docker exec -it $CONTAINER_NAME bash" data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                 </select>
+                <!-- Docker Compose -->
                 <select id="t2" class="form-select d-none" aria-label="Default select example">
                     <option selected>Function</option>
-                    <option value="t2-1">Check Logs</option>
-                    <option value="t2-2">List Pods</option>
-                    <option value="t2-3">Restart Sourcegraph</option>
-                    <option value="t2-4">Get Events</option>
-                    <option value="t2-5">Delete Pod</option>
+                    <option value="docker-compose logs" data-toggle="tooltip" data-placement="right" title="Displays log output from services.">Check Logs</option>
+                    <option value="docker-compose ps" data-toggle="tooltip" data-placement="right" title="List containers">List Containers</option>
+                    <option value="docker-compose up -d" data-toggle="tooltip" data-placement="right" title="Builds, (re)creates, starts, and attaches to containers for a service.">Start/Restart Sourcegraph</option>
+                    <option value="docker-compose down" data-toggle="tooltip" data-placement="right" title="Stops containers and removes containers, networks, volumes, and images created by up.">Shutdown Sourcegraph</option>
+                    <option value="docker-compose exec -it $CONTAINER_NAME bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                 </select>
+                <!-- Kubernetes -->
                 <select id="t3" class="form-select d-none" aria-label="Default select example">
                     <option selected>Function</option>
-                    <option value="kubectl logs -f $POD_NAME" label="Tail the logs for the specified pod.">Check Logs</option>
-                    <option value="kubectl get pods -o=wide" label="List all pods in your cluster and the corresponding health status of each pod">List Pods</option>
-                    <option value="kubectl describe $POD_NAME" label="kubectl describe $POD_NAME">Describe Pods</option>
-                    <option value="kubectl rollout restart deployment sourcegraph-frontend" label="Restarting Sourcegraph Instance by restarting the frontend pod.">Restart Sourcegraph</option>
-                    <option value="kubectl get events" label="List all events in the cluster’s history.">Get Events</option>
-                    <option value="kubectl delete pod $POD_NAME">Delete Pod</option>
-                    <option value="kubectl get pvc" label="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
-                    <option value="kubectl get pv"label="List all Persistent Volumes (PVs) that have been provisioned. In a healthy cluster, there should be a one-to-one mapping between PVs and PVCs">Persistent Volumes (PVs) List</option>
+                    <option value="kubectl logs -f " pod=true data-toggle="tooltip" data-placement="right" title="Tail the logs for the specified pod.">Check Logs</option>
+                    <option value="kubectl get pods -o=wide " data-toggle="tooltip" data-placement="right" title="List all pods in your cluster and the corresponding health status of each pod">List Pods</option>
+                    <option value="kubectl describe pod " pod=true data-toggle="tooltip" data-placement="right" title="Display detailed information about the status of a single pod">Describe Pod</option>
+                    <option value="kubectl rollout restart deployment sourcegraph-frontend" data-toggle="tooltip" data-placement="right" title="Restarting Sourcegraph Instance by restarting the frontend pod.">Restart Sourcegraph</option>
+                    <option value="kubectl get events " data-toggle="tooltip" data-placement="right" title="List all events in the cluster’s history.">Get Events</option>
+                    <option value="kubectl delete pod " pod=true data-toggle="tooltip" data-placement="right" title="Delete failing pod so it gets recreated, possibly on a different node">Delete Pod</option>
+                    <option value="kubectl get pvc" data-toggle="tooltip" data-placement="right" title="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
+                    <option value="kubectl get pv" data-toggle="tooltip" data-placement="right" title="List all Persistent Volumes (PVs) that have been provisioned. In a healthy cluster, there should be a one-to-one mapping between PVs and PVCs">Persistent Volumes (PVs) List</option>
+                    <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access Sourcegraph in your cluster locally.">Post Forward</option>
+                    <option value="kubectl exec -it $POD_NAME /bin/bash" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                 </select>
+                <input id="pod-name" class="mt-3" value="$POD_NAME"></input>
             </div>
             </div>
             <!-- OUTPUT CONSOLE -->
             <div class="row">
             <div class="col card m-5 p-5">
                 <div id="output-console">
-                    <text id="description" class="text-primary"></text>
-                    <textarea id="output" class="p-2 bg-primary text-white w-100 mt-3">command output</textarea>
+                    <!-- output area -->
+                    <textarea id="output" class="p-2 bg-primary text-white w-100 mt-3">Choose a deployment type to begin.</textarea>
+                    <!-- copy button -->
                     <div class="text-right">
-                        <button id="copy-btn" class="btn btn-primary mt-3">Copy</button>
+                        <button id="copy-btn" class="btn btn-primary mt-3 d-none">Copy</button>
+                    </div>
+                    <!-- description -->
+                    <text id="description" class="text-primary"></text>
+                    <div class="alert alert-success alert-dismissible fade" role="alert">
+                        <strong>Copied Successfully!</strong>
+                        <button id="close" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             </div>
