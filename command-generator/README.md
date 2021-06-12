@@ -2,6 +2,8 @@
 
 A web app that generates the most frequently used commands for different deployment type when supporting a customer.
 
+<img width="1195" alt="clg" width="100%" src="https://user-images.githubusercontent.com/68532117/121770229-0008d100-cb1d-11eb-9a47-e81a4e1beb23.png">
+
 ## Features
 
 - generates command line based on selected deployment type, currently supports Docker, Docker Compose, K8s
