@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/main.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Command Line Generator</title>
+</head>
+<body class="p-5">
+    <div class="container m-5">
+        <div class="row">
+            <!-- Deployment Types -->
+            <div class="col card m-5 p-5">
+                <select id="d-types" class="form-select" aria-label="Default select example">
+                    <option selected>Deployment Type</option>
+                    <option id="sd" value="t1">Single Docker</option>
+                    <option id="dc" value="t2">Docker Compose</option>
+                    <option id="k8s" value="t3">Kubernetes</option>
+                </select>
+            </div>
+            <!-- Functions -->
+            <div class="col card m-5 p-5">
+                <select id="t1" class="form-select d-none" aria-label="Default select example">
+                    <option selected>Function</option>
+                    <option value="t1-1">Check Logs</option>
+                    <option value="t1-2">List Pods</option>
+                    <option value="t1-3">Restart Sourcegraph</option>
+                    <option value="t1-4">Get Events</option>
+                    <option value="t1-5">Delete Pod</option>
+                </select>
+                <select id="t2" class="form-select d-none" aria-label="Default select example">
+                    <option selected>Function</option>
+                    <option value="t2-1">Check Logs</option>
+                    <option value="t2-2">List Pods</option>
+                    <option value="t2-3">Restart Sourcegraph</option>
+                    <option value="t2-4">Get Events</option>
+                    <option value="t2-5">Delete Pod</option>
+                </select>
+                <select id="t3" class="form-select d-none" aria-label="Default select example">
+                    <option selected>Function</option>
+                    <option value="kubectl logs -f $POD_NAME" label="Tail the logs for the specified pod.">Check Logs</option>
+                    <option value="kubectl get pods -o=wide" label="List all pods in your cluster and the corresponding health status of each pod">List Pods</option>
+                    <option value="kubectl describe $POD_NAME" label="kubectl describe $POD_NAME">Describe Pods</option>
+                    <option value="kubectl rollout restart deployment sourcegraph-frontend" label="Restarting Sourcegraph Instance by restarting the frontend pod.">Restart Sourcegraph</option>
+                    <option value="kubectl get events" label="List all events in the cluster’s history.">Get Events</option>
+                    <option value="kubectl delete pod $POD_NAME">Delete Pod</option>
+                    <option value="kubectl get pvc" label="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
+                    <option value="kubectl get pv"label="List all Persistent Volumes (PVs) that have been provisioned. In a healthy cluster, there should be a one-to-one mapping between PVs and PVCs">Persistent Volumes (PVs) List</option>
+                </select>
+            </div>
+            </div>
+            <!-- OUTPUT CONSOLE -->
+            <div class="row">
+            <div class="col card m-5 p-5">
+                <div id="output-console">
+                    <text id="description" class="text-primary"></text>
+                    <textarea id="output" class="p-2 bg-primary text-white w-100 mt-3">command output</textarea>
+                    <div class="text-right">
+                        <button id="copy-btn" class="btn btn-primary mt-3">Copy</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</body>
+</html>
