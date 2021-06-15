@@ -65,7 +65,6 @@
                     <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access Sourcegraph in your cluster locally.">Port Forward</option>
                     <option value="kubectl exec -it  " value2=" sh" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                     <option value="kubectl exec " value2=" -- psql -U sg -c 'SELECT * FROM schema_migrations'" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to check for database.">Check Dirty Database</option>
-                    <option value="kubectl exec " value2=" -- psql -U sg -c" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to run psql query.">Run PSQL Queries in Pod</option>
                 </select>
                 <input id="pod-name" class="mt-3" value="$POD_NAME"></input>
             </div>
