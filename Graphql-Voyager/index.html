@@ -23,26 +23,25 @@
   <body>
     <div id="voyager">
       <div class="container p-3">
-        <div class="text-center p-3">
-          <form>
-            <div class="form-group">
+        <div class="p-3 d-flex justify-content-center">
+          <form style="width:500px" class="text-center d-flex">
               <input
                 type="password"
                 name="token"
-                class="form-control"
+                class="form-control m-2"
                 id="token"
-                placeholder="Enter Token Here"
+                placeholder="Enter Your Sourcegraph Token Here"
               />
               <button
                 type="submit"
                 onclick="return setButton()"
-                class="btn btn-primary mb-2"
+                class="btn btn-outline-primary"
               >
                 Submit
               </button>
-            </div>
           </form>
         </div>
+        <!-- https://cors-anywhere.herokuapp.com/ -->
       </div>
     </div>
     <script>
