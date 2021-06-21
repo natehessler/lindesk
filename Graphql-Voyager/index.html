@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      integrity="undefined"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+      integrity="undefined"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@16/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@16/umd/react-dom.production.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.min.js"></script>
+  </head>
+  <body>
+    <div id="voyager">
+      <div class="container p-3">
+        <div class="text-center">
+          <img
+            src="https://sourcegraph.com/.assets/img/sourcegraph-mark.svg"
+            width="20%"
+          />
+        </div>
+        <div class="p-3 d-flex justify-content-center">
+          <form style="width: 500px" class="text-center">
+            <input
+              type="password"
+              name="token"
+              class="form-control m-2"
+              id="token"
+              placeholder="Enter Your Sourcegraph Token Here"
+            />
+            <button
+              type="submit"
+              onclick="return setButton()"
+              class="btn btn-outline-primary"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+        <!-- https://cors-anywhere.herokuapp.com/ -->
+      </div>
+    </div>
+    <script>
+      let token;
+      function setButton() {
+        token = document.getElementById("token").value;
+        GraphQLVoyager.init(document.getElementById("voyager"), {
+          introspection: introspectionProvider,
+        });
+      }
+      function introspectionProvider(introspectionQuery) {
+        return fetch(
+          `https://cors-anywhere.herokuapp.com/https://sourcegraph.com/.api/graphql`,
+          {
+            method: "post",
+            body: JSON.stringify({ query: introspectionQuery }),
+            headers: {
+              Authorization: "token " + token,
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          }
+        ).then((response) => response.json());
+      }
+    </script>
+  </body>
+</html>
