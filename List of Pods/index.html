@@ -45,16 +45,19 @@
                         <div class="col-8">
                             <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="list-pod0" role="tabpanel" aria-labelledby="list-pod0-list">
-                                <p>#TODO</p>
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">cAdvisor exports container monitoring metrics scraped by Prometheus and visualized in Grafana.</li>
+                                </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod1" role="tabpanel" aria-labelledby="list-pod1-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">A third PostgreSQL instance for storing code insights data.</li>
+                                    <li class="list-group-item">A PostgreSQL instance for storing code insights data.</li>
+                                    <li class="list-group-item">Added in 3.25.0</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod2" role="tabpanel" aria-labelledby="list-pod2-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">A second PostgreSQL instance for storing large-volume precise code intelligence data.</li>
+                                    <li class="list-group-item">A PostgreSQL instance for storing large-volume precise code intelligence data.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod3" role="tabpanel" aria-labelledby="list-pod3-list">
@@ -64,7 +67,7 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod4" role="tabpanel" aria-labelledby="list-pod4-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">is the sharded service that stores the code and makes it accessible to other Sourcegraph services</li>
+                                    <li class="list-group-item">This is the sharded service that stores the code and makes it accessible to other Sourcegraph services</li>
                                     <li class="list-group-item">Mirrors repositories from their code host. All other Sourcegraph services talk to gitserver when they need data from git. </li>
                                     <li class="list-group-item">Requests for fetch operations, however, go through repo-updater.</li>
                                 </ol>
@@ -80,13 +83,13 @@
                             <div class="tab-pane fade" id="list-pod6" role="tabpanel" aria-labelledby="list-pod6-list">
                                 <p>Run zoekt for indexed search, which is a fast text search engine, intended for use with source code.</p>
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">zoekt webserver: zoekt runs searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup)</li>
-                                    <li class="list-group-item">zoekt indexserver: a Sourcegraph specific command which indexes all enabled repositories on Sourcegraph, as well as keeping the indexes up to date.</li>
+                                    <li class="list-group-item">Zoekt webserver: zoekt runs searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup)</li>
+                                    <li class="list-group-item">Zoekt indexserver: a Sourcegraph specific command which indexes all enabled repositories on Sourcegraph, as well as keeping the indexes up to date.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod7" role="tabpanel" aria-labelledby="list-pod7-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">is the distributed tracing service used by Sourcegraph</li>
+                                    <li class="list-group-item">The distributed tracing service used by Sourcegraph</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod8" role="tabpanel" aria-labelledby="list-pod8-list">
@@ -97,7 +100,7 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod9" role="tabpanel" aria-labelledby="list-pod9-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">the main database for sourcegraph, where things like repo lists are stored, user data, siteconfig (anything not related to code-intel and code-insights)
+                                    <li class="list-group-item">The main Postgres database for Dourcegraph, where things like repo lists are stored, user data, siteconfig (anything not related to code-intel and code-insights)
                                     </li>
                                     <li class="list-group-item">A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.
                                     </li>
@@ -141,7 +144,7 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod16" role="tabpanel" aria-labelledby="list-pod16-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">part of unindexed search</li>
+                                    <li class="list-group-item">Part of unindexed search</li>
                                     <li class="list-group-item">This service should be scaled up to the more on-demand searches that need to be done at once. For a search the frontend will scatter the search for each repo@commit across the replicas. The frontend will then gather the results. Like gitserver this is an IO and compute bound service</li>
                                     <li class="list-group-item">Its state is just a disk cache which can be lost at any time without being detrimental.</li>
                                     <li class="list-group-item">If the size of repo is bigger than the disk it will result in error</li>
@@ -149,7 +152,7 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod17" role="tabpanel" aria-labelledby="list-pod17-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">frontend server that serves the web application, extensions, and graphQL services</li>
+                                    <li class="list-group-item">Frontend server that serves the web application, extensions, and graphQL services</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod18" role="tabpanel" aria-labelledby="list-pod18-list">
@@ -161,11 +164,16 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod19" role="tabpanel" aria-labelledby="list-pod19-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">an HTTP server that exposes the Rust Syntect syntax highlighting library for use by other services. </li>
+                                    <li class="list-group-item">An HTTP server that exposes the Rust Syntect syntax highlighting library for use by other services. </li>
                                     <li class="list-group-item">Send it some code, and it'll send you syntax-highlighted code in response.</li>
                                 </ol>
                             </div>
-                            <div class="tab-pane fade" id="list-pod20" role="tabpanel" aria-labelledby="list-pod20-list">#TODO</div>
+                            <div class="tab-pane fade" id="list-pod20" role="tabpanel" aria-labelledby="list-pod20-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">The following jobs are defined by the worker service: codeintel-commitgraph, codeintel-janitor, and codeintel-auto-indexing.</li>
+                                    <li class="list-group-item">Added in 3.29.0.</li>
+                                </ol>
+                            </div>
                         </div>
                         </div>
                     </div>
