@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="icon" href="https://sourcegraph.com/.assets/img/favicon.png" sizes="16x16" type="image/png">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Sourcegraph Support Tools</title>
+</head>
+<body class="p-5">
+    <h3 class="p-5 text-center">List of Pods and Services</h3>
+        <div class="container p-3">
+            <div class="tab-pane" id="list-pods-list" role="tabpanel" aria-labelledby="list-pods-list-list">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="list-group" id="list-tab" role="tablist">
+                            <a class="list-group-item list-group-item-action active" id="list-pod0-list" data-toggle="list" href="#list-pod0" role="tab" aria-controls="home">cadvisor</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod1-list" data-toggle="list" href="#list-pod1" role="tab" aria-controls="home">codeinsights-db</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod2-list" data-toggle="list" href="#list-pod2" role="tab" aria-controls="profile">codeintel-db</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod3-list" data-toggle="list" href="#list-pod3" role="tab" aria-controls="messages">github-proxy</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod4-list" data-toggle="list" href="#list-pod4" role="tab" aria-controls="settings">gitserver</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod5-list" data-toggle="list" href="#list-pod5" role="tab" aria-controls="settings">grafana</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod6-list" data-toggle="list" href="#list-pod6" role="tab" aria-controls="settings">Indexed-search</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod7-list" data-toggle="list" href="#list-pod7" role="tab" aria-controls="settings">jaeger</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod8-list" data-toggle="list" href="#list-pod8" role="tab" aria-controls="settings">minio</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod9-list" data-toggle="list" href="#list-pod9" role="tab" aria-controls="settings">pgsql</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod10-list" data-toggle="list" href="#list-pod10" role="tab" aria-controls="settings">precise-code-intel-worker</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod11-list" data-toggle="list" href="#list-pod11" role="tab" aria-controls="settings">prometheus</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod12-list" data-toggle="list" href="#list-pod12" role="tab" aria-controls="settings">query-runner</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod13-list" data-toggle="list" href="#list-pod13" role="tab" aria-controls="settings">redis-cache</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod14-list" data-toggle="list" href="#list-pod14" role="tab" aria-controls="settings">redis-store</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod15-list" data-toggle="list" href="#list-pod15" role="tab" aria-controls="settings">repo-updater</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod16-list" data-toggle="list" href="#list-pod16" role="tab" aria-controls="settings">searcher</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod17-list" data-toggle="list" href="#list-pod17" role="tab" aria-controls="settings">sourcegraph-frontend</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod18-list" data-toggle="list" href="#list-pod18" role="tab" aria-controls="settings">symbols</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod19-list" data-toggle="list" href="#list-pod19" role="tab" aria-controls="settings">syntect-server</a>
+                            <a class="list-group-item list-group-item-action" id="list-pod20-list" data-toggle="list" href="#list-pod20" role="tab" aria-controls="settings">worker</a>
+                        </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-pod0" role="tabpanel" aria-labelledby="list-pod0-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">cAdvisor exports container monitoring metrics scraped by Prometheus and visualized in Grafana.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod1" role="tabpanel" aria-labelledby="list-pod1-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A PostgreSQL instance for storing code insights data.</li>
+                                    <li class="list-group-item">Added in 3.25.0</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod2" role="tabpanel" aria-labelledby="list-pod2-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A PostgreSQL instance for storing large-volume precise code intelligence data.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod3" role="tabpanel" aria-labelledby="list-pod3-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Proxies all requests to github.com to keep track of rate limits and prevent triggering abuse mechanisms.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod4" role="tabpanel" aria-labelledby="list-pod4-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">This is the sharded service that stores the code and makes it accessible to other Sourcegraph services</li>
+                                    <li class="list-group-item">Mirrors repositories from their code host. All other Sourcegraph services talk to gitserver when they need data from git. </li>
+                                    <li class="list-group-item">Requests for fetch operations, however, go through repo-updater.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod5" role="tabpanel" aria-labelledby="list-pod5-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A frontend for service metrics that displays data from Prometheus and Jaeger, and ships with customized dashboards for Sourcegraph services.</li>
+                                    <li class="list-group-item">Displaying generated dashboards for our Prometheus metrics and alerts.
+                                    </li>
+                                    <li class="list-group-item">Providing an interface to query Prometheus metrics and Jaeger traces.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod6" role="tabpanel" aria-labelledby="list-pod6-list">
+                                <p>Run zoekt for indexed search, which is a fast text search engine, intended for use with source code.</p>
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Zoekt webserver: zoekt runs searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup)</li>
+                                    <li class="list-group-item">Zoekt indexserver: a Sourcegraph specific command which indexes all enabled repositories on Sourcegraph, as well as keeping the indexes up to date.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod7" role="tabpanel" aria-labelledby="list-pod7-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">The distributed tracing service used by Sourcegraph</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod8" role="tabpanel" aria-labelledby="list-pod8-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A MinIO instance that serves as a local S3-compatible object storage to hold user uploads for code-intel before they can be processed.</li>
+                                    <li class="list-group-item">Called bundle manager before 3.22.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod9" role="tabpanel" aria-labelledby="list-pod9-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">The main Postgres database for Dourcegraph, where things like repo lists are stored, user data, siteconfig (anything not related to code-intel and code-insights)
+                                    </li>
+                                    <li class="list-group-item">A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod10" role="tabpanel" aria-labelledby="list-pod10-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">It converts LSIF upload file into Postgres data. This service is horizontally scalable.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod11" role="tabpanel" aria-labelledby="list-pod11-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Collect high-level, and low-cardinality, metrics from our services.</li>
+                                    <li class="list-group-item">Prometheus recording rules, alert_count.</li>
+                                    <li class="list-group-item">Prometheus alert rules (which trigger notifications) based on alert_count metrics.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod12" role="tabpanel" aria-labelledby="list-pod12-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">part of the search query, saved searches. It handles notifications related to Saved Searches</li>
+                                    <li class="list-group-item">Periodically runs saved searches, determines the difference in results, and sends notification emails. It is a singleton service by design so there must only be one replica.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod13" role="tabpanel" aria-labelledby="list-pod13-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A Redis instance for storing cache data.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod14" role="tabpanel" aria-labelledby="list-pod14-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">A Redis instance for storing short-term information such as user sessions</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod15" role="tabpanel" aria-labelledby="list-pod15-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Repo-updater manages scheduling and takes care of cloning, updating external repositories
+                                    </li>
+                                    <li class="list-group-item">Repo-updater tracks the state of repos, and is responsible for automatically scheduling updates ("git fetch" runs) using gitserver. Other apps which desire updates or fetches should be telling repo-updater, rather than using gitserver directly, so repo-updater can take their changes into account. It is a singleton service by design, so there must only be one replica.
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod16" role="tabpanel" aria-labelledby="list-pod16-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Part of unindexed search</li>
+                                    <li class="list-group-item">This service should be scaled up to the more on-demand searches that need to be done at once. For a search the frontend will scatter the search for each repo@commit across the replicas. The frontend will then gather the results. Like gitserver this is an IO and compute bound service</li>
+                                    <li class="list-group-item">Its state is just a disk cache which can be lost at any time without being detrimental.</li>
+                                    <li class="list-group-item">If the size of repo is bigger than the disk it will result in error</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod17" role="tabpanel" aria-labelledby="list-pod17-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Frontend server that serves the web application, extensions, and graphQL services</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod18" role="tabpanel" aria-labelledby="list-pod18-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Indexes symbols in repositories using Ctags. Similar in architecture to searcher, except over ctags output</li>
+                                    <li class="list-group-item">The ctags output is stored in SQLite files on disk (one per repository@commit). Ctags processing is lazy, so it will occur only when you first query the symbols service. Subsequent queries will use the cached on-disk SQLite DB.</li>
+                                    <li class="list-group-item">It is used by basic-code-intel to provide the jump-to-definition feature</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod19" role="tabpanel" aria-labelledby="list-pod19-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">An HTTP server that exposes the Rust Syntect syntax highlighting library for use by other services. </li>
+                                    <li class="list-group-item">Send it some code, and it'll send you syntax-highlighted code in response.</li>
+                                </ol>
+                            </div>
+                            <div class="tab-pane fade" id="list-pod20" role="tabpanel" aria-labelledby="list-pod20-list">
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">The following jobs are defined by the worker service: codeintel-commitgraph, codeintel-janitor, and codeintel-auto-indexing.</li>
+                                    <li class="list-group-item">Added in 3.29.0.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
