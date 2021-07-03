@@ -67,8 +67,8 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod4" role="tabpanel" aria-labelledby="list-pod4-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">This is the sharded service that stores the code and makes it accessible to other Sourcegraph services</li>
-                                    <li class="list-group-item">Mirrors repositories from their code host. All other Sourcegraph services talk to gitserver when they need data from git. </li>
+                                    <li class="list-group-item">This is the sharded service that stores the code and makes it accessible to other Sourcegraph services.</li>
+                                    <li class="list-group-item">Mirrors repositories from their code host. All other Sourcegraph services talk to gitserver when they need data from git.</li>
                                     <li class="list-group-item">Requests for fetch operations, however, go through repo-updater.</li>
                                 </ol>
                             </div>
@@ -81,15 +81,16 @@
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod6" role="tabpanel" aria-labelledby="list-pod6-list">
-                                <p>Run zoekt for indexed search, which is a fast text search engine, intended for use with source code.</p>
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">Zoekt webserver: zoekt runs searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup)</li>
+                                    <li class="list-group-item">Run zoekt for indexed search, which is a fast text search engine, intended for use with source code.</li>
+                                    <li class="list-group-item">Zoekt webserver: zoekt runs searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup).</li>
                                     <li class="list-group-item">Zoekt indexserver: a Sourcegraph specific command which indexes all enabled repositories on Sourcegraph, as well as keeping the indexes up to date.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod7" role="tabpanel" aria-labelledby="list-pod7-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">The distributed tracing service used by Sourcegraph</li>
+                                    <li class="list-group-item">The distributed tracing service used by Sourcegraph.</li>
+                                    <li class="list-group-item">jaeger-agent is a sidecar used in Kubernetes deployments for collecting traces from services.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod8" role="tabpanel" aria-labelledby="list-pod8-list">
@@ -100,10 +101,8 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod9" role="tabpanel" aria-labelledby="list-pod9-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">The main Postgres database for Dourcegraph, where things like repo lists are stored, user data, siteconfig (anything not related to code-intel and code-insights)
-                                    </li>
-                                    <li class="list-group-item">A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.
-                                    </li>
+                                    <li class="list-group-item">The main Postgres database for Sourcegraph, where things like repo lists are stored, user data, site config (anything not related to code-intel and code-insights).</li>
+                                    <li class="list-group-item">A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod10" role="tabpanel" aria-labelledby="list-pod10-list">
@@ -120,8 +119,9 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod12" role="tabpanel" aria-labelledby="list-pod12-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">part of the search query, saved searches. It handles notifications related to Saved Searches</li>
-                                    <li class="list-group-item">Periodically runs saved searches, determines the difference in results, and sends notification emails. It is a singleton service by design so there must only be one replica.</li>
+                                    <li class="list-group-item">Part of the search query, saved searches. It handles notifications related to Saved Searches</li>
+                                    <li class="list-group-item">Periodically runs saved searches, determines the difference in results, and sends notification emails.</li>
+                                    <li class="list-group-item">It is a singleton service by design so there must only be one replica.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod13" role="tabpanel" aria-labelledby="list-pod13-list">
@@ -136,10 +136,9 @@
                             </div>
                             <div class="tab-pane fade" id="list-pod15" role="tabpanel" aria-labelledby="list-pod15-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">Repo-updater manages scheduling and takes care of cloning, updating external repositories
-                                    </li>
-                                    <li class="list-group-item">Repo-updater tracks the state of repos, and is responsible for automatically scheduling updates ("git fetch" runs) using gitserver. Other apps which desire updates or fetches should be telling repo-updater, rather than using gitserver directly, so repo-updater can take their changes into account. It is a singleton service by design, so there must only be one replica.
-                                    </li>
+                                    <li class="list-group-item">Repo-updater manages scheduling and takes care of cloning, updating external repositories.</li>
+                                    <li class="list-group-item">Repo-updater tracks the state of repos, and is responsible for automatically scheduling updates ("git fetch" runs) using gitserver. Other apps which desire updates or fetches should be telling repo-updater, rather than using gitserver directly, so repo-updater can take their changes into account.</li>
+                                    <li class="list-group-item">It is a singleton service by design, so there must only be one replica.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod16" role="tabpanel" aria-labelledby="list-pod16-list">
@@ -148,28 +147,30 @@
                                     <li class="list-group-item">This service should be scaled up to the more on-demand searches that need to be done at once. For a search the frontend will scatter the search for each repo@commit across the replicas. The frontend will then gather the results. Like gitserver this is an IO and compute bound service</li>
                                     <li class="list-group-item">Its state is just a disk cache which can be lost at any time without being detrimental.</li>
                                     <li class="list-group-item">If the size of repo is bigger than the disk it will result in error</li>
+                                    <li class="list-group-item">Almost every service is linked to the frontend, from which it gathers configuration updates.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod17" role="tabpanel" aria-labelledby="list-pod17-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">Frontend server that serves the web application, extensions, and graphQL services</li>
+                                    <li class="list-group-item">Frontend server that serves the web application, extensions, and graphQL services.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod18" role="tabpanel" aria-labelledby="list-pod18-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">Indexes symbols in repositories using Ctags. Similar in architecture to searcher, except over ctags output</li>
+                                    <li class="list-group-item">Indexes symbols in repositories using Ctags. Similar in architecture to searcher, except over ctags output.</li>
                                     <li class="list-group-item">The ctags output is stored in SQLite files on disk (one per repository@commit). Ctags processing is lazy, so it will occur only when you first query the symbols service. Subsequent queries will use the cached on-disk SQLite DB.</li>
-                                    <li class="list-group-item">It is used by basic-code-intel to provide the jump-to-definition feature</li>
+                                    <li class="list-group-item">It is used by basic-code-intel to provide the jump-to-definition feature.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod19" role="tabpanel" aria-labelledby="list-pod19-list">
                                 <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item">An HTTP server that exposes the Rust Syntect syntax highlighting library for use by other services. </li>
+                                    <li class="list-group-item">An HTTP server that exposes the Rust Syntect syntax highlighting library for use by other services.</li>
                                     <li class="list-group-item">Send it some code, and it'll send you syntax-highlighted code in response.</li>
                                 </ol>
                             </div>
                             <div class="tab-pane fade" id="list-pod20" role="tabpanel" aria-labelledby="list-pod20-list">
                                 <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">The worker service is a collection of background jobs that run periodically or in response to an external event.</li>
                                     <li class="list-group-item">The following jobs are defined by the worker service: codeintel-commitgraph, codeintel-janitor, and codeintel-auto-indexing.</li>
                                     <li class="list-group-item">Added in 3.29.0.</li>
                                 </ol>
