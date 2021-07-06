@@ -1,0 +1,139 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "github.schema.json#",
+    "title": "ListofPods",
+    "description": "A list of pods in a Sourcegraph Kubernetes deployment.",
+    "allowComments": true,
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        // "name": {
+        //     "description": "string",
+        //     "note": "string",
+        //     "type": "string",
+        //     "release": "string"
+        // },
+        "cAdvisor": {
+            "description": "cAdvisor exports container monitoring metrics scraped by Prometheus and visualized in Grafana.",
+            "type": "Observability"
+        },
+        "codeinsights-db": {
+            "description": "A PostgreSQL instance for storing code insights data.",
+            "type": "Managed Service",
+            "note": "You cannot use your own PostgreSQL server for this database.",
+            "release": "3.25.0"
+        },
+        "codeintel-db": {
+            "description": "A PostgreSQL instance for storing large-volume precise code intelligence data.",
+            "note": "You can use your own PostgreSQL v12+ server for this database.",
+            "type": "Managed Service",
+            "release": "2.4.3"
+        },
+        "github-proxy": {
+            "description": "Proxies all requests to github.com to keep track of rate limits and prevent triggering abuse mechanisms.",
+            "note": "There is only one replica running in production.",
+            "type": "Internal Service",
+            "singleton": true
+        },
+        "gitserver": {
+            "description": "This is the sharded service that stores the code and makes it accessible to other Sourcegraph services. It mirrors repositories from their code host. All other Sourcegraph services talk to gitserver when they need data from the code hosts.",
+            "note": "Requests for fetch operations, however, go through repo-updater.",
+            "type": "Internal Service",
+            "singleton": false
+        },
+        "grafana": {
+            "description": "A frontend for service metrics that displays data from Prometheus and Jaeger, and ships with customized dashboards for Sourcegraph services.",
+            "note": "It provides an interface to query Prometheus metrics and Jaeger traces.",
+            "type": "Observability"
+        },
+        "indexed-search": {
+            "description": "Run zoekt for indexed search, which is a fast text search engine, intended for use with source code.",
+            "note": "There are two services within this pod: Zoekt webserver and Zoekt indexserver. Zoekt webserver allows zoekt to run searches from in-memory indexes, but persists these indexes to disk (to avoid eg. re-indexing everything on startup). Zoekt indexserver is a Sourcegraph specific command which indexes all enabled repositories on Sourcegraph, as well as keeping the indexes up to date.",
+            "type": "Search",
+            "singleton": false
+        },
+        "jaeger": {
+            "description": "The distributed tracing service used by Sourcegraph.",
+            "note": "jaeger-agent is a sidecar used in Kubernetes deployments for collecting traces from services.",
+            "type": "Observability",
+        },
+        "minio": {
+            "description": "A MinIO instance that serves as a local S3-compatible object storage to hold user uploads for code-intel before they can be processed.",
+            "note": "This replaced bundle manager in 3.22. By default, Sourcegraph will use a MinIO server bundled with the instance to store precise code intelligence indexes uploaded by users. MinIO shouldn’t be accessible outside of the cluster/docker-compose network so it shouldn’t need anything other than the default credentials. You can alternatively configure your instance to instead store this data in an S3 or GCS bucket. Doing so may decrease your hosting costs as persistent volumes are often more expensive than the same storage space in an object store service.",
+            "type": "Managed Service",
+            "release": "3.22.0"
+        },
+        "pgsql": {
+            "description": "A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.",
+            "note": "You can use your own PostgreSQL v12+ server for this database.",
+            "type": "Managed Service"
+        },
+        "precise-code-intel-worker": {
+            "description": "It converts LSIF upload file into Postgres data. This service is horizontally scalable.",
+            "note": "This service is called worker before 3.22.0.",
+            "type": "Code Intelligence",
+            "release": "3.22.0",
+            "singleton": false
+        },
+        "prometheus": {
+            "description": "handles scraping of service metrics, and ships with recording rules, alert rules, and alerting capabilities.",
+            "note": "It currently bundles Alertmanager as well as integrations to the Sourcegraph web application.",
+            "type": "Observability"
+        },
+        "query-runner": {
+            "description": "Periodically runs saved searches, determines the difference in results, and sends notification emails. It is a background goroutine running in the repo-updater service of Sourcegraph.",
+            "note": "It is a singleton service by design so there must only be one replica.",
+            "type": "Search, Code Insight",
+            "singleton": true
+        },
+        "redis-cache": {
+            "description": "A Redis instance for storing cache (non-persistent) data.",
+            "note": "Sourcegraph supports external Redis servers from 5.0 but there is no reason to as Sourcegraph only stores ephemeral cache and session data in Redis.",
+            "type": "Managed Service",
+            "singleton": false
+        },
+        "redis-store": {
+            "description": "A Redis instance for storing short-term data such as user sessions.",
+            "note": "Sourcegraph supports external Redis servers from 5.0 but there is no reason to as Sourcegraph only stores ephemeral cache and session data in Redis.",
+            "type": "Managed Service",
+            "singleton": false
+        },
+        "repo-updater": {
+            "description": "Repo-updater manages scheduling and takes care of cloning, updating external repositories. It tracks the state of repos, and is responsible for automatically scheduling updates ("git fetch" runs) using gitserver. Other apps which desire updates or fetches should be telling repo-updater, rather than using gitserver directly, so repo-updater can take their changes into account.",
+            "note": "It is a singleton service by design, so there must only be one replica.",
+            "type": "Internal Service",
+            "singleton": true
+        },
+        "searcher": {
+            "description": "Searcher handles unindexed search. This service should be scaled up to the more on-demand searches that need to be done at once. For a search the frontend will scatter the search for each repo@commit across the replicas. The frontend will then gather the results.",
+            "note": "Like gitserver this is an IO and compute bound service. Its state is just a disk cache which can be lost at any time without being detrimental. If the size of repo is bigger than the disk it will result in error.",
+            "type": "Search",
+            "singleton": false
+        },
+        "sourcegraph-frontend": {
+            "description": "This is the frontend server of Sourcegraph that serves the web application, extensions, and GraphQL API services. Almost every service is linked to the frontend, from which it gathers configuration updates.",
+            "note": "Typically there are multiple replicas running in production to scale with load.",
+            "type": "Frontend",
+            "singleton": false
+        },
+        "symbols": {
+            "description": "Indexes symbols in repositories using Ctags. Similar in architecture to searcher, except over ctags output. The ctags output is stored in SQLite files on disk (one per repository@commit). Ctags processing is lazy, so it will occur only when you first query the symbols service. Subsequent queries will use the cached on-disk SQLite DB. It supports regex queries, with queries of the form ^foo$ optimized to perform an index lookup (basic-code-intel takes advantage of this).",
+            "note": "It is used by basic-code-intel to provide the jump-to-definition feature.",
+            "type": "Code Intelligence",
+            "singleton": false
+        },
+        "syntect-server": {
+            "description": "syntect-server is a minimal HTTP server written in Rust that wraps the Syntect syntax highlighting library (also written in Rust) to expose a JSON API. Send it some code, and it'll send you syntax-highlighted code in response.",
+            "note": "Syntect continues to be the best option for us to deliver high quality syntax highlighting to our users across a wide variety of languages.",
+            "type": "Interal Service",
+            "singleton": true
+        },
+        "worker": {
+            "description": "The worker service is a collection of background jobs that run periodically or in response to an external event.",
+            "note": "The following jobs are defined by the worker service: codeintel-commitgraph, codeintel-janitor, and codeintel-auto-indexing.",
+            "type": "Code Intelligence",
+            "release": "3.29.0",
+            "singleton": true
+        }
+    }
+}

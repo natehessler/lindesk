@@ -13,7 +13,7 @@
 </head>
 <body class="p-5">
     <div class="text-center">
-        <img src="https://sourcegraph.com/.assets/img/sourcegraph-mark.svg" width="20%">
+        <img src="https://sourcegraph.com/.assets/img/sourcegraph-mark.svg" width="10%">
     </div>
     <h1 class="m-3 text-center">Command Line Generator</h1>
     <div class="container">
@@ -62,12 +62,12 @@
                     <option value="kubectl describe pod " pod=true data-toggle="tooltip" data-placement="right" title="Display detailed information about the status of a single pod">Describe Pod</option>
                     <option value="kubectl rollout restart deployment sourcegraph-frontend" data-toggle="tooltip" data-placement="right" title="Restarting Sourcegraph Instance by restarting the frontend pod.">Restart Sourcegraph</option>
                     <option value="kubectl get events " data-toggle="tooltip" data-placement="right" title="List all events in the cluster’s history.">Get Events</option>
-                    <option value="kubectl delete pod " pod=true data-toggle="tooltip" data-placement="right" title="Delete failing pod so it gets recreated, possibly on a different node">Delete Pod</option>
+                    <option value="kubectl delete pod " pod=true data-toggle="tooltip" data-placement="right" title="Delete a failing pod so that it will get recreated, possibly on a different node.">Delete Pod</option>
                     <option value="kubectl get pvc" data-toggle="tooltip" data-placement="right" title="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
-                    <option value="kubectl get pv" data-toggle="tooltip" data-placement="right" title="List all Persistent Volumes (PVs) that have been provisioned. In a healthy cluster, there should be a one-to-one mapping between PVs and PVCs">Persistent Volumes (PVs) List</option>
-                    <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access Sourcegraph in your cluster locally.">Port Forward</option>
-                    <option value="kubectl exec -it  " value2=" sh" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
-                    <option value="kubectl exec " value2=" -- psql -U sg -c 'SELECT * FROM schema_migrations'" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to check for database.">Check Dirty Database</option>
+                    <option value="kubectl get pv" data-toggle="tooltip" data-placement="right" title="List all Persistent Volumes (PVs) that have been provisioned.">Persistent Volumes (PVs) List</option>
+                    <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access your Sourcegraph locally.">Port Forward</option>
+                    <option value="kubectl exec -it " value2=" sh" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
+                    <option value="kubectl exec " value2=" -- psql -U sg -c 'SELECT * FROM schema_migrations'" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to check for dirty database.">Check Dirty Database</option>
                 </select>
                 <input id="pod-name" class="mt-3" value="$POD_NAME"></input>
             </div>
