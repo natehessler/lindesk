@@ -66,6 +66,7 @@
                     <option value="kubectl get pvc" data-toggle="tooltip" data-placement="right" title="List all Persistent Volume Claims (PVCs) and their statuses.">Persistent Volume Claims (PVCs) List</option>
                     <option value="kubectl get pv" data-toggle="tooltip" data-placement="right" title="List all Persistent Volumes (PVs) that have been provisioned.">Persistent Volumes (PVs) List</option>
                     <option value="kubectl port-forward svc/sourcegraph-frontend 3080:30080" data-toggle="tooltip" data-placement="right" title="Access your Sourcegraph locally.">Port Forward</option>
+                    <option value="kubectl port-forward " value2=" 9090:9090" pod=true data-toggle="tooltip" data-placement="right" title="Access Prometheus locally.">Port Forward - Prometheus</option>
                     <option value="kubectl exec -it " value2=" sh" pod=true data-toggle="tooltip" data-placement="right" title="Get a shell to the running container.">Run shell</option>
                     <option value="kubectl exec " value2=" -- psql -U sg -c 'SELECT * FROM schema_migrations'" pod=true data-toggle="tooltip" data-placement="right" title="Get inside the PGSQL Pod to check for dirty database.">Check Dirty Database</option>
                 </select>
