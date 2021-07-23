@@ -38,6 +38,16 @@
             "command2": " bash",
             "description": "This allows you to execute an interactive bash shell on a running container."
         },
+        "Kill Container": {
+            "command": "docker kill ",
+            "option": "$CONTAINER",
+            "description": "Kill one or more containers."
+        },
+        "Restart Container": {
+            "command": "docker restart ",
+            "option": "$CONTAINER",
+            "description": "Restart one or more containers."
+        },
         "Run Interative Shell": {
             "command": "docker exec -it ",
             "option": "$CONTAINER",
@@ -61,9 +71,13 @@
             "command": "docker-compose ps -a",
             "description": "Get a list of containers."
         },
+         "Kill Containers": {
+            "command": "docker-compose kill",
+            "description": "Get a list of containers."
+        },
         "Install/Run Sourcegraph": {
             "command": "docker-compose up -d",
-            "description": "Builds, (re)creates, starts, and attaches to containers for Sourcegraph"
+            "description": "Builds, (re)creates, starts, and attaches to containers for Sourcegraph. `-d` flag starts the container in the detached mode where the container runs in the background."
         },
         "Shutdown Sourcegraph": {
             "command": "docker-compose down",
@@ -104,7 +118,7 @@
             "description": "Display detailed information about the status of a single pod"
         },
         "Restart Sourcegraph": {
-            "command": "kubectl describe ",
+            "command": "kubectl rollout restart deployment/sourcegraph-frontend -n prod ",
             "option": "$POD",
             "description": "Restart Sourcegraph Instance by restarting the frontend pod."
         },
