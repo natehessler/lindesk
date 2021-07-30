@@ -4,7 +4,7 @@
 
 while true;
 do
-    echo "Time Now: `date +%H:%M:%S`"
+    echo "Time Now: $(date +%H:%M:%S)"
     kubectl top pods | grep gitserver
     sleep 3600 #every 5 minute
 done
