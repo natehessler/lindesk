@@ -14,17 +14,17 @@
         //     "release": "string"
         // },
         "cAdvisor": {
-            "description": "cAdvisor exports container monitoring metrics scraped by Prometheus and visualized in Grafana.",
+            "description": "cAdvisor is like a container watchman. It's a service that exports container monitoring metrics scraped by Prometheus and passes along visuals in Grafana as dashboards.",
             "type": "Observability"
         },
         "codeinsights-db": {
-            "description": "A PostgreSQL instance for storing code insights data.",
+            "description": "A PostgreSQL instance for storing code insights data. Code insights are visualized in the Sourcegraph homepage, in the form of graphs which provide high level information about interesting data points such as commits made, insights from search and much more.",
             "type": "Managed Service",
             "note": "You cannot use your own PostgreSQL server for this database.",
             "release": "3.25.0"
         },
         "codeintel-db": {
-            "description": "A PostgreSQL instance for storing large-volume precise code intelligence data.",
+            "description": "A PostgreSQL instance for storing large-volume precise code intelligence data. Code intelligence stores indexed code to provide semantic language specific results when a user hovers/highlights code. It uses LSIF from Microsoft and is more of an opt-in service for customers at this point in time who would like near exact to exact results.",
             "note": "You can use your own PostgreSQL v12+ server for this database.",
             "type": "Managed Service",
             "release": "2.4.3"
@@ -64,7 +64,7 @@
             "release": "3.22.0"
         },
         "pgsql": {
-            "description": "A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one.",
+            "description": "A PostgreSQL instance for storing long-term information, such as user information when using Sourcegraph’s built-in authentication provider instead of an external one. If the data you are looking for it's not stored in the codeintel or code insights db, it's definitely here.",
             "note": "You can use your own PostgreSQL v12+ server for this database.",
             "type": "Managed Service"
         },
@@ -81,7 +81,7 @@
             "type": "Observability"
         },
         "query-runner": {
-            "description": "Periodically runs saved searches, determines the difference in results, and sends notification emails. It is a background goroutine running in the repo-updater service of Sourcegraph.",
+            "description": "Periodically runs saved searches, determines the difference in results, and sends notification emails. It is a background goroutine running in the repo-updater service of Sourcegraph. This will be soon deprecated in future versions of Sourcegraph.",
             "note": "It is a singleton service by design so there must only be one replica.",
             "type": "Search, Code Insight",
             "singleton": true
