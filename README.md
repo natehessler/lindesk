@@ -1,3 +1,11 @@
+# DEPRECATED
+
+# DEPRECATED
+
+# DEPRECATED
+
+Use the publicly visible https://github.com/sourcegraph/support-scripts/
+
 # Support Tools
 
 [A list of tools](https://sourcegraph.github.io/support-tools/) built by Customer Support Engineers that provide values when supporting our customers.
