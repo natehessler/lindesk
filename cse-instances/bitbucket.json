@@ -1,0 +1,9 @@
+{
+  "url": "https://bitbucket.sgdev.org",
+  "token": "REDACTED",
+  "username": "engineers",
+  "repositoryQuery": [
+    "test-repo",
+    "extension-testing-private"
+  ]
+}
