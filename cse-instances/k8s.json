@@ -1,0 +1,89 @@
+{
+	// The externally accessible URL for Sourcegraph (i.e., what you type into your browser)
+	// This is required to be configured for Sourcegraph to work correctly.
+	// "externalURL": "https://sourcegraph.example.com",
+
+	// The authentication provider to use for identifying and signing in users.
+	// Only one entry is supported.
+	//
+	// The builtin auth provider with signup disallowed (shown below) means that
+	// after the initial site admin signs in, all other users must be invited.
+	//
+	// Other providers are documented at https://docs.sourcegraph.com/admin/auth.
+	"experimentalFeatures": {
+		"tls.external": {
+			//"certificates": [
+			//	"<certificate>"
+			// ],
+			"insecureSkipVerify": true
+		},
+		"perforce": "enabled"
+	},
+	"search.largeFiles": [
+		"go.sum",
+		"package-lock.json",
+		"*.thrift"
+	],
+	"auth.providers": [
+		{
+			"type": "builtin",
+			"allowSignup": false,
+		}, 
+		{
+			"type": "github",
+			"url": "", // URL of your GitHub instance; can leave empty for github.com
+			"displayName": "GitHub",
+			"clientID": "6c8a4d3cf7096c4b4972",
+			"clientSecret": "c8394278fe656e6c850a347e9c88c8ba4bfc530f",
+			"allowSignup": false, // Set to true to enable anyone with a GitHub account to sign up without invitation
+		},
+		{
+			"type": "saml",
+			"configID": "okta",
+			"identityProviderMetadataURL": "https://dev-6337504.okta.com/app/exk1cuscngd6EKPQF5d7/sso/saml/metadata",
+			"allowSignup": true,
+			"displayName": "Thank you Okta very cool"
+      }
+	],
+	"observability.silenceAlerts": [
+		"warning_repo-updater_syncer_synced_repos"
+	],
+  "search.index.enabled": true,
+  "externalURL": "https://cse-k8s.sgdev.org/",
+  "disableAutoGitUpdates": false,
+  "disableAutoCodeHostSyncs": false,
+  "licenseKey": "eyJzaWciOnsiRm9ybWF0Ijoic3NoLXJzYSIsIkJsb2IiOiJtcDNVTDRwdXlWUEllY0oyMUM3WmZtMXBld2FwZFIrTWtDTmFPSDZ6dEllcnc4bDdkNWtMdlhEanRpdHdkMG5LTG5Cb2ZRUEJ5TmhGSmhGc0lxNlJWZWlzVEgxSkJoTW9vcSswVXRCck9vZE1id01BSThKelZDbFZsVzNJVGtiK2EyMWxoNGVhZW14ZVc4MUM3dm5DK2EzZHU0K0Zob0VzZWE3NEJseHNUdDhpYXNXT3hxUGt0ajdSbEpERmR4T0RxQTJCWEc3WktmYjljMWw4NnVKR2FLN1lqN1JmeWwwTUVxOFROdDRFck9mSUlXMmxydVMxUm9CRXNta2ZDVU9rUlJYMmQ2ZzA0bDI0ZkIrRG4yREVYcUlPcEJqdFhFdVkzKytxMUxrOUxiOHRYWUI2bC9hYVRsZ2ZCbm9kL2h6UEVXTHkxV0kwZWtWeCtzZ2FEMGlXamc9PSIsIlJlc3QiOm51bGx9LCJpbmZvIjoiZXlKMklqb3hMQ0p1SWpwYk1qTTVMRFV6TERZNUxERTVOQ3d4TXprc01UY3pMRGt5TERJd09WMHNJblFpT2xzaWRISjFaUzExY0NJc0ltVnVkR1Z5Y0hKcGMyVWlMQ0ppWVhSamFDMWphR0Z1WjJWeklsMHNJblVpT2pVd0xDSmxJam9pTWpBeU1pMHdOeTB4TmxRd05Eb3dNRG93TUZvaWZRPT0ifQ",
+	// Other
+	// "corsOrigin": "https://phabricator.sgdev.org https://bitbucket.sgdev.org https://gitlab.sgdev.org",
+	"update.channel": "none",
+	"branding": {
+		"favicon": "https://i.pinimg.com/originals/1b/41/20/1b412053a7b59ab47149a3eb59e5804d.png",
+		"brandName": "Pokedex - CSE K8s Test Instance",
+		"light": {
+			// "logo": "https://i.pinimg.com/originals/fe/61/dc/fe61dc2b7ef08a538b906eced7fa5cb5.gif",
+			"logo": "https://i.pinimg.com/originals/bf/d2/5d/bfd25dec14eb752b3ca7cc5fb937a2ce.gif",
+			"symbol": "https://i.pinimg.com/originals/fd/72/1f/fd721f81cf12ebf7b3234c2c665b584c.png"
+		},
+	},
+	"observability.tracing": {
+		"sampling": "selective"
+	},
+	"observability.alerts": [
+		{
+			"level": "critical",
+			"notifier": {
+				"type": "opsgenie",
+				"apiKey": "3abc6957-9441-44c2-b152-f52f6630d1a2",
+				"responders": [
+					{
+						"type": "team",
+						"name": "distribution"
+					}
+				]
+			},
+			"owners": [
+				"distribution",
+			]
+		}
+	]
+}
