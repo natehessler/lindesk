@@ -1,0 +1,53 @@
+.preview-window {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid grey;
+    overflow-y: scroll;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.menu {
+    margin-top: 20px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.messages {
+    min-height: 2rem;
+    line-height: 1rem;
+    text-align: center;
+    color: #12c91e;
+    padding-top: 0.25rem;
+}
+
+.menu-item {
+    background-color: rgb(0, 149, 255);
+    color: white;
+    padding: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: rgb(38, 161, 249);
+}
+
+.disabled {
+    color: #5d5d5d;
+    background: #6d6d6d;
+    cursor: default;
+}
+
+.disabled:hover {
+    color: #5d5d5d;
+    background: #6d6d6d;
+    cursor: default;
+}
