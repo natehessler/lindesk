@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--   See Using Zendesk Garden:
+      https://developer.zendesk.com/apps/docs/developer-guide/setup#using-zendesk-garden
+      https://garden.zendesk.com/css-components/bedrock/
+      https://garden.zendesk.com/css-components/utilities/typography/
+    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@zendeskgarden/css-bedrock@7.0.21,npm/@zendeskgarden/css-utilities@4.3.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <h2 class="u-semibold u-fs-xl">CSE Summary Exporter</h2>
+        <div class="menu">
+            <button id="fetch-button" class="menu-item">Fetch</button>
+            <button id="copy-button" class="menu-item disabled">
+                <i data-feather="clipboard"></i>
+            </button>
+        </div>
+        <div id="messages" class="messages"></div>
+        <div id="result"></div>
+    </div>
+    <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
