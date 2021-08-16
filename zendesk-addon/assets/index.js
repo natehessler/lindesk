@@ -39,12 +39,12 @@ const fetchTicketSummary = async() => {
 
     //Edit this to select which fields get published from the Zendesk ticket api
     ticketSummary = {
-        Title: ticket.subject,
-        Description: ticket.description,
-        Requestor: ticket.requester.identities[0].value,
-        CSE: ticket.assignee.user.name,
-        Tags: ticket.tags,
-        Summary: parseSummary(ticket.comments[0].value),
+        title: ticket.subject,
+        description: ticket.description,
+        requestor: ticket.requester.identities[0].value,
+        cse: ticket.assignee.user.name,
+        tags: ticket.tags,
+        summary: ticket.comments[0].value,
     }
 }
 
@@ -54,15 +54,22 @@ const printTicketSummary = (ticketDetails) => {
     outTarget.innerHTML = ""
 
     for (let key in ticketDetails) {
-        const keyDisplay = document.createElement('span')
-        keyDisplay.appendChild(document.createTextNode(key + ": "))
-        const valueDisplay = document.createElement('span')
-        keyDisplay.style.fontWeight = "900"
-        valueDisplay.appendChild(document.createTextNode(ticketDetails[key]))
-        const fieldDisplay = document.createElement('p')
-        fieldDisplay.appendChild(keyDisplay)
-        fieldDisplay.appendChild(valueDisplay)
-        outTarget.append(fieldDisplay)
+        //ticket is html string to preserve html structure
+        if (key == "summary") {
+            const valueDisplay = document.createElement('p')
+            valueDisplay.innerHTML = ticketDetails.summary
+            outTarget.append(valueDisplay)
+        } else {
+            const keyDisplay = document.createElement('span')
+            keyDisplay.appendChild(document.createTextNode(key.charAt(0).toUpperCase() + key.slice(1) + ": "))
+            const valueDisplay = document.createElement('span')
+            keyDisplay.style.fontWeight = "900"
+            valueDisplay.appendChild(document.createTextNode(ticketDetails[key]))
+            const fieldDisplay = document.createElement('p')
+            fieldDisplay.appendChild(keyDisplay)
+            fieldDisplay.appendChild(valueDisplay)
+            outTarget.append(fieldDisplay)
+        }
     }
 
     if (outTarget.innerHTML != "") {
@@ -72,29 +79,6 @@ const printTicketSummary = (ticketDetails) => {
     }
 
 
-}
-
-//parses response out of HTML entry from Zendesk
-const parseSummary = (str) => {
-    let index = 1
-    let count = 1
-
-    //assuming first char is always <
-    while (index < str.length && count > 0) {
-        if (str.charAt(index) === "<") {
-            count++
-        }
-        if (str.charAt(index) === ">") {
-            count--
-        }
-        index++
-    }
-    let out = ""
-    while (str.charAt(index) != "<") {
-        out += str.charAt(index)
-        index++
-    }
-    return out
 }
 
 const prettyParseObj = (obj) => {
