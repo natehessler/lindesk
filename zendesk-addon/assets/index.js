@@ -81,29 +81,6 @@ const printTicketSummary = (ticketDetails) => {
 
 }
 
-//parses response out of HTML entry from Zendesk
-const parseSummary = (str) => {
-    let index = 1
-    let count = 1
-
-    //assuming first char is always <
-    while (index < str.length && count > 0) {
-        if (str.charAt(index) === "<") {
-            count++
-        }
-        if (str.charAt(index) === ">") {
-            count--
-        }
-        index++
-    }
-    let out = ""
-    while (str.charAt(index) != "<") {
-        out += str.charAt(index)
-        index++
-    }
-    return out
-}
-
 const prettyParseObj = (obj) => {
     let out = ""
     for (let key in obj) {
