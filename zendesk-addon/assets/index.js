@@ -11,7 +11,7 @@ client.invoke('resize', {
 });
 
 //global state for ticket summary
-let ticketSummary = ""
+let ticketSummary = null
 
 //adds click functionality to the fetch button
 document.getElementById('fetch-button').addEventListener('click', async() => {
@@ -35,7 +35,6 @@ document.getElementById('copy-button').addEventListener('click', async() => {
 const fetchTicketSummary = async() => {
     const res = await client.get('ticket')
     const ticket = res.ticket
-    console.log(ticket)
 
     //Edit this to select which fields get published from the Zendesk ticket api
     ticketSummary = {
@@ -81,18 +80,10 @@ const printTicketSummary = (ticketDetails) => {
 
 }
 
-const prettyParseObj = (obj) => {
-    let out = ""
-    for (let key in obj) {
-        out += `${key}: ${obj[key]} \n`
-    }
-    return out
-}
-
 // copies content to clipboard
 const copyToClipBoard = async(content) => {
     try {
-        await navigator.clipboard.writeText(prettyParseObj(content))
+        await navigator.clipboard.writeText(document.getElementById('result').outerHTML)
         console.log("wrote to clipboard")
         document.getElementById('messages').innerHTML = "Copied to Clipboard"
     } catch (err) {
