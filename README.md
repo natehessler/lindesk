@@ -10,6 +10,8 @@ Use the publicly visible https://github.com/sourcegraph/support-scripts/
 
 ## Command Line Generator
 
+![image](https://user-images.githubusercontent.com/68532117/133286989-016132c9-a594-4265-aaf1-9daea3afd430.png)
+
 Use the publicly visible https://github.com/sourcegraph/support-generator
 
 The Command Line Generator is a simple web app that supports can use to generate the most frequently used commands for different deployment type when supporting a customer.
