@@ -1,0 +1,38 @@
+
+# browser extension not working for private repositories <!-- Ticket Title  Hint: include keywords to make it searchable -->
+
+- Zendesk Link: [#7936](https://sourcegraph.zendesk.com/agent/tickets/7936)
+- Application engineer: Kelvin Lee
+- Customer: realtor.com <!-- Redact if this contains personally identifying information -->
+- Date: Apr 29
+
+<!-- Data populated from integration, speak to Ben Gordon or Michael Bali if not working -->
+<!-- During Internal team trial, fill missing data manually (we are waiting for all data to sync) -->
+
+## Technical Environment
+- Version: 3.38.1
+- Deployment: k8s
+- External Services: github
+- Auth Providers: builtin, saml
+
+
+## Links
+<!-- Data for application engineer manual entry -->
+- Slack Links: [Slack[(https://sourcegraph.slack.com/archives/C0375T8M92N/p1651270766507659)
+- GitHub Issue Link: None
+- Doc Update Link: None
+
+## Summary
+### Customer Question
+Troubleshooting browser extension not working on private repositories
+
+### Application Engineer Answer
+Sent them the [documentation](https://docs.sourcegraph.com/integration/browser_extension), mentioning that it specfically mentioned private repositories, and they solved it themselves. Specifically, from customer:
+
+> I had to grant permissions to the browser extension and it works as expected now
+
+### Relevant Docs Pages Used/Created
+https://docs.sourcegraph.com/integration/browser_extension
+
+<!-- Once complete, upload a copy to https://github.com/sourcegraph/support-tools-internal/tree/main/resolved-tickets as a .md file -->
+<!-- Name the file 7936.md -->
