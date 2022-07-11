@@ -1,0 +1,23 @@
+{
+  "title": "Reddit - contains search",
+  "dateOpened": "10 October 2021",
+  "dateClosed": "19 October 2021",
+  "customerPulse": "They're okay, I guess",
+  "zendeskTicketNumber": 3648,
+  "zendeskLink": "https://sourcegraph.zendesk.com/agent/tickets/3648",
+  "AER": "Warren Gifford",
+  "customer": "Reddit",
+  "deploymentType": "kubernetes",
+  "version": "3.30.3",
+  "externalServices": ["GitHub"],
+  "isManagedInstance": false,
+  "tags": ["search", "contains"],
+  "wasEscalated": true,
+  "githubIssueLink": "https://github.com/sourcegraph/customer/issues/529",
+  "rfhEngineer": "Rijnard van Tonder",
+  "engineeringTeam": "Search Core",
+  "ticketType": "defect",
+  "issueSummary": "Customer encountered odd behavior from the repo:contains.file() code",
+  "troubleShootingSteps": "reproduce the customers search timeout in similar codebase",
+  "resolution": "I was unable to reproduce the same failure after huddling with our team to try to reproduce. The same user later encountered a more clear scenario which was discovered to be a bug and is scheduled for resolution in the linked issue"
+}
