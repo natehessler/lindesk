@@ -40,9 +40,21 @@ create_value() {
     # FIXME add condition to check type param for number, string, or array
     if [ "$VALUE" = "" ]; then
         VALUE="N/A"
+    elif [ "$3" = "string" ]; then
+        VALS+=("\"$VALUE\"")
+    elif [ "$3" = "number" ]; then
+        VALS+=("$VALUE")
+    elif [ "$3" = "array" ]; then
+        gsed -i 's/,/ /' "$CONV/$1.txt"
+        ARRAY_VAL=$(cut -c "$2" "$CONV/$1.txt")
+        IFS=' '
+        read -r -a arr <<<"$ARRAY_VAL"
+
+        VALUE=$(printf '%s\n' "${arr[@]}" | jq -R . | jq -s .)
+        VALS+=("$VALUE")
     fi
+
     rm -rf "$CONV/$1.txt"
-    VALS+=("\"$VALUE\"")
 }
 
 pandoc -o "$CONV/$TICKET.txt" "$ORIG/$TICKET.md" --strip-comments --wrap=none
@@ -63,7 +75,6 @@ VALS+=("\"$TICKET_LINK\"")
 rm "$CONV/ticketlink.txt"
 
 # format title key:value
-# FIXME need to remove the pandoc artifact at the end of the title
 awk 'NR==1' "$CONV/$TICKET.txt" >"$CONV/title.txt"
 TITLE=$(cut -c 3- "$CONV/title.txt")
 TITLE_EDIT=${TITLE%??????????}

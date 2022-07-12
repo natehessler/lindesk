@@ -1,0 +1,23 @@
+{
+  "zendeskTicketNumber": 3210,
+  "zendeskLink": "https://sourcegraph.zendesk.com/agent/tickets/3210",
+  "title": "repositories could not be synced",
+  "AER": "Kelvin Lee",
+  "customer": "Tinder ",
+  "dateClosed": "Sep 9",
+  "version": "3.33.0​",
+  "deployment": "docker-compose",
+  "externalServices": ["GITHUB"],
+  "authProviders": ["builtin", "saml"],
+  "slackLinks": [
+    "[Slack",
+    "(September",
+    "incident)](https://sourcegraph.slack.com/archives/C01574FJV35/p1631232796016000)",
+    "[Slack",
+    "(October",
+    "incident)](https://sourcegraph.slack.com/archives/C01574FJV35/p1635359693011100)"
+  ],
+  "githubIssueLink": "[GitHub](https://github.com/sourcegraph/sourcegraph/issues/25264)",
+  "docUpdateLink": "[Managed Instance access PR](https://github.com/sourcegraph/handbook/pull/689), and another [PR by dax](https://github.com/sourcegraph/handbook/pull/634)",
+  "summary": "Sample summary for now"
+}

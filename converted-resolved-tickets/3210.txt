@@ -1,0 +1,18 @@
+-   Zendesk Link: \[
+AER: Kelvin Lee
+customer: Tinder 
+dateClosed: Sep 9
+version: 3.33.0​
+deployment: docker-compose
+externalServices: GITHUB
+authProviders: builtin,saml
+slackLinks: [Slack (September incident)](https://sourcegraph.slack.com/archives/C01574FJV35/p1631232796016000), [Slack (October incident)](https://sourcegraph.slack.com/archives/C01574FJV35/p1635359693011100)
+githubIssueLink: [GitHub](https://github.com/sourcegraph/sourcegraph/issues/25264)
+docUpdateLink: [Managed Instance access PR](https://github.com/sourcegraph/handbook/pull/689), and another [PR by dax](https://github.com/sourcegraph/handbook/pull/634)
+Repo sync issues reported by a managed instance ("
+No resolution yet, waiting for an engineering [fix](https://github.com/sourcegraph/sourcegraph/issues/25264)
+To "fix" the UI, there is a workaround recorded \[here\](https://github.com/sourcegraph/sourcegraph/issues/25264
+https://handbook.sourcegraph.com/engineering/enablement/delivery/managed/operations
+https://github.com/sourcegraph/handbook/pull/689 https://github.com/sourcegraph/handbook/pull/634
+"
+"Some repositories could not be synced" (UI errors, but not in logs)
