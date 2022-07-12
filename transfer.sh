@@ -37,7 +37,6 @@ create_key() {
 # params: filename, char range, type, append line
 create_value() {
     VALUE=$(cut -c "$2" "$CONV/$1.txt")
-    # FIXME add condition to check type param for number, string, or array
     if [ "$VALUE" = "" ]; then
         VALUE="N/A"
     elif [ "$3" = "string" ]; then
