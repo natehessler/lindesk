@@ -37,8 +37,9 @@ create_key() {
 # params: filename, char range, type, append line
 create_value() {
     VALUE=$(cut -c "$2" "$CONV/$1.txt")
+
     if [ "$VALUE" = "" ]; then
-        VALUE="N/A"
+        VALS+=("\"N/A\"")
     elif [ "$3" = "string" ]; then
         VALS+=("\"$VALUE\"")
     elif [ "$3" = "number" ]; then
@@ -122,6 +123,9 @@ VALS+=("\"Sample summary for now\"")
 # Create key value pairs and push them to json file
 length=${#KEYS[@]}
 touch "$CONV/json/$TICKET.json"
+
+echo "Length of the KEYS array: ${#KEYS[@]}"
+echo "Length of the VALS array: ${#VALS[@]}"
 
 for ((i = 0; i < length; i++)); do
     if [ "$i" -eq 0 ]; then
