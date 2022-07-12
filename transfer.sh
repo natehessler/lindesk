@@ -1,12 +1,22 @@
 #! /bin/bash
+set -e
 
-mkdir ./resolved-tickets/converted
-mkdir ./resolved_tickets/converted/json
-touch ./resolved-tickets/converted/keyval.txt
+if [ ! -d ./converted-resolved-tickets ]; then
+    mkdir ./converted-resolved-tickets
+fi
+
+if [ ! -d ./converted-resolved-tickets/json ]; then
+    mkdir ./converted-resolved-tickets/json
+fi
+
+if [ -f "./converted-resolved-tickets/$1.txt" ]; then
+    echo "File already exists at ./converted-resolved-tickets/$1.txt"
+    exit 1
+fi
 
 ORIG=./resolved-tickets
-CONV=./resolved-tickets/converted
-TICKET="2935"
+CONV=./converted-resolved-tickets
+TICKET="$1"
 KEYS=()
 VALS=()
 
@@ -100,18 +110,18 @@ VALS+=("\"Sample summary for now\"")
 
 # Create key value pairs and push them to json file
 length=${#KEYS[@]}
-touch "$CONV/$TICKET.json"
+touch "$CONV/json/$TICKET.json"
 
 for ((i = 0; i < length; i++)); do
     if [ "$i" -eq 0 ]; then
-        echo "{" >>"$CONV/$TICKET.json"
+        echo "{" >>"$CONV/json/$TICKET.json"
     fi
 
     if [ "$i" -ne 13 ]; then
-        echo "${KEYS[$i]}: ${VALS[$i]}," >>"$CONV/$TICKET.json"
+        echo "${KEYS[$i]}: ${VALS[$i]}," >>"$CONV/json/$TICKET.json"
     else
-        echo "${KEYS[$i]}: ${VALS[$i]}" >>"$CONV/$TICKET.json"
-        echo "}" >>"$CONV/$TICKET.json"
+        echo "${KEYS[$i]}: ${VALS[$i]}" >>"$CONV/json/$TICKET.json"
+        echo "}" >>"$CONV/json/$TICKET.json"
     fi
 done
 
