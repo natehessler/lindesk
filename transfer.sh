@@ -66,8 +66,9 @@ rm "$CONV/ticketlink.txt"
 # FIXME need to remove the pandoc artifact at the end of the title
 awk 'NR==1' "$CONV/$TICKET.txt" >"$CONV/title.txt"
 TITLE=$(cut -c 3- "$CONV/title.txt")
+TITLE_EDIT=${TITLE%??????????}
 KEYS+=("\"title\"")
-VALS+=("\"$TITLE\"")
+VALS+=("\"$TITLE_EDIT\"")
 rm "$CONV/title.txt"
 
 # ANCHOR Prepare the rest of the document for conversion to json key-value pairs
