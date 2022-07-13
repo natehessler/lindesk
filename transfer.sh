@@ -23,11 +23,30 @@ VALS=()
 # ANCHOR create KEYS
 # function: create_key()
 # description: Creates correctly formatted JSON keys out of plain text
-# params: current format, new format, line number, char range
+# params: current format, new format, line number, char range, alt char range, alt current format
 create_key() {
-    gsed -i "s/-   $1/$2/" "$CONV/$TICKET.txt"
-    awk "NR==$3" "$CONV/$TICKET.txt" >"$CONV/$2.txt"
-    KEY=$(cut -c "$4" "$CONV/$2.txt")
+    if [ -n "$6" ]; then
+        CSE_OR_AER=$(awk "NR==$3" "$CONV/$TICKET.txt")
+        echo "$CSE_OR_AER" >"$CONV/$2-test.txt"
+
+        if [ "$(awk "NR==1" "$CONV/$2-test.txt")" = "A" ]; then
+            gsed -i "s/-   $1/$2/" "$CONV/$TICKET.txt"
+        elif [ "$(awk "NR==1" "$CONV/$2-test.txt")" = "*" ]; then
+            gsed -i "s/-   $6/$2/" "$CONV/$TICKET.txt"
+        fi
+    fi
+
+    KEY_NEW=$(awk "NR==$3" "$CONV/$TICKET.txt")
+    echo "$KEY_NEW" >"$CONV/$2.txt"
+
+    if [ "$(cut -c 5 "$CONV/$2.txt")" = "*" ]; then
+        KEY=$(cut -c "$5" "$CONV/$2.txt")
+        # echo "has asterisks"
+    else
+        KEY=$(cut -c "$4" "$CONV/$2.txt")
+    fi
+
+    echo "$KEY"
     KEYS+=("\"$KEY\"")
 }
 
@@ -36,12 +55,16 @@ create_key() {
 # description: uses previously created files generate valid JSON values
 # params: filename, char range, type, append line
 create_value() {
-    VALUE=$(cut -c "$2" "$CONV/$1.txt")
+    # VALUE=$(cut -c "$2" "$CONV/$1.txt")
+    # echo "$VALUE"
+    # AST_FLAG=false
 
-    if [ "$VALUE" = "" ]; then
-        VALS+=("\"N/A\"")
-    elif [ "$3" = "string" ]; then
-        VALS+=("\"$VALUE\"")
+    if [ "$3" = "string" ]; then
+        if [ "$VALUE" = "" ]; then
+            VALS+=("\"N/A\"")
+        else
+            VALS+=("\"$VALUE\"")
+        fi
     elif [ "$3" = "number" ]; then
         VALS+=("$VALUE")
     elif [ "$3" = "array" ]; then
@@ -83,28 +106,34 @@ VALS+=("\"$TITLE_EDIT\"")
 rm "$CONV/title.txt"
 
 # ANCHOR Prepare the rest of the document for conversion to json key-value pairs
-# remove lines '#'
+# remove lines starting with '#'
 grep -o '^[^#]*' "$ORIG/$TICKET.md" >"$CONV/$TICKET.md"
 # remove comments
 pandoc -o "$CONV/$TICKET-e.txt" "$CONV/$TICKET.md" --strip-comments --wrap=none
 # remove pandoc html artifacts
 grep -o '^[^`|^<]*' "$CONV/$TICKET-e.txt" >"$CONV/$TICKET-m.txt"
+# echo "-   Zendesk Link: \\["
 # remove white space
 grep "\S" "$CONV/$TICKET-m.txt" >"$CONV/$TICKET.txt"
 # remove tmp txt files
-rm "$CONV/$TICKET.md" "$CONV/$TICKET-e.txt" "$CONV/$TICKET-m.txt"
+# rm "$CONV/$TICKET.md" "$CONV/$TICKET-e.txt" "$CONV/$TICKET-m.txt"
+
+# if asterisk, remove first 6 chars of ticket
+
+# remove zendesk link first line in ticket.txt
+awk 'NR>1' "$CONV/$TICKET.txt" >tmp.txt && mv tmp.txt "$CONV/$TICKET.txt"
 
 # ANCHOR create rest of keys
-create_key "Application engineer" "AER" 2 "1-3"
-create_key "Customer" "customer" 3 "1-8"
-create_key "Date" "dateClosed" 4 "1-10"
-create_key "Version" "version" 5 "1-7"
-create_key "Deployment" "deployment" 6 "1-10"
-create_key "External Services" "externalServices" 7 "1-16"
-create_key "Auth Providers" "authProviders" 8 "1-13"
-create_key "Slack Links" "slackLinks" 9 "1-10"
-create_key "GitHub Issue Link" "githubIssueLink" 10 "1-15"
-create_key "Doc Update Link" "docUpdateLink" 11 "1-13"
+create_key "Application engineer" "AER" 1 "1-3" "7-9" "**CSE"
+create_key "Customer" "customer" 2 "1-8" "7-14"
+create_key "Date" "dateClosed" 3 "1-10" "7-10"
+create_key "Version" "version" 4 "1-7" "7-13"
+create_key "Deployment" "deployment" 5 "1-10" "7-16"
+create_key "External Services" "externalServices" 6 "1-16" "7-23"
+create_key "Auth Providers" "authProviders" 7 "1-13" "7-20"
+create_key "Slack Links" "slackLinks" 8 "1-10" "7-17"
+create_key "GitHub Issue Link" "githubIssueLink" 9 "1-15" "7-23"
+create_key "Doc Update Link" "docUpdateLink" 10 "1-13" "7-21"
 KEYS+=("\"summary\"")
 
 # ANCHOR create rest of vals
@@ -124,18 +153,21 @@ VALS+=("\"Sample summary for now\"")
 length=${#KEYS[@]}
 touch "$CONV/json/$TICKET.json"
 
-echo "Length of the KEYS array: ${#KEYS[@]}"
-echo "Length of the VALS array: ${#VALS[@]}"
-
 for ((i = 0; i < length; i++)); do
+    PAIR="${KEYS[$i]}: ${VALS[$i]},"
+
     if [ "$i" -eq 0 ]; then
         echo "{" >>"$CONV/json/$TICKET.json"
     fi
 
     if [ "$i" -ne 13 ]; then
-        echo "${KEYS[$i]}: ${VALS[$i]}," >>"$CONV/json/$TICKET.json"
+        echo "$PAIR" >>"$CONV/json/$TICKET.json"
     else
-        echo "${KEYS[$i]}: ${VALS[$i]}" >>"$CONV/json/$TICKET.json"
+        {
+            echo "$PAIR"
+            echo "\"importedTicket\": true"
+        } >>"$CONV/json/$TICKET.json"
+
         echo "}" >>"$CONV/json/$TICKET.json"
     fi
 done
