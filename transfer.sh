@@ -136,10 +136,11 @@ elif [ "$NO_AST_CHARS" = "Vers" ]; then
     gsed '3i-   Date: 28 October 2021' "$CONV/$TICKET.txt" >"$t" && mv "$t" "$CONV/$TICKET.txt"
 fi
 
+HAS_AST="$(cut -c 5 "$CONV/line_3_check.txt")"
 rm "$CONV/line_3_check.txt"
 
 # this condition should be changed. Create a flag for ast or no_ast
-if [ "$AST_CHARS" = 'Vers' ]; then
+if [ "$HAS_AST" = '*' ]; then
     head -10 "$CONV/$TICKET.txt" >>"$CONV/first-keys.txt"
     echo "$CONV/first-keys.txt" | tr -d "*"
 
@@ -151,7 +152,7 @@ if [ "$AST_CHARS" = 'Vers' ]; then
     done
 
     rm "$CONV/first-keys.txt" "$CONV/no-ast-keys.txt"
-elif [ ! "$AST_CHARS" = 'Vers' ]; then
+else
     head -10 "$CONV/$TICKET.txt" >>"$CONV/first-keys.txt"
     echo "$CONV/first-keys.txt" | tr -d "*"
 
