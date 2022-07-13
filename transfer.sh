@@ -20,6 +20,7 @@ TICKET="$1"
 KEYS=()
 VALS=()
 
+echo "============== TICKET $1 ==============="
 # ANCHOR create KEYS
 # function: create_key()
 # description: Creates correctly formatted JSON keys out of plain text
@@ -34,6 +35,7 @@ create_key() {
         elif [ "$(awk "NR==1" "$CONV/$2-test.txt")" = "*" ]; then
             gsed -i "s/-   $6/$2/" "$CONV/$TICKET.txt"
         fi
+        rm "$CONV/$2-test.txt"
     fi
 
     KEY_NEW=$(awk "NR==$3" "$CONV/$TICKET.txt")
@@ -41,19 +43,18 @@ create_key() {
 
     if [ "$(cut -c 5 "$CONV/$2.txt")" = "*" ]; then
         KEY=$(cut -c "$5" "$CONV/$2.txt")
-        # echo "has asterisks"
     else
         KEY=$(cut -c "$4" "$CONV/$2.txt")
     fi
 
-    echo "$KEY"
+    echo "$KEY" >>keys.txt
     KEYS+=("\"$KEY\"")
 }
 
 # ANCHOR create values
 # function create_value()
 # description: uses previously created files generate valid JSON values
-# params: filename, char range, type, append line
+# params: filename, char range, type, append line, alt char range
 create_value() {
     # VALUE=$(cut -c "$2" "$CONV/$1.txt")
     # echo "$VALUE"
@@ -116,24 +117,64 @@ grep -o '^[^`|^<]*' "$CONV/$TICKET-e.txt" >"$CONV/$TICKET-m.txt"
 # remove white space
 grep "\S" "$CONV/$TICKET-m.txt" >"$CONV/$TICKET.txt"
 # remove tmp txt files
-# rm "$CONV/$TICKET.md" "$CONV/$TICKET-e.txt" "$CONV/$TICKET-m.txt"
-
-# if asterisk, remove first 6 chars of ticket
-
+rm "$CONV/$TICKET.md" "$CONV/$TICKET-e.txt" "$CONV/$TICKET-m.txt"
 # remove zendesk link first line in ticket.txt
 awk 'NR>1' "$CONV/$TICKET.txt" >tmp.txt && mv tmp.txt "$CONV/$TICKET.txt"
 
+# check line 3 for date
+awk 'NR==3' "$CONV/$TICKET.txt" >"$CONV/line_3_check.txt"
+NO_AST_CHARS=$(cut -c 5-8 "$CONV/line_3_check.txt") # reads "Vers" or "**Ve"
+AST_CHARS=$(cut -c 7-10 "$CONV/line_3_check.txt")   # reads "Vers" or "**Ve"
+
+# if line 3 isn't "Date", insert a date in line 3
+# this is absolutely necessary. Script will break otherwise.
+if [ "$AST_CHARS" = "Vers" ]; then
+    t=$(mktemp)
+    gsed '3i-   **Date:** 28 October 2021' "$CONV/$TICKET.txt" >"$t" && mv "$t" "$CONV/$TICKET.txt"
+elif [ "$NO_AST_CHARS" = "Vers" ]; then
+    t=$(mktemp)
+    gsed '3i-   Date: 28 October 2021' "$CONV/$TICKET.txt" >"$t" && mv "$t" "$CONV/$TICKET.txt"
+fi
+
+rm "$CONV/line_3_check.txt"
+
+# this condition should be changed. Create a flag for ast or no_ast
+if [ "$AST_CHARS" = 'Vers' ]; then
+    head -10 "$CONV/$TICKET.txt" >>"$CONV/first-keys.txt"
+    echo "$CONV/first-keys.txt" | tr -d "*"
+
+    for ((i = 1; i < 11; i++)); do
+        awk "NR==$i" "$CONV/first-keys.txt" >"$CONV/$i.txt"
+        cat <"$CONV/$i.txt" | tr -d "*" >>"$CONV/no-ast-keys.txt"
+        sed 's/^.\{4\}//g' "$CONV/no-ast-keys.txt" >"$CONV/kv-$TICKET.txt"
+        rm "$CONV/$i.txt"
+    done
+
+    rm "$CONV/first-keys.txt" "$CONV/no-ast-keys.txt"
+elif [ ! "$AST_CHARS" = 'Vers' ]; then
+    head -10 "$CONV/$TICKET.txt" >>"$CONV/first-keys.txt"
+    echo "$CONV/first-keys.txt" | tr -d "*"
+
+    for ((i = 1; i < 11; i++)); do
+        awk "NR==$i" "$CONV/first-keys.txt" >"$CONV/$i.txt"
+        cat <"$CONV/$i.txt" | tr -d "*" >>"$CONV/ast-keys.txt"
+        sed 's/^.\{4\}//g' "$CONV/ast-keys.txt" >"$CONV/kv-$TICKET.txt"
+        rm "$CONV/$i.txt"
+    done
+    rm "$CONV/first-keys.txt" "$CONV/ast-keys.txt"
+fi
+
 # ANCHOR create rest of keys
-create_key "Application engineer" "AER" 1 "1-3" "7-9" "**CSE"
-create_key "Customer" "customer" 2 "1-8" "7-14"
-create_key "Date" "dateClosed" 3 "1-10" "7-10"
-create_key "Version" "version" 4 "1-7" "7-13"
-create_key "Deployment" "deployment" 5 "1-10" "7-16"
-create_key "External Services" "externalServices" 6 "1-16" "7-23"
-create_key "Auth Providers" "authProviders" 7 "1-13" "7-20"
-create_key "Slack Links" "slackLinks" 8 "1-10" "7-17"
-create_key "GitHub Issue Link" "githubIssueLink" 9 "1-15" "7-23"
-create_key "Doc Update Link" "docUpdateLink" 10 "1-13" "7-21"
+create_key "Application engineer" "AER" 1 "5-24" "7-9" "CSE"
+create_key "Customer" "customer" 2 "5-12" "7-14"
+create_key "Date" "dateClosed" 3 "5-8" "7-10"
+create_key "Version" "version" 4 "5-11" "7-13"
+create_key "Deployment" "deployment" 5 "5-14" "7-16"
+create_key "External Services" "externalServices" 6 "5-21" "7-23"
+create_key "Auth Providers" "authProviders" 7 "5-18" "7-20"
+create_key "Slack Links" "slackLinks" 8 "5-15" "7-17"
+create_key "GitHub Issue Link" "githubIssueLink" 9 "5-21" "7-23"
+create_key "Doc Update Link" "docUpdateLink" 10 "5-19" "7-21"
 KEYS+=("\"summary\"")
 
 # ANCHOR create rest of vals
@@ -147,7 +188,7 @@ create_value "authProviders" "16-" "array"
 create_value "slackLinks" "13-" "array"
 create_value "githubIssueLink" "18-" "string"
 create_value "docUpdateLink" "16-" "string"
-VALS+=("\"Sample summary for now\"")
+VALS+=("\"$(tail +11 "$CONV/$TICKET.txt")\"")
 
 # Create key value pairs and push them to json file
 length=${#KEYS[@]}
