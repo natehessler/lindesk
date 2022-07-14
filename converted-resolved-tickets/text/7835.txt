@@ -1,0 +1,12 @@
+-   Application engineer: Gabe Torres
+-   Customer: Netflix 
+-   Date: Apr 25
+-   Version: 3.39.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+-   Slack Links: https://sourcegraph.slack.com/archives/C012V43N8E7/p1650903528362739
+-   GitHub Issue Link:
+-   Doc Update Link:
+Now that the codeinsights-db is just regular PostgreSQL and not using the timescaledb, any concerns with us replacing it with an RDS PostgreSQL instance?
+Code Insights should be good to use with a managed database now that timescaledb has been deprecated on 3.39.0.

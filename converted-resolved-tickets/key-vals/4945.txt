@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4945
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4945
+title: Corrupted repos in trial-salesforce
+Application engineer: Mariam Adedeji
+Customer: Salesforce.com 
+Date: Dec 7
+Version: 3.17.2​
+Deployment: single docker
+External Services:
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1638940266242200
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28897, https://github.com/sourcegraph/sourcegraph/issues/28899
+Doc Update Link:
+Summary: Keegan was already assisting them with this issue before I jumped in, so I just watched out for where I'm needed.
+Ryan from Repo-management has raised GitHub issues for this issue and their concern regarding removing repo from the UI on prod and has been communicated to them by Keegan and Mike. GitHub issues are listed below How to prevent repos from getting corrupted: Issue link How to recover from a corrupted repo, without SSH access: issue link
+After looking into the logs from the Gitserver, they detected that some repos were corrupted due to the fact that some repos were created as non-bare, whereas other repos (like perforce/automation) are cloned as bare which could be because the config file wasn't written to disk during the hard shutdown they did a couple of days back and the bare = true and the other options did not make it to the disk in time.
+1.  Update config
+2.  Find the 148 affected repos in the working tree by running this command: find . -name .git -exec bash -c "cd '{}' && git config --bool core.bare true" ;
+3.  Remove all affected repos by running this docker-compose logs -f \

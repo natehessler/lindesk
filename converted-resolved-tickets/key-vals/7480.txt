@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7480
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7480
+title: support-unity-users - user permissions
+Application engineer: Warren Gifford
+Customer: Unity 
+Date: Apr 5
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB,GITLAB
+Auth Providers: builtin,saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: A customer reports being unable to access repos that their teammates can -- suspecting an error in the registration of their username.
+This is an obvious permissions issue
+The users admin confirmed that the users email had been registered in okta incorrectly. yes - there was a bad mapping in okta towards sourcegraph - fixed it - need to delete your account again - sorry

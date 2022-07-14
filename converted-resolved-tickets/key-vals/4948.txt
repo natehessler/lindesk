@@ -1,0 +1,37 @@
+zendeskTicketNumber: 4948
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4948
+title: How to automate searching through a repo group
+Application engineer: Michael Bali
+Customer: 
+Date: Dec 7, 2021
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02NLUQG0E5/p1638954320001400
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The Customer was wondering if there is a more automatic way of searching through a group of repositories rather than specifying them all.
+There are currently two ways to go about this;
+-   Using the 
+-   Making use of 
+The repogroup parameter will Only include results from the named group of repositories (defined by the server admin). We have a doc that talks about how to create a repogroup or if you have one already and would like to convert it to a search context.We recommend you use one of the following methods at a time so as to avoid any potential errors/conflicts in your code search. 
+However, the customer was hoping to do a more automatic approach as he saw when creating context you had to specify the repos. The customer said the problem with that is the management as they have certain groups that are ever-changing so he would like it to be as accurate as possible. I believe this is most likely a feature request because there is no other way around this at the moment.
+The CE, came up with a workaround to help customers create and keep a search context updated via Jenkins job/Git commit hook or something of that sort. You can use info on using Graphql API here: https://docs.sourcegraph.com/api/graphql
+A sample query would look something like this:
+    mutation updateSearchContext {
+    updateSearchContext(
+    id: "U2VhcmNoQ29udGV4dDoiQGFkbWluL2lwcF9tYXN0ZXJfbWFuaWZlc3Qi"
+    searchContext: {name: "abc-def", description: "", public: true}
+    repositories: [{repositoryID: "UmVwb3NpdG9yeToyMDM=", revisions: "refs/tags/feature-9.0.0_r42"}, {repositoryID: "UmVwb3NpdG9yeToyMDQ=", revisions: "refs/tags/feature-9.0.0_r42"}]
+    ) {
+    id
+    description
+    repositories {
+    revisions 
+    }
+    }
+    }
+The customer likes this idea, would be closing this out and adding it to the pool in case anyone encounters a similar case in the future.
+-   https://docs.sourcegraph.com/api/graphql
+-   https://docs.sourcegraph.com/code_search/how-to/convert_repository_groups_to_search_contexts

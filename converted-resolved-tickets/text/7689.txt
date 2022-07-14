@@ -1,0 +1,20 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Citadel LLC 
+-   Date: Apr 18
+-   Version: ​3.36.3
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers: Kerberos API
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+1.       Currently .sv files in our Sourcegraph cluster do not have syntax highlighting. We have the sourcegraph/Verilog extension installed and enabled. I see the public Sourcegraph instances has highlighting for .sv files, so I am hoping we just have a misconfiguration. 2.       Search for enums appears to be missing in .sv files -- when you hover over an enum variable, there is no popup with the value (we can see this behavior working in C++). I am curious if this is a missing feature or potentially a bug.
+Yes you understood everything correctly.
+I'd like to pick your brain on what you would feel is a valid approach here (P.S. Both options are valid and do work just as fine)
+Option 1: Since SystemVerilog is derived from Verilog, would you prefer to have .sv files highlighted as Verilog files? The reason I ask is because the LanguageSpec for Verilog currently includes .sv file extensionss as evidenced here. In this case, the configuration would only require updating the syntaxHighlighting config to:
+{ "syntaxHighlighting": { "languages": { "extensions": { "systemverilog": "verilog" }, "patterns": \[\] } }
+Option 2: Using the steps you mentioned above, this would create highlighting specifically for SystemVerilog(as of now, as you may have noticed, we don't have SystemVerilog).
+To answer your question, once merged, the files will highlight without requiring any additional configuration.
+I hope this helps.
+https://docs.sourcegraph.com/dev/how-to/add_support_for_a\_language
+https://docs.sourcegraph.com/code_intelligence/explanations/rockskip

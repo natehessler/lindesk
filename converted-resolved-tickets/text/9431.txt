@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: Glovo 
+-   Date: June 29, 2022
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1656580260334619
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I'm applying one where I've selected 700 changesets and tried to publish them. For most of them I'm seeing this error: 
+Yes, your interpretation of the error you see is correct. You can configure batch changes rollout windows to help schedule changesets. Sharing a \[doc\](https://docs.sourcegraph.com/admin/config/batch_changes
+https://docs.sourcegraph.com/admin/config/batch_changes

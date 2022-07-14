@@ -1,0 +1,19 @@
+zendeskTicketNumber: 3667
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3667
+title: reddit permissions alerts
+CSE: Warren Gifford
+Customer: Reddit 
+Date: 28 October 2021
+Version: ​3.30.3
+Deployment: kubernetes
+External Services: github
+Auth Providers: github
+Slack Links: (slack)\[https://sourcegraph.slack.com/archives/C02BJ8T258D/p1633388299187400\]
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: > I am currently debugging two issues with the repo-updater: (1) Number of entities with stale permissions and (2) Time gap between least and most up to date permissions.I have two questions: (1) Is there a way to tell from which code host theses errors orginated? (2) The only remedies listed in the docs are updating your ratelimit in GitHub or disabling the alert. Are there any other options?
+Suggested use of site config options to throttle API requests for permissions
+> Hey @ktatkinson glad repoListUpdateInterval worked for you :raised_hands::skin-tone-3: , to answer your earlier question the difference between it and gitUpdateInterval is the way it selects which repos to apply the rate limits to. gitUpdateInterval allows you to target specific repos to apply your request rate limits to. (edited)
+Suggested use of the
+(1) Number of entities with stale permissions
+(2) Time gap between least and most up to date permissions.

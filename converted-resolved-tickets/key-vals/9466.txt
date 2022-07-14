@@ -1,0 +1,16 @@
+zendeskTicketNumber: 9466
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9466
+title: lsif index using Github actions shows not found error
+Application engineer: Michael Bali
+Customer: Cresta 
+Date: July 2, 2022
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C03JMN66WMC/p1656796313113999
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer uploaded an LSIF file, it generated the link but when he clicks on it it shows not found.
+-   Requested for the github job yaml file
+The customer needed to provide 

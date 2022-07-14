@@ -1,0 +1,14 @@
+-   Application engineer: Ben Gordon
+-   Customer: Databricks 
+-   Date: April 27, 2022
+-   Version: ​3.39
+-   Deployment: docker-compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+-   monorepo automatically reclones approx. 1x each day
+-   Multiple live calls eventually point us to git gc being the cause of the monorepo recloning
+-   In version 3.39, we added SG Maintenance to replace git gc as the default garbage collector for git repos. We also disabled git gc as they perform the same function. Engineering overlooked one place where git gc still runs, and did not disable it fully. This causes errors where git gc and SG Maintenance can run on the same repository at the same time, causing repository corruption. This has been fixed in version 3.41.
+-   disable git gc using 

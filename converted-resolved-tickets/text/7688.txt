@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Mercari 
+-   Date: Apr 17
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C018U1ZRFQC/p1650273318383839
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+We had some strange github activity from some of our org users that we were investigating and we noticed that each of them had the http://sourcegraph.comsourcegraph.com\> oauth authorization so we wanted to know if any of these possible IP's would belong to souregraph? 34.132.1.XX  34.66.182.XX  35.193.186.XX  35.222.136.XX  35.223.199.XX These IPs are indeed Sourcegraph's. Is github user id enough or do we need their Sourcegraph username?
+Sure, let me find out. On that, is it possible to find out who else may have added kouzoh/  repositories to sourcegraph? Aside from the two we know about we have no real way of searching to find out.
+Confirmed that also ambush404 and snkzt do have repos on sourcegraph.com
+N/A

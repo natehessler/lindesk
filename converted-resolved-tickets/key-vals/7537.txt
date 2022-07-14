@@ -1,0 +1,25 @@
+zendeskTicketNumber: 7537
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7537
+title: docker-container: repo syncing troubleshooting for github + github enterprise
+Application engineer: Kelvin Lee
+Customer: Coinbase 
+Date: Apr 7
+Version: 3.27.5
+Deployment: docker-container
+External Services: GitHub, GitHub Enterprise
+Auth Providers: None?
+Slack Links: None
+GitHub Issue Link: [GitHub RFH](https://github.com/sourcegraph/customer/issues/829)
+Doc Update Link: None
+Summary: Though the original ask was about repo syncing/latency, lots of other questions got generated through the discussion: - What sort of data is retained during the upgrade process? - Is data-integrity safe during the upgrade process? - How do we backup data? - What's the upgrade process/procedure like?
+> What sort of data is retained during the upgrade process?
+The \[table here\](https://docs.sourcegraph.com/admin/install/migrate-backup
+> Is data-integrity safe during the upgrade process?
+In general, yes. As long as things go smoothly 😅
+> How do we backup data?
+In general, the process across deployments is to: exec into the container(s) containing the databases, execute some 
+> What's the upgrade process/procedure like?
+There are docs detailing the process [here](https://docs.sourcegraph.com/admin/updates).
+https://docs.sourcegraph.com/admin/install/migrate-backup
+https://docs.sourcegraph.com/admin/install/docker-compose/migrate
+https://docs.sourcegraph.com/admin/updates

@@ -1,0 +1,14 @@
+zendeskTicketNumber: 5416
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5416
+title: Error during update - Docker Compose
+Application engineer: Gabe Torres
+Customer: Cisco Meraki 
+Date: Jan 5
+Version: 3.35.1​
+Deployment: docker-compose
+External Services: GITLAB,OTHER
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C02DNE235TL/p1641423007001300
+customer was attempting an upgrade but couldn't connect to the frontend. I checked the docker compose yaml and saw that they were still using the container images for 3.30.4 when they should have had the images for 3.31.2. The customer had an error during the git merge and had some of the old images still.
+customer also noticed this container running gcr.io/cadvisor/cadvisor:v0.43.0. It looks like this is a container that their SRE team adds to their deployments.
+Summary: 

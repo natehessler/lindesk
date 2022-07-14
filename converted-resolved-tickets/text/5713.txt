@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Segment.io Inc
+-   Date: Jan 21
+-   Version: 3.34.2
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1642781904003300
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer's initial message was regarding a 
+I directed the customer to our doc page on how to set batch change rates. Their site admin stepped in to make those updates. I also let them know that they can set up a service account but would have to have their admin set it up with a global token (also sent them a page in the docs about this). For their feature request, I let them know I would bring this to the attention of our team (their CE).
+\[batch change rates\](https://docs.sourcegraph.com/admin/config/batch_changes

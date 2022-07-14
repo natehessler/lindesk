@@ -1,0 +1,14 @@
+-   CSE: Warren Gifford
+-   Customer: Sourcegraph 
+-   Date: 28 October 2021
+-   Version: ​3.30.3
+-   Deployment: k8s
+-   External Services: github
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1633132928170800
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/529
+-   Doc Update Link:
+    This works:
+    repo:contains.file(go\.mod) file:\.drone\.yml select:repo patternType:regexp
+    This doesn’t: (i.e. returns no results)
+    repo:contains.file(go\.mod) repo:github.snooguts.net file:\.drone\.yml select:repo patternType:regexp

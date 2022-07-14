@@ -1,0 +1,12 @@
+-   Application engineer: Riana Shahid
+-   Customer: Target 
+-   Date: June 7, 2022
+-   Version: 3.24.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C01M58VTV39/p1654625197275809
+is the author of the PR going to be the same as the author of the commit or can it be specified independently? We would like to use a service account for creating the commit and possibly a different account for opening the PRs.
+You should be able to use the name and email fields under 
+https://docs.sourcegraph.com/batch_changes/references/batch_spec_yaml_reference
+https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1648209702569009?thread_ts=1648209117.882599&cid=C01NDS6BVBQ

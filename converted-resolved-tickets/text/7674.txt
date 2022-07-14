@@ -1,0 +1,13 @@
+-   Application engineer: Ben Gordon
+-   Customer: Salesforce.com 
+-   Date: Apr 14
+-   Version: 3.17.2​
+-   Deployment: single docker
+-   External Services:
+-   Auth Providers: builtin
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+customer reports single-container sourcegraph server instance crashes when executing a search
+ask about instance scale customer shares they have disabled search indexing
+disabled search indexing forces all searches to go through Searcher instead of Indexed Search, which causes high RAM usage, causing the server to OOM. Re-enabling search indexing allows searches to resolve as expected

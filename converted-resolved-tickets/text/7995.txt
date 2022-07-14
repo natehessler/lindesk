@@ -1,0 +1,16 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Curve 
+-   Date: May 4, 2022
+-   Version: 3.31.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: builtin,saml ​
+-   Slack Links: https://sourcegraph.slack.com/archives/C02EKVAHQPN/p1651677924563309
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/915
+-   Doc Update Link: https://github.com/sourcegraph/customer/issues/915
+The customer experienced an empty repository error in the Sourcegraph UI. In the customer's gitserver logs, the customer received a repo ownership error. These errors occurred after the customer migrated from a non-Helm deployment of Sourcegraph to a Helm deployment. The Helm deployment configuration at this current moment requires rootless containers to be run. ​
+This error was not reproducible outside of the customer's environment. ​
+The customer was instructed to run the chown commands in this kustomize overlay in order to change the permissions of all persistent volumes for all applicable services. The frontend searcher services were excluded due to containing only emptyDir.
+​https://kubernetes.io/docs/concepts/storage/volumes/
+​https://github.com/sourcegraph/deploy-sourcegraph/tree/master/overlays/migrate-to-nonprivileged ​
+​t=2022-05-04T16:15:10+0000 lvl=eror msg="handleGetObject: getting object" error="git command \[git rev-parse bf774605be494f876ea510e59de433efdfa9aaa1\

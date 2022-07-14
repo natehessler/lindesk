@@ -1,0 +1,13 @@
+-   Application engineer: Giselle Northy
+-   Customer: Warner Media, LLC. 
+-   Date: Jan 18
+-   Version: ​3.35.1
+-   Deployment: Kubernetes
+-   External Services: N/a
+-   Auth Providers: N/a
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+This was ultimately stumbling blocks in getting Sourcegraph set up. Misconfig and lack of resources to pods.
+They accidentally tried to externalize the Code Insights DB. It cannot be run externally because its a timescale DB. 3.35.0 Has problems with Code Insights - we let them know and they switched install to 3.35.1 PVs were lingering from previous attempts to start the product Lack of resources to pods - needed to use the resource calculator
+https://docs.sourcegraph.com/admin/install/resource_estimator

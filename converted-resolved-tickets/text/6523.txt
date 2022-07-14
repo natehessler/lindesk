@@ -1,0 +1,20 @@
+-   Application engineer: Giselle Northy
+-   Customer: Lookout 
+-   Date: Feb 27
+-   Version: 3.36.3​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETCLOUD,GITHUB
+-   Auth Providers: builtin,saml
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+We have a monorepo (https://source.corp.lookout.com/services/conservice) that isn't getting picked up by SG due to it's size. (this was not the actual problem - he was guessing based on a previous case)
+What I did:
+A. One repo was not coming up in search
+B. Confirmed that the user was a Site Admin because by default they can see all repos added. Asked him to go to the repositories admin page
+C. Yes it was there
+D. Therefore looked closer at the search he was running - was it getting what he wanted?
+E. Had him include fork:yes that worked to show the repo
+F. He realized that its awkward for them and apparently has something to do with the 'network root' (he had more context than me given I cannot see his repos)
+G. He said "once services/conservice (the repos name) is the root, then you wouldn't have to specify forks...  But github doesn't make it as easy to change network root anymore, i think"
+H. So the solution was either E. or G.

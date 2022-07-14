@@ -1,0 +1,15 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Databricks 
+-   Date: Feb 17
+-   Version: none provided, but lsif-java version 0.7.2
+-   Deployment: unknown
+-   External Services: unknown
+-   Auth Providers: unknown
+-   Slack Links: [Slack Thread with customer](https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1645141234778179) , [Some context on taking the ticket](https://sourcegraph.slack.com/archives/C01HW836940/p1645142025641709?thread_ts=1645139034.179169&cid=C01HW836940) , [More context on how I would be getting the bug report info](https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1645144598388169?thread_ts=1645138219.749019&cid=C02UM8A9M2R) and how [I was just going to do the same thing for ticket 6346](https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1645144663368779?thread_ts=1645141234.778179&cid=C02UM8A9M2R)
+-   GitHub Issue Link: [GitHub Issue](https://github.com/sourcegraph/lsif-java/issues/397)
+-   Doc Update Link: None
+Best described [here](https://github.com/sourcegraph/lsif-java/issues/397), in the issue description.
+None
+Bug filing
+None
+None 

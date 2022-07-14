@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4998
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4998
+title: atlassian - internal network timeout?
+Application engineer: Warren Gifford
+Customer: Atlassian 
+Date: Dec 9
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: 
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: This is a repetitious ticket.
+Customers in v3.33 were experiencing a bug where searches to the streaming endpoint as well as some to the graphQL API timed out displaying our unhandled error message: "The connection was closed before your search was completed. This may be due to a problem with a firewall, VPN or proxy, or a failure with the Sourcegraph server."
+attempted traces -- returned nothing requested but never received frontend logs and zoekt-webserver logs
+A customer upgrade resolved this issue for unknown reasons
+n/a
+"The connection was closed before your search was completed. This may be due to a problem with a firewall, VPN or proxy, or a failure with the Sourcegraph server."

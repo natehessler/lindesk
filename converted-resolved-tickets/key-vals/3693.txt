@@ -1,0 +1,17 @@
+zendeskTicketNumber: 3693
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3693
+title: Re: SourceGraph IntelliJ plugin
+CSE: Jason Harris
+Customer: SAP 
+Date: Oct 6
+Version: 3.30.3​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: N/A
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/515
+Doc Update Link: https://github.com/sourcegraph/sourcegraph-open-in-intellij/pull/10
+Summary: Customer unable to open file in intelij.
+Tested multiple path adjustments
+Pull request made to adjust path for windows machines.
+https://github.com/sourcegraph/sourcegraph-open-in-intellij/pull/10

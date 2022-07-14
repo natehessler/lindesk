@@ -1,0 +1,15 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Glovo 
+-   Date: Nov 20
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Stale permissions for more than 5 minutes. Git GC problem.
+Sending events from Sourcegraph to GitHub
+Check gitserver logs for git janitorial services. Run this script while exec'd in Postgres
+SELECT users.id, users.username, user_permissions.synced_at FROM user_permissions JOIN users ON user_permissions.user_id=users.idusers.id WHERE user_permissions.synced_at \
+The customer is speaking with the CE to move the instance to Sourcegraph infrastructure as a managed instance.

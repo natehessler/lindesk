@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6810
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6810
+title: New Slack message in support-snowflake-sourcegraph
+Application engineer: Mariam Adedeji
+Customer: Snowflake, Inc. 
+Date: Mar 10
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C021MU16S1F/p1646961421281359
+GitHub Issue Link:
+Doc Update Link:
+Summary: Customer wanted to know the best way to configure external DBs
+2 more questions with regards to the work on the k8s deployment - Seems that Codeintel, codeinsights, and pgsql deployments are 3 separate postgres instances. Can we share a single managed postgres instance for these? Also, we see that Timescaledb is used for codeinsights, would we need to provision this extension to our postgres db? If we were to remove codeintel, codeinsights, do we need to provision the schema in postgres for the frontend deployment?
+Question1:  The answer No, it's not advisable to share a single managed instance for this 3. I have highlighted the following recommendation from our docs below: If you choose to set up your own PostgreSQL server, please note we strongly recommend each database to be set up in different servers and/or hosts. We suggest either:
+Deploy codeintel-db alongside the other Sourcegraph containers, i.e. not as a managed PostgreSQL instance. Deploy a separate PostgreSQL instance. The primary reason to not use the same Postgres instance for this data is because precise code intelligence data can take up a significant of space (given the amount of indexed repositories is large) and the performance of the database may impact the performance of the general application database. You'll most likely want to be able to scale their resources independently.
+Running codeinsights-db as an external service - Sort of, this is because it is a TimescaleDB instance and not all the database providers support the TimescaleDB plugin, RDS, Cloud SQL, etc does not. But this is changing over the next two releases because we decided to remove our use of TimescaleDB -- it will likely be possible manually in 3.37 and automatic in 3.38.
+Question2: The answer is yes. You can find guidance on how to go about it here. Docs for manually removing timescaleDB is here
+Docs

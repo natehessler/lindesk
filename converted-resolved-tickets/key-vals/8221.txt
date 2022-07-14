@@ -1,0 +1,23 @@
+zendeskTicketNumber: 8221
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8221
+title: Symbol sidebar error when searching branches of a monorepo
+Application engineer: Michael Bali
+Customer: Nutanix, Inc. 
+Date: May 15, 2022
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: GITHUB,OTHER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1652692489163789
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/976
+Doc Update Link: N/A
+Summary: They are seeing Processing symbols is taking longer than expected . Try again in a while in the symbols sidebar when you run a search. They can navigate to a file in the branch of the monorepo, however when they search they get no results.
+-   Symbol performance issues on some branches in monorepo.
+-   We saw huge spikes in cpu usage for both the symbol and gitserver
+-   We attempted increasing the resource allocations for gitserver and symbol pods.
+-   Still, didnt resolve the error we see in the UI
+-   The FE, gitserver, symbols logs show alots of slow requests
+-   Frontend restart count is high.
+-   made the recommendation of upgrading from v3.34 to v3.38/39 so as to observe performance behavior and enable [rockship usage](https://docs.sourcegraph.com/code_intelligence/explanations/rockskip).
+The customer is on an old version of sourcegraph, there have been lots of improvements to monorepo performance, starting from v3.35.0. They upgraded their instance and enabled rockskip which fixed the issue for them.
+-   https://docs.sourcegraph.com/code_intelligence/explanations/rockskip

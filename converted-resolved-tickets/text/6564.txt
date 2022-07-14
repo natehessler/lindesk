@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Tinder 
+-   Date: Mar 1
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1646164594105069
+-   GitHub Issue Link: N/A
+-   Doc Update Link:N/A ​
+​Hi there! Do you maintain your IDE extensions, or are those community maintained? ​ ​It seems like the "copy link to file" doesn't work with our managed instance. Instead of navigating to tinder.sourcegraph.com it goes to just sourcegraph.com and cannot find our repos.
+​I was just in the middle of trying \[this\] out for you before I suggested them to you. But if you haven't tried them yet I'm very positive this should fix your issue. ​ ​
+​https://github.com/sourcegraph/sourcegraph-jetbrains

@@ -1,0 +1,14 @@
+-   Application engineer: Ben Gordon
+-   Customer: Capital One 
+-   Date: May 26, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+-   How to query for users and site-admin status
+SELECT username, created_at, site_admin 
+FROM users
+ORDER BY site_admin;

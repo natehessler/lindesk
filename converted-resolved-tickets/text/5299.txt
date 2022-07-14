@@ -1,0 +1,12 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: 
+-   Date: Dec 23
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+How can we setup monitoring for leaked code on sourcegraph
+Unfortunately as per the current product capabilities, code monitoring allows you to keep track of and get notified about changes in your code. Some use cases for code monitors include getting notifications for potential secrets, anti-patterns, or common typos committed to your codebase.

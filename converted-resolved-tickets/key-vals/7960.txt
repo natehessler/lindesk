@@ -1,0 +1,31 @@
+zendeskTicketNumber: 7960
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7960
+title: src login not working
+Application engineer: Gabe Torres
+Customer: Shipt 
+Date: May 2
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: What am I doing wrong here:
+    ➜  ~ echo $SRC_ENDPOINT && echo $SRC_ACCESS_TOKEN
+    https://shipt.sourcegraph.com (https://shipt.sourcegraph.com/)
+    my-actual-token-here
+    ➜  ~ src login "https://shipt.sourcegraph.com (https://shipt.sourcegraph.com/)"   
+    ❌ Problem: No access token is configured.
+    🛠  To fix: Create an access token at https://customer-instance.com/user/settings/tokens, then set the following environment variables:
+       SRC_ENDPOINT=https://customer-instance.com (https://customer-instance.com/)
+       SRC_ACCESS_TOKEN=(the access token you just created)
+       To verify that it's working, run this command again.
+    ➜  ~ src version  
+    Current version: 3.39.1
+    Recommended version: 3.39.1 or later
+Sending a curl request with the token worked. 
+Setting the env vars in the same command worked: 
+The customer wasn't exporting the environment variables correctly. This worked:
+    export SRC_ENDPOINT=https://customer-instance.com
+    export  SRC_ACCESS_TOKEN=token

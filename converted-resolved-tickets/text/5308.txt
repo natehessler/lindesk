@@ -1,0 +1,14 @@
+-   Application engineer: Warren Gifford
+-   Customer: ServiceTitan 
+-   Date: Dec 27
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link: 
+How to get src past a OAuth proxy service from google?
+This would be about using the env vars provided in 
+In this instance the users proxy did not support JWT and they opted to have their security admin provide an exception for src
+https://github.com/sourcegraph/src-cli/blob/main/AUTH_PROXY.md

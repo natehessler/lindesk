@@ -1,0 +1,11 @@
+-   Application engineer: Ben Gordon
+-   Customer: Sourcegraph 
+-   Date: May 10
+-   Version: ​3.38.1
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/CV5KX7T70/p1652195896655469
+-   How often can we expect database migration issues, and how can we prevent them?
+-   since version 3.38, we don't have any records of database migration issues in our solved ticket database.
+-   The addition of the Migrator service should dramatically reduce the occurence of database migrations issues

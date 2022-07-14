@@ -1,0 +1,19 @@
+zendeskTicketNumber: 7818
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7818
+title: Sourcegraph Chrome Extension Not Working
+Application engineer: Michael Bali
+Customer: Nuro AI 
+Date: Apr 22
+Version: 3.19.1​
+Deployment: docker-container
+External Services: GITHUB
+Auth Providers: openidconnect,builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01EJ09NR8S/p1650674444328859
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer was trying to get sourcegraph chrome extension to work on our code repo. It appears that sg has full access to our git enterprise but I don't see any code intelligence pop up when I hover within our codebase.
+-   Can you confirm on your Sourcegraph instance if the programming language extensions are enabled.
+-   is this repo cloned and searchable on your Sourcegraph instance and are you able to get code intel on this repo in Sourcegraph?
+-   In addition to the above, In the [documentation](https://docs.sourcegraph.com/integration/browser_extension) on the extension, there is a section for \[troubleshooting\](https://docs.sourcegraph.com/integration/browser_extension
+The problem auto resolved itself after the user signed out and signed back in
+-   https://docs.sourcegraph.com/integration/browser_extension

@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: bet365 
+-   Date: June 1, 2022
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: GITLAB
+-   Auth Providers: gitlab,gitlab
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+The Customer was trying to upgrade their instance from 3.37 to 3.38. However, when they run docker-compose pull command the get a YAML error.
+I did my research and I know the minimum version of docker-compose that supports the 
+That error is definitely a sign that an old version of docker-compose is being used. The root user is actually pulling an older version in 
+    ERROR: The Compose file './docker-compose.yaml' is invalid because:
+    services.sourcegraph-frontend-internal.depends_on.migrator.condition contains "service_completed_successfully", which is an invalid type, it should be a service_started, or a service_healthy

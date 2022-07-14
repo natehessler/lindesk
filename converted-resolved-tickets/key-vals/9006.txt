@@ -1,0 +1,20 @@
+zendeskTicketNumber: 9006
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9006
+title: Corrupt repo
+Application engineer: Gabe Torres
+Customer: Reddit 
+Date: June 14, 2022
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1655250354056159
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/1014
+Doc Update Link:
+Summary: The customer reported some error logs in the repo updater.
+We ran git prune and git fetch inside the repo. Git prune failed and git fetch succeeded. Running git gc failed with the following, indicating a corrupt repo:
+    error: refs/pull/103626/merge does not point to a valid object!
+    fatal: bad object refs/pull/103626/merge
+    fatal: failed to run repack
+I recommended removing the repo to force a reclone but the issue resolved itself after gitserver ran sg maintenance on the repo. Sg maintenance attempts to reclone the corrupt repo every 2 days.
+    fatal: bad object 902eeb79632e629015ac4c1b87b174bc95a9c88f\\nerror: https://github.com/Homebrew/homebrew-core did not send all necessary objects\\n\\n\

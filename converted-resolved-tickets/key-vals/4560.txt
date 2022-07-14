@@ -1,0 +1,17 @@
+zendeskTicketNumber: 4560
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4560
+title: New Slack message in support-indeed-campaigns
+Application engineer: Warren Gifford
+Customer: Indeed 
+Date: Nov 12
+Version: 3.32.0​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: builtin,saml
+Slack Links: (https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1636739197010300)\[https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1636739197010300\]
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: > What happens to MRs that cannot be merged due to merge conflicts? Do I need to reapply the spec?
+> Does this mean src apply? Yep you can use either src batch apply -f \
+Hey @avishai Batch Changes currently do not highlight or identify changesets that have possible merge conflicts.Your insight is right here. If the base branch has changed the change spec must be re-executed to re-generate the diff in each changeset, taking into account an updated base branch. This can be done by re-running the spec.Re-executing the batch change will cause the proposed changeset (with merge conflicts) to be removed (and closed as if it was published).Let me know if this helps, I was assuming this following the above batch change inquiries.
+Yep you can use either src batch apply -f \

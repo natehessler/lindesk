@@ -1,0 +1,37 @@
+zendeskTicketNumber: 8096
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8096
+title: Googlr SMTP relay does not work
+Application engineer: Michael Bali
+Customer: 
+Date: May 9, 2022
+Version: ​v3.39.1
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1652159759607939
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/35943
+Doc Update Link:
+Summary: I'm running on Google Compute Engine on a Container Optimized OS VM. Got everything working except I'm having difficulty getting SMTP set up though google workspace's smtp-relay. When I run a 
+    {
+    "data": {
+    "sendTestEmail": "Failed to send test email: EOF"
+    }
+    }
+Here is a redacted snippet of my config:
+    "email.address": "MANUALLYREDACTED",
+    "email.smtp": {
+    "authentication": "PLAIN",
+    "domain": "MANUALLYREDACTED",
+    "username": "MANUALLYREDACTED",
+    "password": "REDACTED",
+    "host": "http://smtp-relay.gmail.comsmtp-relay.gmail.com>",
+    "port": 587
+    }
+-   I asked that he telnet from the server to the SMTP host and he got a response. So that worked. Still, he is unable to send test emails.
+-   I checked to see if 2FA is enabled on the Google workspace account because when its enabled SMTP does not work and the customer confirmed 2FA is off.
+-   I requested for logs and in the frontend we saw this error  
+-   I told the user to create an access token on their instance and attempt again, but no dice!
+-   I also confirmed that 
+-   I was able to reproduce the issue on my end and I discoveredwhen I use  
+The Team responsible for this bit of the product is currently looking into this as we think it's an issue getting SMTP relay to work with sourcegraph and you can follow along [here](https://github.com/sourcegraph/sourcegraph/issues/35943) as we investigate. At the moment, The alternative is to use 
+-   https://github.com/sourcegraph/sourcegraph/issues/35943

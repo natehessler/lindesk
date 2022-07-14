@@ -1,0 +1,12 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: runtastic GmbH 
+-   Date: Dec 2
+-   Version: 3.30.3​
+-   Deployment: docker-container
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C02GKJ51WK1/p1638448966002000
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+How to setup a search context for a project
+This is currently not supported but is on the works. We can only create search contexts at the repository level at the moment.

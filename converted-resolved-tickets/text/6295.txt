@@ -1,0 +1,13 @@
+-   Application engineer: Giselle Northy
+-   Customer: Snowflake 
+-   Date: Feb 16
+-   Version: ​
+-   Deployment: k8
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C021MU16S1F/p1645042438253929
+-   GitHub Issue Link:
+-   Doc Update Link:
+Can code monitors send weekly summaries?
+I double checked and I see now that we currently support sending email's based on one trigger: "When new search results are detected". And that is followed by an email notification to the owner of the code monitor. Which means at this time we don't have a way to send weekly summaries.
+https://docs.sourcegraph.com/code_monitoring/explanations/core_concepts

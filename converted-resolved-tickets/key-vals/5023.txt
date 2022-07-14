@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5023
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5023
+title: Account deletion
+Application engineer: Giselle Northy
+Customer: 
+Date: Dec 11
+Version: n/a
+Deployment: n/a
+External Services: n/a
+Auth Providers: n/a
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Delete user request from Sourcegraph.com
+This process is subject to change. Follow guidance here: https://handbook.sourcegraph.com/departments/support/process/permanently_deleting_user_data

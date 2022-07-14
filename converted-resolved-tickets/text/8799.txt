@@ -1,0 +1,14 @@
+-   Application engineer: Jason Harris
+-   Customer: Vmware 
+-   Date: June 7, 2022
+-   Version: ​3.40.1
+-   Deployment: Docker
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03DYKCM3PD/p1654616458949139
+-   GitHub Issue Link:https://github.com/sourcegraph/customer/issues/1023
+-   Doc Update Link: N/A
+The customer reached out after having their batch change hung up while "determining workspace type". Something of interest here is that they ran the same spec yesterday, but it failed because their internet went out. They did not try again until today, and now it's getting hung up after it completes the Preparing container images step.
+Asked if customer has run this spec before without issue, they have. Asked if there were any changes to the spec since the last time they ran it successfully, there weren't. Asked them to run the command with the -v option, which didn't provide any additional information. Tried a different spec to determine whether this was happening with this batch only or others too. This is happening any time they try src batch preview, regardless of the batch spec specified. Nothing of note in the frontend logs. Exec into psql and run the following queries SELECT \* FROM batch_spec_execution_cache_entries 0 rows
+SELECT \* FROM batch_spec_resolution_jobs 0 rows
+After all that, we just needed to reboot docker. I'm not sure why that fixed the problem. Most likely it cleared the cache of any unfulfilled promises.

@@ -1,0 +1,18 @@
+zendeskTicketNumber: 7235
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7235
+title: support-dropbox-admin - zoekt data ???
+Application engineer: Warren Gifford
+Customer: Dropbox 
+Date: Mar 29
+Version: 3.36.2​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: where are sourcegraph repo indices stored? we're wondering if there's a way to persist this independently of the host or not to reduce downtime when cycling machines
+Hey @jwon I got a little more context on this issue and wanted to share a little additional thoughts -- I understand now that your compose instance periodically gets cycled to a new host.For docker compose deployments zoekt is volume mounting the index data -- This is the volume that mounts the data in compose.From docker volume ls ... local docker-compose_symbols-0 local docker-compose_worker local docker-compose_zoekt-0-shared
+Then inspect \[ec2-user@ip-172-31-18-10 \~\]\$ docker volume inspect docker-compose_zoekt-0-shared \[ { "CreatedAt": "2022-03-30T17:08:40Z", "Driver": "local", "Labels": { "com.docker.compose.project": "docker-compose", "com.docker.compose.version": "1.25.3", "com.docker.compose.volume": "zoekt-0-shared" }, "Mountpoint": "/mnt/docker-data/volumes/docker-compose_zoekt-0-shared/\_data", "Name": "docker-compose_zoekt-0-shared", "Options": null, "Scope": "local" }\]
+Finally checking out that mount point (this is on an EC2 instance) \[ec2-user@ip-172-31-18-10 \~\]\$ sudo ls /mnt/docker-data/volumes/docker-compose_zoekt-0-shared/ \_data \[ec2-user@ip-172-31-18-10 \~\]\$ sudo ls /mnt/docker-data/volumes/docker-compose_zoekt-0-shared/\_data bitbucket.sgdev.org%2FBAT%2Fbatchtest_v16.00000.zoekt bitbucket.sgdev.org%2FK8S%2Fzoekt_v16.00000.zoekt bitbucket.sgdev.org%2FPRIVATE%2Ftest-repo_v16.00000.zoekt bitbucket.sgdev.org%2FSGDEMO%2Fgo_v16.00000.zoekt github.com%2Fapache%2Fdruid_v16.00000.zoekt github.com%2Fapache%2Fdruid_v16.00000.zoekt.meta github.com%2Fapache%2Fecharts_v16.00000.zoekt github.com%2Fapache%2Fecharts_v16.00000.zoekt.meta github.com%2FAPIs-guru%2Fgraphql-voyager_v16.00000.zoekt github.com%2FAPIs-guru%2Fgraphql-voyager_v16.00000.zoekt.meta github.com%2Fbenjaminwgordon%2Fchained-symlink_v16.00000.zoekt github.com%2FDaedalusG%2FDuplicate-File-Test_v16.00000.zoekt github.com%2FDaedalusG%2FKnights_Travail_v16.00000.zoekt github.com%2FDaedalusG%2Fsymlink-test_v16.00000.zoekt github.com%2Fgabtorre%2Fdeploy_v16.00000.zoekt github.com%2Fgabtorre%2Fempty_v16.00000.zoekt github.com%2Fgolang%2Fgo_v16.00000.zoekt github.com%2Fgolang%2Fgo_v16.00000.zoekt.meta github.com%2Fgrafana%2Fgrafana_v16.00000.zoekt
+This is all to say that it might be possible to backup the data in this directory and then plug it in on the next host machine, at which point Sourcegraph may pick it up as though the indexes are fresh.I don't think we've tested this but I'd be happy to investigate a little further if it seems like something that might help out your team in future host migrations? Wdyt?

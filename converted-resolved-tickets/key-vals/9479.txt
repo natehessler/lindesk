@@ -1,0 +1,16 @@
+zendeskTicketNumber: 9479
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9479
+title: Batch Change Error
+Application engineer: Michael Bali
+Customer: Allegro 
+Date: July 3, 2022
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1656925301582469
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: On every first run of 
+-   I think this is most likely related to docker taking a while to get started and up and running to process these batch changes.
+-   Increasing the Docker CPU allocation

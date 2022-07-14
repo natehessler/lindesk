@@ -1,0 +1,14 @@
+-   Application engineer: Warren Gifford
+-   Customer: Databricks 
+-   Date: Mar 9
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1646871784938699
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/772
+-   Doc Update Link:
+How to diagnose a corrupt repo and reclone condition.
+Observer the error messages in gitserver, identify the commit marked s curropt example --
+    t=2022-03-10T00:15:24+0000 lvl=warn msg=“marking repo for re-cloning due to stderr output indicating repo corruption” repo=databricks/universe stderr=“error: Could not read 5587192c33873f37ec5a508087f7e460a8f7784d\n
+Run git fsck at the failing commit

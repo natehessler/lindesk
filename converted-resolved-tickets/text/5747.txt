@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Citrix 
+-   Date: Jan 22
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/CT9P97S6L/p1642934248014300
+-   GitHub Issue Link:
+-   Doc Update Link:
+There are some repos in our bitbucket that was deleted, how can we purge them from Sourcegraph? Can it be purged and disk space released when we remove it from code hosts config? We see at least a repo that does not exist in bitbucket (prob got deleted), removed in the code hosts configuration, but still in Repository status and status is not yet cloned
+When you add the repo(s) to the exclude list, after a short while, Sourcegraph will remove those repos and prevent them from being rediscovered if they exist. If they don't exist, then Sourcegraph will completely remove them from your instance and this exclusion list can be removed at your discretion.
+Sorry about this. Is this just one repo or all the repos in the exclude list? There are a couple of things I'd like to double check with you concerning these deleted repos. Are you able to exec into gitserver please and cd into data/repos to double check if that repo or repos are still still present? Alternatively, you can exec into the db container by docker-compose exec -it $pgql_container /bin/sh -- psql -U sg , then DELETE FROM repo WHERE uri = 'bitbucket.com/$org/\$name_of_repo'; What i do suspect is that in as much as they've been excluded Sourcegraph still has a local copy in gitserver and pgsql . Just want to confirm if this is indeed the case.

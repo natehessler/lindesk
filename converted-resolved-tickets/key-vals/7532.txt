@@ -1,0 +1,67 @@
+zendeskTicketNumber: 7532
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7532
+title: New Slack Message in help sg developer tool
+Application engineer: Quinlan Sparks
+Customer: ServiceNow 
+Date: Apr 7
+Version: N/A troubleshooting 
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1649363023443059
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer was trying to set up a local development environment using 
+1.  Followed the quickstart instructions for setting up the local environment [here](https://docs.sourcegraph.com/dev/setup/quickstart) to attempt to recreate the issue
+2.  Restart the shell when prompted by 
+3.  Run 
+4.  Run 
+Running 
+https://docs.sourcegraph.com/dev/setup/quickstart
+https://docs.sourcegraph.com/admin/how-to/dirty_database
+👉 Which one do you want to fix?
+[3,4,5]: 3
+❌ pcre
+Encountered the following error:
+dpkg: %!w(
+How to fix:
+Run the following command(s):
+sudo apt-get update && sudo apt-get -y install libpcre3-dev
+👉 What do you want to do?
+[1]: I'll fix this manually (either by running the command or doing something else)
+[2]: You can run the command for me
+[3]: Go back
+Enter choice: 2
+👉 Trying my hardest to fix "pcre" automatically...
+[sudo] password for user:
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://us.archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Hit:5 http://ppa.launchpad.net/git-core/ppa/ubuntu focal InRelease
+Get:6 http://us.archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:7 http://us.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1,711 kB]
+Get:8 http://us.archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [916 kB]
+Fetched 2,963 kB in 1s (2,028 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+libpcre3-dev is already the newest version (2:8.39-12build1).
+0 upgraded, 0 newly installed, 0 to remove and 431 not upgraded.
+✅ Done! "pcre" should be fixed now!
+💡 0. Install base utilities (git, docker, ...)
+Checks:
+✅ 1. gcc
+✅ 2. git
+❌ 3. pcre: dpkg: %!w(
+❌ 4. sqlite: dpkg: %!w(
+❌ 5. libev: dpkg: %!w(
+✅ 6. pkg-config
+✅ 7. jq
+✅ 8. curl
+✅ 9. comby
+✅ 10. bash
+✅ 11. docker
+👉 Which one do you want to fix?
+[3,4,5]:

@@ -1,0 +1,11 @@
+-   CSE: Warren Gifford
+-   Customer: Hello Digit, Inc. 
+-   Date: 28 October 2021
+-   Version: ​3.30
+-   Deployment: kubernetes
+-   External Services: N/a
+-   Auth Providers: N/a
+-   Slack Links: (primary)\[https://sourcegraph.slack.com/archives/C028GBRETPB/p1634164914056400\]
+-   GitHub Issue Link: N/a
+-   Doc Update Link: N/a
+N/a

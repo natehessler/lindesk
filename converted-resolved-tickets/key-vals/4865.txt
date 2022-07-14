@@ -1,0 +1,20 @@
+zendeskTicketNumber: 4865
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4865
+title: Code insights problem
+Application engineer: Alex Jean-Baptiste
+Customer: News Corp 
+Date: December 2, 2021
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02JSU299NY/p1638521466127300
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/617
+Doc Update Link: N/A
+Summary: The customer experienced a Code Insights issue in which their set Code Insight was stuck in the following state: "This insight is still being processed."
+1.  The GraphQL Backend was used to check to see if the insight had persisted to the database.
+2.  worker, searcher, psql, and gitserver pods were checked for errors and restarted depending on whether or not they were in a failed or pending state.
+An upgrade to Sourcegraph 3.35.1 was scheduled for the customer after consulting with SWE Coury Clark about this issue. The upgrade to Sourcegrph 3.35.1, deletion of the Code Insight, and a recreation of the Code Insight got the customer's issue resolved.
+https://docs.sourcegraph.com/code_insights/how-tos/Troubleshooting https://docs.sourcegraph.com/code_insights
+From worker pod: t=2021-12-22T18:35:10+0000 lvl=eror msg=workerutil.dbworker.store.insights_query_runner_jobs_store.QueuedCount e │s ="failed to con ect │ ──────────────────────────────│─────┘ │ rror="failed to connect to 
+t=2021-12-22T22:44:08+0000 lvl=eror msg="error fetching commits from gitserver repo_id: 2001: git command \[git log --format=format:%H%x00%x00%aN%x00%aE%x00%at%x00%cN% │ │ x00%cE%x00%ct%x00%B%x00%P%x00 --after=2020-12-22T22:43:24Z --date-order\] failed (output: \"\"): exit status 128"

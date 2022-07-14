@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Databricks 
+-   Date: Feb 10
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+I notice in the logs that the worker container is trying to do migrations, but it keeps on looping these two lines:t=2022-02-10T23:19:57+0000 lvl=dbug msg="Running up migration" migrationID=6 t=2022-02-10T23:19:57+0000 lvl=dbug msg="Running up migration" migrationID=3Attached is the screenshot for existing migrations that appear stuck. Is this of any concern?
+Hey @william.chau I don't believe these migrations being stuck at 0% is any concern. I believe these migrations have to do with some optional settings that can be enabled in site config which encrypt some information within the database, if these features aren't enabled than these migrations are expected to remain at 0% complete.I'm going to do a little investigation to confirm my suspicion here -- I'll have an update for you soon
+Hey @william.chau I had a look on my test instance and I can confirm that these two migrations are expected to be at 0% unless you've set up an encryption.keys argument in your instances site config json. You can learn more about the option here. Hope this helps, and let me know if you have anymore questions

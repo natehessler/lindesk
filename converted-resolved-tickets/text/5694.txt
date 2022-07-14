@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Atlassian 
+-   Date: Jan 20
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1642679891023300
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer wanted to get a list of contributors in a specific repo but had it nested under an existing GraphQL query here. This didn't yield any results for the list of contributors as the customer expected.
+Requested the customer to run this query instead, which was successful.
+{ repositories(names: "github.com/sourcegraph/sourcegraph") { nodes { id name contributors(after: "last week") { nodes { person { name email } } } } } }

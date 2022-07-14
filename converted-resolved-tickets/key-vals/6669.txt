@@ -1,0 +1,22 @@
+zendeskTicketNumber: 6669
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6669
+title: New Slack message in support-mercadolibre: unhealthy frontend, gitserver worker and symbols stuck in crash loop, RBAC issue
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: Mar 7
+Version: 3.29.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1646664618402009
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/752
+Doc Update Link: n/a
+Summary: After a previous issue with their aws ebs csi driver, the worker, gitserver, and symbols pods were unstable and stuck in a crash loop. 
+Checking logs showed that the frontend was unhealthy which lead the three pods above to crash. Also failed liveness and readiness probes: 
+We tried increasing 
+Examining the frontend logs indicated that this could be related to role-based access control
+    W0308 16:25:04.245508       7 reflector.go:324] k8s.io/client-go@v0.23.1/tools/cache/reflector.go:167: failed to list *v1.StatefulSet: statefulsets.apps "gitserver" is forbidden: User "system:serviceaccount:ns-sourcegraph:sourcegraph-frontend" cannot list resource "statefulsets" in API group "apps" in the namespace "ns-sourcegraph"
+    E0308 16:25:04.245533       7 reflector.go:138] k8s.io/client-go@v0.23.1/tools/cache/reflector.go:167: Failed to watch *v1.StatefulSet: failed to list *v1.StatefulSet: statefulsets.apps "gitserver" is forbidden: User "system:serviceaccount:ns-sourcegraph:sourcegraph-frontend" cannot list resource "statefulsets" in API group "apps" in the namespace "ns-sourcegraph"
+When I mentioned to the customer that the rbac could have been created incorrectly, they deleted all resources in their kubernetes cluster after my work hours for the day. They ran this command 
+The events after implementing this change indicated that some of the pods were still unhealthy but they removed volumes and reapplied and then it worked. Dirty database error was gone without having to go through the steps in our doc. They were able to get to the login page for sourcegraph.
+https://docs.sourcegraph.com/admin/how-to/dirty_database

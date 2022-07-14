@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: 
+-   Date: Feb 3, 2022
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: Email
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customer used Sourcegraph with the simple docker run install method successfully on an intel mac He now has an M1 mac and can't get the docker method to work anymore. It fails consistently shortly after startup.
+I believe this is happening because you are trying to run our existing x86-64 sourcegraph/server Docker image on ARM-based (M1) Macs. I Found out if the user is running the M1-specific version of Docker.
+Apparently, the user was not using the m1-specific version of Docker. He downloaded the M1-specific version of Docker and bump the memory limit to 4 / 6 GB in their Docker for Mac settings. The User confirms everything works now.
+N/A
+N/A

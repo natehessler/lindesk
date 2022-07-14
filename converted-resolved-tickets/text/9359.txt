@@ -1,0 +1,10 @@
+-   Application engineer: Riana Shahid
+-   Customer: MercadoLibre 
+-   Date: June 27, 2022
+-   Version: 3.29.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C028683RWRH/p1656338360669779
+Do you know how can I show only repos in results ? I'm looking for a specific implementation but don't need to see the code, only the repo.
+To see only repos in the results you can add 

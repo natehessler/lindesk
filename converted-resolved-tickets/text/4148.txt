@@ -1,0 +1,22 @@
+-   CSE: Gabe Torres
+-   Customer: Roblox Corporation 
+-   Date: 28 October 2021
+-   Version: 3.32.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1635202125020000
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer was wondering why the Repositories panel on the sidebar only showed repos from their GitHub and never from GitHub Enterprise. The Repositories panel is populated from the "fastest-time-to-result" result set which never included the customer's GHE repos. This could be because repos with higher repo star counts are given a higher ranking in the results and the customer's GHE repos don't have any stars. Doing an exhaustive search would make their GHE repos show up on the Repositories panel because the panel is populated after the exhaustive result set is returned. I suggested a workaround for the customer by using the ranking.repoScores to add priority to their GHE.
+    "experimentalFeatures": {
+            "ranking": {
+                    "repoScores": {
+                            "github.com/sourcegraph": 50000,
+                            "github.com/sourcegraph/sourcegraph": 10000,
+                    },
+            },
+        }
+I found the following conversations on GitHub and this past ticket. Discussions on GitHub: https://github.com/sourcegraph/sourcegraph/discussions/24895
+https://github.com/sourcegraph/sourcegraph/issues/3791  Related Ticket: https://sourcegraph.zendesk.com/agent/tickets/3095
+Ultimately the customer suggested adding more information into how result ranking works.

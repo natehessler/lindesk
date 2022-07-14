@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Indeed 
+-   Date: May 12
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1652365890264099
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/23471
+-   Doc Update Link: N/A
+Is it expected that MRs created don't respect the Enable "Delete source branch" option by default setting?
+Yes it is. Yes this is expected. Just wanted to flag that this behavior is  something we've noted and do have it on our radar. It is currently being tracked here.
+https://github.com/sourcegraph/sourcegraph/issues/23471

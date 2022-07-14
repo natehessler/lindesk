@@ -1,0 +1,15 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Citrix 
+-   Date: Apr 12
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/CT9P97S6L/p1649810221924809
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+We are seeing the gitserver sometimes has issue to sync, by seeing the ps xfa, there are some zombie processes that keeps sync hanging.
+33443 ? Sl 0:00 \_ containerd-shim -namespace moby -workdir /var/lib/containerd/io.containerd.runtime.v1.linux/moby/8cec8a890ca4973ff8af8c32a9dda5810162e810b91226f5ed694195f8353402 -address /run/containerd/containerd.sock -containerd-bina 33463 ? Ss 0:00 \_ /sbin/tini -- /usr/local/bin/gitserver 33534 ? Sl 22:11 \_ /usr/local/bin/gitserver 79783 ? S 0:05 \_ git -c credential.helper= -c protocol.version=2 fetch --progress --prune https://svcacct_srcgraph:xxxxxxxxxx@code.citrite.net/scm/xsu/gcc.git +refs/heads/*:refs/heads/* +r 83493 ? R 0:04 \
+Requested the customer for gitserver logs and also checking for last_error records in postgres. The results were nil in postgres.
+The customer resolved this by restarting the gitserver daemon.
+N/A

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8746
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8746
+title: New Slack message in support-allegro
+Application engineer: Stomzy Mwendwa
+Customer: Allegro 
+Date: June 6, 2022
+Version: ​3.39
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1654515960760609
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: We got user that does not have an access to repository in Sourcegraph, but has access to that repository in our GitHub. He is signed via GitHub to SG also, in code host we have an "authorization": {} setup. What is the best way to debug such situation?
+Customer fixed the issue by forcing a sync of users and repos
+N/A

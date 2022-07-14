@@ -1,0 +1,12 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: kiwi 
+-   Date: Mar 4
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C027433JXKN/p1646391274620749
+-   GitHub Issue Link:
+-   Doc Update Link:
+A question. Let's say I mess up some Batch changes. All the MRs are already created. How to revert this? If I delete the batch change, the MRs and branches on GitLab are not deleted and I have to rename the branch for the fixed Batch change. And by doing this I create a lot of stalled branches. Is there a better option?
+Batch Changes is designed to be "declarative". So if you mess up something, change the spec, re-apply, and all the changesets will be updated. If you change the on.repositoriesMacthingQuery, and some repositories are not in target anymore, the changesets will be closed indeed

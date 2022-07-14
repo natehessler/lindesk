@@ -1,0 +1,16 @@
+-   Application engineer: Warren Gifford
+-   Customer: Workiva 
+-   Date: Feb 17
+-   Version: 3.26.3​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+:wave::skin-tone-4:, Looking at this doc: https://docs.sourcegraph.com/admin/external_services/postgres
+docker run \[...\] -e PGHOST=psql1.mycompany.org -e PGUSER=sourcegraph -e PGPASSWORD=secret -e PGDATABASE=sourcegraph -e PGSSLMODE=require -e CODEINTEL_PGHOST=psql2.mycompany.org -e CODEINTEL_PGUSER=sourcegraph -e CODEINTEL_PGPASSWORD=secret -e CODEINTEL_PGDATABASE=sourcegraph-codeintel -e CODEINTEL_PGSSLMODE=require sourcegraph/server:3.36.3
+when using AWS cloudformation? I just tried to create a db with the name sourcegraph-codeintel and i run into
+DatabaseName must begin with a letter and contain only alphanumeric characters. ...
+After a little investigation it does look like this is a hardcoded value in our server deployment -- happy to flag a CE in to make a feature request on this since it seems like this isn't going to work with AWS cloudformation with the current code for server
+Note in docker-compose and kubernetes deployments this doesn't appear to be hard coded the same way

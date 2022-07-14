@@ -1,0 +1,11 @@
+-   Application engineer: Ben Gordon
+-   Customer: Capital One 
+-   Date: Mar 10
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1646943026323549
+-   Customer reports they are unable to change site configurations, and repos are not syncing with auth errors
+-   run database queries against external_services, and realize they are failing to execute due to database OOM
+-   update provisioning of CPU and RAM on the pgsql database, and all services work again as expected

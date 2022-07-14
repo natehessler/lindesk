@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6604
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6604
+title: Is it possible to specify all revisions for a repository instead of specifying a list?
+Application engineer: Michael Bali
+Customer: Nutanix, Inc. 
+Date: Mar 2
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: GITHUB,OTHER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/CTJCMDCCS/p1646283632503459
+GitHub Issue Link: n/A
+Doc Update Link: N/A
+Summary: when creating a search context, is it possible to specify all revisions for a repository instead of specifying a list?
+I attempted a few tests around this and I discovered it currently not supported to use glob patterns to search over a range of revisions using a search context. You would have to specify them in an array, that way Sourcegraph can run a search across multiple revisions specified in the array.
+N/A 

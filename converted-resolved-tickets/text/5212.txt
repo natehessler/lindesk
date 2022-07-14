@@ -1,0 +1,13 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Sourcegraph Community
+-   Date: Dec 17
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1639770873103900
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+How to get results back from a graphql query
+https://docs.sourcegraph.com/api/graphql/examples
+https://docs.sourcegraph.com/api/graphql/examples

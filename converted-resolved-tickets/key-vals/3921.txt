@@ -1,0 +1,16 @@
+zendeskTicketNumber: 3921
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3921
+title: Possible to override / append to file extensions to language mapping?
+CSE: Donavon Ellison
+Customer: Two Sigma Investments
+Date: 28 October 2021
+Version: ​3.32.0
+Deployment: Kubernetes
+External Services: N/A
+Auth Providers: N/A
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: N/A
+Feature request was submitted
+N/A

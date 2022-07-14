@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5434
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5434
+title: New Slack message in support-nuro-sourcegraph
+Application engineer: Stomzy Mwendwa
+Customer: Nuro AI 
+Date: Jan 6
+Version: 3.19.1​
+Deployment: docker-container
+External Services: GITHUB
+Auth Providers: openidconnect,builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01EJ09NR8S/p1641517702001800
+GitHub Issue Link:
+Doc Update Link:
+Summary: I've had a few issues that maybe you can help me with: src requires USER to be set, I'm not sure why though, I'm already directly providing it my endpoint and token. Seems a bit weird that it would need USER for this operation as well. Easy enough to fix but seems perhaps like a bug. lsif-clang takes 7+ hours to index our codebase (on a dedicated machine with 24cores, 64Gb ram) processing on the server side has failed, I'm not sure why and I don't see a way to get more information
+For src, I requested the customer to update to latest. This was probably why the CLI needed USER to be set but typically this isn't the case since you only need to pass SRC variables. Customer didn't report any resolution on this.
+For lsif-clang, I requested the customer for their instance type deployment. This was confirmed as Docker Compose. I requested the customer to run a docker inspect on the precise-code-intel-worker container and check for whether the container as OOMKilled. They confirmed that their container had indeed returned an OOMKilled: true. This is why the upload took very long. Bumping up memory for this container is the resolution to this.

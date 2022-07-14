@@ -1,0 +1,14 @@
+-   Application engineer: Jason Harris
+-   Customer: Netflix 
+-   Date: Feb 24
+-   Version: 3.37.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+-   Slack Links: slack is from internal netflix channel. Not shareable.
+-   GitHub Issue Link:
+-   Doc Update Link:
+Hi! I could use some help crafting this query (currently running into a "too many files to search" error.
+https://sourcegraph.netflix.net/search?q=context:global+timeout:300s+count:10+repo:%5Estash%5C.corp%5C.netflix%5C.com/%28PI%7CAE%29/.*%24+content:%22%28curl%7Cwget%29+.*+%5C%5C%7C+%28bash%7Csh%7Cpython%29%22+-content:%22netflix.%28com%7Cnet%29%22&patternType=regexp
+Basically, I'm trying to find instances where people are downloading and running scripts from the outside internet (thus the exclusion of netflix domains). Would appreciate any pointers for crafting this query!
+Suggested that the customer use the src cli in order to make use of the stream flag, which is not available in the web UI.

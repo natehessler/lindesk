@@ -1,0 +1,18 @@
+zendeskTicketNumber: 6718
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6718
+title: Dirty Database
+Application engineer: Gabe Torres
+Customer: Capital One 
+Date: Mar 8
+Version: ​3.36.1
+Deployment: ECS - Docker Compose
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1646782437119909
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer got a failed migration error 1528395834
+Tried to run the steps in the dirty database doc. Running the migration failed because some changes had already been applied. Running the migration with parts commented out worked. https://github.com/sourcegraph/sourcegraph/blob/v3.36.1/migrations/frontend/1528395834_squashed_migrations.up.sql
+The customer commented out sections of the migration that had already been applied.
+https://docs.sourcegraph.com/admin/how-to/dirty_database_pre_3\_37
+The target schema is marked as dirty and no other migration operation is seen running on this schema. The last migration operation over this schema has failed (or, at least, the migrator instance issuing that migration has died). Please contact support@sourcegraph.com for further assistance.

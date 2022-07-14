@@ -1,0 +1,19 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Booking.com 
+-   Date: May 10
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1652191545348879
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer ran into this error: error: failed to run migration for schema "frontend": dirty database: schema "frontend" marked the following migrations as failed: 1647282553
+When running the manual schema change, the customer ran into: when we did the manual apply the schema change, we got the deadlock issue: sg=
+ERROR: deadlock detected DETAIL: Process 14034 waits for AccessExclusiveLock on relation 17778 of database 16384; blocked by process 33. Process 33 waits for AccessShareLock on relation 17756 of database 16384; blocked by process 14034. HINT: See server log for query details.
+select \* from pg_locks to see which processes are causing conflict with context deadlines/deadlocks
+Scale services that are related to these processes to 0 and apply the manual migration sql commands
+We scaled down the frontend, precise-intel-worker, worker and repo-updater services which were causing the postgres locks.
+Once that was done, we were able to apply the manual migration done.
+https://docs.sourcegraph.com/admin/how-to/manual_database_migrations
+https://github.com/sourcegraph/sourcegraph/tree/main/migrations/frontend/1647282553

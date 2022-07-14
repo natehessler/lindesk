@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: GOV.UK 
+-   Date: June 21, 2022
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1655893175110479
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Looking at the above thread it seems the issue is solved but I'm still unable to view GitLab results in Sourcegraph - I tried using Private browsing but no joy. Is anyone else still having issues?
+Related to: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1655192236321589
+Related issue was resolved. See resolution section.
+Users unable to view GitLab results need to log out of both Sourcegraph and GitLab and log in to GitLab then Sourcegraph again to revoke and approve a new access token.

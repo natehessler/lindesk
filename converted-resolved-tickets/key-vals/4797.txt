@@ -1,0 +1,18 @@
+zendeskTicketNumber: 4797
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4797
+title: New Slack message in support-segment
+Application engineer: Warren Gifford
+Customer: Segment.io Inc 
+Date: Nov 30
+Version: 3.28.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: 
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: question I'm in the process of upgrading our Sourcegraph deployment and I had a quick question regarding the https://docs.sourcegraph.com/admin/migration/3_31upgrade steps for v3.31\>.
+We recently migrated to external databases using RDS (so we have removed the pgsql and codeintel-db deployments). I did check for corrupt indices already and found none before moving to RDS, but do we still need to double check before upgrading to v3.31 after we get to v3.30.3?
+The documentation seems to imply that the issue only exists when running the built in databases
+Hey @ajacobs in my reading of the doc the major glibc change alluded to could have been introduced if your database was ever upgraded from v3.26 \> v3.27. The built-in database's image change causing a reindex just reveals that the bug exists.I believe it's possible the index corruption could have been migrated into RDS, but since you checked for the corrupt indexes before moving to RDS you should be fine to proceed without this check.I'm going to triple check with the team to verify my reading of the text here. I'll let you know, and clarify the doc as well.
+n/a

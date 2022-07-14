@@ -1,0 +1,15 @@
+-   Application engineer: Warren Gifford
+-   Customer: realtor.com 
+-   Date: Apr 29
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Ah, if I add the specific branch it shows up. Do I have to change the query to cover all branches?
+Hmm let me see, theres a way to specify a specific branch as the default to search (and index), but I'm not sure if an all branches search option exists -- let me do some investigation, seems like progress though
+Yeah, did a test with a specific branch and the monitor triggers. Would be awesome if there was a regex option for rev: as well.
+Hey @johan.muedsam there is indeed a way to search all branches, I was thinking it was a regex thing and as such maybe not avaialble, but actually we are using glob patterns. Heres on docs on the matter. As well as an example search that targets all branches of sourcegraph/src-cli
+see above

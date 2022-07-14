@@ -1,0 +1,27 @@
+zendeskTicketNumber: 7056
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7056
+title: Re: Appfolio troubleshooting ; batch changes ; PRs , webhooks
+Application engineer: Kelvin Lee
+Customer: AppFolio 
+Date: Mar 21
+Version: 3.37.0
+Deployment: docker-compose
+External Services: github
+Auth Providers: builtin, github
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C02JCB0TM26/p1646880490028929?thread_ts=1645726915.284729&cid=C02JCB0TM26)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Quoted directly from customer:
+> Going to restart this thread and bring up two issues. I've found the timeout issue pop out again. I'm assuming that this issue could prop up because of network connections. Although I'm not sure. To be specific this is the exact error I get:
+>
+> fetching repo:
+    fetching ZIP archive: Get "https://code.dynasty.com/github.com/appfolio/vendor-frontend@fead817b27b3fe81e825998369d0dfc2eb872a32/-/raw": read tcp 192.168.1.90:64936 -> 54.214.174.188:443: read: operation timed out
+       Log: /tmp/changeset-github.com-appfolio-vendor-frontend-fead817b27b3fe81e825998369d0dfc2eb872a32.3610473469.log
+> I resolved this be running the batch changes in increments of 10 and using the old cached changesets. Although I'd prefer to be able to figure out a way to run all batch changes with no hacky way of doing this.Second issue, the batch change is trying to make a PR, but keeps running into the error in the linked image.
+>
+> \
+None taken, the customer indicated they were too busy to visit at this time. S:
+None. I stayed on the ticket for as long as I felt was appropriate. Signaled to them that if they want support's attention, they can raise a new thread.
+None
+    Get "https://code.dynasty.com/github.com/appfolio/vendor-frontend@fead817b27b3fe81e825998369d0dfc2eb872a32/-/raw": read tcp 192.168.1.90:64936 -> 54.214.174.188:443: read: operation timed out
+       Log: /tmp/changeset-github.com-appfolio-vendor-frontend-fead817b27b3fe81e825998369d0dfc2eb872a32.3610473469.log 

@@ -1,0 +1,15 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Apple 
+-   Date: Nov 12
+-   Version: 3.31.2​
+-   Deployment: docker-container
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C0225J36ZTR/p1636766378009000) , [Seeking confidence from the CS team](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1637008918407300)
+-   GitHub Issue Link: [GitHub Issue](https://github.com/sourcegraph/sourcegraph/issues/13748)
+-   Doc Update Link: None
+Is there a lightweight way to restrict repo permissions to user groups / user organizations ?
+Nope, unfortunately. not yet. Though we do have a permissions API to cover that use case, just not as lightweight as config files.
+https://github.com/sourcegraph/sourcegraph/issues/13748
+https://docs.sourcegraph.com/admin/repo/permissions
+https://docs.sourcegraph.com/admin/organizations

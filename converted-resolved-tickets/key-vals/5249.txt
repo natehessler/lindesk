@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5249
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5249
+title: CapitalOne Question
+Application engineer: Stomzy Mwendwa
+Customer: Capital One 
+Date: Dec 20
+Version:
+Deployment: K8s on AWS ECS
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1640025957088400
+GitHub Issue Link:
+Doc Update Link:
+Summary: I noticed our kubernetes frontend deployment doesn't call out the INDEXED_SEARCH_SERVERS variable with all of the 14 zoekt endpoints we currently have. Is that just being handled by kubernetes auto-discovery or something?
+The answer then is pretty short in that Kubernetes does everything automatically for service discovery for index server endpoints.

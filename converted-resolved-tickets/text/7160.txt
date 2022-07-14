@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Chime 
+-   Date: Mar 24
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+This was just a question about the synching behavior of repos on Sourcegraph -- when will I see changes in the remote reflected in Sourcegraph --
+@Shigeki Another great tip for tracking this is to check a repo's settings page. Heres an example path to append to your instance url: /github.com/sourcegraph/sourcegraph/-/settings/index  page for the repo.There you can find information about the last sync with your codehost, and also the last index of the repo. In most cases search results are going referencing the last index of the repo and as such checking the indexing page is a good way to get an estimate of the   how long Sourcegraph is taking to update a repo for search results.
+Another great resource if you'd like to learn more about update scheduling can be found here -- https://docs.sourcegraph.com/admin/repo/update_frequency

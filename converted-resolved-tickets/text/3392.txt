@@ -1,0 +1,14 @@
+-   CSE: Donavon Ellison
+-   Customer: 
+-   Date: 28 October 2021
+-   Version: ​2021-09-17
+-   Deployment: Sourcegraph.com
+-   External Services:
+-   Auth Providers:
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Synced repository was not being auto-selected when attempting to resync it
+1.  Go to code host site
+2.  Change repo name to match what is shown on sourcegraph
+Rename repo on code host to match what is being populated on sourcegraph

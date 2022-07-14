@@ -1,0 +1,18 @@
+zendeskTicketNumber: 9393
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9393
+title: Repo not visible on Sourcegraph
+Application engineer: Michael Bali
+Customer: Upwork 
+Date: June 28, 2022
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1656492702704239
+GitHub Issue Link:
+Doc Update Link:
+Summary: The user could not view the repo in sourcegraph .
+-   Were you able to view this repo before in the past or this is your first time trying to access this repo on sourcegraph?
+-   Also, do you have access to view this repo in your codehost?
+-   Next steps is for us to figure out if this repo is indexed in your sourcegraph instance. Your Sourcegraph site admin can help us figure this out.
+Apparently, the repo is a forked repo, and adding the parameter 

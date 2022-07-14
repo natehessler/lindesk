@@ -1,0 +1,16 @@
+-   Application engineer: Michael Bali
+-   Customer: Singapore Airlines 
+-   Date: May 25, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: Email
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+How to connect Sourcegraph to the internet via Squid Proxy?
+We looked at this internally and we believe the extension timeout you are experiencing is related to the issue with configuring squid proxy to access your Azure DevOps code host over the internet. By default, Sourcegraph instances require access to sourcegraph.com in order to fetch extensions from our extension registry, which explains the timeout error you see.
+At the moment, we do not have any official documentation for setting up proxies and we think it might be worth looking into some documentation your cloud provider (AWS) might have around this internally.
+Once they are able to get sourcegraph to connect to the internet via proxy they can also make use of the offline extensions.
+Sourcegraph allows customizing git-config and ssh_config for alternate clone URLs for repos. Some sites put an HTTPS or SSH proxy in front of their code host to reduce load and in this case, we try to treat these repos as being on their original code host, not the proxy site. This official [documentation](https://docs.sourcegraph.com/admin/repo/git_config) contains some examples of how these can be done. I hope this addresses your use-case.
+N/A 

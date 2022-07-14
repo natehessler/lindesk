@@ -1,0 +1,22 @@
+-   Application engineer: Ben Gordon
+-   Customer: Segment.io Inc 
+-   Date: Nov 23
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links:
+    -   https://sourcegraph.slack.com/archives/CKMSNT9C0/p1637689867041700
+    -   https://sourcegraph.slack.com/archives/CHXHX7XAS/p1637780994158800
+    -   https://sourcegraph.slack.com/archives/C02E4HE42BX/p1637784887281300
+-   GitHub Issue Link:
+    -   https://github.com/sourcegraph/customer/issues/571
+LSIF uploads are failing.\
+The precise-code-intel-worker is raising Postgres errors
+-   Gathered complete logs from precise-code-intel-worker (found nothing aside from the postgres error)
+-   Ensured that the database was connected correctly to the instance
+-   Reached out to code-intel
+-   Code intel identifies a bug in 3.28
+-   Code intel merges a fix which creates a feature flag, which disables the lsif-go API docs uploads
+Delivered the fix to the customer
+    msg=codeintel.lsifstore.WriteDocumentationPages error="ERROR: duplicate key value violates unique constraint \"lsif_data_documentation_pages_pkey\" (SQLSTATE 23505)" count=1.000 elapsed=0.006

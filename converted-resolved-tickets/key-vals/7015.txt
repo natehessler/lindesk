@@ -1,0 +1,17 @@
+zendeskTicketNumber: 7015
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7015
+title: # Fwd: not seeing private repos in source graph
+Application engineer: Alex Jean-Baptiste
+Customer: 
+Date: Mar 18
+Version: ​197691_2022-03-22_89ce8fa1cee6
+Deployment: Cloud
+External Services: GitHub
+Auth Providers: 3rd Party SAML SSO
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/33014/files ​
+Summary: The customer was not seeing the private repositories from their organization.\
+The customer was guided to update their code host connection to their organization in Sourcegraph with the following instructions: ​
+Make sure that the customer has an update to date PAT under the organization's code host connection (Click on the organization the user belongs to \> Settings \> Code Host Connections \> Update) ​ Should the user be using an SAML SSO to log into GitHub then that PAT will have to be authorized after it is generated as demonstrated here.
+https://docs.sourcegraph.com/cloud/organizations/adding_your_org_repos_to_cloud ​ https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on

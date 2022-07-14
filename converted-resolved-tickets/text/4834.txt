@@ -1,0 +1,13 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Unity 
+-   Date: Dec 1
+-   Version: 3.30.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C01FKCMAVH9/p1638407581003400), short thread where I document what Warren had suggested [here](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1638407682110500)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+How to fix a dirty database
+[Docs!](https://docs.sourcegraph.com/admin/how-to/dirty_database)
+https://docs.sourcegraph.com/admin/how-to/dirty_database

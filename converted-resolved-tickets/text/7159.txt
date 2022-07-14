@@ -1,0 +1,13 @@
+-   Application engineer: Kelvin Lee
+-   Customer: 
+-   Date: Mar 24
+-   Version: ​3.38.0
+-   Deployment: docker-compose
+-   External Services: Github, Other
+-   Auth Providers: Saml
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C02M9ASQ2LC/p1648162589022199)
+-   GitHub Issue Link: [GitHub Issue](https://github.com/sourcegraph/sourcegraph/issues/32633)
+-   Doc Update Link: none
+OBSERVATION: VS Code Extension can be used to search sourcegraph from directly within VS Code. As part of the UX, clicking on the search-results of a sourcegraph search will open up the file into VS Code, but only in read-only mode.
+QUESTION: Can VS Code Extension open these files locally, instead i.e. smartly match the search result to a local copy of the file on disk?
+No, not yet. But it's a [feature request](https://github.com/sourcegraph/sourcegraph/issues/32633)!

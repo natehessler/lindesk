@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Unity 
+-   Date: Dec 3
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1638538428099700
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+src search does not return all matches that you get on the website. How does one fix that?
+You will be able to get an exhaustive search using our CLI by using the -stream flag to access our Streaming API which is configured to run exhaustive searches.In addition, you will want  to add the count:all  keyword to your search query in order to tell Sourcegraph to give you all the results possible from your current instance.You would also use this on the Sourcegraph web app if you search query returned more than 500 search results. 500 returned results is our limit unless using the count:all keyword.Finally your command will look as follows:src search -stream {\$YOUR QUERY count:all}
+https://docs.sourcegraph.com/api/stream_api

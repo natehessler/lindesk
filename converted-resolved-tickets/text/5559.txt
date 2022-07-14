@@ -1,0 +1,13 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Wayfair
+-   Date: Jan 13
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C024QE1K0FP/p1642085183001500
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/29597
+-   Doc Update Link: N/A
+Recieved an error when doing a general search using graphql API that a repo didn't exist
+the customer renamed and archived said repo but didn't update it on Sourcegraph
+https://docs.sourcegraph.com/admin/how-to/remove-repo

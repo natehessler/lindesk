@@ -1,0 +1,16 @@
+-   Application engineer: Michael Bali
+-   Customer: Atlassian 
+-   Date: Nov 28, 2021
+-   Version: 3.34.1​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1638147495026200
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The old secrets in the repo have been replaced with new ones but Sourcegraph search results still display the old secrets instead.
+-   checked to see if this happening across different repos or just a specific repo?
+-   asked for screenshots of the mirroring page of the affected repo, I would like to see when last the repo was synced and attempt to refresh by clicking the refresh button.
+Took a while for the repo to sync probably due to its number in the update queue but the issue resolved itself as the repository was synced and is now updated.
+None
+N/A 

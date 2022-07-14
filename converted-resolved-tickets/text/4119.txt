@@ -1,0 +1,13 @@
+-   CSE: Donavon Ellison
+-   Customer: Booking.com
+-   Date: 28 October 2021
+-   Version: 3.33.0​
+-   Deployment: docker-compose
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1635174870023900
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/20911
+-   Doc Update Link: N/A
+Repo Updater was saying there were no repos being synced but the graphs and customer said otherwise
+Check Grafana repo-updater to see if repos are being synced
+This is a known bug and is being worked on

@@ -1,0 +1,13 @@
+-   Application engineer: Gabe Torres
+-   Customer: SAP 
+-   Date: Jan 6
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sap-successfactors.slack.com/archives/C01TG4R64BT/p1641495051000900
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/641
+-   Doc Update Link:
+There seems to be something happening where symbols are showing up as 'unknown' causing the select:symbol.class to fail because the class is not recognized as a class.
+I have been testing on this repo https://sourcegraph.com/github.com/sourcegraph/sourcegraph-jetbrains/-/blob/src/main/java/Util.java?L9:14-9:18 I added the repo to a new docker-compose instance on sourcegraph version 3.31.2 and 3.33.0 For example the class Util shows up as 'class' on 3.31.2 and 'unknown' on version 3.33.0 I indexed the repo with lsif-java on sourcegraph 3.33.0 and the symbol showed up as 'unknown' still.
+This seems to be a bug that should be fixed with https://github.com/sourcegraph/sourcegraph/pull/29903

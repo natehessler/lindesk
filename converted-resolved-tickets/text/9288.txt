@@ -1,0 +1,11 @@
+-   Application engineer: Riana Shahid
+-   Customer: Reddit 
+-   Date: June 23, 2022
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links:https://sourcegraph.slack.com/archives/C02BJ8T258D/p1656003734857019
+I'm trying to do a symbol/references search for a function definition and it's returning anything and everything in that language that uses the same word, including other functions with the same name (eg cassandra.execute vs sql.execute) and comments (and not code in comments, literally a comment containing the same word) making it really hard to find usages of that specific function within our code.
+this comes down to whether the results under References are search-based or precise. On the right side of the same line as the References and History tab you should see a button that says either "Hide search-based results when precise results are available" or "Mix precise and search-based results". After clicking the "Hide" option, if you are still getting only search-based results then precise results are not available at this time.
+https://docs.sourcegraph.com/code_intelligence/explanations/precise_code_intelligence

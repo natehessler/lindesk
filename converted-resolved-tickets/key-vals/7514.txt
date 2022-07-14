@@ -1,0 +1,27 @@
+zendeskTicketNumber: 7514
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7514
+title: Symbol container growing past 100gb
+Application engineer: Michael Bali
+Customer: Databricks 
+Date: Apr 6
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1649292584874699
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Symbol container growing past 100gb which is strange
+-   Did a preliminary investigation, I understand this is an issue that was discovered in the past to be a bug and was fixed in version 3.37. I can see on my end you are on version 3.38, can you double confirm that for me?
+-   Asked for logs related to the symbols container
+-   Requested fo screenshot of the https://sourcegraph.example.com/-/debug/grafana/d/symbols/symbols and include the "janitor" section?
+-   Could you also send us the output of 
+-   Did you notice it respecting the 100GB limit previously, and now it's not?Did you set 
+-   noticing a discrepancy in reported disk usage:
+-   
+-   Grafana shows \~50GB
+-   This could be caused by a build-up of partial files in the cache. Could you run 
+-   Seems as if everything changed from writing to symbols to enterprise-symbols, that could be the problem.
+I don't think the total disk usage will exceed 200GB (100GB for each of the dirs 
+    t=2022-04-01T01:26:40+0000 lvl=eror msg="diskcache.Cached Fetch" error="context canceled" count=1.000 elapsed=19.895 component=symbols
+    t=2022-04-01T01:26:40+0000 lvl=eror msg=codeintel.symbols.api.Search error="databaseWriter.GetOrCreateDatabaseFile: context canceled" count=1.000 elapsed=19.904 parseAmount=partial-parse repo=databricks/runtime commitID=3427c4a9c6bc1ada2041f958f3a251e103c59336 query=

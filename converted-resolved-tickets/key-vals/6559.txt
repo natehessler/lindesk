@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6559
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6559
+title: New Slack message in support-mercadolibre: provisioning error / pvc failed to provision volume
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: Mar 1
+Version: 3.29.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1646152244432719
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Customer kept seeing pods failing (sourcegraph-frontend and symbols in crash loop and several others pending) and got the following error: 
+CE reached out to me saying they saw the thread and suspect that there was a mis-step in setting up their Amazon EBS CSI driver . Asked the customer about it and wanted to set up a zoom call to make sure they go through the steps correctly but this customer doesn't have access to aws. Though in investigating the settings for their IAM role, they noticed that one value was different than what the aws doc suggested. I suggested they try setting up the IAM role again, this time following the steps in the guide exactly. This customer submitted a ticket with their person who has access to aws and got this fixed.
+https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html

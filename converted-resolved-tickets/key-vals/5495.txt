@@ -1,0 +1,39 @@
+zendeskTicketNumber: 5495
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5495
+title: Workiva: pgsql pod restarts
+Application engineer: Ben Gordon
+Customer: Workiva 
+Date: Jan 11
+Version: 3.35.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links:
+https://sourcegraph.slack.com/archives/CTJUDV6JH/p1640109864034100
+https://sourcegraph.slack.com/archives/CTJUDV6JH/p1641920610006300
+Summary: -   GitHub Issue Link:
+-   Doc Update Link:
+Customer reports increase in Sourcegraph instance instability
+-   The apparent error is pgsql pod restarts on the instance
+-   We began debugging by collecting pgsql container logs, and inspecting the k8s events on the pgsql deployment
+-   We tried increasing the memory allocated to pgsql, and collected k8s events and pgsql logs over the course of multiple days
+-   This showed minimal improvement, but the instance instability remained
+-   At this point, the customer expressed interest in starting a fresh Sourcegraph instance using our pre-beta Helm installation
+-   Delivery was brought in, as they were looking for customers to test this deployment option
+-   Once the customer brought up the new Helm instance, it presented the same PGSQL issues as their previous instance
+-   At this point, Delivery takes over the debugging, as the cause for the PGSQL failures is due to deployment modifications that the customer has made
+-   Customer had removed multiple deployments from their instance, including cAdvisor, redisStore, and redisCache
+-   Adding back in both redis services improves the instance health, but PGSQL issues remain
+-   Delivery made modifications to the Helm deployment files, including replacing the logic for our Postgres k8s ready checks
+-   This change prevents k8s from rescheduling pgsql due to errant failed ready checks by changing the ready check logic to be more permissive
+-   The customer was also experiencing issues with readiness probes, but these appear to have solved themselves with time.
+-   The customer implements all the same fixes from their Helm deployment into their previous deployment, which resolves all the problems they were experiencing
+-   Customer begins reporting a new issue with Prometheus failing to start due to an EphemeralStorage limit making the pods unschedulable
+-   We discover the customer has inserted their own ephemeralStorage limitations on this deployment, so we ask them to remove it
+-   Removing the ephemeralStorage limitation resolves the unscheduleable pod issue, and Prometheus starts up successfully
+-   At this point both instances are running in healthy states
+-   Add back in removed redis pods, redis is necessary for functionality of the Sourcegraph app as it handles auth and sessions
+-   Remove customer-added ephemeral storage limits, these were too limiting and caused unschedulable pods
+-   Increase PGSQL memory to accommodate larger data set size, this was causing PGSQL to fail to start due to OOM
+-   Our Delivery team publishes multiple PR's into our Helm deployment to resolve issues we expect would block any customer's deployments in the future
+Too many to link in a GitHub issue, see linked threads

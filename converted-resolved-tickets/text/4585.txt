@@ -1,0 +1,16 @@
+-   Application engineer: Giselle Northy
+-   Customer: SumUp 
+-   Date: Nov 15
+-   Version: ​3.33
+-   Deployment: Kubernetes
+-   External Services: Github
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C027WQS8ZPH/p1637008655017300
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/2144
+-   Doc Update Link: n/a
+Markdown Code blocks are not being rendered properly by Sourcegraph.
+Example of what it looks like in Github:
+![image (1)](https://user-images.githubusercontent.com/27694443/142047311-2dffef74-ab64-44fe-a872-94a0562fc29e.png)
+Example of what it looks like in Sourcegraph today:
+![image](https://user-images.githubusercontent.com/27694443/142047351-b5c6882d-e864-4dbe-822d-d2c023a8c8ec.png)
+This is a Feature request that has been kicked around for a couple years now - [Feature: Syntax highlight code in markdown files](https://github.com/sourcegraph/sourcegraph/issues/2144)

@@ -1,0 +1,9 @@
+-   Application engineer: Riana Shahid
+-   Customer: Workiva 
+-   Date: June 16, 2022
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+Customer kept getting "Unable to verify your access token" error in vs code extension
+Customer had to manually add 

@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Segment.io Inc 
+-   Date: Nov 16
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: 
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+:wave_hello: Are there any recommended checks/tests we should be running after doing an upgrade (or migrating to an external datastore) that make us confident the upgrade was a success?
+Hey @ajacobs we don't have any tests that must be run to ensure an upgrade went smoothly. Our upgrade docs generally cover any case specific extra steps. Other good things to do for peace of mind after an upgrade are to keep an eye on any grafana warnings in the site admin monitoring tab.We have a few docs on how to manage database issues that can occur during upgrades, you shouldn't need to run any of the queries in these but, for extra peace of mind, you could.This doc: https://docs.sourcegraph.com/admin/how-to/rebuild-corrupt-postgres-indexes covers rebuilding corrupt postgres indexes, the extension amcheck query might bring some peace of mind.This doc: https://docs.sourcegraph.com/admin/how-to/dirty_database covers how to resolve issues caused by incomplete migrations after an upgrade. (The frontend won't start if this is an issue, so, you shouldn't really need this one)
+n/a 

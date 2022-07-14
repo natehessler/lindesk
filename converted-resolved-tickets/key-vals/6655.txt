@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6655
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6655
+title: Code Monitor Multiline diff search
+Application engineer: Gabe Torres
+Customer: Cisco Meraki 
+Date: Mar 4
+Version: 3.35.1​
+Deployment: docker-compose
+External Services: GITLAB,OTHER
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01S6JETFA7/p1646424277574619
+GitHub Issue Link:
+Doc Update Link:
+Summary: It does not seem like I can use a structural search with the type: diff filter. Is there another way to set up a code monitor for my use case?
+Code Monitors don't support structural searches. Multiline search is also a current limitation with diff searches. I believe the best workaround at this time would be to track all changes to the file.

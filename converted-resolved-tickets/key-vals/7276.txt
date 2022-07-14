@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7276
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7276
+title: New Slack message in support-mercadolibre: Grafana not showing any data - permission error in prometheus
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: Mar 31
+Version: 3.29.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1648736214898469
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Grafana and prometheus not displaying any data
+Prometheus logs indicated that this might be a permissions error. At first glance the contents of their 
+https://docs.sourcegraph.com/admin/install/kubernetes/troubleshoot

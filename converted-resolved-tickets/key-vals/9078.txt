@@ -1,0 +1,18 @@
+zendeskTicketNumber: 9078
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9078
+title: New Slack message in chime-sourcegraph-support-poc
+Application engineer: Stomzy Mwendwa
+Customer: Chime 
+Date: June 16, 2022
+Version: ​3.40.2
+Deployment: Docker-compose
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02JPTA94AK/p1655396903576689
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: this sourcegraph query isn't quite doing what I would expect.. any ideas what I'm doing wrong?
+repo:1debit lang:ruby (.cards AND NOT .cards\[A-Z\_\]) still shows this in the results: .cards_tab_label
+https://chime.sourcegraph.com/search?q=context:global+repo:1debit+lang:ruby+%28.cards+AND+NOT+.cards%5BA-Z\_%5D%29&patternType=literal
+Okay, I believe I may have found a query that works for this. Please try repo:1debit lang:ruby content:.cards
+I

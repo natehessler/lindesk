@@ -1,0 +1,11 @@
+-   Application engineer: Riana Shahid
+-   Customer: SoFi 
+-   Date: May 25, 2022
+-   Version: 3.37.0​
+-   Deployment: docker-container
+-   External Services: GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0260MME38B/p1653500060142079
+-   Github Issue: https://github.com/sourcegraph/customer/issues/991 (similar problem with Apple)
+Customer was on 3.38 on a single container kubernetes deployment 
+Customer was able to successfully get to v3.40.1 after spinning up their own codeinsights db.

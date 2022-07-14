@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4445
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4445
+title: How to Hide the Sidebar on sourcegraph Search results
+CSE: Michael Bali
+Customer: Dropbox 
+Date: Nov 4 2021
+Version: 3.29.1​
+Deployment: docker-compose
+External Services: OTHER
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C015JREMBTR/p1636071107002200
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The Customer wants to know if it is possible to hide the sidebar on the Sourcegraph Search result.
+I attempted to reproduce this and it's not possible to totally hide the sidebar.The sidebar is an integral part of the Sourcegraph UI. However, if it's distracting and creates noise you can collapse the dropdown
+N/A 

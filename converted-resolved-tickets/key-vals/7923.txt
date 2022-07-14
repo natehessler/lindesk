@@ -1,0 +1,21 @@
+zendeskTicketNumber: 7923
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7923
+title: Rank-By-Stars Feature not getting Disabled
+Application engineer: Riana Shahid
+Customer: Two Sigma Investments 
+Date: Apr 29
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: n/a
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: I'm trying to disable the rank-by-star feature for codebases by following these instructions: 
+    "experimentalFeatures": {
+    "ranking": {
+    "maxReorderQueueSize": 0
+    }
+    }
+but that doesn't seem to be working ie the search results are still ranked by stars. Any idea why that may be?
+I recommended they restart their instance with 

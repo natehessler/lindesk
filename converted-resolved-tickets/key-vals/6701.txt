@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6701
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6701
+title: Segment: Incomplete Migrations
+Application engineer: Ben Gordon
+Customer: Segment.io Inc 
+Date: Mar 8
+Version: 3.35.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1646758250908949
+Customer reports 
+We have a troubleshooting doc with a solution for this problem, as it was a known issue with the 3.35 version
+Summary: -   Sent customer SQL query from the linked doc, which resolved the incomplete migration
+-   https://docs.sourcegraph.com/code_insights/how-tos/Troubleshooting

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 8464
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8464
+title: # Snowflake Ticket
+Application engineer: Alex Jean-Baptiste
+Customer: Snowflake, Inc. 
+Date: May 25, 2022
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C021MU16S1F/p1653499256532599?thread_ts=1653439785.914909&cid=C021MU16S1F
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: ​can we get someone on the call that knows about the oauth process? ​ ​one engineer can't login and the other gets this, which routes to my user account for some reason ​ \[SCREENSHOT\]
+​​A call with the customer CE Nate Maynard, AppE Amber Furbush and myself was had. The customer was told that the GitHub sign-in flow that they were experiencing was working as intended.
+They were given instruction on how to create a GitHub App under an organization rather than an individual user in order to get around their SSO being dependent on one user having access.
+​https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app ​

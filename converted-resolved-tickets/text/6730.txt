@@ -1,0 +1,10 @@
+-   Application engineer: Ben Gordon
+-   Customer: Indeed 
+-   Date: Mar 9
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1646853428355889
+-   Is it possible to re-open a closed batch change
+-   re-applying the same batch change should work, as batch changes are designed to be idempotent

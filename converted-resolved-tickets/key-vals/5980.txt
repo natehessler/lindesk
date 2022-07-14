@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5980
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5980
+title: New Slack message in support-reddit-sourcegraph: Asking if intermediate upgrade is necessary or if versions can be skipped
+Application engineer: Riana Shahid
+Customer: Reddit 
+Date: Feb 2
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1643826727475049
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Customer wanted to know if they can upgrade from 3.34.2 to 3.36.2 directly or if they need to do 3.35.1 first.
+I confirmed that they do need the intermediate upgrade, according to the docs
+https://docs.sourcegraph.com/admin/updates/server

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6348
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6348
+title: New message in #support-roblox-sourcegraph
+Application engineer: Stomzy Mwendwa
+Customer: Roblox Corporation 
+Date: Feb 17
+Version: 3.37.0​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github,github
+Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1645148171261149
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer reported that they were seeing receiving different results on code insights graph for 2 similar queries. The first code insight was generated 6 months ago as compared to a newer one a few weeks old.
+Try to find if the search query used had a repo: filter. If not, include it and see how the results stack up.
+Unfortunately, the customer hasn't gotten back to me in 4 days+. Closing this and will re-open if and when they do.

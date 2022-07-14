@@ -1,0 +1,26 @@
+zendeskTicketNumber: 4506
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4506
+title: Problem with upgrade from 3.30.4 to 3.31.2
+Application engineer: Jason Harris
+Customer: Capital One 
+Date: Nov 9
+Version: ​
+Deployment: k8s
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1636480085013600
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer attempted to upgrade from 
+-   Asked them to check for corrupt postgres indexes, but since they couldn't spin up the pods, they couldn't 
+-   Asked them to send their yaml files to check the security context.
+-   Asked if they were receiving an error that looked anything like this: 
+-   Asked if other DB's were starting up... answer was no.
+-   Asked for the output of 
+    -   Nothing of note output from these commands.
+-   Asked them to change security overlay settings, which only caused validation errors.
+-   Asked them to reboot 
+-   Suspected the pod was belonging to the wrong user (
+Resolved with a phone call:
+Changes to get past read-only file system error:
+create 

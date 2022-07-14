@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6284
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6284
+title: Can customers create their own search notebooks?
+Application engineer: Jason Harris
+Customer: Lyft, Inc. 
+Date: Feb 16
+Version: 3.36.3
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0174NVAREV/p1645029523009589
+GitHub Issue Link:
+Doc Update Link:
+Summary: Can we create our own search notebooks?
+Yes! You just need to add it to the experimental features and make sure you have your instance upgraded to 3.36.

@@ -1,0 +1,21 @@
+-   Application engineer: Gabe Torres
+-   Customer: Workiva 
+-   Date: Apr 28
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/CTJUDV6JH/p1651184640306129
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/733
+-   Doc Update Link:
+The customer switched codeintel-db and pgsql to managed databases and saw the following error in the frontend:\
+The customer is using PGSSLMODE: require for codeintel and pgsql and CODEINSIGHTS_PGSSLMODE: disable
+    CODEINSIGHTS_PGDATASOURCE: postgres://postgres:password@codeinsights-db:5432/postgres
+    CODEINSIGHTS_PGSSLMODE: disable
+Adding the long-form vars for codeinsights-db disables SSL for codeinsights-db.
+    - CODEINSIGHTS_PGHOST=codeinsights-db
+    - CODEINSIGHTS_PGPORT=5432
+    - CODEINSIGHTS_PGUSER=postgres
+    - CODEINSIGHTS_PGPASSWORD=password
+    - CODEINSIGHTS_PGDATABASE=postgres
+    - CODEINSIGHTS_PGSSLMODE=disable

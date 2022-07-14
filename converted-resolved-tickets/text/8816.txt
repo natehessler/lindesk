@@ -1,0 +1,22 @@
+-   Application engineer: Michael Bali
+-   Customer: Atlassian 
+-   Date: June 16, 2022
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1655425172764489
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is it possible add people to an "Organization" created in our Atlassian installation of Sourcegraph? I created one via the UI, can see its settings all fine, but I don't think I can invite any of my teammates? The UI has an option to invite and says this when I use it, but despite the message they haven't received anything, nor they can access the dashboard I am intending to share with them. Any clues?
+-   checked to find out if they have their SG instance is configured to send email.
+The admin confirming that this isn't configured. This explains the problem they are encountering. We also have a detailed [doc](https://docs.sourcegraph.com/admin/config/email) on configuring sourcegraph to send emails using an SMTP server of your choose.
+Asked the admin to do the following as an admin:
+-   Add people to the organisation created manually on the organisation page until email is configured.
+To unblock your ability to share insights, you can do one of a few things:
+1.  You can ask your site admin to: - Create a global dashboard (admins should be able to create global dashboards) that you can then add insights to
+-   Add people to the organisation manually on the organisation page until email is configured
+-   A possible easier solution for your admin is just have them add [everyone on the instance to this org](https://docs.sourcegraph.com/admin/organizations), effectively side-stepping the global restriction of (1).
+2.  Your admin would need to upgrade your sourcegraph instance -- you're on 3.34.
+-   In 3.37+, you'll have the option to create globally-visible dashboards regardless of being a site admin
+-   In 3.40+, [you'll get direct share links on individual insights](https://about.sourcegraph.com/blog/release/3.40) (but will still need people to be part of an organisation, or still need to be able to create a global dashboard).

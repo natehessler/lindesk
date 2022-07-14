@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Nutanix, Inc. 
+-   Date: June 14, 2022
+-   Version: 3.39
+-   Deployment: kubernetes
+-   External Services: GITHUB,OTHER
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1655206410926119
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Sourcegraph Support - Is there any way to add custom metrics for alert and monitoring purpose on prometheus / Grafana which comes with sourcegraph ?
+Hi Pritam. Happy to help out with this one here.At the moment, unfortunately, creating custom alerts isn't recommended and not currently supported by Sourcegraph. We do encourage folks to share feedback on monitoring and dashboards and alerts if you'd like to see improvement.Our issue tracker is the ideal place for that.Currently, folks are encouraged to use the current metrics because they are improved and updated on each release to ensure displayed information is up to date.I apologize for the inconvenience here.
+https://docs.sourcegraph.com/admin/faq

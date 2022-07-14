@@ -1,0 +1,12 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Reddit
+-   Date: Jan 3
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1641244117212900
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/651
+-   Doc Update Link: N/A
+Repo was failing to sync after being deleted/moved
+Add SSO authenification to your token for these repos

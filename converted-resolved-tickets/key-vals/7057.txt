@@ -1,0 +1,20 @@
+zendeskTicketNumber: 7057
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7057
+title: Sourcegraph reports "Cloning in progress"
+Application engineer: Giselle Northy
+Customer: FactSet 
+Date: Mar 21
+Version: 3.32.0​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: How do I scale sourcegraph and up the resources in the docker compose file?
+For how to set the frontends, in the docker-compose.yaml there's a note by the sourcegraph-frontend-0 stating that you'd want to apply changes there to the frontend-internal service as well. \
+sourcegraph-frontend-0: container_name: sourcegraph-frontend-0 image: 'index.docker.io/sourcegraph/frontend:3.37.0@sha256:724ccb31e95237cbe12b51f3c8b8d22a7d0ac65a73ee8084614360c2018ce3ca' cpus: 4 mem_limit: '8g' environment: \
+The resources you allocate depend on several factors that are deployment specific. I suggest referencing our resource estimator guide here . It's not perfect but it can give you a general idea of how much resources and where.
+Also, a good place to check are the Grafana pages for specific services to see if they are showing high memory / cpu usage. For repo updating, those would be services like repo updater, frontend, and gitserver.
+https://docs.sourcegraph.com/dev/background-information/architecture
+https://docs.sourcegraph.com/admin/install/resource_estimator

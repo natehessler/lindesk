@@ -1,0 +1,16 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Thrive Global 
+-   Date: June 27, 2022
+-   Version: ​3.40
+-   Deployment: Docker-compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03GANCKQSK/p1656331012952279
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I'm trying to get this insights https://sourcegraph.infra.stag.thriveglobal.com/insights/insight/aW5zaWdodF92aWV3OiIyOXZyM3BuM296Wm9HaEdtNGdSRVhYTmFsQVMigraph\> to show correctly. Not sure if I'm doing something wrong or not. Could you have a look please?
+I want to search for graphRef: Federated-Gateway-Production-arkg55@current in files called argo/platform-config.yaml and plot the number over time. Thanks
+Got it! Thanks. This should look like.
+file:argo/platform-config.yaml content:graphRef:
+I believe you'd want to run this across all repositories. Just a quick caveat that this may take some time to return a plot.
+Internal note

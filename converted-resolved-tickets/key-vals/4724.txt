@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4724
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4724
+title: How To: add syntax highlighting for proprietary language
+Application engineer: Jason Harris
+Customer: Twitter 
+Date: Nov 23
+Version: 3.33.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/CTN0ZBETE/p1637680388045800
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28088
+Doc Update Link:
+Summary: I would like to add syntax highlighting for some proprietary languages we use. How do I get started with that?
+This is currently not supported. Added a feature request: https://github.com/sourcegraph/sourcegraph/issues/28088
+https://github.com/sourcegraph/sourcegraph/issues/28088

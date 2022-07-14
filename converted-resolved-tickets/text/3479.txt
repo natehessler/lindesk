@@ -1,0 +1,16 @@
+-   **CSE:** Ben Gordon
+-   **Customer:** Snapdocs Inc 
+-   **Date:** 28 October 2021
+-   **Version:** ​3.31.2
+-   **Deployment:** kubernetes
+-   **External Services:** GITHUB
+-   **Auth Providers:** builtin, github
+-   **Slack Links:** https://sourcegraph.slack.com/archives/C029VE4A12R/p1632335401051000
+-   **GitHub Issue Link:**
+-   **Doc Update Link:**
+Customer unable to browse non-main branches on a monorepo
+-   requested logs from gitserver and repo-updater: found some long executing requests
+-   requested Grafana dashboards for repo-updater: found performance issues, including long running requests
+-   Asked admin if they had provisioned resources according to our Monorepo scaling docs: https://docs.sourcegraph.com/admin/install/kubernetes/scale
+-   They had not, so they performed the necessary re-provisioning and the problem is now resolved
+Reprovisioning their k8s with better resource limits fixed the issue

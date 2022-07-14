@@ -1,0 +1,10 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: 
+-   Date: Dec 19
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1639883809113100
+-   GitHub Issue Link:
+-   Doc Update Link:
+In https://github.com/sourcegraph/sourcegraph/issues/28987issue
+Do I need extra configuration to show the Subscription component?
+Could try running this instead: SOURCEGRAPH_API_URL=https://sourcegraph.com sg start web-standalone
+https://github.com/sourcegraph/sourcegraph/blob/20a1003caf37c8275a853411e9923cdc7dc6cfd9/sg.config.yaml

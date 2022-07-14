@@ -1,0 +1,24 @@
+-   Application engineer: Michael Bali
+-   Customer: Atlassian 
+-   Date: Nov 7, 2021
+-   Version: ​N/A
+-   Deployment: Kubernetes
+-   External Services: GITHUB,GITLAB,OTHER
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1636349902006200
+-   GitHub Issue Link: n/A
+-   Doc Update Link: n/A
+The Sourcegraph instance was returning zero results in a repo that was modified in the last 3 months.
+-   if these changes were made within the last 3 months then I suspect the repo isn't updated and this is why searching this is probably returning 0 results.This repo can be manually refreshed by
+    -   Clicking Repository Status
+    -   search the repo name
+    -   Click on the setting button
+    -   Click on the 
+-   I would also like to request for 
+-   I noticed some results were excluded. I want you to run the search again this time to enable 
+-   exec into 
+-   I also want to confirm if 
+For more context to my second question, I did a search on a repo with two different branches. I have 
+The customer upgraded their sourcegraph instance and this seems to have resolved their issue. They confirmed everything works fine now.
+N/A
+N/A

@@ -1,0 +1,13 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Unity 
+-   Date: Dec 9
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1639058015113000
+-   GitHub Issue Link:
+-   Doc Update Link:
+Hi. After installing the sourcegraph chrome plugin I expected to see a new icon at the top right on github.cds but it is not there. Am I missing an extra step? Thanks! Would you know how to install the sourcegraph app to a new github org?
+Update the SG URL on the extension to their hosting URL I forwarded the link to our doc on how to configure a new code host with either repo or org
+[doc](https://docs.sourcegraph.com/admin/external_service/github)

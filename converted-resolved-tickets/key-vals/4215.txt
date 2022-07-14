@@ -1,0 +1,22 @@
+zendeskTicketNumber: 4215
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4215
+title: Customer question about clarity on Batch Changes permissions documentation
+CSE: Alex Jean-Baptiste
+Customer: Tinder 
+Date: 28 October 2021
+Version: 3.33.0​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1635361888016500
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/26953
+Summary: Hi @nate.maynard and @dan.ryan, we have some permissions questions about the interactions between sourcegraph's batch changes and our code host (github).
+https://docs.sourcegraph.com/batch_changes/how-tos/configuring_credentials
+> Creating, updating, or publishing a batch change; or publishing a single changeset: You must have access to view the repositories and the configured token must have the rights to push a branch and create the changesets on your code host (e.g., push branches to and open pull requests on the GitHub repositories). \
+How exactly is it that sourcegraph is able to create any pull requests on our code hosts given this conflicting info?
+So after talking with the team it seems as though the confusion lies with how GitHub outlines their permissions: "The first page talks about the GitHub token used by Batch Changes when pushing changes to the code host; the second talks about permissions on the batch change itself."
+The GitHub permissions outlined in the first doc will give write access to the token using the repo check box.
+https://docs.sourcegraph.com/batch_changes/how-tos/configuring_credentials
+https://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes
+https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps

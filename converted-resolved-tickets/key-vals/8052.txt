@@ -1,0 +1,19 @@
+zendeskTicketNumber: 8052
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8052
+title: New Slack message in support-allegro
+Application engineer: Stomzy Mwendwa
+Customer: Allegro 
+Date: May 5
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1651830862425319
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer accidentally added public repos into their instance and deleted the code host connection. The repos that were queued for cloning were not disappearing from the UI and the customer was uncomfortable about that
+Confirm the number of repos by running in GQL: { "data": { "repositories": { "totalCount": 85747 } } }
+query { externalServices { nodes { kind, repoCount } } }
+Asked the customer to Exec into your Postgres pod by running kubectl exec -it \
+The customer didn't find the DELETED key words but used the isPrivate: False filter to remove the repos from their org.
+N/A

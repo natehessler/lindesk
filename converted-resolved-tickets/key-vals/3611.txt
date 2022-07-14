@@ -1,0 +1,18 @@
+zendeskTicketNumber: 3611
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3611
+title: New Slack message in trial-reddit-sourcegraph
+CSE: Alex Jean-Baptiste
+Customer: Reddit 
+Date: 28 October 2021
+Version: ​3.32.0
+Deployment: Kubernetes
+External Services: Github
+Auth Providers: Built-In, Github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1633018348137700
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: 1.  Explained to the customer that our Sourcegraph Cloud product has already done the work of indexing the public Kubernetes repository.
+2.  Explained that a private instance of Sourcegraph is not going to come with the precise code intelligence functionality that they are requesting.
+3.  Directed the customer to add the Kubernetes public repository to their private Sourcegraph instance.
+4.  Informed the customer of cross-repository code intelligence functionality as documented \[here\](https://docs.sourcegraph.com/code_intelligence/explanations/precise_code_intelligence
+5.  Informed the customer about manually indexing the Kubernetes public repository if the code intelligence did not resolve by referencing the documentation [here](https://docs.sourcegraph.com/code_intelligence/tutorials/indexing_go_repo).

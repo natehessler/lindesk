@@ -1,0 +1,12 @@
+zendeskTicketNumber: 6986
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6986
+title: Error previewing batch change
+Application engineer: Gabe Torres
+Customer: 
+Date: Mar 17
+Slack Links: https://sourcegraph.slack.com/archives/C034ZJQSAG6/p1647557952601719
+st attempted to preview a batch change with our sourcegraph instance and ran in to some errors when viewing my preview:\
+R: permission denied for view tracking_changeset_specs_and_changesets (SQLSTATE 42501)
+admin had changed the view permissions for users. They were able to change them and the user was able to see the batch change preview.
+s://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes
+Summary: 

@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4632
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4632
+title: Access organization repos on Sourcegraph.com
+Application engineer: Ben Gordon
+Customer: 
+Date: Nov 18
+Version: ​N/A
+Deployment: N/A
+External Services:N/A
+Auth Providers: N/A
+Slack Links:
+-   https://sourcegraph.slack.com/archives/C025BKWFPDY/p1637612188071300
+-   https://sourcegraph.slack.com/archives/C025BKWFPDY/p1637612188071300
+Summary: -   GitHub Issue Link:
+-   Doc Update Link:
+How to add organization repository to Sourcegraph.com
+On GitHub, organizations must grant access to the Sourcegraph OAuth app via GitHub.com. This can be a challenge to resolve, as the section of the organization settings on GitHub where third-party application access is managed (https://github.com/organizations/organization-name/settings/oauth_application_policy) only lists requests for access. Until a member of the organization requests access for the Sourcegraph.com app, Sourcegraph will not show up as an option. And unfortunately, this option is only exposed during GitHub's OAuth interstitial while granting access in the first place.
+To resolve this, a user who belongs to that organization on GitHub.com and has created a code host connection or login connection Sourcegraph Cloud can submit a new request. To do this, that user should go to GitHub.com and then their User settings \> Applications \> Authorized OAuth Apps \> Sourcegraph.com. There will be a section for "Organization access." They can then either request or grant (if they administrate the organization on GitHub) access.
+The GitHub organization's administrator will then receive an email from GitHub for a "Third-party application approval request for (organization-name)" with a link to approve the request.

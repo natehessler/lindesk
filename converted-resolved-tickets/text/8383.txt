@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Booking.com 
+-   Date: May 22, 2022
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1653292024813459
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/973
+-   Doc Update Link: N/A
+So I have this search-probe that is just a small binary that shells out to the src CLI and issues a search, roughly every second. But if I look at the graph for search latency that's using the query: histogram_quantile(0.95, sum by (le)(rate(src_search_streaming_latency_seconds_bucket\[5m\]))) I'm seeing gaps in my metrics, digging further I can see that it only ever has the source of browser but the CLI searches arrive as source unknown .Is there a good metric to measure the latency of all searches not just the streaming?
+https://sourcegraph.com/github.com/sourcegraph/sourcegraph@8ae6cd08ea4891f2f7d7881e4c4e0a56fd0b6134/-/blob/cmd/frontend/internal/search/search.go?L604-626
+The customer reported that they mislabeled the source. It's other. Confirming how we handle CLI source. There's a fix here: https://github.com/sourcegraph/sourcegraph/issues/35998 to continue tracking
+N/A

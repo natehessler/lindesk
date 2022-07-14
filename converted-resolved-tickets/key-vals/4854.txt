@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4854
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4854
+title: "docker for mac" banner being served to all users.
+Application engineer: Jason Harris
+Customer: Netflix 
+Date: Dec 2
+Version: 3.34.1​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://sourcegraph.slack.com/archives/C012V43N8E7/p1638487022074500
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28405
+Doc Update Link: N/A
+Summary: Banner being served to all users. Should only be served to site-admins.
+Sourcegraph search to find code that needed to be updated.
+Found code that needed to be updated and updated the issue filed in previous issue.

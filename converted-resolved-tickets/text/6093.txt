@@ -1,0 +1,12 @@
+-   Application engineer: Gabe Torres
+-   Customer: Lockheed Martin Space Systems 
+-   Date: Feb 8
+-   Version: ​3.36.3
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C030CPM2ELR/p1644339380710089
+-   GitHub Issue Link:
+-   Doc Update Link:
+We don't see the Notebooks option under "Code Search". Is there something we need to do to activate it?
+The global settings should be something like this: { "experimentalFeatures": { "codeInsights": true, "showSearchNotebook": true }, }

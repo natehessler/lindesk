@@ -1,0 +1,19 @@
+zendeskTicketNumber: 7288
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7288
+title: Get all repositories that have a certain search string
+Application engineer: Jason Harris
+Customer: Netflix 
+Date: Mar 31
+Version: 3.37.0​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://netflix.slack.com/archives/CHKL4G5PG/p1648762962021019 (only visible to netflix assigned AER's)
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: This customer had a few questions: 1. How do I get all given repos that have a certain string? 2. Can I get this data in a more consumable format like json or csv? 3. Is there also an API that I could get a json response from?
+1.  Yup. Use the select filter, like this: 
+2.  Yes! On the 
+3.  You betcha!!! There's two options here:
+    -   Go to your settings on the web app. In the left menu there is an API console under the 
+    -   The 

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7433
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7433
+title: Does Sourcegraph Support SCIM?
+Application engineer: Michael Bali
+Customer: TripActions Inc. 
+Date: Apr 4
+Version: 3.33.0​
+Deployment: docker-container
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02RK23KB70/p1649140886843279
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: We are currently using SSO with Okta for Sourcegraph, but we have to manually remove users that are off-boarded (to avoid consuming licenses for people that can't actually use them). I'd like to know if Sourcegraph supports https://developer.okta.com/docs/concepts/scim/SCIM\>, is that the case? I've been doing some research and can't find any information online.
+No, we don't have support for a SCIM API, but we will sync access controls from the code host. Users can be removed using our graphQL API. Would be intuitive to run this as a cron to periodically remove users.
+N/A 

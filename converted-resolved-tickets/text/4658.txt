@@ -1,0 +1,24 @@
+-   Application engineer: Giselle Northy
+-   Customer: Segment.io Inc 
+-   Date: Nov 19
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1637341879035300
+I have been working on Sourcegraph batch change to create changeset (raising PR's) on the GIT repositories matching file content. Have some challenges here.
+For each matched repository from repositorymatchingquery , how to raise multiple PR's on every matched file under the same repo or is it possible to perform steps on each matched file in a repo and then open PR. (Currently the steps are executing only for the first occurrence of the matched file .)
+This below code I tried to execute for each matched file . Not working.
+    steps:
+    -run: 
+    for file in "${{ join repository.search_result_paths " " }}";
+    do
+    sed '1,1s/
+    mv temp "${file}"
+    done
+    container: alpine:3
+Good example for this case: https://github.com/segmentio/platform-api . This repo has multiple docker files. But its only executing steps on first matched file only.
+A)  They were missing the 'on' part of the Batch changes template https://docs.sourcegraph.com/batch_changes/references/batch_spec_templating
+B)  Suggested following some of the examples for looping the batch spec in the cheat sheet https://docs.sourcegraph.com/batch_changes/references/batch_spec_cheat_sheet
+C)  When it still wasn't working, suggested narrowing down the scope of the repo's as mentioned in doc https://docs.sourcegraph.com/batch_changes/references/troubleshooting
+Solution: They found that repository.search_result_paths didnt work so added steps using find and sed commands to loop through each matched file.

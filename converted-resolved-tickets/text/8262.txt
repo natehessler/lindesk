@@ -1,0 +1,14 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: Booking.com 
+-   Date: May 17, 2022
+-   Version: 3.38.1​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1652797463105389
+-   GitHub Issue Link:
+-   Doc Update Link:
+> we're having some performance issues after we moved from 3.37 to 3.38.The first time I noticed it was this morning, some searches against our large mono-repo being slow, then we got that it was being cloned again, and now we're getting empty resposes and 502s randomly, let me add the pictures in a thread
+There is a known issue with 
+https://docs.sourcegraph.com/admin/how-to/monorepo-issues
+https://docs.sourcegraph.com/admin/deploy/kubernetes/scale

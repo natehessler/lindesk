@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6838
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6838
+title: redis scaling , sizing, resource estimator
+Application engineer: Kelvin Lee
+Customer: Snowflake, Inc. 
+Date: Mar 11
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C021MU16S1F/p1647042858527439)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: "does redis need 100Gi for the PVC? Wondering if we can decrease this number"
+Default sizes made by the [k8s deployment](https://github.com/sourcegraph/deploy-sourcegraph) or the [docker-compose deployment](https://github.com/sourcegraph/deploy-sourcegraph-docker) repos are generally best place to start. But there's \[soft/fuzzy evidence\](https://docs.sourcegraph.com/admin/external_services/redis
+https://github.com/sourcegraph/deploy-sourcegraph https://github.com/sourcegraph/deploy-sourcegraph-docker https://docs.sourcegraph.com/admin/external_services/redis
+https://docs.sourcegraph.com/admin/install/resource_estimator 

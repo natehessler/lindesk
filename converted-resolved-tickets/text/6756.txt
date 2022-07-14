@@ -1,0 +1,13 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Roblox Corporation 
+-   Date: Mar 9
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1646888226234559
+-   GitHub Issue Link:
+-   Doc Update Link:
+Hey team, I have an example of this issue again. Last time it went away without any particular changes. It'd be great to figure out what's going on here. Error:
+Failed to run operations on changeset Creating commit from patch for repository "github.rbx.com/Roblox/sourcegraph-batch-test-1": gitserver: pushing ref: exit status 128 \$ git -c credential.helper- -c protocol.version-2 push --force https://‹redacted›@github.rbx.com/Roblox/sourcegraph-batch-test-1 715ef8eacf328 remote: Invalid username or password. fatal: Authentication failed for 'https://github.rbx.com/Roblox/sourcegraph-batch-test-1/'
+The customer ended up resolving this by uploading a new token

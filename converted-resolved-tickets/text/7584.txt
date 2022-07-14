@@ -1,0 +1,16 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: RVU 
+-   Date: Apr 11
+-   Version: ​3.38.1
+-   Deployment: Docker-compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C01L8M80YAY/p1649759949110479
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I was looking at setting up some search context based on some labelling files we have in our repos but ran into this issue.
+It seems like I can't use a content: filter for these. Would it be possible to support it in the future?
+The query I used to use to setup repo groups was this so ideally I'd like to reuse them if possible.
+select:repo file:.github/rvu/labels.yaml content:airship
+Perhaps we could try with the repo:contains.file(..) and file:contains.content(..) filters? This query; select:repo file:.github/rvu/labels.yaml content:airship would transform to; repo:contains.file(labels.yaml) AND file:contains.content(airship) Would you be open to giving this a try?
+https://docs.sourcegraph.com/code_search/reference/queries

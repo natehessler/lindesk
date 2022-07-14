@@ -1,0 +1,15 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Avito 
+-   Date: Mar 2
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1646224904594809
+-   GitHub Issue Link:
+-   Doc Update Link:
+At Bitucket, we have many users with different access rights to repositories, but when working with code through Sourcegraph, these rights are not taken into account, that is, users will check out all the repositories.
+I was digging around on this and found that we could be able to use explicit permissions to override Bitbucket's permissions which is the desired use case for this scenario(because the code host permissions are not being respected - I'm curious as to why though) A bit of an explanation, as long as the explicit permissions are set up, It would not be possible to revoke them from the code host itself, because these permissions are defined solely on the Sourcegraph side.
+The customer read the documentation and realized that they hadn't installed Bitbucket server plugin
+https://docs.sourcegraph.com/integration/bitbucket_server
+https://docs.sourcegraph.com/admin/repo/permissions

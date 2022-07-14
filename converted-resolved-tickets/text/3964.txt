@@ -1,0 +1,14 @@
+-   CSE: Warren Gifford
+-   Customer: Curve 
+-   Date: 28 October 2021
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: (https://sourcegraph.slack.com/archives/C02EKVAHQPN/p1634741303003400)\[https://sourcegraph.slack.com/archives/C02EKVAHQPN/p1634741303003400\]
+-   GitHub Issue Link: (https://github.com/sourcegraph/lsif-go/issues/204)\[https://github.com/sourcegraph/lsif-go/issues/204\]
+-   Doc Update Link: (https://github.com/sourcegraph/lsif-go/commit/c2ff452f78383b207cdac1b27299b2b526f53f71)\[https://github.com/sourcegraph/lsif-go/commit/c2ff452f78383b207cdac1b27299b2b526f53f71\]
+A customers CI was failing when it ran into a mistagged version of go running in lsif-go tagged at 1.14 but containing a sha pointing to 1.16
+Review Github Issue
+Correct Sha version. See (PR)\[https://github.com/sourcegraph/lsif-go/commit/c2ff452f78383b207cdac1b27299b2b526f53f71\]
+\$ lsif-go error: failed to list modules: exit status 1 go: \[REDACTED\]/v6@v6.14.0: reading \[REDACTED\]/go.mod at revision v6.14.0: unknown revision v6.14.0

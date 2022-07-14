@@ -1,0 +1,18 @@
+zendeskTicketNumber: 6176
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6176
+title: Kubernetes version does not support APIversion
+Application engineer: Michael Bali
+Customer: Nutanix, Inc. 
+Date: Feb 10
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: GITHUB,OTHER
+Auth Providers: builtin,saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer has Kubernetes version 1.23 in staging and the API version in his sourcegraph deployment isn't compatible with Kubernetes.
+-   My understanding here is kube 1.23 is the latest version of Kubernetes. I see the customer is on version 3.34.2.
+I checked the next version of sourcegraph 3.35 and we are using the networking.k8s.io/v1. Upgrading to a more updated version can help solve this problem.
+N/A
+N/A

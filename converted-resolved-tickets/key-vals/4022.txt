@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4022
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4022
+title: New Slack message in trial-salesforce
+CSE: Alex Jean-Baptiste
+Customer: Salesforce.com 
+Date: 28 October 2021
+Version: ​3.17.2
+Deployment: Single Docker
+External Services: N/A
+Auth Providers: Built-in
+Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1634910602041300
+GitHub Issue Link:N/A
+Doc Update Link: N/A
+Summary: The customer experienced slowed searches when viewing larger directories within one of their Perforce Helix Core depots (repositories). The customer began receiving front-end 504 errors. Information about Perforce Helix Core: https://www.perforce.com/perforce/doc.current/manuals/p4guide/Content/P4Guide/\_introduction.html
+No steps to troubleshoot.
+The customer was unable to consistently reproduce the error and the error did not persist.

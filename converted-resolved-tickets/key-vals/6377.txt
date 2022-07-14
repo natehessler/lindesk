@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6377
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6377
+title: Is it normal for Sourcegraph to show a batch change as "Open" when all MRs behind it are already merged
+Application engineer: Michael Bali
+Customer: Booking.com 
+Date: Feb 21
+Version: 122792_2021-12-21_1f86d6c​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1645444480210799
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Question: Is it normal for Sourcegraph to show a batch change as "Open" when all MRs behind it are already merged?
+This is expected behavior, and closing a batch change is manual.
+https://docs.sourcegraph.com/batch_changes/how-tos/closing_or_deleting_a\_batch_change

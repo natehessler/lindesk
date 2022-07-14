@@ -1,0 +1,15 @@
+zendeskTicketNumber: 8051
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8051
+title: # Recent Searches Visibility Question
+Application engineer: Alex Jean-Baptiste
+Customer: Capital One 
+Date: May 5
+Version: ​3.31.2
+Deployment: AWS ECS
+External Services: GitHub Enterprise
+Auth Providers: github
+Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1651808427016639
+GitHub Issue Link: N/A
+Doc Update Link: N/A ​
+Summary: ​Is there a way to block access to recent searches on the Sourcegraph home screen?  It has come to our attention that if you do a search for something potentially sensitive, we don't want to show that search result to every user of Sourcegraph.
+​The behavior of our recent searches is that they are only visible to the user who performed the said search. For example, Dev A performs a vulnerable search and it appears on their Sourcegraph homepage. Dev B logs into Sourcegraph and does not see the vulnerable search from Dev A in their recent searches. Dev B only sees the searches that they have performed on Sourcegraph. The only way that Dev A and Dev B would see the same recent searches as if they were sharing one account with the same credentials. ​

@@ -1,0 +1,19 @@
+zendeskTicketNumber: 7749
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7749
+title: New Slack message in support-doordash user can't see private repos
+Application engineer: Quinlan Sparks
+Customer: DoorDash 
+Date: Apr 20
+Version: 3.28.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C017J5QN4FJ/p1650482151729629
+GitHub Issue Link:
+Doc Update Link:
+Summary: > Hi team
+>
+> One engineer cannot see any private repositories in search results.
+>
+> I manuallly synced his permission but did not resolve the issue.
+The customer was able to solve the problem by manually deleting and recreating the engineer's account. I offered some guidance on how they might approach debugging if the issue came back, and have received no further communication.

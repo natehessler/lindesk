@@ -1,0 +1,22 @@
+zendeskTicketNumber: 9094
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9094
+title: The user cannot share an insight dashboard with the team
+Application engineer: Michael Bali
+Customer: Atlassian 
+Date: June 16, 2022
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1655425172764489
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Hey sourcegraph support. I'm trying out the Insights feature and I also created an organization so that I can share my dashboard with my team. When my team try and access the dashboard they get a 404 and I can't add them either.
+-   checked to find out if they have their SG instance is configured to send email.
+It looks like their instance might not be configured to send emails. That's likely the problem. That's likely the problem. To unblock your ability to share insights, you can do one of a few things:
+1.  You can ask your site admin to: - Create a global dashboard (admins should be able to create global dashboards) that you can then add insights to
+-   Add people to the organisation manually on the organisation page until email is configured
+-   A possible easier solution for your admin is just have them add [everyone on the instance to this org](https://docs.sourcegraph.com/admin/organizations), effectively side-stepping the global restriction of (1).
+2.  Your admin would need to upgrade your sourcegraph instance -- you're on 3.34.
+-   In 3.37+, you'll have the option to create globally-visible dashboards regardless of being a site admin
+-   In 3.40+, [you'll get direct share links on individual insights](https://about.sourcegraph.com/blog/release/3.40) (but will still need people to be part of an organisation, or still need to be able to create a global dashboard).

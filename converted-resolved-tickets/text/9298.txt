@@ -1,0 +1,11 @@
+-   Application engineer: Gabe Torres
+-   Customer: Upwork Global Inc. 
+-   Date: June 23, 2022
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1656024794313549
+Is there any way to see the output on the host machine from the script that runs in the "run" stanza of the configuration?
+-keep-logs should retain logs after executing steps.
+https://docs.sourcegraph.com/cli/references/batch/preview

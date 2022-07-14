@@ -1,0 +1,19 @@
+zendeskTicketNumber: 8180
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8180
+title: Repo showing as Empty repository
+Application engineer: Gabe Torres
+Customer: Cisco Meraki 
+Date: May 12
+Version: 3.35.1​
+Deployment: docker-compose
+External Services: GITLAB,OTHER
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C02DNE235TL/p1652378969675429
+GitHub Issue Link:
+Doc Update Link:
+Summary: We had a change to our Gerrit server yesterday. They changed permission on one of the main repo's manage. When I check the Manage Repo-\>Failed fetch/clone, it lists the manage repo. When I click the Settings  box, I get an Empty repository
+Checked the logs for errors with the manage repo but we didn't see any errors.\
+We attempted to clone the repo from inside gitserver and this worked so we ruled out any connection errors.
+We added the repo the exclude list and removed it manually from gitserver. The repo might have become corrupted when their code host settings changed.
+https://docs.sourcegraph.com/admin/how-to/remove-repo
+Empty repository

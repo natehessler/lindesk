@@ -1,0 +1,19 @@
+zendeskTicketNumber: 3886
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3886
+title: Twitter Re-ProcessingSymbols
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Oct 14
+Version: 3.33.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: 
+GitHub Issue Link:
+Doc Update Link:
+Summary: This issue is initially about the symbols sidebar rarely returning results. It is also about an issue in the naming conventions of the kubernetes SYMBOLS_CACHE_SIZE_MB env var
+The best way to troubleshoot this is to check the grafana provisioning indicators charts. You may also run a trace of the symbols sidebar query or observe its behavior in the browser network tab.
+This issue was not fully addressed, resources were allocated to the symbols service which may have slightly improved circumstances. It is likely that gitserver also requires resources. See the doc created for more insight
+[doc](https://github.com/sourcegraph/deploy-sourcegraph/commit/26ef234b0f71238c74d857f18c75d7ae0e04a173) [doc](https://github.com/sourcegraph/deploy-sourcegraph-dot-com/pull/13181/files)
+[doc created](https://docs.sourcegraph.com/admin/how-to/monorepo-issues) [env var fix](https://github.com/sourcegraph/customer/issues/525)
+processing symbols taking longer than expected

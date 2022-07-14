@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6638
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6638
+title: Repos are missing
+Application engineer: Donavon Ellison
+Customer: Yelp Inc. 
+Date: Mar 4
+Version: 3.23.0​
+Deployment: docker-container
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/CFNURMWHE/p1646408530242259
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/564
+Doc Update Link: N/A
+Summary: Customer reported multiple repos being missing in their instance
+Check repo status dashboard
+https://github.com/sourcegraph/sourcegraph/issues/32311
+N/A

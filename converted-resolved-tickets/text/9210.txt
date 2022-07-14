@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: Coupang 
+-   Date: June 21, 2022
+-   Version: ​helm
+-   Deployment: 3.39.1
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02NFUV7V9A/p1655882345799819
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is it possible to setup having double auth system? 1 is github auth and 2 is builtin. I thought some UI for users can select login method. In case of github, user can select "Sign in with SAML" or  "Sign in with a username and password".
+Sourcegraph supports username/password auth by default. We support both authentication and permissions syncing (through OAuth) for GitHub. However, If you use GitHub as your code host, we do not officially support using another authentication mechanism (SAML, etc.). Instead, you'll need to follow this flow: Use SAML (or another auth mechanism) to log in to GitHub Use GitHub OAuth to log in to Sourcegraph
+In this way, access to Sourcegraph will still be managed by your identity provider, using the code host as a middle step. Follow these steps to \[configure authentication with GitHub via OAuth\](https://docs.sourcegraph.com/admin/auth
+1.  https://docs.sourcegraph.com/admin/config/authorization_and_authentication
+2.  https://docs.sourcegraph.com/admin/auth

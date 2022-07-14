@@ -1,0 +1,18 @@
+zendeskTicketNumber: 7802
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7802
+title: # 20% Network Issues In POC
+Application engineer: Alex Jean-Baptiste
+Customer: Pandora Media, Inc. 
+Date: Apr 22
+Version: ​3.34.2
+Deployment: Nomad POC
+External Services: GitHub
+Auth Providers: SAML OneLogin
+Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1650647538569659
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer is experiencing network errors in their Sourcegraph instance about 20% of the time while using Sourcegraph.
+Captured one Jaeger trace log that did not indicate that the network errors were originating from internal communication within Sourcegraph.
+No resolution.
+https://docs.sourcegraph.com/admin/observability/tracing ​
+​Log ommited for length. See attachement in ZenDesk.

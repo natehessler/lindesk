@@ -1,0 +1,20 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Goldman Sachs 
+-   Date: Mar 24
+-   Version: ​3.34
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers: GitLab SSO
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+What is cause of exit code 143 for a container?
+Exit code 143 is related to Memory/GC issues. Your default Mapper/reducer memory setting may not be sufficient to run the large data set. Thus, try setting up higher AM, MAP and REDUCER memory when a large yarn job is invoked.
+Current Configuration:
+·  gitserver: 12GB per pod
+·  indexed-server:112GB per pod
+Questions:
+1.  What cpu/memory setting should be configured for gitserver and indexed-search for code host with 50K repos and 5K users ?
+2.  Why is a single unhealthy pod,  out of 5-6 pods of a deployment, causing overall health to degrade ?
+On a live call with the customer, we changed the readiness probe for gitserver to 60s and maintained the same 5s for indexed-search. This helped keep the pods up and running for the period of use. We noticed that the readiness probes affected the gitserver since it came up and would crash frequently. Keeping a longer probe maintains health it seems.
+Also, we bumped up memory to 2x for gitserver as well.

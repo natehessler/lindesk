@@ -1,0 +1,12 @@
+-   Application engineer: Ben Gordon
+-   Customer: kiwi 
+-   Date: Nov 26
+-   Version: 3.30.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C027433JXKN/p1637938265007900
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28236
+Converting draft batch change to published batch change does not work for GitLab repositories
+Tested the batch specs on local against a GitLab Repository Found that the issue was reproducable Tested against GitHub repository Issue not reproducable Determined that issue is a bug Sent bug to public issue tracker
+Batch changes engineers found and resolved the bug

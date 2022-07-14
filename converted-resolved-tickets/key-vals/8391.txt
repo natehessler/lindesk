@@ -1,0 +1,15 @@
+zendeskTicketNumber: 8391
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8391
+title: New Slack message in support-unity-users
+Application engineer: Riana Shahid
+Customer: Unity 
+Date: May 23, 2022
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB,GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1653324226233869
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/35980
+Doc Update Link: n/a
+Summary: Customer was trying to authenticate their account info in the vs code extension but kept getting an error 
+I had the customer update their instance url and access token by editing the setting.json for this extension directly. I saw the same error when I tried to authenticate in vs code so I brought the question to the team and Beatrix found that it was an issue with the extension not updating the URL via the UI. So calls were being made to sourcegraph.com instead of whatever the customer entered. 

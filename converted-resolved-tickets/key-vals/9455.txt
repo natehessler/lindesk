@@ -1,0 +1,16 @@
+zendeskTicketNumber: 9455
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9455
+title: New Slack message in support-canva-sourcegraph
+Application engineer: Rakesh Joshi
+Customer: Canva 
+Date: June 30, 2022
+Version: ​3.40.0
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.zendesk.com/agent/tickets/9455
+GitHub Issue Link:
+Doc Update Link:
+Summary: hey sorry maybe i'm missing it, but in the intellij plugin there doesn't seem to be any way of configuring the sourcegraph instance like there is for the vscode extension, i'm using this one: https://plugins.jetbrains.com/plugin/9682-sourcegraph
+Provided the relevant information on how to configure sourcegraph plugin for intelliJ.
+https://github.com/sourcegraph/sourcegraph-jetbrains/blob/main/README.md

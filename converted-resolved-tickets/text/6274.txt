@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Booking.com 
+-   Date: Feb 16
+-   Version: 3.33.0​
+-   Deployment: docker-compose
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1645011957566539
+-   GitHub Issue Link:
+-   Doc Update Link:
+We are working on the integration of Sourcegraph into TBU and I have a question around authorisation. If Sourcegraph indexes 2 instances of GitLab, and I only have read permissions on one instance, will I get results from both instances in SG? Also, If I open a bunch of MRs through Batch Change across both instances, which account are the MRs opened in?
+Hey @zane.wright-booking.com. Happy to come back to you with an answer. Repo permissions are default going to be mirrored from the code host onto your Sourcegraph instance and is the building block for authorization. In this sense, as long as you have permissions on the two GitLab instances, you should be able to pull content from both, and onto Sourcegraph. Permissions syncs are done async in the background and what happens is that the sync will combine data for each configured code host to use this as the source-of-truth for which repos a user has access to what. Finally, to answer your question here: Also, If I open a bunch of MRs through Batch Change across both instances, which account are the MRs opened in? Repo permissions will be used to determine what can be done in a batch change. Typically, read access to a repository will allow you to check out a diff, changeset title, link and additional information. In summary, when you perform a batch change your current repo permissions are taken into account.  You may need access to all repositories mentioned in a batch change to enable you to create MRs to the repos in both GitLab instances. I hope this was of some aid to you.
+https://unknwon.io/posts/200915_setup-sourcegraph-gitlab-keycloak/ https://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes
+https://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes

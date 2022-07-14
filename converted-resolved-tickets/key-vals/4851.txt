@@ -1,0 +1,15 @@
+zendeskTicketNumber: 4851
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4851
+title: Alt+h and Alt+z shortcuts not working on Mac
+Application engineer: Gabe Torres
+Customer: Reddit 
+Date: Dec 2
+Version: 3.32.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,guithub
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1638474005169400
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28575
+re getting user reports that the keyboard shortcuts don't work in the browser.
+Summary: Tested the shortcuts in Chrome, Firefox, and Chrome on Windows and Mac.
+The shortcuts for toggling the History Panel and Line Wrap were not working on Mac because alt+h and alt+z are used to create special characters instead of returning key attributes.

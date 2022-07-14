@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6147
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6147
+title: Re: \[Sourcegraph\] Re: Sourcegraph returning 500 issue; what we did to fix it
+Application engineer: Warren Gifford
+Customer: Brex 
+Date: Feb 9
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/695
+Doc Update Link:
+Summary: A customer-managed instance reported a repo that was not updating
+Upon investigation, I found that the customers grafana charts were showing that the gitserver was underprovisioned
+Allocating more mem to the gitserver reinitiated synching
+t=2022-02-10T00:37:03+0000 lvl=warn msg="runUpdateLoop: error updating repo" uri=github.com/brexhq/credit_card err="context deadline exceeded" t=2022-02-10T01:48:58+0000 lvl=warn msg="runUpdateLoop: error updating repo" uri=github.com/brexhq/credit_card err="context deadline exceeded" t=2022-02-10T03:13:00+0000 lvl=warn msg="runUpdateLoop: error updating repo" uri=github.com/brexhq/credit_card err="context deadline exceeded" t=2022-02-10T05:00:15+0000 lvl=warn msg="runUpdateLoop: error updating repo" uri=github.com/brexhq/credit_card

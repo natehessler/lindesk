@@ -1,0 +1,20 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: bet365 
+-   Date: June 23, 2022
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: GITLAB
+-   Auth Providers: gitlab,gitlab
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I have an issue where a user is reporting that they cannot search repos they should be able to. We have ensured they have logged out and back into the corresponding repo. We even tried Nuking them, then re-logging back in and ensuring their permissions had sync'd with
+Phillip Jones
+Yesterday 06:14 am To SourcegraphShow more Hi,
+I have an issue where a user is reporting that they cannot search repos they should be able to. We have ensured they have logged out and back into the corresponding repo. We even tried Nuking them, then re-logging back in and ensuring their permissions had sync'd with
+https://SGINSTNANCE.local/users/fardeenshoikat/settings/permissions
+This looks ok to me. But Fardeen cannot search the repos he's a Member of....
+Digging into the database, I've noticed that he is duplicated in the users table:
+453 \
+Could this be why, is the solution to remove the older entry direct via the backend (when we nuked him and he relogged in the higher ID appeared)?
+Thanks for digging into this and spotting the duplicate values. I believe the id with the 2021 created_at timestamp is probably what's blocking Fardeen.Totally agree that deleting this is the right step. We deleted the rogue entry but the issue also related to some missing permissions on the GitLab side too.

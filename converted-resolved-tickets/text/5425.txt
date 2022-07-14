@@ -1,0 +1,13 @@
+-   Application engineer: Gabe Torres
+-   Customer: eBay 
+-   Date: Jan 6
+-   Version: 3.25.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01BT374HHV/p1641497631001700
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer added an external code host but they were seeing "Can't connect to GitHub" on the code host status.
+I tested the external host config, the user was able to update the settings without errors. We checked the repo setting and we saw that all the repos were showing up as "Empty repository". We saw in grafana that gitserver, worker, and indexed search pods were unavailable. I saw in the index server logs that the index service could not connect to the frontend. I thought this was an RBAC issue so I asked for a deployment spec and saw that the admin was using the insiders images for all the services.
+The admin was updating his instance by pulling the insiders images from DockerHub and some of the images were incompatible. This can happen when users deploy the main branch instead of checking out the versioned tag. We recommend following the standard upgrade path to make upgrades easier and prevent future issues as services change or get removed. The important part is to get the new changes from the release tags.

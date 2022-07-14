@@ -1,0 +1,15 @@
+zendeskTicketNumber: 8942
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8942
+title: Question on the Proper Memory Size for pgsql DB
+Application engineer: Michael Bali
+Customer: Coupang 
+Date: June 13, 2022
+Version: ​3.39.1
+Deployment: Helm
+External Services: Github
+Auth Providers: github
+Slack Links: https://sourcegraph.slack.com/archives/C02NFUV7V9A/p1655170902182859
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: I have a question for sourcegraph pgsql database's proper memory size. Currently we setup external pgsql database on aws Aurora PostgreSQL. this db instance type is db.r6g.large (vCPU: 2core, memory: 16GB). When I first built it, it had 3.5 GB of free memory. but now it have only 0.8 GB. So I wonder what affects the size of the memory for pgsql database ? and should I scale up db instance type?
+The main Postgres DB (pgsql) has a higher number of CPU cores than other instances, which suggests that most of the operations are READ operations that take more processing power than the other DB instances. My recommendation based off previous customer experience is to enable auto-scaling for DB disks since you are using a cloud provider.

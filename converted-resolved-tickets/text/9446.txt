@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: 
+-   Date: June 30, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03JMN66WMC/p1656617678566289
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer had questions about the types of results they were getting as references in some of their files.
+The references can be either search-based or precise. Precise code intelligence relies on LSIF data to provide the kind of references you're looking for. When this data is not available, sourcegraph falls back on search-based results, which are matches for the keyword. 
+https://docs.sourcegraph.com/code_intelligence/explanations/precise_code_intelligence

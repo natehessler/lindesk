@@ -1,0 +1,23 @@
+-   Application engineer: Michael Bali
+-   Customer: Segment.io Inc 
+-   Date: Feb 8, 2022
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1644383523632759
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer's account was deleted, the customer did a reset and now no longer has access to her published changesets
+-   I asked the customer to check the batch change page to see if she can see any changeset belonging to her,she said NO but she could see other people's changeset.
+-   In trying to get more information as to why the account was reset or deleted I asked if she lost access to any other data, maybe saved search, LSIF etc?
+-   In addition to the above question, Do you still have access to the repository where this changeset are published to because if you don't you won't be able to view its details or update it in your batch change.
+-   The sourcegraph admin on their ended the following for context, password requirements for okta changed which resulted in people's access to change. We have a sourcegraph user cleanup daily cron job that removed many people's users.
+-   I immediately suspected this is what affected the customer's account. The batch change was deleted when the user account was deleted.
+-   To confirm this I asked a follow-up question If any saved search was deleted too?
+-   The customer confirmed everything was deleted.
+-   I just did a test similar to what the customer is experiencing and I can confirm that when an account is deleted everything (All user data (access tokens, email addresses, external account info, survey responses, etc) including batch changes is also deleted.
+-   The Customer decided to use the pull request details from GitHub to proceed.
+-   The customer also understood this was a mistake from the admin end.
+N/A
+N/A

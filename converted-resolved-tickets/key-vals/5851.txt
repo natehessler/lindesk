@@ -1,0 +1,20 @@
+zendeskTicketNumber: 5851
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5851
+title: Roblox Export Question
+Application engineer: Alex Jean-Baptiste
+Customer: Roblox Corporation 
+Date: Jan 27
+Version: 3.35.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github,github
+Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1643309142009500
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/30506
+Summary: Hey Sourcegraph team, I have a question about the Sourcegraph export results button. I have a query that has 137 results. But, when I click export results and download the CSV, the result only has 30 entries. Is there a way to get all the results in the same CSV?
+Can you try adding the following filter at the end of your search? I was able to get an exhaustive result list when exporting when adding this filter. count:all The full query looks as follows:
+\[CONTEXT FOR QUERY\] file:global.json count:all  To explain this behavior, here is the following:
+As you can see here or export extension queries the internal Sourcegraph GraphQL API.
+That API accesses a data store that allows one to access previously performed searches, however, Sourcegraph stores only a limited amount of matches (30) by default for the SearchResult datatype to conserve time and space.
+What adding the count:all attribute does is force Sourcegraph to explicitly perform an exhaustive search that is then saved with all of the actual matches as an SearchResult object in the database. Then the search export code is able to query the SearchResult object with all of the matches that you see in the UI. Please let me know if this works for you makes sense :simple_smile:
+https://github.com/sourcegraph/sourcegraph/pull/30506

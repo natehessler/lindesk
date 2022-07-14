@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Pandora Media, Inc. 
+-   Date: Apr 26
+-   Version: ​3.34.2
+-   Deployment: Nomad (POC)
+-   External Services: Github
+-   Auth Providers: OneLogin
+-   Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1651011527081629
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+For batch \[changes\], is the user \[repo\] permission been used?
+​That is correct, @rzheng. User repo permissions are carried over to Batch Changes. If one has read access to the repos involved in the change, they will be able to see the Batch Change in its entirety; if not, they will see a limited amount of information. ​
+​https://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes

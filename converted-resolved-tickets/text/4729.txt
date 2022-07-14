@@ -1,0 +1,24 @@
+-   Application engineer: Giselle Northy
+-   Customer: Quantcast 
+-   Date: Nov 23
+-   Version: 3.34.2​
+-   Deployment: Kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+I have added the configurations to set alerts up for Slack. It seems like I am having trouble with receiving alerts. I made a testing channel on Slack and also added the webhook.
+A)  When you were setting up the Slack alerts, were you following the guide here? https://docs.sourcegraph.com/admin/observability/alerting
+If so, can you share what you have set in your site configuration for slack and the webhook? your site configuration (e.g. https://sourcegraph.example.com/site-admin/configuration)
+B)  Do you have the Grafana metrics enabled in your instance? For example if you go to... https://sourcegraph.example.com/-/debug/grafana/. sd
+.. do you see the charts being populated with metrics?
+https://docs.sourcegraph.com/admin/observability/metrics
+C)  What happens when you send a test alert? By going to the API console and sendingb e tested using the Sourcegraph GraphQL API. Visit your API Console (e.g. https://sourcegraph.example.com/api/console) and use the following mutation to trigger an alert:
+mutation { triggerObservabilityTestAlert( level: "critical" ) { alwaysNil } }
+SUMMARY:
+This turned out to be a misconfig in adding the slack alert code to their Kubernetes sourcegraph-frontend.ConfigMap.yaml for site.json. Error msg:
+    writing site config overrides to database: confdb.SiteCreateIfUpToDate: invalid settings JSON: [CommaExpected]
+![image](https://user-images.githubusercontent.com/27694443/145477802-bd64dad9-bfc0-451a-a205-4c63a45417c4.png)
+It looked to be that there should be a comma 
+![image](https://user-images.githubusercontent.com/27694443/145477952-dd856eb4-3cfb-4494-8961-91da3b133d61.png)

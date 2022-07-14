@@ -1,0 +1,14 @@
+zendeskTicketNumber: 3809
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3809
+title: New Slack message in trial-salesforce
+CSE: Alex Jean-Baptiste
+Customer: Salesforce.com 
+Date: 28 October 2021
+Version: ​3.17.2
+Deployment: Docker Compose
+External Services: N/A
+Auth Providers: Built-in
+Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1634064245349400
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/26308
+Summary: 

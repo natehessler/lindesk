@@ -1,0 +1,13 @@
+-   **CSE:** Jason Harris
+-   **Customer:** Two Sigma Investments 
+-   **Date:** 28 October 2021
+-   **Version:** 3.31
+-   **Deployment:**
+-   **External Services:**
+-   **Auth Providers:**
+-   **Slack Links:** N/A
+-   **GitHub Issue Link:** N/A
+-   **Doc Update Link:** N/A
+The customer said there was a mismatch between the code hosts config shown in the UI and the actual config on our frontend containers.
+Check PGSQL container. Check migrations. Check if variables are set correctly.
+The customer completed steps here: https://docs.sourcegraph.com/admin/config/advanced_config_file

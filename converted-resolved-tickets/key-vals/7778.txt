@@ -1,0 +1,18 @@
+zendeskTicketNumber: 7778
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7778
+title: am closing this ticket as we have gotten perms syncing to work. Any new ticket that comes in regard perms syncing should link this one, however, as it has valuable context as to how they got here. \# Lockheed Martin: IdP configuration
+Zendesk Link: \[
+Application engineer: Jason Harris
+Customer: Lockheed Martin Space Systems 
+Date: April 21, 2022
+Version: ​3.39
+Deployment: Kubernetes
+External Services: GitLab
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/C030CPM2ELR/p1650567115817229
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/857
+Summary: -   Doc Update Link: N/A
+the customer reported being unable to sync permissions.
+Throughout the troubleshooting process, checked all permissions tables in psql Test both idps individually and compare with database entries.
+Ultimately, discovered a database discrepancy where the user_id being returned by LM's idp was not matching the bind_id sourcegraph uses to bind repo permissions to users. We created a GitLab group token with the following scopes, api, read_api and read_user and had users begin logging in using GitLab oauth app. This resolved the issue.
+Note: This will likely need to be changed due to security reasons when it comes to their production environment.

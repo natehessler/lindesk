@@ -1,0 +1,9 @@
+-   Application engineer: Gabe Torres
+-   Customer: Smartsheet 
+-   Date: Mar 9
+-   Slack Links: https://sourcegraph.slack.com/archives/C0325FV42G5/p1646862087324759
+-   GitHub Issue Link:
+-   Doc Update Link:
+I ran a search with the API console for GraphQL and it came back with limitHit as true. I understand there's a limit to how many results you can retrieve at once, but how do I get the remaining results?
+Adding count:all to your query will remove result limits.
+https://docs.sourcegraph.com/code_search/how-to/exhaustive

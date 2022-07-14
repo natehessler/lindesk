@@ -1,0 +1,21 @@
+zendeskTicketNumber: 7598
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7598
+title: Hover does not work in Bitbucket Server plugin
+Application engineer: Michael Bali
+Customer: Upwork Global Inc. 
+Date: Apr 12
+Version: 3.37.0​
+Deployment: docker-compose
+External Services: BITBUCKETSERVER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1649807561147329
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/839
+Doc Update Link: N/A
+Summary: A user from Upwork is having problems getting hovers to work using the bitbucket plugin. Code intel works fine on their Sourcegraph instance. In the browser console, the user is seeing 
+-   I was thinking this maybe related to this [bug](https://github.com/sourcegraph/sourcegraph/issues/32599) that was recently fixed.
+-   I did a test on our bitbucket instance and everything works fine, tho I see it's on version 1.4.15.
+-   The customer is currently on v1.3.6 and I encouraged they update to the latest version following the instructions in this doc. However, upgrading still takes them back to their previous v1.3.6.
+-   the plugin currently does not work with instances on 3.37.0 and 3.38.0.
+-   upgrading to 3.39.0 which includes the fix [pull/33406](https://github.com/sourcegraph/sourcegraph/pull/33406) should resolve the issue
+-   "corsOrigin" must be added in their instance site configuration
+-   Upgrading their sourcegraph instance to v3.39.0 should resolve the issue for the customer.

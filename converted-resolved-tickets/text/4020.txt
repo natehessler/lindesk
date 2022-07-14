@@ -1,0 +1,13 @@
+-   CSE: Alex Jean-Baptiste
+-   Customer: Glovo 
+-   Date: 28 October 2021
+-   Version: 3.30.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: GitHub
+-   Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1634909855005100
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/21591
+-   Doc Update Link: N/A
+The customer was unable to access repositories with an organization scope on Sourcegraph. The customer was able to access the repositories on their Github instance, however.
+The customer was asked to search for their organization's public repositories by using the search query repo:github to test their Sourcegraph permissions. The customer was able to see the organization's public repositories and it was determined at this moment that the customer was experiencing a bug documented in the already-filed Github issue.
+The customer was given access to a team within the Github organization. The team scope is not experiencing any known permission syncing issues within Sourcegraph currently.

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8290
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8290
+title: Can sourcegraph enumerate subscribed users/watchers?
+Application engineer: Michael Bali
+Customer: Extend 
+Date: May 18, 2022
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C03AGA23X0V/p1652890174389049
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Can sourcegraph enumerate subscribed users/watchers?
+At the moment, It's not possible to do this via sourcegraph and I looped in the CE for a possible Code Monitoring FR
+N/A

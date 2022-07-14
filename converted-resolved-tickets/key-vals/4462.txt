@@ -1,0 +1,25 @@
+zendeskTicketNumber: 4462
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4462
+title: Reddit: can `src-cli` return a full list of all repos/repositories via query?
+CSE: Kelvin Lee
+Customer: Reddit 
+Date: Nov 5
+Version: 3.32.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,guithub
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1636151760098600
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Client wants to use 
+The client's initial query would not output the entire list of results, due to result count limits enforced by Sourcegraph. Client raised this as a question to see if they can get an exhaustive list.
+Application engineer initially was not able to find a workaround, but from help from Ben Gordon via DMs, a new query was written which allowed for the exhaustive return of all results.
+"Is there a way to get the CLI to stream all results?"
+With more detail/context, is there a way to get 
+Yes! The query that the client had used was just malformed. Instead of using:
+    src search --stream --json select:repo fork:yes archived:yes 
+... Use this instead...:
+    src search --stream --json "select:repo fork:yes archived:yes count:all" 
+Note, in particular, the " that enclose the query.
+Note, also that the 
+None

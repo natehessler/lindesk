@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: AppFolio
+-   Date: Jan 31
+-   Version: n/a
+-   Deployment: Docker Compose
+-   External Services: n/a
+-   Auth Providers: n/a
+-   Slack Links: https://sourcegraph.slack.com/archives/C02JCB0TM26/p1643656497583499
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer had a couple general questions about the Recent Searches panel. Specifically, whether they are visible to everyone or if each person just sees their own. Also wanted to know if individual searches can be edited from the search history
+Every user only sees their own searches and while I couldn't find anything on removing/editing specific searches in the history, I found out that the entire recent search panel can be hidden from the home page by updating one's own user settings to hide the home panels.
+last bullet point \[here\](https://docs.sourcegraph.com/CHANGELOG

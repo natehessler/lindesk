@@ -1,0 +1,22 @@
+-   Application engineer: Warren Gifford
+-   Customer: Roblox Corporation 
+-   Date: June 1, 2022
+-   Version: 3.38.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer encountered errors during the upgrade process, with the frontend not initializing correctly despite migrator running and other compose services coming up alright
+\[ec2-user@ip-10-102-110-121 docker-compose\]\$ docker-compose up -d Creating network "docker-compose_sourcegraph" with the default driver Creating repo-updater ... done Creating jaeger ... done Creating syntect-server ... done Creating caddy ... done Creating codeintel-db-exporter ... done Creating minio ... done Creating symbols-0 ... done Creating worker ... done Creating pgsql ... done Creating zoekt-webserver-0 ... done Creating searcher-0 ... done Creating redis-store ... done Creating pgsql-exporter ... done Creating codeintel-db ... done Creating cadvisor ... done Creating codeinsights-db-exporter ... done Creating gitserver-1 ... done Creating github-proxy ... done Creating zoekt-indexserver-0 ... done Creating redis-cache ... done Creating precise-code-intel-worker ... done Creating prometheus ... done Creating codeinsights-db ... done Creating grafana ... done Creating gitserver-0 ... done Creating migrator ... done Creating sourcegraph-frontend-internal ... done
+ERROR: for sourcegraph-frontend-2 Container "53bdc6a18bf6" is unhealthy.
+ERROR: for sourcegraph-frontend-0 Container "53bdc6a18bf6" is unhealthy.
+ERROR: for sourcegraph-frontend-1 Container "53bdc6a18bf6" is unhealthy. ERROR: Encountered errors while bringing up the project.
+Checked the versions table in the pgsql database sg=
+  service    version   updated_at                      first_version 
+  ---------- --------- ------------------------------- ----------------
+  frontend   3.38.1    2022-06-01 01:46:25.983285+00   3.29.0
+Attempted to manually change the database version using migrator commands -- this didn't work. So despite most of the services being up in v3.40.1 the database was thinking it was still in an older version
+Elected to run through upgrades as though the database was in v3.38. So -\> v3.39 -\> v3.40.1
+This worked out and got the database up to v3.40.1

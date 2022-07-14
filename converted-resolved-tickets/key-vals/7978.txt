@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7978
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7978
+title: New Slack message in support-upwork-sourcegraph only personal repos appearing in search results``{=html}
+Application engineer: Quinlan Sparks
+Customer: Upwork Global Inc. 
+Date: May 3
+Version: 3.37.0​
+Deployment: docker-compose
+External Services: BITBUCKETSERVER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1651603649303909
+GitHub Issue Link:
+Doc Update Link:
+Summary: > Hi, for some reason I can't see any repos except personal repos inside sourcegraph. Is this a permission issue? Using the 
+Agreeing that this was likely a permissions issue, I requested that someone with admin access to the customer's instance check when their permissions were last synced. This revealed that there was a case mismatch on the customer's username. Admin updated the username to correct this, and resynced the customer's permissions, which resolved the issue.
+https://docs.sourcegraph.com/admin/repo/permissions

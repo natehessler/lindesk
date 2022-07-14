@@ -1,0 +1,17 @@
+zendeskTicketNumber: 5795
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5795
+title: Wayfair - GCP Cloud SQL max_connections
+Application engineer: Warren Gifford
+Customer: Wayfair 
+Date: Jan 25
+Version: 3.36.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Customer encountered an error that seemed to indicate a database max_connections problem but of the google cloud SQL variety. This was observed after an upgrade, and the customer wanted to know if the issue resulted from anything in the upgrade
+This is usually caused by big queries -- it could be related to changes in load from code insights
+upgrading the max_connections settings should resolve things
+t=2022-01-25T18:16:12+0000 lvl=eror msg="doResults: failed to list user private repos" error="failed to connect to 

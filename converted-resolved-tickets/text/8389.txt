@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Netflix 
+-   Date: May 23, 2022
+-   Version: 3.37.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+-   Slack Links: https://netflix.slack.com/archives/CHKL4G5PG/p1653075393388079
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+The customer was complaining of slow performance on their browser.
+Cleared the chrome cache and restarted the browser.
+The above fixed the issue.

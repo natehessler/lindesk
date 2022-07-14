@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6351
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6351
+title: How to paginate results from the GraphQL Query endpoint
+Application engineer: Michael Bali
+Customer: Wayfair 
+Date: Feb 18,2022
+Version: 3.36.1​
+Deployment: Kubernetes
+External Services: GITHUB
+Auth Providers: builtin
+Slack Links: : https://sourcegraph.slack.com/archives/C024QE1K0FP/p1645197898981249
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: -   How to paginate results from the query endpoint since no pagination arguments are present.  The search object seems like it does not expose next or after arguments. Is this expected? Without pagination, it seems that results are capped at 30 records, i.e in the below query limitHit=true and matchCount=30
+-   Does sourcegraph have visibility into repo /file creation dates? Curious if we could get at a metric which captures the number of repos containing default documentation by looking at file vs. repo creation dates
+-   When using Sourcegraph, remember to include the count: filter to your queries. If you don't, you may get inconsistent results between a search using Sourcegraph Code Search UI and a search using the Sourcegraph GraphQL API.
+-   For reference, you can see our APIs here. The streaming and GraphQL endpoints are optimized to return results quickly. For this reason, there are time and result limits to searches. The GraphQL API returns results as a set and is optimized to return results as soon as possible. The streaming API returns results as a stream and returns results as they become available, so this could be why you get a different number of results. You can change the behavior of the search by using count or timeout to give the search more time. Exhaustive searches help if you need all the results rather than fast results. If you need to process a large result set, we recommend using the Sourcegraph CLI with the -stream flag. Hope this helps!
+-   To answer the second question, We do, via the history of the repo and files! We have visibility into the dates of revisions, and you can search revisions for whether a file exists. You can natively search for files in the sourcegraph search bar by using a commit search with "before:" or "after:" tags https://docs.sourcegraph.com/code_search/reference/queries
+-   https://docs.sourcegraph.com/code_search/reference/queries
+-   https://docs.sourcegraph.com/api

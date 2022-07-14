@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6059
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6059
+title: v3.35.2 - code-insights migration job stuck at 91%
+Application engineer: Stomzy Mwendwa
+Customer: Sabre 
+Date: Feb 6
+Version: 3.35.2​
+Deployment: kubernetes
+External Services: BITBUCKETSERVER
+Auth Providers: saml
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link:
+Summary: The customer reported an issue with their code-insights migration jobs failing at 91% as indicated by the UI
+This is a known issue. More on it here: https://docs.sourcegraph.com/code_insights/how-tos/Troubleshooting
+Asked the customer to exec into the pgsql pod by running: kubectl exec -ti 
+https://docs.sourcegraph.com/code_insights/how-tos/Troubleshooting

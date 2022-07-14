@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Indeed 
+-   Date: Nov 24
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/CSKMGUJ58/p1637767334055900
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer expressed a Readiness probe failed: dial TCP \${IP Address}:i/o timeout and Readiness probe failed: dial TCP \${IP Address}: connect: connection refused errors from their syntect-server pod.
+The customer was advised to double the value of the initialDelaySeconds value in their syntect-server.Deployment.yamlfile. The customer never confirmed if this fixed their error.
+https://stackoverflow.com/questions/48540929/kubernetes-readiness-probe-failed-error

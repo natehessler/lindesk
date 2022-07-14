@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5430
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5430
+title: SAP - Sudden Prometheus OOM
+Application engineer: Warren Gifford
+Customer: SAP 
+Date: Jan 6
+Version: 3.33.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: My prometheus pod OOM'd unexpectedly. I added more resources and the issue was resolved but I'm not sure why it failed
+Hey Kevin, I did some looking into this and what I found is that a spike like this can be caused by recording rules misbehaving - something is exporting something that is too high cardinality (high label dimensions)If you navigate to the grafana charts for prometheus and take a look at the Average prometheus rule group evaluation duration over 10m by rule group chart, do you see anything unusual?
+Hey @Kevin Lin I did a little more investigating on this and found that in almost all cases prometheus OOM crashes due to a misconfiguration of resource request limits, or a problems with a ton of data history stacking up. It also seems to be the case that its memory requirements spike really high at startup. I found this article very informative.I also found another method we can use to look at whats going on with the pod besides our grafana charts --You can port forward the prometheus pod to gain access to a nice UI where you can see which metrics are taking the most memory up. Note that kns is an alias on my system and stands for kubectl -n ns-sourcegraph which is the namespace I use on my test cluster warrengifford@Warrens-MacBook-Pro \~ % kns port-forward svc/prometheus 3080:30090 Forwarding from 127.0.0.1:3080 -\> 9090 Forwarding from \[::1\]:3080 -\> 9090 Handling connection for 3080
+If this issue comes up again I think the prometheus grafana charts and the port forwarded UI will be great places to gather data. That said I suspect that having granted prometheus more data this shouldn't be an issue again in the future
+\[https://docs.sourcegraph.com/admin/observability/metrics

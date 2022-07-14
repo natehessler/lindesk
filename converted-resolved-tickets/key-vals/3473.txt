@@ -1,0 +1,18 @@
+zendeskTicketNumber: 3473
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3473
+title: Snapdocs: Not All Repositories Visible in New Sourcegraph Instance
+CSE: Ben Gordon
+Customer: Snapdocs Inc 
+Date: 28 October 2021
+Version: ​3.31.2
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin, github
+Slack Links: https://sourcegraph.slack.com/archives/C029VE4A12R/p1632334181050300
+GitHub Issue Link:
+Doc Update Link:
+Summary: After installing Sourcegraph and adding API key, admin-level users only see 95 repos instead of expected 148 repos
+-   Check repo-updater logs and grafana, but found no errors or performance issues
+-   Grafana shows repo-updater sync queue managing less than 148 repos, so issue is not sync errors, but GitHub API not returning all repos
+-   This suggests an API Key permissions level issue, so ask admin to issue a new API Key
+New GitHub API Key installed, users now able to see all expected repositories

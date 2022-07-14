@@ -1,0 +1,19 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Apple 
+-   Date: Apr 6
+-   Version: 3.32.0​
+-   Deployment: docker-container
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01NM1WFVH8/p1649268853384399)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+Customer just curious about stability of our https://github.com/sourcegraph/deploy-sourcegraph-helm
+At the time of asking, it was not stable. [README.md](https://github.com/sourcegraph/deploy-sourcegraph-helm/blob/2a6db4dcbbab4e542fcea57995fd03957c3e295a/README.md) in the repo, at the time of the question, reads:
+> This is an experimental project. NOT INTENDED FOR USE IN PRODUCTION. Instead, use one of Sourcegraph's supported deployment methods.
+Though, worth noting, general availabiity (GA) of Helm was [announced](https://sourcegraph.slack.com/archives/C01PX32TK1S/p1649445849921439) shortly after to be available April 25th.
+None at time. But helm resources have been mentioned [here](https://sourcegraph.slack.com/archives/C01HW836940/p1649405524727389), and copied below:
+External: https://docs.sourcegraph.com/admin/install/kubernetes/helm
+Internal:
+https://www.loom.com/looms/folders/Helm-d543b6f887ed438ab1b3836ab3a3422ehttps://www.loom.com/looms/folders/Helm-d543b6f887ed438ab1b3836ab3a3422e
+https://handbook.sourcegraph.com/departments/product-engineering/engineering/cloud/delivery/deployment/helm/

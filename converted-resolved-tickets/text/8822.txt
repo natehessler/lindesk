@@ -1,0 +1,22 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: KBTG 
+-   Date: June 7, 2022
+-   Version: ​3.39.1
+-   Deployment: Docker-Compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03GRH68W7M/p1654678294516559
+-   GitHub Issue Link: N/A
+-   Doc Update Link:
+sourcegraph query question:
+Is it possible to search for all possible value of regrex group match?
+for example, if I search for log4j vulnerability match like org.apache.logging.log4j' 2.((0\
+I'll find all source code that match pattern.
+But is it possible to get all version in our repository that match that expression and count summary total instead?
+something like Insight feature, but I don't want it to find all history of code like insight, I just want the latest code rightaway.
+Is it possible to query that in SourceGraph?
+ou can use the repo:contains.content(...) or file:contains.content(...) filters to search for repos or files that contain the content that match the regex you'd like to pass along.
+In this case this would be something like:
+repo:contains.content(org.apache.logging.log4j 2.((0\
+This searches exhaustively for files that match the gradle content of repos that reference a vulnerable version of log4j anywhere, taking the regex pattern.
+You could of course play around with the value of the repo:contains.content(...) predicate to whatever you'd like.

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6711
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6711
+title: Can you configure the path the src shortcut uses
+Application engineer: Donavon Ellison
+Customer: Databricks
+Date: Mar 8
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1646769204189989
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Can you configure the path the src shortcut uses?
+Yes we have how to do so in our docs here
+https://docs.sourcegraph.com/integration/browser_search_engine

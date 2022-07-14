@@ -1,0 +1,15 @@
+-   Application engineer: Ben Gordon
+-   Customer: Red Ventures 
+-   Date: Mar 16
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02EYG34D5X/p1647441549901949
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/775
+-   customer reports 3 repos are not cloning
+-   fetch repo-updater logs from managed instance
+-   determine that GitHub is reporting an outage, which delays the debug
+-   repo-updater logs show Git error code 128, for empty objects
+-   delivery needed to update the resource allocation to the PGSQL database on this customers managed instance
+    fatal: cannot read existing object info 22aea7c460e49e6737e9dda3ebb35fa8b25c7733\\nfatal: fetch-pack: invalid index-pack output\\n\": exit status 128"

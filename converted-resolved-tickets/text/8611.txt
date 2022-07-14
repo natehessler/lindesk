@@ -1,0 +1,12 @@
+-   Application engineer: Gabe Torres
+-   Customer: Databricks 
+-   Date: May 31, 2022
+-   Deployment: Docker Compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1654033530672879
+-   GitHub Issue Link:
+-   Doc Update Link:
+If we were to migrate from docker-compose to Helm kubernetes deployment, is there a way to transfer all user settings over?
+Generating and restoring database dumps should work to migrate your core data. Some things to note: the Sourcegraph version installed with Helm should be the same version as your Docker Compose Sourcegraph, repos will have to reclone, andindexes will be rebuilt. Use https://docs.sourcegraph.com/@main/admin/deploy/docker-compose
+https://docs.sourcegraph.com/admin/deploy/migrate-backup

@@ -1,0 +1,17 @@
+-   **CSE:** Jason Harris
+-   **Customer:** 
+-   **Date:** 28 October 2021
+-   **Version:** 3.31
+-   **Deployment:** Docker
+-   **External Services:**
+-   **Auth Providers:**
+-   **Slack Links:** https://sourcegraph.slack.com/archives/C01HW836940/p1632945644259400
+-   **GitHub Issue Link:** N/A
+-   **Doc Update Link:** https://github.com/sourcegraph/snippets/pull/1
+The customer was unable to upload LSIF to multiple files.
+Tried doing the same on a test instance. I ran into the same issues. I also asked Ben to test, he also found the same issue.
+Elevated to batch changes, who found that the script was broken. This was an issue with github expression syntax clashing with sourcegraph's own expression syntax, leaving the secrets object wasn't readable at runtime. We fixed the expression syntax from
+SRC_ACCESS_TOKEN: \${{secrets.srcAccessToken}} SRC_ENDPOINT: \${{ secrets.srcEndpoint }}
+to
+SRC_ACCESS_TOKEN: ${{ \\${{ secrets.srcAccessToken }} }} SRC_ENDPOINT: ${{ \\${{ secrets.srcEndpoint }} }}
+This fixed the issue and allowed the customer to upload LSIF to multiple files.

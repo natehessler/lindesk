@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5920
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5920
+title: saml not working
+Application engineer: Michael Bali
+Customer: N/A 
+Date: Jan 31, 2022
+Version: ​ N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: Email
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The Customer configured SAML, but it didn't work.
+Shared the documentation for configuring and adding SAML provider to sourcegraph
+The customer confirmed that everything works well now. I guess he followed the instructions stated in thedocumentation
+https://docs.sourcegraph.com/admin/auth/saml/generic
+N/A

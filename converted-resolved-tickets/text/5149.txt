@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Reddit 
+-   Date: Dec 15
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: 
+-   GitHub Issue Link: n/a
+-   Doc Update Link: 
+Admin was confused because they couldn't see lsif files they were uploading in their s3 bucket. This is because the files are only temporarily stored.
+While investigating this the customer set the bucket to enable versioning and was able to observe the creation of new dump.lsif files in the bucket
+As above 

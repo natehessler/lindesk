@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6484
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6484
+title: Twitter - VSCode Extension Configuration
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Feb 24
+Version: 3.37.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: I'd like some help in getting the new vscode client configured correctly. I'll post my current setup and results in a thread in a moment.
+this issue was revealed to have to do mostly with the Sourcegraph extension needing to make requests to a specific URI on Twitters git server
+sourcegraph.remoteUrlReplacements was required for the extension to redirect properly
+    "sourcegraph.accessToken": "",
+        "sourcegraph.url": "https://sourcegraph.twitter.biz (https://sourcegraph.twitter.biz/)",
+        "sourcegraph.defaultBranch": "master",
+        "sourcegraph.remoteUrlReplacements": {"https://git.twitter.biz/": "https://git.twitter.biz/ro/"},

@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5827
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5827
+title: Unexpected API Docs behavior
+Application engineer: Gabe Torres
+Customer: Reddit 
+Date: Jan 26
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1643218105067600
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/666\
+Doc Update Link:
+Summary: There are some weird things about sourcegraph's godoc. (More details in the GitHub issue)
+API Docs is experimental and currently, the team is not focusing their work on this experiment.

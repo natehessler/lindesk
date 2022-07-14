@@ -1,0 +1,13 @@
+-   Application engineer: Gabe Torres
+-   Customer: Glovo 
+-   Date: Apr 4
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1649090248582179
+-   GitHub Issue Link:
+-   Doc Update Link:
+I suppose errors like this (Can't connect to GitHub) are something that should be on the Sourcegraph delivery team's radar (2) are you aware of any GitHub outages?
+Our delivery team receives critical alerts from your Sourcegraph instance and, ideally, delivery will handle the alert and CS or CE will notify you about the alerts. In this case, an API rate limit error caused the sync to fail and we did not get alerted. We are actively refining our alerts from repo-updater, so thanks for letting us know about this error. There was a recent sync job completed (2022-04-04 06:33:42.714437+00), since repo updater will re-attempt the sync job and the API rate limit gets refreshed hourly.
+https://sourcegraph.slack.com/archives/C02E4HE42BX/p1649098421638139 This resulted in finding

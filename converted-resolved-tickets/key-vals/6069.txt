@@ -1,0 +1,21 @@
+zendeskTicketNumber: 6069
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6069
+title: Sourcegraph not mirroring "archived" status of GitHub Enterprise repo
+Application engineer: Gabe Torres
+Customer: Palantir Technologies 
+Date: Feb 7
+Version: 3.35.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/CTNA0E80K/p1644261915303949
+GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/12549
+Doc Update Link:
+Summary: Palantir is seeing archived repositories appear in search results. They're currently using repositoryQuery: 'Public' to sync GHE repositories because 'affiliated' would return 0 repos, as svc-sourcegraph(service account) is not associated with all the orgs/repos. We provided a workaround to switch to orgs but moving to orgs(https://docs.github.com/en/rest/reference/repos
+We looked at the cloud icon to see if there were issues with code hosts connections. We saw some errors but this was with their github host connection and not with GHE.\
+We confirmed that the repo was archived in GHE and that SG had an up to date clone.\
+We confirmed that other repos were shown as archived but these repos were from Github.com not GHE.\
+We confirmed that the token had the correct scope to fetch all repo data.\
+We checked his code host config and saw that they were using repositoryQuery: 'Public' which has a known issue with showing archived status.
+Their CE created a product ticket to track progress on this since the customer doesn't want to spend time to change to orgs syncing.
+https://docs.sourcegraph.com/admin/external_service/github

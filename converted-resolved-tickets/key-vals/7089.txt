@@ -1,0 +1,19 @@
+zendeskTicketNumber: ``{=
+zendeskLink: ml}
+title:   Zendesk Link: [#7089](https://sourcegraph.zendesk.com/agent/tickets/7089)
+Application engineer: Stomzy Mwendwa
+Customer: Glovo 
+Date: Mar 23
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github
+Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1648037638838239
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: It seems like the Sourcegraph OAuth app is requesting a lot of permissions. In fact, I thought that the only thing Sourcegraph needs to do is validate that this GitHub user is a member of our org, and then the rest is handled by you using the code host token (i.e. fetching actual repo contents, etc.).
+As of today, your sentiments about Sourcegraph asking for a lot of permissions is valid and we have had other customers ask about the same as well. Today it's an "all or nothing" type of experience when using OAuth.
+When users sign up for Sourcegraph with GitHub, the ideal scenario should be that they are presented with the GitHub interstitial to grant access for Sourcegraph. This is then the user's "login" and should provide no access beyond some PII like their email or username. When the same user then creates a code host connection, they should be presented with the same interstitial, with expanded scopes to include public and private repository access. If the user is part of an organization, then that org's repos are also available to the user.
+We've found that we're currently requesting repo scope when a user signs up with GitHub (a great example is here). As I picked up from the thread, it would be ideal to request only personal information and not requesting the repo scope unless a specific user tag is present. However, for whatever reason, we're requesting repo access from everyone. 
+What I think is a step in the right direction is how my teammates are focusing on introducing GitHub Apps as an alternate auth flow to OAuth. This flow would be something along the lines of - On sign up all we require is email or username. When they have signed up and want to add a code host, Sourcegraph then can ask for more permissions. Through a GitHub App scopes are already predefined in GitHub There's been quite a bit of work moving towards this direction evidenced by some PRs I'd like to share here and here just as examples. A caveat is that this is WIP for Sourcegraph.com and I, at the moment may not have an exact timeline for managed and self hosted instances.
+In summary, I believe the permissions issue will be addressed with GitHub Apps and I do not expect we would ask more than we have today. 

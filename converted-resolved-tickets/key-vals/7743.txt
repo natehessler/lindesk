@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7743
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7743
+title: # Pandora
+Application engineer: Alex Jean-Baptiste
+Customer: Pandora Media, Inc. 
+Date: Apr 20
+Version: ​3.34.2
+Deployment: Nomad (POC)
+External Services: BitBucket
+Auth Providers: saml, oneLogin
+Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1650307270681739
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/34663
+Summary: The customer received their oneLogin metadata and had a displayName field that they inquired  could DisplayName  be displayName?
+Confirmed that the displayName value worked for setting up auth provider while also omitting configId
+https://docs.sourcegraph.com/admin/auth/saml/one_login ​

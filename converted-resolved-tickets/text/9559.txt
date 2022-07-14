@@ -1,0 +1,9 @@
+-   Application engineer: Gabe Torres
+-   Customer: Smartsheet 
+-   Date: July 6, 2022
+-   Slack Links: https://sourcegraph.slack.com/archives/C0325FV42G5/p1657137785930739
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way to configure the Sourcegraph Intellij plugin to search in our custom sourcegraph domain instead of sourcegraph.com?
+It is possible to configure the IntelliJ plugin for use with a private Sourcegraph instance. You can refer to the documentation here for these details.
+https://github.com/sourcegraph/sourcegraph/tree/main/client/jetbrains

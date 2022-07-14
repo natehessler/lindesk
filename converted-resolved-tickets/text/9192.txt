@@ -1,0 +1,15 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Reddit 
+-   Date: June 21, 2022
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1655838060094209
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/pull/37644
+-   Doc Update Link: N/A
+The customer experienced a gap in search-based code intelligence in which references across a Go module were not found. ​ References within a Go file however were found. ​
+​ 1. Click on "Find References" for a Go variable that has references outside the current file but within the Go module that it exists within. ​ 2. You will only find the references within that current file.
+The issue has been fixed in the following GitHub issue and should be released in Sourcegraph 3.42.0. ​
+N/A
+N/A

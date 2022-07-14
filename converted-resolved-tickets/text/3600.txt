@@ -1,0 +1,24 @@
+-   **CSE:** Gabe Torres
+-   **Customer:** Reddit 
+-   **Date:** 28 October 2021
+-   **Version:** 3.32
+-   **Deployment:** Kubernetes
+-   **External Services:** NA
+-   **Auth Providers:** NA
+-   **Slack Links:** https://sourcegraph.slack.com/archives/C02BJ8T258D/p1632946463121900
+-   **GitHub Issue Link:** NA
+-   **Doc Update Link:** NA
+The customer was trying to upload an LSIF using src lsif upload and received an error: Upload failed to complete: Failed to process
+The customer noticed that the precise-code-intel-worker pod was OOM'ing. These were the settings for that deployment.
+    resources:
+              limits:
+                cpu: "2"
+                memory: 4G
+              requests:
+                cpu: "1"
+                memory: 4G
+The customer increased the resources for the precise code interl worker deployment and they were able to process the LSIF upload. https://github.com/sourcegraph/deploy-sourcegraph/blob/master/base/precise-code-intel/worker.Deployment.yaml Currently we do not have recommendations about horizontal scaling and resource allocation for the code intel service. We can use the settings for sourcegraph.com for reference:
+    Our Sourcegraph.com deployment has the memory requests set to 32Gi, and 2CPU each
+    It also has a replica count of 4, compared to to 2 for deploy-sourcegraph (the worker is horizontally scalable)
+Some more info from code intel: https://sourcegraph.slack.com/archives/CHXHX7XAS/p1633032236144100
+Upload failed to complete: Failed to process

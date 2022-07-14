@@ -1,0 +1,14 @@
+zendeskTicketNumber: 9359
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9359
+title: Meli Question - how to see only repos in search results
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: June 27, 2022
+Version: 3.29.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C028683RWRH/p1656338360669779
+ou know how can I show only repos in results ? I'm looking for a specific implementation but don't need to see the code, only the repo.
+ee only repos in the results you can add 
+Summary: 

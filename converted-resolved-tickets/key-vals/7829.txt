@@ -1,0 +1,15 @@
+zendeskTicketNumber: 7829
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7829
+title: New Slack message in support-mercadolibre
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: Apr 25
+Version: 3.29.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1650889456443209
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Customer ran a script to create close to 1500 users but only 969 were created. While investigating possible causes for why they didn't all get created, the customer reported that they created the rest of their users using our cli tool. Later their CE dmed Erik at MeLi to ask if they have any more issues with user creation, Erik said that they reran the script and it worked the second time. Unclear what actually fixed the problem but this is resolved.
+https://docs.sourcegraph.com/cli/references/users/list 

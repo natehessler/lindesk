@@ -1,0 +1,19 @@
+zendeskTicketNumber: 
+zendeskLink: 
+title: How to get Information on OOMKill and Pod Restarts with the default Prometheus in Grafana.
+CSE: Michael Bali
+Customer: Tableau 
+Date: 28 October 2021
+Version: 3.18.0​
+Deployment: docker-compose
+External Services: OTHER,GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C011899KB6U/p1635551319008600
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: -   Q1. Hello Sourcegraph! Another monitoring and integration question for you: We want to start monitoring pod restarts and OOM terminations so we can watch out for underlying issues in our server. I see there are some pod-level metrics exposed in grafana on a per-service basis, but it looks to be purely percentage-based. Is there a way we can get information on OOMKill and pod restarts with the default Prometheus, or will we need to use something like https://github.com/kubernetes/kube-state-metrics to do it for us? Thanks!
+-   Q2. I couldn't find a metric for pod restart counts on that page, did I miss something?
+-   Prometheus sends all metrics to Grafana. So certain thresholds, whenever they get exceeded, alerts are sent to Grafana and that's how the dashboard gets populated.Grafana will just show the message but a docker inspect -f '{{json .State}}' \$container would give more information also logs.
+-   There isn't a direct metric to get pod restart counts. However, On Grafana you go to the specific pod, click on Kubernetes monitoring to get the Percentage pods available. While on Docker-Compose you click on the Container's container missing metric.You can also get this using the commands k8: kubectl get pods DC:
+docker events --filter event=restart --since=60m
+https://docs.sourcegraph.com/admin/observability/dashboards

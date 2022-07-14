@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Segment.io Inc 
+-   Date: Dec 10
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: 
+-   GitHub Issue Link: 
+-   Doc Update Link: 
+This was an inquiry about where usage statistics are stored and how the current site admin usage stats page is generated
+Usage stats are generated from the Redis DB as well as the event_logs table in the pgsql database. The usage stats page currently uses a deprecated getUsageStatistics package which gatehrs data from the redis db, we should be moving away from this. As such during a standard migration as per our docs, the usage data will be lost (redis isn't backed up)
+A separate script used to exist Sourcegraph Server Gen but this script is in need of maintenance and update. It currently doesnt support the codeintel-db

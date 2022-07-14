@@ -1,0 +1,15 @@
+-   Application engineer: Gabe Torres
+-   Customer: Level 
+-   Date: Mar 17
+-   Version: ​3.37.0
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C035B2A2ZFV/p1647581305222899
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer was getting this error after trying to upload an lsif dump.\
+❌ Failed to upload index parts unexpected status code: 404 (failed to enqueue payload: upload not found)
+I noticed that there was a network error, because if an upload fails src should retry not just terminate the connection. So we tried to split the dump into smaller parts using src lsif upload -max-payload-size 25 to split the 150MB file into 25MB parts. We saw a bit more progress but this still failed. We noticed the uploads were timing out at 1:15 sec every time. (A 500 error means the server is not available) So we determined the issue was with the user's network bandwidth.
+We attempted to upload an index for a smaller repo (sg/src-sli) and this worked successfully. So the customer decided to stop attempting to upload using his network and upload the indexes in their CI pipeline. This ended up working since the uploads were happening on their cloud network so they had more bandwidth.
+t=2022-03-24T20:40:47+0000 lvl=eror msg=codeintel.httpapi.handleEnqueueMultipartUpload error="failed to upload object: upload multipart failed, upload id: c9e, cause: read multipart upload data failed, read tcp -\>: i/o timeout" count=1.000 elapsed=74.994 statusCode=500

@@ -1,0 +1,13 @@
+-   Application engineer: Giselle Northy
+-   Customer: Butterfly Network Inc 
+-   Date: Mar 24
+-   Version: insiders
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Lsif py is not working
+Lsif Py is deprecated. Check lsif on our docs page before troubleshooting. They are revamping it. check Lsif.dev
+https://github.com/sourcegraph/sourcegraph/pull/33400

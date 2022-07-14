@@ -1,0 +1,17 @@
+-   Application engineer: Gabe Torres
+-   Customer: Smartsheet 
+-   Date: Jan 13
+-   Version: NA
+-   Deployment: NA
+-   External Services: NA
+-   Auth Providers: NA
+-   Slack Links: https://sourcegraph.slack.com/archives/C02H4BECQ7R/p1642108420004400
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/633
+I'm having trouble setting up https via docker-compose with Caddy + Let's Encrypt and things aren't working. Here's what I've done:\
+1) Followed the instructions in the deploy-sourcegraph-docker/docker-compose/docker-compose.yaml file\
+• Using the config for HTTPS with Let's Encrypt's staging environment\
+2) Restarted caddy and sourcegraph-frontend-0 containers\
+At that point, https is still not available. I imagine that there's some kind of logs of the communication that caddy is doing with let's encrypt, so that's where I'd go next in an attempt to see what's going on, but I don't know where they would be\
+Our domain is publicly resolvable, however, the IP that it resolves to is not. It's a private IP address
+In order for the automatic HTTPS to work, Caddy must be accessible to the internet over port 80 and port 443 so that Let's Encrypt can verify that the user has control over DNS. We have some instructions on how to use a different certificate if the instance isn't public. This is how we set up some of our private environments. https://docs.sourcegraph.com/admin/http_https_configuration
+We have some instructions for generating a self-signed certificate here: https://docs.sourcegraph.com/admin/ssl_https_self_signed_cert_nginx Steps 1, 2, and 5 are the relevant pieces of information in this docs. Please let me know if this helps.

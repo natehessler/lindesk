@@ -1,0 +1,18 @@
+zendeskTicketNumber: 8402
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8402
+title: # New message in #trial-databricks-sourcegraph
+Application engineer: Alex Jean-Baptiste
+Customer: Databricks 
+Date: May 23, 2022
+Version: ​3.40.0
+Deployment: Docker Compose
+External Services: GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1653363010224919
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: ​​Hello, LSIF uploads are recently failing with Upload failed to complete: Gitserver.DefaultBranchContains: BranchesContaining: signal: killed Do you know what's happening?
+​The issue experienced was similar to ticket
+​Environment variable was used to eliminate egress throttling SRC_GIT_SERVICE_MAX_EGRESS_BYTES_PER_SECOND = -1
+N/A
+N/A

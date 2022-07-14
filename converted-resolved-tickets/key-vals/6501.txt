@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6501
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6501
+title: Twitter - upgrade - migrator stall
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Feb 25
+Version: 3.37.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/731
+Doc Update Link:
+Summary: is this log message expected on migrator
+t=2022-02-25T15:40:37+0000 lvl=info msg="Checked progress of index creation" schema=frontend tableName=sub_repo_permissions indexName=sub_repo_perms_user_id exists=true isValid=false in-progress=true phase="waiting for old snapshots" phases="7 of 10" lockers="824639726352 of 824639726360" blocks="824639726416 of 824639726424" tuples="824639726464 of 824639726472"
+After looking at this a little more, I believe whats going on here is that there were some lsif uploads being processed, and migrator was holding on those before completing, so having stopped those should be fine.I believe the intended use of migrator is to effectively run migrations before an upgrade, but I'm not sure doing this would have gotten around these codeintel uploads processing and creating some downtime, from our docs -- In some situations, administrators may wish to migrate their databases before upgrading the rest of the system to reduce downtime. Sourcegraph guarantees database backward compatibility to the most recent minor point release so the database can safely be upgraded before the application code.To execute the database migrations independently, follow the Kubernetes instructions on how to manually run database migrations. Running the up (default) command on the migrator of the version you are upgrading to will apply all migrations required by the next version of Sourcegraph.
+The interaction with codeintel uploads might be in need of some ergonomics upgrades here. I'll reach out to our team and to check some of my assumptions here and provide some feedback
+--
+Hey @jmeador just wanted to check back in on this -- TL;DR the above information is correct, these logs were just letting you know that index creation was waiting for lsif uploads to finish processing.Also wanted to get some clarity on this -- the effect here was that those stalled queries were blocking migrator from completing, so it required manual intervention to get the upgrade completed
+Was there any downtime for users during the upgrade? It shouldn't be the case that concurrent index creation actually blocks writes to the database

@@ -1,0 +1,15 @@
+-   CSE: Michael Bali
+-   Customer: 
+-   Date: Nov 5, 2021
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1636185856057500
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I would like to contribute to Sourcegraph and I found a few interesting issues. I wanted to know the process of getting the issue assigned to you.
+-   We have a contributing Guideline page.
+-   We also have a board with good first issue here.
+-   https://github.com/orgs/sourcegraph/projects/210
+-   https://github.com/sourcegraph/sourcegraph/blob/main/CONTRIBUTING.md

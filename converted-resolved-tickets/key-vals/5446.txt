@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5446
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5446
+title: Syntax highlighting missing
+Application engineer: Kelvin Lee
+Customer: Toast 
+Date: Jan 7
+Version: 3.30.3​
+Deployment: docker-container
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01FY24RFB7/p1641584798000900)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Syntax highlighting missing
+Not sure how legitimate these are, but: \> Is the file that you are trying to view particularly large? And is it in a language that is already in your repository? If the language is a common one, could you try viewing a smaller file of the same language and let me know how that goes? I'm wondering if the language is the issue, or if it's just a scaling thing
+> Does your org have a monorepo type of architecture? Sometimes, the implications of scale/size of monorepos will point us towards a resource-allocation-based sollution
+And of course, searching in our internal solved tickets repo surfaced [this](https://github.com/sourcegraph/support-tools-internal/blob/c14a3615599eb25de63f8f72ef8dcee3bf5b3b35/resolved-tickets/4694.md), leading to some high confidence it was just a provisioning thing.
+Customer seems satisfied with answer that it's likely lack of provisioning/resources to their deployment.

@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Glovo 
+-   Date: June 14, 2022
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1655283938478109
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+There's an issue with sourcegraph failing on PRs. Hope this screenshot will be useful raised_hands:skin-tone-2: and thank you for any help in advance :slightly_smiling_face:
+This is a failed docker pull step on GitHub
+The customer reported that this is a non-blocker. They were able to merge after retries.
+N/A

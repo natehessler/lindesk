@@ -1,0 +1,18 @@
+zendeskTicketNumber: 8351
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8351
+title: Repositories missing from organization
+Application engineer: Michael Bali
+Customer: finpension 
+Date: May 19, 2022
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: N/A
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/968
+Doc Update Link: N/A
+Summary: All the repositories we added to the organization "finpension" are gone and are not appearing when re-adding them.
+Raised this to the cloud team and we figured that GitLab made a breaking change that affects our integration with this code host. All users/customers using GitLab.com, and who have upgraded their on-perm GitLab to the version \>= 15.0 are believed to be affected. Older GitLab version that have OAuth access token expiry enabled would also experience this problem.
+Gitlab no longer supports tokens without an expiry date And the OAuth token expiration time is \[two hours\](https://docs.gitlab.com/ee/integration/oauth_provider.html
+We made some [modifications](https://github.com/sourcegraph/sourcegraph/pull/36042) to our code base to mitigate this issue
+-   https://github.com/sourcegraph/sourcegraph/pull/36042

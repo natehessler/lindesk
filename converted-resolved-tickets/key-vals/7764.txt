@@ -1,0 +1,15 @@
+zendeskTicketNumber: 7764
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7764
+title: Sourcegraph plugin not showing up in intellij
+Application engineer: Jason Harris
+Customer: Netflix 
+Date: Apr 21
+Version: 3.39.0
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Customer having trouble with sourcegraph plugin. was on 1.2.2 of intelij.
+Customer upgrading to 1.2.3 fixed the issue.

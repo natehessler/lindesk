@@ -1,0 +1,16 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: 
+-   Date: Apr 14
+-   Version: ​3.36.3
+-   Deployment: docker-compose
+-   External Services: BITBUCKERSERVER,OTHER
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C03BC5YKLE7/p1649941371078269
+-   GitHub Issue Link:
+-   Doc Update Link:
+> I'll jump in with a question already sweat_smile I attempted setting up the CLI (
+    src login
+    ❌ Problem: Error communicating with https://sourcegraph.open.ch: Post "https://sourcegraph.open.ch/.api/graphql": x509: certificate signed by unknown authority
+> So somewhere I'm hitting the proxy most likely, although I'm not sure I should. Any hints? Any flags i can use to debug? Should I report it directly on github?
+This is a certificate issue, so there's a limit to what we can offer here. You can use the 
+https://docs.sourcegraph.com/cli/references/login

@@ -1,0 +1,14 @@
+-   Application engineer: Jason Harris
+-   Customer: Lockheed Martin Space Systems 
+-   Date: Feb 3
+-   Version: ​3.35.1
+-   Deployment: kubernetes
+-   External Services: n/a
+-   Auth Providers: LM SSO
+-   Slack Links: https://sourcegraph.slack.com/archives/C030CPM2ELR/p1643911475450589
+-   GitHub Issue Link: n/a
+-   Doc Update Link:
+Performance issues. Lots of OOM.
+Look at grafana charts, which showed limited disk space remaining on the gitserver. Also asked about other pods, all of which were underprovisioned.
+This was a clear cut case of needing to add resources. They did so by following the recommendations of the resource estimator.
+https://docs.sourcegraph.com/admin/install/resource_estimator

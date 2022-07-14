@@ -1,0 +1,17 @@
+zendeskTicketNumber: 7265
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7265
+title: # New Slack message in support-reddit-sourcegraph
+Application engineer: Alex Jean-Baptiste
+Customer: Reddit 
+Date: Mar 30
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1648666930887059
+GitHub Issue Link: N/A
+Doc Update Link: N/A ​
+Summary: ​We want to migrate users over to our production instance. Can you help us with a data migration script?
+​​Here is our first option.A dump of the relevant tables from your test database and then restoring those tables on your production database.Seems like you can use pg_dump for this use case.You would use the --table=pattern flag in order to choose specific tables within the database.I'm currently looking to see which tables that would entail (accounting for repo permissions, code host authorizations, etc.)
+Our second option is a continuous migration methodHere is some information from DigitalOcean on the process.I am aware that the users on your production instance may not be on your test instance and therefore an overwrite would happen with the first option. It would seem that our second option would negate that situation.Let me know what you think about either of these options @ktatkinson and if there is anything I missed. ​ ​I've consulted with my colleagues and I can continue answering any questions you have as you work on a data migration script, but writing it for you is not something that we can do.Let me know if you have any additional questions.
+https://docs.digitalocean.com/products/databases/postgresql/how-to/migrate/ https://www.postgresql.org/docs/current/app-pgdump.html

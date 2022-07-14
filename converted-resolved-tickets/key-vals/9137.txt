@@ -1,0 +1,15 @@
+zendeskTicketNumber: 9137
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9137
+title: Saling indexed-search pods
+Application engineer: Gabe Torres
+Customer: Reddit 
+Date: June 17, 2022
+Version: 3.40.2
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1655494036175219
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/1074
+Doc Update Link:
+Summary: After scaling up the webserver CPU usage is distributed, but the memory usage is still very high on the original instance. Can I safely delete the old pod?
+It's possible that the old index search pod was holding on to file cache data, in which case a restart would help. indexed-search should rebalance the repos between replicas when more replicas are added. The indexed search pods can be restarted and should not cause any reindexing if the Persistent Volumes did not change. Running indexing processes should be completed when the new pods come online.

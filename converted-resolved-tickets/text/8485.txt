@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: Singapore Airlines 
+-   Date: May 25, 2022
+-   Version: ​
+-   Deployment: Docker-Compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+where are all the repositories  stored in sourcegraph after it's being synced from the code host?
+By default, Sourcegraph requires a storage class for all persistent volumes claims and by default, this storage class is called 
+To see this, you run the following command:
+To get a list of pods
+-   https://sourcegraph.com/github.com/sourcegraph/sourcegraph@v3.36.3/-/blob/internal/repos/syncer.go?L67 

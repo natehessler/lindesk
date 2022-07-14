@@ -1,0 +1,25 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Northrop Grumman 
+-   Date: Jan 12
+-   Version: ​3.29.1
+-   Deployment: docker-compose
+-   External Services: builtin
+-   Auth Providers: GITLAB
+-   Slack Links: Email Thread (https://sourcegraph.zendesk.com/agent/tickets/5536)
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/639
+-   Doc Update Link: N/A
+The customer initially had connection issues between Sourcegraph and their Bitbucket code host with the following error: "error in syncExternalService for"BITBUCKETSERVER" with ID 3: context deadline exceeded."
+The customer's frontend service was also unable to reach out to sourcegraph.com. The customer let it be known that a proxy was in place on their network to reach external servers and that proxy/no_proxy settings were set in their docker configuration.
+After a scheduled call the customer also had the following questions:
+Is there a way to pull extensions locally so that they can be distributed to an air-gapped environment?
+What does Sourcegraph as a whole (network-wise) require to operate in an air-gapped environment successfully?
+Is Atlassian Crowd authorization supported?
+Yes. We have the ability to create a private extensions registry. Here are the docs to do so: https://docs.sourcegraph.com/admin/extensions
+The answer is that Sourcegraph is perfectly suitable to work in an air-gapped environment. You should however keep the following in mind when operating Sourcegraph in that manner:
+Any code host that you are using should also be available on the air-gapped instance as well.
+As it currently stands, Sourcegraph does not support Atlassian Crowd.
+Atlassian Crowd has SAML authentication for SSO available as described in the docs here if your team has access to Crowd Data Center.
+The tool you are using to manage your LDAP connections (i.e., Microsoft AD, Okta, etc.) may be configured to use SAML authentication.
+In which case, the above docs should work as well.
+https://docs.sourcegraph.com/admin/auth/saml/generic https://docs.sourcegraph.com/admin/auth/saml https://docs.sourcegraph.com/admin/config/site_config
+https://docs.sourcegraph.com/admin/extensions

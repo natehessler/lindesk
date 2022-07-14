@@ -1,0 +1,13 @@
+-   Application engineer: Gabe Torres
+-   Customer: Wayfair 
+-   Date: Feb 9
+-   Version: 3.36.1​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C024QE1K0FP/p1644437674244859
+When using Sourcegraph, remember to include the count: filter in your queries. If you don't, you may get inconsistent results between a search using Sourcegraph Code Search UI and a search using the Sourcegraph GraphQL API. A colleague of mine raised the fair point that this seems like a bug. I'm not convinced it is, but having an official response from y'all on why I see this behavior when querying would be helpful.
+For reference, you can see our APIs here. The streaming and GraphQL endpoints are optimized to return results quickly. For this reason, there are time and result limits to searches. The GraphQL API returns results as a set and is optimized to return results as soon as possible. The streaming API returns results as a stream and returns results as they become available, so this could be why you get a different number of results. You can change the behavior of the search by using count or timeout to give the search more time. Exhaustive searches help if you need all the results rather than fast results. If you need to process a large result set, we recommend using the Sourcegraph CLI with the -stream flag. Hope this helps!
+https://docs.sourcegraph.com/code_search/how-to/exhaustive\
+https://docs.sourcegraph.com/code_search/reference/queries
+https://docs.sourcegraph.com/api

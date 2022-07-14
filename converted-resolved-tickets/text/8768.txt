@@ -1,0 +1,14 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Target 
+-   Date: June 6, 2022
+-   Version: 3.24.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C01M58VTV39/p1654540917014659
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+"Now that I'm about ready to launch this thing, I have a question about the published state. I know I can apply via either the CLI tool or through the UI but am curious whether I can publish via the UI at some point too, or whether that is to be done only via a change in the specfile?" ​
+​Yes. You are able to publish your batch change from the UI as well.
+The process to do so is described here. ​
+https://docs.sourcegraph.com/batch_changes/quickstart

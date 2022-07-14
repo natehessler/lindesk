@@ -1,0 +1,14 @@
+-   Application engineer: Michael Bali
+-   Customer: Newscorp 
+-   Date: Nov 17
+-   Version: ​N/A
+-   Deployment:N/A
+-   External Services: N/A
+-   Auth Providers:N/A
+-   Slack Links: https://sourcegraph.slack.com/archives/C02JSU299NY/p1637161925059300
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customer would like to know if it's possible to increase the search context lines to accommodate more lines of code in preview.
+-   If you go to your name in the top right of the screen and then click Settings you see a JSON object that represents your User Settings.
+-   Adding the following parameter will let you customize this (This example has 3 lines shown) -"search.contextLines": 3,
+https://docs.sourcegraph.com/admin/config/settings

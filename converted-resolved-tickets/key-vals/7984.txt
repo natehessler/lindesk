@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7984
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7984
+title: Exclude archived BitBucket repo
+Application engineer: Gabe Torres
+Customer: Netflix 
+Date: May 3
+Version: 3.37.0​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://netflix.slack.com/archives/CHKL4G5PG/p1651618625176029\
+GitHub Issue Link:
+Doc Update Link:
+Summary: I want to search non-archived reference of AnnotatedCompositeSerializer , this is my search AnnotatedCompositeSerializer archived:no lang:java and I got this reference from the 4th result. But app owner confirmed that this repo was archived. Can you let me know if my search is correct?
+We get the 'archived' status by checking the "archived" label on the repo. Does this repo have the 'archived' label applied on BB?
+https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/internal/repos/bitbucketserver.go?L194-196

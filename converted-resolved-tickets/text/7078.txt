@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Two Sigma Investments 
+-   Date: Mar 22
+-   Version: ​v3.36 -\> v3.38
+-   Deployment: k8s
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/32989
+-   Doc Update Link:
+global settings search configuration broke in v3.36 -- more info in github issue
+Duplicate issue by successive upgrades
+https://github.com/sourcegraph/sourcegraph/pull/33089/files

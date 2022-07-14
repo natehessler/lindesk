@@ -1,0 +1,13 @@
+-   Application engineer: Giselle Northy
+-   Customer: Pr0con 
+-   Date: Dec 3
+-   Version: ​Cloud
+-   Deployment: sourcegraph.com
+-   External Services: n/a
+-   Auth Providers: n/a
+-   Slack Links: n/a
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+How can you add another private repo to sourcegraph cloud. Customer added Github, but wanted to add a 2nd Github account.
+This is a limitation of Sourcegraph Cloud. You can add one Github account, but cannot add more because users there have no access to Site-admin. This is what it looks like in the UI:
+![image](https://user-images.githubusercontent.com/27694443/144912827-ed5711c3-453b-45cc-b16f-5a03d24f8814.png)

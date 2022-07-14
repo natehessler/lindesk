@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Pandora Media, Inc. 
+-   Date: Apr 8
+-   Version: ​3.34
+-   Deployment: Nomad (Unsupported)
+-   External Services: GitHub
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1649469956211559
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+​Still seeing Networking Error sporadically. \[An image of the customer's web browser network panel was shared).
+The customer was advised to increase the replica count of gitserver to five. The memory of the gitserver service was increased to 128GB of memory based on the suggestion of allocating 3 times the amount of memory taken by Sourcegraph repos. ​
+https://docs.sourcegraph.com/admin/install/kubernetes/scale

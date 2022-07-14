@@ -1,0 +1,11 @@
+zendeskTicketNumber: 7813
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7813
+title: Fwd: Timeout when users search while indexing large number of Bitbucket repos
+Application engineer: Ben Gordon
+Customer: JPMorgan 
+Date: April 22, 2022
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/905
+r appears in UI when attempting to search
+rved logs for frontend and searcher Reached out to engineering for debugging We theorized that the IP allowlist might be root cause We also considered that the container volume mounts might have been problematic
+customer never had the issue re-appear after initial presentation, and we resolved both potential root causes we had theorized. Since the risk for this occurring again is very low, we are closing
+Summary: 

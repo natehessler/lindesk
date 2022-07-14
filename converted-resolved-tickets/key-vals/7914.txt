@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7914
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7914
+title: Dropbox question
+Application engineer: Kelvin Lee
+Customer: Dropbox 
+Date: Apr 28
+Version: 3.36.2​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C02M9ASQ2LC/p1651169722475529)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: > is there a way to search content but just get the filenames? e.g. don't care about the context
+Yes! 
+https://docs.sourcegraph.com/code_search/reference/queries

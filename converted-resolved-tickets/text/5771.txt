@@ -1,0 +1,31 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Indeed 
+-   Date: Jan 24
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: saml
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1643052186014100) , old [thread](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1642622811150700) that might have been linked elsewhere already but covers a lot, especially Ben's comment [here](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1642625833152100?thread_ts=1642622811.150700&cid=C01JR51JR5J)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+repository does not exist error when running a batch change
+None
+Known issue. A couple of possible workaround, but not likely to work, quoted below:
+The workarounds, if you wish to try:
+(1) This one's easy. You can attempt to add a 
+(2) This one is a bit involved, and quoted/described below:
+> Here goes. The general idea is:
+>
+> I've fixed this in the past by adding the previous repo name to the code host exclusion list, waiting for it to be deleted, and then removing it from the exclusion list. (removing it again from the exclusion list isnt necessary, but it keeps the configuration cleaner)
+>
+> The steps to conduct the above look something like this: Please navigate to Site Admin -\> Manage Code Hosts -\> (Select your code host)In the configuration JSON file, please add the following repo exclusion:
+    "exclude": [
+        {
+          "name": "
+        }
+      ]
+> After a few minutes, Sourcegraph should remove the repo from your instance, and prevent it from being rediscovered which should resolve the issue.You can confirm this deletion is done by navigating to: Site Admin -\> Repository Status and searching for the repository by name.If the repository does not appear, then it has been completely removed from your instance, and your batch change should resolve without error.
+>
+> This will require that you have site-admin access.
+... But ultimately, both of the \
+None

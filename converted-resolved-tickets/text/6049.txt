@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Roblox Corporation 
+-   Date: Feb 4
+-   Version: 3.35.1
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1644010723471159 https://sourcegraph.slack.com/archives/CHXHX7XAS/p1643929940179029
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer noticed a large increase in disk space over the past few days.
+Asked for container usage statistics from the customer and noticed that the symbols service was sitting at 256G of usage which was too high.
+Found a thread from earlier in the customer-support-internal channel pointing to an issue with the symbols service not deleting old cache files, which filled the disk quicker than usual. I informed the customer that this was the case and that a patch was forthcoming.

@@ -1,0 +1,23 @@
+zendeskTicketNumber: 4431
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4431
+title: Codeinsights-db corruption
+CSE: Ben Gordon
+Customer: Reddit 
+Date: Nov 4
+Version: 3.32.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,guithub
+Slack Links:
+-   [Engineering help thread](https://sourcegraph.slack.com/archives/C014ZCKMCAV/p1636045934174500)
+-   [Customer help thread](https://sourcegraph.slack.com/archives/C02BJ8T258D/p1636042132091300)
+Summary: -   GitHub Issue Link:
+    -   
+-   Doc Update Link:
+    -   N/A
+How to rebuild codeinsights-db after accidental deletion
+-   Rebuild the codeinsights-db
+-   Restart frontend and let it perform all migrations on the codeinsights-db
+-   Restart worker service / pod and code insights should start up at that point
+-   Restart frontend again one more time to be safe
+N/A -- a doc would make sense here normally, but engineering is about to change the behavior of codeinsights-db in a way that makes rebuilding it impossible, so this doc would be out-of-date before anybody has a chance to use it

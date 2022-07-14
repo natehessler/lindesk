@@ -1,0 +1,19 @@
+zendeskTicketNumber: 5105
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5105
+title: Sourcegraph 3.32.0 search issues
+Application engineer: Alex Jean-Baptiste
+Customer: FactSet 
+Date: Dec 14
+Version: 3.32.0​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml,github
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer ran into an issue where there was a discrepancy between the results returned from this search query: remote-icon count:10000 archived:no file:
+The customer also ran into the issue of archived repos showing up in search results when the archived:no option was used in a search query.
+I suggested a call to get more context from the customer and then followed up with some information after making some assumptions based on similar issues from the past with other customers.
+I assumed the customer was running the Sourcegraph CLI and that using the -stream flag would allow the user to get all the search results they were looking for and asked whether or not the customer had recently upgraded to 3.34.0 where we were are of a bug that prevents search results that should appear from not appearing.
+I asked for logs from the indexed-search and searcher service in regards to the archived repo visibility issue and no response was received.
+https://docs.sourcegraph.com/cli/references/search https://docs.sourcegraph.com/CHANGELOG

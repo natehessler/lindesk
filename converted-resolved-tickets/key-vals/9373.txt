@@ -1,0 +1,18 @@
+zendeskTicketNumber: 9373
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9373
+title: New Slack message in support-coupang-sourcegraph
+Application engineer: Rakesh Joshi
+Customer: Coupang 
+Date: June 27, 2022
+Version: ​3.39.1
+Deployment: Helm
+External Services: Github
+Auth Providers: Github
+Slack Links: https://sourcegraph.slack.com/archives/C02NFUV7V9A/p1656396569978119
+GitHub Issue Link:
+Doc Update Link:
+Summary: Hi teams, I tested the batch change feature. I have write permission but have the Branch protection rules so that I can not merge to any branch directly. (our registered users can merge after reviewing by gerrit tools). And I try to run batch changes with that repository, and publish batch set. The status is Unpublished even though I click "publish on apply", and the Action field shows "No Action". Is it right flow? what means "No action" ?
+Hi ,
+https://docs.sourcegraph.com/batch_changes/how-tos/publishing_changesets
+Please let me know if it resolves your query.
+https://docs.sourcegraph.com/batch_changes/how-tos/publishing_changesets

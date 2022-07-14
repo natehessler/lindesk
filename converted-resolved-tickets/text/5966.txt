@@ -1,0 +1,11 @@
+-   Application engineer: Gabe Torres
+-   Customer: Cisco Meraki 
+-   Date: Feb 1
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: GITLAB,OTHER
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C01S6JETFA7/p1642632549020100
+The customer reported that the history tab on their manage monorepo takes a long time to load.
+Increasing the CPU for gitserver (the service that handles git history) could improve performance, thought this is a known issue.
+https://docs.sourcegraph.com/admin/how-to/monorepo-issues

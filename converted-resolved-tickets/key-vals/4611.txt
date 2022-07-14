@@ -1,0 +1,15 @@
+zendeskTicketNumber: 4611
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4611
+title: Question on search parameters
+Application engineer: Stomzy Mwendwa
+Customer: Newscorp 
+Date: Nov 17
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02JSU299NY/p1637160746058700
+GitHub Issue Link:
+Doc Update Link:
+Summary: I'm trying to explore JSON files and I want to find a property inside a propertysome files have a "frames" property and I want to find JSON files that have the "frames" property AND that also have the "definitions" property inside it
+context:global "frames": {..."definitions"...} lang:json patternType:structural

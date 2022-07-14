@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Snowflake, Inc. 
+-   Date: Mar 22
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C021MU16S1F/p1647969891525039
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer got an error that the frontend failed to connect to codeinsights database
+Not sure what was causing an issue with codeinsights but we tried setting 
+Closed this ticket due to no response from the customer but I'm guessing the k8s issue was the problem. Unclear if they still kept codeinsights disabled.

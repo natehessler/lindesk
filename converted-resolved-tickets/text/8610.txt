@@ -1,0 +1,10 @@
+-   Application engineer: Gabe Torres
+-   Customer: Netflix 
+-   Date: May 31, 2022
+-   Version: 3.37.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+I'm building Sourcegraph Insights and seem to have run into what looks like a bug. The data series that I'm building is using a regex that can match over multiple lines, and this results in an overcount. See how it says 3 matches above the search result. But it's actually just one match that happens to span 3 lines.
+Our search uses line-based counts rather than block counts. For this reason, Code Insights regex search only supports single-line matches. This is a search limitation we are aware of: https://github.com/sourcegraph/sourcegraph/issues/31028 In the meantime, we can try finding a workaround for this query.
+https://docs.sourcegraph.com/@v3.39.0/code_insights/explanations/automatically_generated_data_series

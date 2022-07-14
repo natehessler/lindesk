@@ -1,0 +1,14 @@
+-   Application engineer: Michael Bali
+-   Customer: Citrix 
+-   Date: April 26, 2022
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/CT9P97S6L/p1651037340461199
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/pull/29855
+-   Doc Update Link: N/A
+The Customer is facing an issue that some repository that does not exist anymore in the source git server but still be shown at Sourcregraph "Repository status." They are not in the "repos" list, and I tried to add them to the exclude list, but they are still there. Do you know how to purge them?
+Repositories that do not exist in the code host shouldn't appear on Soucegraph. I ran a test by deleting a repo on my code host that also exist on sourcegraph, I refreshed the sourcegraph page and after some seconds I see that the repo does not appear on sourcegraph again, which validates that this should happen automatically.
+This is a [bug](https://github.com/sourcegraph/sourcegraph/pull/29855) that has been fixed in 
+-   https://github.com/sourcegraph/sourcegraph/pull/29855

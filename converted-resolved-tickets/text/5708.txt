@@ -1,0 +1,13 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Atlassian 
+-   Date: Jan 20
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1642743252030200
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer wanted to know the search result set is not returned in an orderly manner everytime they run the same query
+Hi It seems that I am getting two different result sets when searching sourcegraph with the same term https://sourcegraph-frontend.internal.shared-prod.us-west-2.kitt-inf.net/search?q=%22authentication-policy-strategy-mismatch%22&patternType=regexp Any thoughts why this might be?
+Sourcegraph currently does minimal ranking. Each Zoekt backend returns results in alphabetical order, but the frontend in streaming mode returns results as they're received from the shards. The team is aware of this issue and working on how to make it better. I also want to share this doc with you, for reference on ranking.Kindly let me know if you have any other question regarding this

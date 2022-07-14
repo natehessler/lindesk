@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8372
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8372
+title: reddit - validation tests
+Application engineer: Warren Gifford
+Customer: Reddit 
+Date: May 20, 2022
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: After our outage last week, I'm looking for a set of 'acceptance tests' to ensure that our instances are working after an upgrade. In the past I've done very basic testing, ensuring sign-in works, ensuring that I can do a search in the UI, and ensuring that I can manually sync a repository (to make sure that connection the the code host is working). Do you have a more extensive list of test cases?
+Hey Katie we don't currently have any sort of acceptance tests built into Sourcegraph for after an upgrade. We've done a little bit of work in this area with the production of cli based validation test, but, this is an area we're still exploring.
+Right now after an upgrade we are relying on prometheus warnings alerts as well as general container health checks to alert admins to any problems that may have been brought on post upgrade (edited)

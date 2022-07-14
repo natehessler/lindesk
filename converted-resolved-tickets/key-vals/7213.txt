@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7213
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7213
+title: Logitech- migrations question
+Application engineer: Warren Gifford
+Customer: Logitech Inc. 
+Date: Mar 28
+Version: 3.30.3​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: openidconnect
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Hi Christine, so far, I recently updated our sourcegraph docker deployment to 3.33.  (BTW,  I'm so glad to see search contexts being adopted as a fully supported feature to replace the experimental version contexts.  This is a such a great feature!)I had a question about some of our data migration statuses.  There are a few migrations that have remained at 0%.  I'm not aware of any adverse affects this is having on our sourcegraph instance, but I wanted to check if these could be an issue going forward (Or if this migration status is normal).
+Hey @Mason Blaylock and @Christine Lovett just jumping in to let you know that those migrations being stuck at 0% is not an issue. Off the top of my head I'm not sure why the APIDoc migration is stuck at 0%, but for the encryption migrations these will be stuck at 0% unless you utilize the encryption.keys argument in your instances site config json. You can learn more about the option here.I'm confident that the APIDoc migration being stuck at 0% has a similar cause, happy to explore that a little further. For now just for peace of mind, I have a stable docker-compose test instance that has been running for a long time (currently in v3.38) and it has all three of the same 0% warning.
+@Mason Blaylock just a quick follow up on the API docs migration -- I did some investigating and found that it is indeed the case that the API docs migration is related to this experimental feature, and if it hasn't been enabled that migration will always remain at 0%TL;DR these are all nothing to worry about, let me know if you have any other questions!

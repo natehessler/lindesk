@@ -1,0 +1,21 @@
+zendeskTicketNumber: 8916
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8916
+title: New message in support-booking
+Application engineer: Stomzy Mwendwa
+Customer: Booking.com 
+Date: June 13, 2022
+Version: 3.37.0​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1655119992407889
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: query{ repository(name: "gitlab.booking.com/core/main") { comparison(base: "a6c2cbdccf691a2b8032c1d0da65a34a70e3ad72", head: "a6c2cbdccf691a2b8032c1d0da65a34a70e3ad70") { commits { nodes{ oid parents { oid } } } } } }
+sending this to the API a6c2cbdccf691a2b8032c1d0da65a34a70e3ad72 is not a valid commit, and the reponse takes quite sometime to tell me revision not found.While for both valid commits is instant
+Tried this https://cse-k8s.sgdev.org/api/console
+This was instant.
+Tried
+query { repository(name: "github.com/visgl/react-map-gl") { comparison(base: "be0e126c", head: "be0e126b") { commits { nodes{ oid parents{ oid } } } } } }
+Tried this query on dotcom and it brought back the revision not found in about 10 to 15 seconds
+Filed a bug report here: https://github.com/sourcegraph/sourcegraph/issues/37269

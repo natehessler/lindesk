@@ -1,0 +1,16 @@
+zendeskTicketNumber: http
+zendeskLink: //sourcegraph.zendesk.com/agent/tickets/3469)
+title: Previously generated API key (strangely) working with a separate instance
+CSE: Jason Harris
+Customer: Reddit 
+Date: 28 October 2021
+Version: ​
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1632328132061900
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Customer had a previous kubernetes instance of sourcegraph that she used to create an API key. After tearing that instance down and creating a new instance, she was still able to use the same API key to auth into the src CLI.
+This was difficult to troubleshoot. In the middle of doing so the customer replied and said that the old API key was no longer working.
+Strange behavior seems to have spontaneously stopped. I am posting a summary here in case this ever comes up again. Seems like a strange issue and one that we definitely want to resolve should we find it again, but I could not find anything relevant in the docs/logs.

@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6498
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6498
+title: New Slack message in trial-avito
+Application engineer: Stomzy Mwendwa
+Customer: Avito 
+Date: Feb 25
+Version: ​
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1645798310904279
+GitHub Issue Link:
+Doc Update Link:
+Summary: How to setup sentry integration if we have self-hosted sentry on custom domain
+This is currently not GA but we support Sentry through this extension: https://github.com/sourcegraph/sourcegraph-sentry

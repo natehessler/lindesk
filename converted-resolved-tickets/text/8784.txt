@@ -1,0 +1,11 @@
+-   Application engineer: Gabe Torres
+-   Customer: Sourcegraph 
+-   Date: June 6, 2022
+-   Version: ​3.40.1
+-   Deployment: Docker Compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C0298GD56M9/p1654557396322149
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/1027
+I configured a Webhook hoping that it would help the data freshness of our batch changes console. I'm seeing successes in the Webhook logs under Site Admin \> Batch Changes -\> Incoming Webhooks, but my batch change is still pretty stale, lots of repos that haven't been updated in many hours.
+We checked logs and grafana and everything seemed stable. The webhook logs were receiving events but they weren't being updated in the UI. After some time the status started to update immediately. Not sure what could have caused this latency.

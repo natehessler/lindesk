@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Medallia 
+-   Date: Mar 1
+-   Version: ​3.37
+-   Deployment: docker-compose
+-   External Services: n/a
+-   Auth Providers: built-in
+-   Slack Links: n/a
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer unable to login.
+Confirmed that nothing was changed in the startup script when initializing the instance Got the console error logs Got on a phone call with the client. Tried to run a trace, which didn't work. fiddle with external URL setting
+The customer had an externalUrl configured, but he was not using the external URL. Commented out the external URL and tried it with the public IP to confirm logins were still working, then added the external URL and made sure to configure the correct protocol (HTTP, not https). This worked. No more issue.

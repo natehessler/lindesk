@@ -1,0 +1,15 @@
+-   Zendesk Link: \[
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Avito 
+-   Date: Mar 9
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1646830679251199
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer was trying to run a search for a file on their instance but were not able to get any results
+Requested the customer for frontend logs and a screenshot of the error they were facing.
+The customer's site admin jumped in and mentioned that this was a permissions issue to which there is a separate incident I was helping out with this here: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1646224904594809
+The repository permissions were the reason the customer's user wasn't able to get any results. The site admin however, directed the user to ask about the initial problem from an internal channel.

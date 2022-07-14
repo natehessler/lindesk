@@ -1,0 +1,23 @@
+zendeskTicketNumber: 4564
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4564
+title: Migrating to 3.31.x and following index check for corruption
+Application engineer: Giselle Northy
+Customer: Atlassian 
+Date: Nov 12
+Version: 3.34.1​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1636754350020900
+GitHub Issue Link:
+Doc Update Link:
+Summary: Migrating to 3.31.x and following the instructions at https://docs.sourcegraph.com/admin/migration/3_31
+Errors were reported when checking for prior index corruption before upgrading. The instructions say to contact customer support to help repair the database if any errors are reported.
+I ran the SQL query on the pgsql pod and got this result:
+    ERROR: item order invariant violated for index "repo_name_unique"
+    DETAIL: Lower index tid=(292,66) (points to heap tid=(4583,10)) higher index tid=(292,67) (points to heap tid=(1067,4)) page lsn=234/A8689358.
+I also ran the SQL against the codeintel-db pod and no errors reported there.
+After confirming with some other folks internally, seeing the error ERROR: item order invariant violated for index "repo_name_unique" indicates Db corruption. This will need to be cleaned up before upgrading. We have a document that will walk you through the process here: https://docs.sourcegraph.com/admin/how-to/rebuild-corrupt-postgres-indexes
+-   Note that to be safe, we advise re-indexing both pgsql and codeintel-db via the process in the doc above
+-   Keep in mind that the process will take some time
+-   We also advise that once re-indexing is done, that the queries be ran again to make sure the corruption has been fixed

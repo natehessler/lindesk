@@ -1,0 +1,14 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Pandora Media, Inc. 
+-   Date: May 10, 2022
+-   Version: ​3.34.0
+-   Deployment: Nomad (POC)
+-   External Services: BitBucket Server
+-   Auth Providers: OneLogin
+-   Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1652212365148349
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer experienced a failed repo sync.
+​No troubleshooting steps were taken due to the deployment configuration being outside of the supported path.
+The customer may be experiencing an issue due to the fact that the gitserver replicas are not properly configured to balance repo clones. ​
+​\[ "t=2022-05-10T19:46:00+0000 lvl=eror msg=\"failed to clone repo\" repo=bitbucket.savagebeast.com/IOS/ios error=\"clone failed. Output: remote: Enumerating objects: 4094, done. \\nremote: Counting objects: 100% (4094/4094), done. \\nremote: Compressing objects: 100% (3207/3207), done. \\nerror: RPC failed; curl 18 transfer closed with outstanding read data remaining\\nfatal: the remote end hung up unexpectedly\\nfatal: early EOF\\nfatal: index-pack failed: exit status 128\""\]

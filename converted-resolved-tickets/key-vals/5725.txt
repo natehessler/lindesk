@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5725
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5725
+title: Workiva email question
+Application engineer: Jason Harris
+Customer: Workiva 
+Date: Jan 21
+Version: 3.35.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/CTJUDV6JH/p1642793122019300
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The previous version of sourcegraph had a checkbox for sending notifications to my email for saved searches, but I noticed the new one does not. Will it send an email by default?
+Code monitoring has essentially replaced saved searches. All you need to do to get notifications again, is to create a new code monitor in the code monitoring tab of sourcegraph, and set your trigger and configure your email.

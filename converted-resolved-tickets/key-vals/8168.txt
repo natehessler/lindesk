@@ -1,0 +1,20 @@
+zendeskTicketNumber: 8168
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8168
+title: Re: Upgrade Path from v3.35 -\> v3.39
+Application engineer: Stomzy Mwendwa
+Customer: Goldman Sachs 
+Date: May 11
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer got the below error during upgrade to 3.36 \* accumulateDirector error: "recursed accumulation of path '/tmp/kustomize-711928850/repo': accumulating resources: 2 errors occurred:
+backend.Service.yaml might not exist in the latest upgrade. Could you please look into this at your earliest. This is blocking upgrade.
+In addition, the customer reported that after adding previously removed code hosts, there was a spinning icon.
+Using our deployment manifest for 3.35\>3.36 we took a look at the PR to remove the service entirely because it was unused
+Removed the backend service manifest from the kustomize file.
+Increased the liveness probe for gitserver to 1200s.
+N/A

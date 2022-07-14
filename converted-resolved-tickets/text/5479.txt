@@ -1,0 +1,14 @@
+-   Application engineer: Jason Harris
+-   Customer: F5 Networks Inc. 
+-   Date: Jan 10
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB,PERFORCE
+-   Auth Providers: saml
+-   Slack Links: N/A
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/621
+-   Doc Update Link: N/A
+Customer upgraded Sourcegraph from 3.31.0 to 3.34.2 just before the holidays.  Since then, Sourcegraph is unable to connect to Perforce branches.  When verifying the mirroring connection in settings for a repo, the following error is reported:
+gitserver error (status code 500): unmarshal JSON: ReadVal: can only unmarshal into pointer, error found in
+Created an issue almost immediately as this seemed to be an encoding issue with Golang unmarshalling.
+This was fixed in 3.35.0, so I asked the customer to upgrade to that version, which fixed the issue.

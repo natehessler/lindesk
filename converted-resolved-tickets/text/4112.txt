@@ -1,0 +1,17 @@
+-   Zendesk Link: \[
+-   CSE: Michael Bali
+-   Customer: Email 
+-   Version: ​N/A
+-   Deployment:sourcegraph.com
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I've changed my username on nearly all of my social services. I would like to do the same here on Sourcegraph and change my username from "a" to "b". If a username change is not possible, then I would like to have my account deleted so I may recreate it.
+If you are running a self-hosted version, you can definitely change your username by ;
+-   Going to the site admin page.
+-   Next, click on the Users page where you see a list of users.
+-   You can now click on your username and make the necessary edits and save.
+Unfortunately, we can't edit a username on sourcegraph.com so I've deleted the account and now you can re-create an account with the desired username.
+None

@@ -1,0 +1,22 @@
+-   CSE: Michael Bali
+-   Customer: 
+-   Date: Nov 9, 2021
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1636530393065000
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customer is getting errors when he attempts to run the app.
+-   This looks like Webpack not resolving an import.
+-   Asked to check that the 
+-   I noticed there were some changes to that particular [file](https://github.com/sourcegraph/sourcegraph/commit/105cf03e700e6a373a25ad008c4a93165fb98882).
+-   If there are no differences, can you check the following one after the other; Can you check that on line 188 of your 
+-   Also, I think this particular [link](https://stackoverflow.com/questions/43037590/field-browser-doesnt-contain-a-valid-alias-configuration) may be helpful. Based on the info I gathered in the above link, on line 193 of your webpack.config.js fil e can you add an ./ in front of node_modules/react-visibility-sensor/visibility-sensor.js' to look like './node_modules/react-visibility-sensor/visibility-sensor.js'
+-   Try running this command to clear the local package cache.
+    yarn cache clean
+    rm -rf node_modules
+    yarn
+-   running 
+-   https://stackoverflow.com/questions/43037590/field-browser-doesnt-contain-a-valid-alias-configuration

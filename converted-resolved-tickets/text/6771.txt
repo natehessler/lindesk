@@ -1,0 +1,16 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: TripActions Inc. 
+-   Date: Mar 10
+-   Version: 3.33.0
+-   Deployment: docker-container
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02RK23KB70/p1646931908950829
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer reported an increased amount of I/O timeouts with syntax highlighting, with the server maxing out on CPU thanks to 
+The customer's AE made contact with me shortly after I made my initial response to the customer, letting me know that he and their CE wanted to see them switch to either Docker-Compose or Kubernetes, and asked me to suggest that they take this opportunity to entirely re-deploy at the latest version, considering how many versions behind they were.
+They were able to resolve the CPU maxing out by restarting their server, but were very open to re-deployment as a better next step when I pointed out that we don't support single Docker in production. They expressed some initial interest in deploying Docker-Compose to Fargate, but that is also an unsupported path, so they anticipate a Kubernetes deployment to their EKS cluster. Their AE has also taken the opportunity to remind them of our managed instances.
+Whichever way they decide to go, it falls outside the initial scope of this ticket, which was resolved with the server restart, and should not return with a redeployment.
+https://docs.sourcegraph.com/admin/deployment_best_practices
+https://docs.sourcegraph.com/admin/install/docker-compose/migrate https://docs.sourcegraph.com/admin/install/docker-compose/aws

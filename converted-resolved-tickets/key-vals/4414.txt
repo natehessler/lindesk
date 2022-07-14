@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4414
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4414
+title: Incorrect sourcegraph instance address
+CSE: Jason Harris
+Customer: Reddit 
+Date: 28 October 2021
+Version: 3.32.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,guithub
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1631825001030400
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Customer complaining of error message in the UI when putting their sourcegraph url into the browser extension: "Incorrect Sourcegraph Instance Address".
+Asked for siteConfig -- Nothing suspect.
+Corrected incorrect sourcegraph url -- did not fix issue but needed to be done.
+Asked if they had granted extension permissions on their codehost.
+These steps fixed the issue:
+Navigate to any page on your code host. Right-click the Sourcegraph icon in the browser extension toolbar. Click "Enable Sourcegraph on this domain". Click "Allow" in the permissions request popup.

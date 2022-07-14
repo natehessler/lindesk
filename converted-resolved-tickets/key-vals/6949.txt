@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6949
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6949
+title: Search results shows error with Code Intel
+Application engineer: Michael Bali
+Customer: Fiverr, Ltd. 
+Date: Mar 16
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: github,github
+Slack Links: https://sourcegraph.slack.com/archives/C01FG5LUWUU/p1647505164155889
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The Search results  shows error: 
+-   Ran the error on sourcegraph and found this error seem to related to a \[failed\](https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/client/web/src/enterprise/codeintel/indexes/pages/CodeIntelIndexPage.story.tsx?L362
+-   Asked for gitserver logs and any errors in the Upload page in the site admin
+one of sourcegraph pods didn't have a node to be scheduled to due to resources and AZ constraints - already fixed

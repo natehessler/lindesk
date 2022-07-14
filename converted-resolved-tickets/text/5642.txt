@@ -1,0 +1,18 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Snapdocs Inc 
+-   Date: Jan 18
+-   Version: ​(Couldn't find them on Looker \]: )
+-   Deployment: (Couldn't find them on Looker \]: )
+-   External Services: (Couldn't find them on Looker \]: )
+-   Auth Providers: (Couldn't find them on Looker \]: )
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C029VE4A12R/p1642543789033800)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+repos not syncing
+Asked for logs... sourcegraph-frontend-\*, repo-updater, gitserver, the usuals.
+Also suggested a manual resync:
+> If you navigate to the repository's settings, and select "Mirroring", there should be a button for "Refresh now" that manually fires a sync.
+... But this is only reasonable for small numbers of repositories (otherwise it becomes tedious), this solution does not scale well.
+None... Customer did not respond with logs.
+"Some repositories could not be synced" \
+None 

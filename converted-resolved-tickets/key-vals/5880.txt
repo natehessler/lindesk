@@ -1,0 +1,37 @@
+zendeskTicketNumber: 5880
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5880
+title: graphql query for grabbing users and general examples
+Application engineer: Kelvin Lee
+Customer: Upwork Global Inc. 
+Date: Jan 28
+Version: 3.33.0​
+Deployment: docker-compose
+External Services: BITBUCKETSERVER
+Auth Providers: builtin,saml
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1643395961392419)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: How to create a query that will get all users and their emails, and guidance for general documentation
+The main docs page is [here](https://docs.sourcegraph.com/api/graphql), with examples [here](https://docs.sourcegraph.com/api/graphql/examples). I provided them the following as a stepping stone:
+    {
+      users(activePeriod: ALL_TIME) {
+        totalCount
+        nodes {
+          username
+          emails {
+     user {
+       id
+     }
+     }
+          usageStatistics {
+            lastActiveTime
+          }
+        }
+      }
+    }
+\
+In general, the Documentation Explorer on the right-hand side should give some guidance for a user attempting to use the GraphQL API. Here's what I described to the customer:
+> As an aside on how I used the Documentation Explorer: I threw keyword "emails" into the search bar, dug down into "User.emails", and then dug down again into "UserEmail" under the Types header. Just drilling down until I found some useful fields to try
+Lastly, customer asked a bit about CSV output, but it doesn't seem we support anything like that.
+https://docs.sourcegraph.com/api/graphql
+https://docs.sourcegraph.com/api/graphql/examples

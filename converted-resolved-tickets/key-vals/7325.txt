@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7325
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7325
+title: New message in #support-uk-dwp
+Application engineer: Stomzy Mwendwa
+Customer: GOV.UK 
+Date: Apr 4
+Version: 3.37.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1649073708817639
+GitHub Issue Link: N/A
+Doc Update Link:
+Summary: GitLab SSO Auth isn't working and users are only provided with builtin password auth. As it stands, no auth via GitLab and as well as builtin.
+I requested for customer frontend logs to see if any auth errors were being thrown. A customer user mentioned that there was a GitLab event last week(3/28 - 4/1). This could be related to this https://twitter.com/gitlabstatus/status/1510699550347984896?s=20&t=paA9nQEoFN4-lp-pIX-TwQ. In addition, the customer tagged a user who I believe is on the infrastructure team since a mention of cluster rebuild was mentioned.
+In this case, I am of very little assistance since the customer issue here is more internal as far as Sourcegraph is concerned. Closing this issue based on this.

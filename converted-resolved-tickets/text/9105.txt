@@ -1,0 +1,12 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Simply Business 
+-   Date: June 16, 2022
+-   Version: ​3.40
+-   Deployment: Docker-compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03KUN7SPRA/p1655460302516499
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+What values should i use for memory limits, or are the defaults okay. I'm using a c5.4xlarge instance
+can help answer this. Considering that a c5.4x has 16 CPUs and 32G of memory, I'd suggest consulting our resource estimator as a base start/foundation for how much you'd need to allocate resource wise for your deployment. I must say that the resource estimator is undergoing significant changes in terms of improvement to properly help setting up a healthy Sourcegraph instance. With that being said, the figures you'll get after providing inputs, should form a base for your instance as users start adding repositories and performing activities on it. We can always scale up vertically if required. The defaults tend to work great in small usage environments, say 20 or so users with a few hundred repos, but performance may start shifting when these grow exponentially. All in all, I do believe that the resource estimator can help with deciding on whether to scale up CPU/Mem as you start or stick with the defaults. I hope this helps!

@@ -1,0 +1,16 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Glovo 
+-   Date: Oct 30
+-   Version: 3.33.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links:https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1635604382052800
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+After upgrading 3.30.1 to 3.31.2, I always see a message like X repositories could not be synced, we still have 18 repos that aren't getting synced. It's not looking great though :grimacing: went up to 33 repos now
+Requested for gitserver logs
+Reviewed the logs shared
+Could you try to check your ulimit value first by running this command ulimit -n Then you can increase it with this command ulimit -n 10000You can make this setting permanent for every shell session by adding the following line to your .\*rc file (usually .bashrc or .zshrc):
+ulimit -n 10000
+lvl=eror msg="Failed to fetch" repo=github.com/glovo/terraform-datadog error="failed to update with output \"\": pipe2: too many open files" lvl=eror msg="performing background repo update" error="failed to fetch: failed to update with output \"\": pipe2: too many open files"

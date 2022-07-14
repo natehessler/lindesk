@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Medallia 
+-   Date: Mar 28
+-   Version: 3.37
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C035JDG6GJD/p1648482204025909
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer wanted to know if sourcegraph supports all Comby features. Linked this 40 minute youtube video going over some features.
+I did not watch the video but overall, Comby is supported. I asked them to clarify if they had a specific feature in mind so that I could confirm but I did not get a response, so it's safe to close this.
+https://docs.sourcegraph.com/batch_changes/references/faq

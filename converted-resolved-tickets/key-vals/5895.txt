@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5895
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5895
+title: RedVentures repo perm issue
+Application engineer: Stomzy Mwendwa
+Customer: Red Ventures 
+Date: Jan 28
+Version: 3.36.2​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02EYG34D5X/p1643415622146029
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/672
+Doc Update Link:
+Summary: This is a managed instance problem which folks on delivery noted that there were some alerts, they noticed in their logs that many repos are blocked by SSO.
+This was open to delivery looking into the SSO permissions of repos. The customer reported that they added several GH orgs and forgot the auth token.
+They updated the token to SSO with all new orgs added.

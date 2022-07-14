@@ -1,0 +1,18 @@
+-   Application engineer: Michael Bali
+-   Customer: Upwork Global Inc. 
+-   Date: Mar 26
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1648375980350969
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer set up to monitor a migration to a specific version of an npm dependency. The diagram has two data series; - For repositories with version \>= ( greater than or equal to ) 211 - For repositories with version \
+For the second repo, When the customer clicks on a datapoint it counts the diffs that are actually migrating from the old version to the version \>210. When I'm clicking on a data point I would expect to see only the results included in this point and now I would like to clarify if its showing the diff as a result of the comparison at that data point?
+-   I did a test similiar to what the customer has, and I also noticed the data point uses the diff count.
+-   Reached out to the code insight team for explaination.
+-   When you click on a data point, we generate a Sourcegraph diff query between the previous and current point. We don't currently have a single click to view the value as a search.
+-   The Run your insight over all your repositories feature is actively in development and there are currently some limitations with performance speed. We have many performance improvements planned. In this [documentation](https://docs.sourcegraph.com/@v3.38.0/code_insights/explanations/current_limitations_of_code_insights), you would find in details  a very  formula for estimating how long an individual data series (query) will take to run on your instance and some information on best practices when creating insights for large repositories.
+https://docs.sourcegraph.com/@v3.38.0/code_insights/explanations/current_limitations_of_code_insights
+N/A

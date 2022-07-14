@@ -1,0 +1,24 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: 
+-   Date: Apr 1
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+> I am new to Sourcegraph.
+>
+> I am trying to find out if Sourcegraph can help with my question.
+>
+> My question is: how to find the path (or paths) from main() to an arbitrary line of code.
+>
+> In my example, I have a bug with SetLED ( RED ). I want to know how the code gets there. I am hoping that Sourcegraph can provide a graph or a trace from the top level to the specific line of code with SetLED ( RED ). There are many other cases in my code with setLED(...) but I am interested only in SetLED ( RED ).
+>
+> I am not able to reproduce the problem with an actual device where my code is running, so I can't use the debugger. I am manually going through the code but I am not making much progress either.
+>
+> Do you know if Sourcegraph can help in this case?
+> Unfortunately, Sourcegraph doesn't have the ability to generate a call graph.
+>
+> You can search for all instances of SetLED ( RED ) and from there identify other functions that call it, assuming RED is passed in explicitly in the code. From there you can find references of other functions that call SetLED(). But if RED is being passed in dynamically at runtime, that's not something we can trace.

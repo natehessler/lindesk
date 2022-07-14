@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: Upwork 
+-   Date: Feb 22
+-   Version: Kubernetes
+-   Deployment: 88262_2021-02-26_4f8eb8a
+-   External Services: GITHUB,GITLAB,OTHER
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1645613599299539
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+the Customer was getting a file that does not exist error when making a search in the CLI. However, the same search query works in the UI
+-   I asked the customer to try adding the stream flag
+Adding the stream flag worked The Sourcegraph UI calls the Stream API for all interactive searches and that's why it worked in the UI to get this to work in the CLI you have to include the stream flag. In addition, we have a search exporter extension you can also use in the web UI to help export a list of search results to CSV.
+-   https://docs.sourcegraph.com/api/stream_api
+-   https://sourcegraph.com/extensions/sourcegraph/search-export

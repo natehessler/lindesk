@@ -1,0 +1,17 @@
+-   CSE: Giselle Northy
+-   Customer: AppFolio 
+-   Date: 28 October 2021
+-   Version: ​3.32
+-   Deployment: Docker compose
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/26209
+-   Confirm Caddy file configuration is correct for their set up. In this case, they wanted to use Let's Encrypt with built in Certificates and HTTPS.
+-   Ask for a copy of their Caddy file
+-   In general it is good to double check the configuration for misconfig or typo's. If possible, compare with a working version or use their version in your test instance.
+-   Customer had Staging enabled and not Production in the Caddy file. Staging setting will not work to enable HTTPS. The file can be tested but will not fully connect, resulting in the unknown certificate errors.
+-   They will need to comment out staging and uncomment production when they are ready to connect the instance.
+    2021/10/13 15:22:27 http: TLS handshake error from 205.254.247.201:58815: remote error: tls: unknown certificate
+    2021/10/13 15:22:58 http: TLS handshake error from 44.230.222.65:61258: remote error: tls: unknown certificate authority

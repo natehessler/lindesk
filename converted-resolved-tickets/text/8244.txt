@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: Atlassian 
+-   Date: May 16, 2022
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1652760275863439
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/961
+-   Doc Update Link: N/A
+The command 
+-   You are able to search bitbucket repos using the vs-code extension. however, when you try to open Open File in Sourcegraph Web you get the error 
+-   You are also able to successfully search and open files in sourcegraph web for GitHub repos.
+-   You also attempted cloning this file locally and we can see errors of cloning not supported for bitbucket cloud repos as well.
+I have been engaging with the team responsible for this bit of the product over the last couple of days and it looks like this is not caused by the extension itself because the function of the editor endpoint relies on open/clone bitbucket cloud repos is from the main application. At the moment, it looks like we [do not support Bitbucket Cloud's clone URL](https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/cmd/frontend/internal/cloneurls/clone_urls.go?L44-50). However, we support repo syncing from Bitbucket Cloud which is why you are able to see these repos on sourcegraph itself. I do not have an ETA on when this would be looked into or when any changes would be made but this is known and being looked into internally.

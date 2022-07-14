@@ -1,0 +1,13 @@
+-   CSE: Warren Gifford
+-   Customer: Twitter 
+-   Date: 28 October 2021
+-   Version: 3.32.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link: (https://github.com/sourcegraph/sourcegraph/issues/26090)\[https://github.com/sourcegraph/sourcegraph/issues/26090\]
+-   Doc Update Link:
+Essentially an update to our extensionId discovery isn't honoring the extension naming conventions. So you can temporarily get around this by adding your extension manually in your global site config. From the linked issue:
+    [registry
+    sourcegraph.company.com/alex/myextension

@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: MercadoLibre 
+-   Date: May 26, 2022
+-   Version: 3.29.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1653601733211889
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/993
+-   Doc Update Link: N/A
+Some non-admin users cannot see specific repos they have access to in the CodeHost.
+-   cross-checked to see if their token \[has the prerequisite scopes\](https://docs.sourcegraph.com/admin/external_service/github
+-   we discovered internal repos were not appearing.
+-   We noticed that when we manually tried to sync a user there was an error coming from our group caching code which stopped permissions form being synced. We asked the customer to disable group caching and from that point could see that we were working through the queue, although slower than we would expect.
+-   Their current workaround is they created a new team group and added users to it and now they are able to access internal repos.

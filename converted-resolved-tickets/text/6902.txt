@@ -1,0 +1,14 @@
+-   Application engineer: Riana Shahid
+-   Customer: Dropbox 
+-   Date: Mar 15
+-   Version: 3.36.2​
+-   Deployment: docker-compose
+-   External Services: GITHUB,OTHER
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C015JREMBTR/p1647373260561639
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer deleted user info with 
+Since deleting this way is considered a soft-delete, it can be recovered with manually-run DB commands, found in the linked doc
+https://docs.sourcegraph.com/admin/user_data_deletion 
+slack thread about deleting user data: https://sourcegraph.slack.com/archives/C01JR51JR5J/p1647375097663679

@@ -1,0 +1,14 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Atlassian 
+-   Date: Feb 9
+-   Version: 3.34.2
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1644433438806969)
+-   GitHub Issue Link: [GitHub RFH](https://github.com/sourcegraph/customer/issues/694)
+-   Doc Update Link: [GitHub Doc Update](https://github.com/sourcegraph/sourcegraph/pull/31363)
+Customer asking for convenience for making many parallel requests to our [Stream API](https://docs.sourcegraph.com/api/stream_api), as well as reporting 504 errors (possible rate-limits).
+Currently no support for the parallelization/ergonomic nice-to-haves of a more sophisticated API experience/API UX. But what the customer is doing is basically on the money of what we recommend; write a script to fire multiple requests, have the requests return their values, and then data-massage/parse/organize the returned results to something useable for the user's needs.
+Expecting the 504s issue to be reported in a different, also Atlassian issue (customer is going to be OOO so closing this ticket for now).
+https://docs.sourcegraph.com/api/stream_api https://github.com/sourcegraph/sourcegraph/pull/31363

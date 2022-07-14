@@ -1,0 +1,12 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Salesforce.com 
+-   Date: Nov 30
+-   Version: 3.17.2​
+-   Deployment: single docker
+-   External Services:
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1638345853190600
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way to seed the search ranking algorithm
+No it's not possible to do that but using search contexts can help constrain the number of repos. You can, however, create contexts that are shared across the org that contain the subset of repos, talking , and they wouldn't have to have each dev recreate them in their own Sourcegraph contexts.

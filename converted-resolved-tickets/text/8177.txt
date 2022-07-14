@@ -1,0 +1,13 @@
+-   Application engineer: Gabe Torres
+-   Customer: Reddit 
+-   Date: May 12
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1652372288083059
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/950
+-   Doc Update Link:
+The customer was seeing errors in repo-updater and the frontend, and LSIF uploads were failing.
+We ran pg_dump --schema-only to cross-reference their schema to a fresh schema and noticed that their schema was missing indexes and constraints. We identified that there were several tables that had duplicate data. We think it came from repeatedly running an INSERT-based backup/restore process as part of their migration over to RDS.
+We worked on a pattern to remove duplicate data and run a repair script that Eric put together (in GHI).

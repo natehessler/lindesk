@@ -1,0 +1,26 @@
+-   Application engineer: Giselle Northy
+-   Customer: Reddit 
+-   Date: Nov 22
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,guithub
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1637601788156800
+-   Github Issue Link: https://github.com/sourcegraph/sourcegraph/issues/28035
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/pull/28058
+Sourcegraph extension button breaks on diff in when config has trailing slash
+-   **Sourcegraph version:** 3.33.0 
+1.  Have a trailing 
+Example: 
+2.  Click the Sourcegraph button within a diff in a PR review
+![image](https://user-images.githubusercontent.com/27694443/142913653-aead0a83-3b40-49f1-8cd3-0436e8f2f8d2.png)
+3.  This loads to a blank page
+![image](https://user-images.githubusercontent.com/27694443/142912978-e817deaf-1d35-4666-bbac-2066508992ea.png)
+This is because the button link URL has an extra slash in it after the 
+Example: 
+4.  To fix, remove the trailing 
+Example: 
+Button should load the file diff on the Sourcegraph instance specified in the extension config.
+A blank page is shown.
+-   Check Extension config for an extra  at the end and remove
+-   Fixed in PR https://github.com/sourcegraph/sourcegraph/pull/28058

@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Upwork 
+-   Date: Apr 26
+-   Version: ​3.37
+-   Deployment: docker-compose
+-   External Services: bitbucketserver
+-   Auth Providers: builtin, saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1650989694577779
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer wasn't sure if sourcegraph was indexing their github repos.
+They can check if the repos are indexed by trying to search for them or checking the list under Site Admin \> Repository Status. I also gave instructions on how to add repos if they're not already there
+https://docs.sourcegraph.com/admin/external_service/github 

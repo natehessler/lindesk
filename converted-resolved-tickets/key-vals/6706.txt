@@ -1,0 +1,25 @@
+zendeskTicketNumber: 6706
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6706
+title: Code Insights time out 504``{=html}
+Application engineer: Giselle Northy
+Customer: Databricks 
+Date: Mar 8
+Version: ​
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Trying to run a Code Insight but it returns 504 and times out. 
+![image](https://user-images.githubusercontent.com/27694443/157551211-c5002825-694c-4b72-8a09-5cd280317b09.png)
+-   Troubleshooting this: Ask them more about the repo that's timing out:
+    -   How big is it?
+    -   Does the query work in Sourcegraph?
+    -   If some query fail and others don't, what is the difference?
+In this case they have a monorepo and several smaller. The monorepo was causing timeout. The work around is here:
+ANSWER
+Depending on the size of the Sourcegraph instance and the size of the repo, you may see odd behavior or timeout errors if you try to create a code insight running over a single large repository. In this case, it's best to try:
+1.  Create the insight, but check the box to "run over all repositories." (This sends the Insight backfilling jobs to the backend Sourcegraph instance worker which will handle them datapoint-by-datapoint. Running over an individual repository otherwise currently runs the jobs in bulk to generate its live preview.)
+2.  After the insight has finished running, filter the insight to the specific repo you originally wanted to use. The filter resolves instantly.
+https://github.com/sourcegraph/sourcegraph/pull/32350

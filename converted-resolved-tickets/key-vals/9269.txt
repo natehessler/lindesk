@@ -1,0 +1,17 @@
+zendeskTicketNumber: 9269
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9269
+title: New Slack message in support-allegro
+Application engineer: Stomzy Mwendwa
+Customer: Allegro 
+Date: June 23, 2022
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1655989008947219
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Whether there are any stability issues with :sourcegraph: ? My batch changes have been processing / retrying for last 15 minutes: • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-2 • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-3 • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-4 • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-5 • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-6 • https://sourcegraph.allegrogroup.com/users/pfryga/batch-changes/migrate-opbox-components-to-reusable-workflows-m-7
+Asked the customer for the failure messages.
+Customer just needed to retry the changesets manually
+https://docs.sourcegraph.com/batch_changes/how-tos/handling_errored_changesets

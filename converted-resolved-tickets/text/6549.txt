@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: Wayfair 
+-   Date: Mar 1
+-   Version: 3.36.1​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C024QE1K0FP/p1646134463339359
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is it possible with the graphql api to include the contents of a file with the query results?
+I did a few test with something similar to your query.  Running the 
+sourcegraph \[link\](https://sourcegraph.com/api/console?\_ga=2.188609899.2134099489.1646134401-746694459.1644915851

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 5013
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5013
+title: Eventbrite - Slow permissions sync
+Application engineer: Warren Gifford
+Customer: Eventbrite 
+Date: December 10, 2021
+Version: 3.34.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: github
+Slack Links: 
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: A single user was unable to view repos, it appears to be the case that the users permissions were no longer synching.
+Remove and re add the user
+Removing and re adding the user resolved the issue. However its unknown why the particular user was reporting issues seeing repos. A likely cause is a temporary outage of service in github around the same time that the issue manifested for the user. Note that this was also observed coinciding with the beginning of the thanksgiving holiday.
+    t=2021-11-27T21:40:39+0000 lvl=eror msg="Failed to sync permissions" type=2 id=50 err="fetch user permissions: list repos for user: Get \"http://github-proxy/user/repos?sort=created&visibility=private&page=1&per_page=100\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"

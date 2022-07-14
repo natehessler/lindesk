@@ -1,0 +1,13 @@
+-   Application engineer: Ben Gordon
+-   Customer: GOV.UK 
+-   Date: Feb 24
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1645723145210089
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer reports seeing "Private Repository 🔒" when running searches after running an upgrade
+Appears to be expected behavior Confirmed expected behavior with the customer
+The customer's query did not target specific content in the search result, so there was no search result snippet. This lead to each search result only displaying repository name + "Private Repository", which appears to suggest that the repositories are not available for viewing to the user. This is not the case, the repos were accessible to the searcher. The customer modified their query to target specific content in the repos, which populates the search result snippets, and indicated to the user that the repos were accessible.

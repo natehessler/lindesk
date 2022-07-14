@@ -1,0 +1,18 @@
+zendeskTicketNumber: 8040
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8040
+title: # Redis Enablement With Environment Variables
+Application engineer: Alex Jean-Baptiste
+Customer: Pandora Media, Inc. 
+Date: May 5
+Version: ​3.34
+Deployment: Nomad (Proof of Concept)
+External Services: BitBucket
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1651783839932569
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: ​from repo-updater I saw "t=2022-05-05T20:42:49+0000 lvl=warn msg=\"failed to execute redis command\" cmd=SETEX error=\"dial tcp: lookup redis-cache on 169.254.0.1:53: no such host\"" \]
+​Do we need an env var to define the cache server?
+​Based on your deployment it would seem that you have to follow the instructions here and add those environment variables to the following services:
+sourcegraph-frontend repo-updater gitserver searcher symbols worker ​ ​I realize that you are not using a custom Redis server but the non-traditional deployment of your Sourcegraph instance leads me to believe adding these environment variables is the appropriate next step. Historically we have had to re-define environment variables across your instance. ​ ​
+https://docs.sourcegraph.com/admin/deploy/kubernetes/configure

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6551
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6551
+title: Sourcegraph @ Coinbase: configuring alerts for when repos are out of sync between github and sourcegraph
+Application engineer: Riana Shahid
+Customer: Coinbase 
+Date: Mar 1 / Mar 3
+Version: ​3.27.5
+Deployment:docker-container
+External Services: GITHUB
+Auth Providers: github, builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01HW836940/p1646261943695469
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: First reached out on Mar 1 because a new person joined coinbase and they just wanted to touch base and get a hold of their CE and AE to ask some general questions about support options, training, consultations, whether there's a dedicated support staff or general pool, hours for support and SLA, and how to monitor and set alerts for when sourcegraph falls behind a certain number of changes. Said their devs have highlighted this issue and want to be able to respond to this proactively.
+I CCed Emily and James on the email and James DMed me to say he'll take it from there. I wasn't included in his response email but I can guess that most of the questions were answered. A new ticket was created for the last question (slack link) and merged into this one. There aren't any direct alerts for when the repos are out of sync with github but it's possible to set up alerts for things that would cause repos to become out of sync. \>In general, there are many kinds of alerts that can be set up in Sourcegraph but as of now, there isn't one that specifically looks for when a repo is out of sync. However, you can configure alerts to notify you when something happens that could cause repos to fall behind. \> \>Take a look at this page on alerts and these examples of things that you can configure alerts for. There is a section of repo-updater alerts that may be helpful for your goals, especially the ones that are critical. Even the repo-updater alerts that are categorized as warning will show you if something is happening that can cause repos to fall out of sync. Of these, you may want to consider setting up an alert for repo-updater: repoupdater_errored_sync_jobs_percentage. Please let me know if you find these docs helpful.
+https://docs.sourcegraph.com/admin/observability/alerting 

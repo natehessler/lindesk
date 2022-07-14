@@ -1,0 +1,20 @@
+zendeskTicketNumber: 4435
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4435
+title: GKE node upgrades stability
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Nov 4
+Version: 3.33.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: 
+GitHub Issue Link: 
+Doc Update Link: n/a
+Summary: Twitter wants to know what happens to Sourcegraph during a node pool update (this is where the version of kubernetes running on nodes and the control plane is updated), we currently have no advisements here except that maybe the PVC will fail to reattach.
+I tested node updates to little avail on k8s-twit and cse-k8s. In most instances the frontend would temporarily go down, possibly dependent on the number of available nodes in the node pool.
+requested a doc be created on expected behavior here.
+https://cloud.google.com/kubernetes-engine/docs/release-notes-stable https://cloud.google.com/kubernetes-engine/upgrades
+https://cloud.google.com/kubernetes-engine/docs/how-to/upgrading-a-cluster https://docs.sourcegraph.com/admin/deployment_best_practices
+Warning FailedAttachVolume 30m attachdetach-controller Multi-Attach error for volume "pvc-6603dcf4-77d4-424e-944a-cdc4ab19c5a5" Volume is already exclusively attached to one node and can't be attached to another
+Note this was likely due to a configMap that no longer existed that gitserver was trying to reference

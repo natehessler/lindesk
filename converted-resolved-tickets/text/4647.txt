@@ -1,0 +1,26 @@
+-   Application engineer: Warren Gifford
+-   Customer: Eventbrite 
+-   Date: Nov 18
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: 
+-   GitHub Issue Link:
+-   Doc Update Link:
+A user was unable to view all the repos they were expected to see.
+-   Investigated signing method and found that all tokens for the github instance were correctly configured
+-   Ran GraphQL queries to confirm user permissions
+-   remove and re-add user
+Removing and adding the user brought back the expected repos
+\[https://docs.sourcegraph.com/admin/repo/permissions
+Query:
+query {
+  authorizedUserRepositories(username: "
+    nodes {
+      name,
+      isPrivate
+    }
+    totalCount
+  }
+}

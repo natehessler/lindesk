@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Unity 
+-   Date: Feb 2
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1643803756394069
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer hit rate limits on code host after creating a batch change that had approximately 200 PRs opened. They had to force push changes to the code host in order to skip errors that were related to repo permissions for repos the user only had read access to
+Run a batch change across repositories with different levels of permissions
+The repos in this case that have read access to only can only be fixed with either a repo-owner giving permissions or being excluded in the batch. However, this is less than ideal. Therefore, I requested the customer to add the following config to avoid hitting rate limits on their code host: batchChanges.rolloutWindows
+https://docs.sourcegraph.com/admin/config/batch_changes

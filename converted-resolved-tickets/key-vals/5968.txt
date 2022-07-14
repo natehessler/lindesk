@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5968
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5968
+title: pandora - batch - bitbucket credentials
+Application engineer: Warren Gifford
+Customer: Pandora Media, Inc. 
+Date: Feb 1
+Version: ​v3.35
+Deployment: k8s
+External Services: bitbucket
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: A customer encountered an error trying to push a changeset to bitbucket repos
+Investigate error message origin
+The users token was out of sync
+https://docs.sourcegraph.com/batch_changes/how-tos/configuring_credentials
+authenticating ChangesetSource: no credential found to authenticate ChangesetSource

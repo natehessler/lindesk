@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: MercadoLibre 
+-   Date: Mar 14
+-   Version: 3.29.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1647278966940179
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer wanted to know the names of the variables they should use when configuring their external database for the frontend
+CE beat me to it in the slack thread but the variable names are 
+https://docs.sourcegraph.com/admin/external_services/postgres

@@ -1,0 +1,14 @@
+zendeskTicketNumber: 6890
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6890
+title: Booking: Batch Changes User-Level Token Config
+Application engineer: Ben Gordon
+Customer: Booking.com 
+Date: Mar 15
+Version: 3.37.0​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1647356545218599
+How to create batch changes with the user as the owner of the PR instead of the organization/GitHub service account name
+Set the user-level batch changes token in the user settings (and optionally use a fork of the repo to avoid permissions issues)
+Summary: -   Set the Author field on the batch spec yaml

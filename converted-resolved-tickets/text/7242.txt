@@ -1,0 +1,25 @@
+-   Application engineer: Giselle Northy
+-   Customer: The Blackstone Group 
+-   Date: Mar 29
+-   Version: ​3.38
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Invalid cert
+    t=2022-04-04T13:39:27+0000 lvl=eror msg="runUpdateLoop: error updating repo" uri=gitlab.blackstone.com/boyetted/sentinel-policies err="error cloning repo: repo gitlab.blackstone.com/boyetted/sentinel-policies not cloneable: exit status 128 (output follows)\n\nfatal: unable to access 'https://gitlab.blackstone.com/boyetted/sentinel-policies.git/': SSL certificate problem: unable to get local issuer certificate"
+    t=2022-04-04T13:39:27+0000 lvl=eror msg="runUpdateLoop: error updating repo" uri=gitlab.blackstone.com/baam/btrac/services/btpconstituentservice err="error cloning repo: repo gitlab.blackstone.com/baam/btrac/services/btpconstituentservice not cloneable: exit status 128 (output follows)\n\nfatal: unable to access 'https://gitlab.blackstone.com/baam/btrac/services/btpconstituentservice.git/': SSL certificate problem: unable to get local issuer certificate"
+he error looks like the certificate provided isn't valid, but lets double check to rule that out. Can you run the below command to know if this certificate is correct or valid? curl --cacert /path/to/cert https:\
+Next, if you have verified that the cert is correct, then attempt to clone a repo in the gitserver pod using GIT_SSL_NO_VERIFY=true git clone 
+Finally, if that works then, the below can be added to the Global config pane which allows you turn off TLS SSL verification when contacting the code host.
+    "experimentalFeatures": {
+        "tls.external": {
+          "certificates": [
+            "-----BEGIN CERTIFICATE-----\n..."
+          ],
+          "insecureSkipVerify": true
+        }
+      },
+"Ok.. I got this working once I hacked the gitserver pod and added our certs to /etc/ssl/certs/ca-certificates.crt."

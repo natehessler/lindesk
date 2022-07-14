@@ -1,0 +1,15 @@
+-   CSE: Warren Gifford
+-   Customer: Twitter 
+-   Date: Oct 28
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: (https://sourcegraph.slack.com/archives/CTN0ZBETE/p1635450887014600)\[https://sourcegraph.slack.com/archives/CTN0ZBETE/p1635450887014600\]
+-   GitHub Issue Link: (https://github.com/sourcegraph/customer/issues/543)\[https://github.com/sourcegraph/customer/issues/543\]
+-   Doc Update Link: (https://github.com/sourcegraph/sourcegraph/pull/26907)\[https://github.com/sourcegraph/sourcegraph/pull/26907\]
+Twitters frontend failed to start during an upgrade from v3.32 to v3.33
+Advise customer to work through dirty database docs
+The customer was able to get the database working again after running through the dirty database troubleshooting doc. Encountering some instances in which migration files attempted to create table indexes that had already been generated.
+(https://docs.sourcegraph.com/admin/how-to/dirty_database)\[https://docs.sourcegraph.com/admin/how-to/dirty_database\]
+Message: ERROR: Failed to migrate the DB. Please contact support@sourcegraph.com for further assistance: Dirty database version 1528395894. Fix and force version.

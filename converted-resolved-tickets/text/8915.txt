@@ -1,0 +1,64 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Allegro 
+-   Date: June 12, 2022
+-   Version: ​3.39
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1655114990060589
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Hi, I'm preparing spec file for batch update. My step looks like below: \
+    jobs:
+      upload_and_publish:
+        name: Reuse workflow
+        uses: allegro-internal/opbox-component-template/.github/workflows/upload-and-publish-reusable.yml@v1
+        secrets: inherit
+        with:
+          branchName: $
+There is an issue with last line, because I want to paste GitHub workflow variable, but Sourcegraph is trying to evaluate it as its own (like in https://docs.sourcegraph.com/@3.40/batch_changes/references/batch_spec_yaml_reference
+Ah thanks for the error message Piotr. I think I see what we could be missing here. Because we're using the literal sequence in a non-run field, we can escape this in your batch spec file with: ${{ "${{ github.event.inputs.branchName }}" }}
+I made the change in your batch spec file. name: migrate-lego-components-to-reusable-workflows description: Migrate Lego's components to reusable workflows
+on: - repositoriesMatchingQuery: repo:github.com/allegro-internal/opbox-(accordion\
+steps:
+-   run: cat /tmp/upload-and-publish.yml \> .github/workflows/upload-and-publish.yml container: ubuntu:18.04 files: /tmp/upload-and-publish.yml: \
+        on:
+          workflow_dispatch:
+            inputs:
+              branchName:
+                type: string
+                description: 'Branch to update in opbox-web'
+                required: false
+        jobs:
+          upload_and_publish:
+            name: Reuse workflow
+            uses: allegro-internal/opbox-component-template/.github/workflows/upload-and-publish-reusable.yml@v1
+            secrets: inherit
+            with:
+              branchName: name: migrate-lego-components-to-reusable-workflows
+    description: Migrate Lego's components to reusable workflows
+on: - repositoriesMatchingQuery: repo:github.com/allegro-internal/opbox-(accordion\
+steps:
+-   run: cat /tmp/upload-and-publish.yml \> .github/workflows/upload-and-publish.yml container: ubuntu:18.04 files: /tmp/upload-and-publish.yml: \
+        on:
+          workflow_dispatch:
+            inputs:
+              branchName:
+                type: string
+                description: 'Branch to update in opbox-web'
+                required: false
+        jobs:
+          upload_and_publish:
+            name: Reuse workflow
+            uses: allegro-internal/opbox-component-template/.github/workflows/upload-and-publish-reusable.yml@v1
+            secrets: inherit
+            with:
+              branchName: ${{ "${{ github.event.inputs.branchName }}" }}
+changesetTemplate: title: LEGO-1717 \
+    to this project. If for any reason the current workflows are different than jobs in reusable workflows, please adapt the code or discard this changes.
+branch: feature/LEGO-1717-reusale-workflows commit: message: LEGO-1717 \
+changesetTemplate: title: LEGO-1717 \
+    to this project. If for any reason the current workflows are different than jobs in reusable workflows, please adapt the code or discard this changes.
+branch: feature/LEGO-1717-reusale-workflows commit: message: LEGO-1717 \
+Please re run the preview and let me know if it works?
+https://docs.sourcegraph.com/batch_changes/references/faq

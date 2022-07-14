@@ -1,0 +1,16 @@
+-   Application engineer: Michael Bali
+-   Customer: News Corp 
+-   Date: Jan 18, 2022
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph.slack.com/archives/C02JSU299NY/p1642512626027500
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is the structural search compatible with YAML files? for example, looking for a name inside the "properties" list?
+Adding the lang keyword informs the parser about language-specific syntax for comments, strings, and code. For example, lang:YAML This should be possible when you specify either the lang filter or the file filter in the search query. Your search query would look the following below depending on the structure of what you are looking for;
+    "properties": [...] lang:YAML 
+or
+    .yaml [$query]
+N/A 

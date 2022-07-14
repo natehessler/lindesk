@@ -1,0 +1,13 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Sourcegraph community
+-   Date: December 30, 2021
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1640856041136800
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+How to scale gitserver for Kubernetes
+Through overlays and customization found in the docs
+https://docs.sourcegraph.com/admin/install/kubernetes/configure

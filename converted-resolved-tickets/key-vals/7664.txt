@@ -1,0 +1,52 @@
+zendeskTicketNumber: 7664
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7664
+title: Reddit: pgsql still receiving connections after moving to external instance
+Application engineer: Jason Harris
+Customer: Reddit 
+Date: Apr 14
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1649954115088029
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/834
+Doc Update Link: n/a
+Summary: The customer moved their production instance onto a hosted Postgres instance a few weeks ago. Yesterday they noticed that the Sourcegraph Postgres dashboard was still reporting that the 
+-   I checked connections on the new Postgres instance... all are working as expected.
+-   Set 
+-   Restarted prometheus pods.
+-   Modified Prometheus config map
+        - kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+              - sourcegraph
+-   Visited https://
+    -   
+-   Asked customer to run kubectl get clusterrolebinding prometheus -o yaml to see if they run prometheus with a ClusterRole. They do not.
+-   Changed a mistake in their configmap
+          kubernetes_sd_configs:
+          - role: pod
+          - role: endpoints
+            namespaces:
+                names:
+                - sourcegraph
+changed to:
+          kubernetes_sd_configs:
+          - role: pod
+            namespaces:
+                names:
+                - sourcegraph
+-   Changes to configMaps were not taking effect for some reason.
+-   Checked 
+    -   List of targets:
+        -   
+        -   
+        -   
+        -   
+Ultimately, the customer was able to figure this out on their own. There were two issues. - Prometheus scraping was disabled in the entire production deployment because Staging was scraping metrics from Production. Once we re-enabled scraping metrics started appearing in the Production Prometheus. - They needed to add this config to the Staging Prometheus to prevent it from scraping the production namespace:
+    kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+            own_namespace: true
+This fixed the issue.

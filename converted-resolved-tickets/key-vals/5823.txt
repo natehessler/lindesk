@@ -1,0 +1,17 @@
+zendeskTicketNumber: 5823
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5823
+title: Twitter - Phabricator setup
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Jan 26
+Version: 3.36.1​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: n/a
+GitHub Issue Link: n/a
+Doc Update Link: https://github.com/sourcegraph/phabricator-extension
+Summary: Trying to install the phabricator extension for sourcegraph, but seeing this in the logs Access to fetch at 'https://sourcegraph-staging.twitter.biz/.assets/extension/css/style.bundle.css?v=0.0.0' from origin 'https://phabricator-staging.twitter.biz' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+"corsOrigin": "https://phabricator-staging.twitter.biz"
+the admin was able to figure this one out independently this is almost certainly an internal security restriction with our frontend routers. working through it now.
+https://github.com/sourcegraph/phabricator-extension

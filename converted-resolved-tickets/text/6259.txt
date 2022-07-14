@@ -1,0 +1,12 @@
+-   Application engineer: Warren Gifford
+-   Customer: Smartsheet 
+-   Date: Feb 15
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way to search/filter by repository size?  I read the docs and such but did not see anything.
+Hey @John Guin after looking around I've confirmed my suspicions there currently no search filter accessible that can filter results based on repo sizeThere does however exit a field that can be queries via the graphQL API but this is intended for internal use only -- and should only be accessible to a site admin -- the field is called RepositoryStats but as you can see in screenshots its got a big warning sign on it suggesting its for use by Sourcegraph internals (i.e. Sourcegraph itself consumes this)A regular flag for our search query language would be really cool though, flagging @Nate Maynard OOO 2/14-2/18 here for a feature request on this

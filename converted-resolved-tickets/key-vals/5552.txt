@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5552
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5552
+title: Question about upgrading one minor version at a time message in support-doordash
+Application engineer: Mariam Adedeji
+Customer: DoorDash 
+Date: Jan 12
+Version: 3.28.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C017J5QN4FJ/p1642046734011100
+GitHub Issue Link:
+Doc Update Link:
+Summary: Question about upgrading. So far, I know we need to upgrade one version by one version. Currently we are trying to change the way we install Helm chart. Previously, we were using kustomization however, we are shifting to Helm release. In this case, do I still need to upgrade one by one? Can I just install the latest version?
+Hello @misa.gohara, yes, I believe you still need to upgrade one minor version at a time. This is required for stability because whenever patch fixes are shipped in minor versions, if you choose to do a major version upgrade, you might end up missing the patch fixes that were applied in the minors

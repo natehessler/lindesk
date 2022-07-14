@@ -1,0 +1,19 @@
+zendeskTicketNumber: 7539
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7539
+title: New Slack message in support-glovo
+Application engineer: Stomzy Mwendwa
+Customer: Glovo 
+Date: Apr 7
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github
+Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1649404447748659
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Hi team, I wanted to ask about the following use case for recommendation on best practices.
+We're upgrading versions of our dependencies using batch changes and sometimes we find ourselves in the situation where one of the batch changes is not yet finished (i.e. some repos still haven't applied the change but others already applied it), and we have to bump the version again.
+Is it better to open a new batch change closing the previous one or update the spec of the old one (assuming the sourcegraph will be able to open new PRs for the ones that were already merged)?
+I lean towards the first option, which would allow us to keep better track of our history, and the only benefit I see to the second option is that I don't need to ~write~ copy&paste the previous spec (plus some minor modification)
+Hi @Gaston Fournier ,Happy to come back with an answer for you on what would be best practice in this scenario. Sorry for taking some time to get back, I had to double check and confirm a few things.When changes from your changesets have been merged and closed, and in this case, one of the changes is incomplete, it would be ideal to close that batch change. The benefit of this is that the change can't be updated or reopened anymore. After closing the change, these can be deleted if required.Since batch changes are uniquely identified by their name property in the namespace property in which they were created, you can edit any other part of the spec file and apply it again. When a new batch spec is applied to an existing batch change, the changesets are updated to the new desired state. So this should be fine, however, the batch spec file would be difficult to track changes on unless it's on source control. In this case, I think it would not be relevant (since it's just a batch spec file).In conclusion, best practice here would be just as you thought; to close the successful batch changes and apply a new one to the unfinished changesets in order to keep everything nice and tidy. If this was not a requirement, then option two would work.I hope this was of help to you. :smiley:
+https://docs.sourcegraph.com/batch_changes/how-tos/closing_or_deleting_a\_batch_change

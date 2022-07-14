@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5166
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5166
+title: Typeform - Missing Results in Filename Query - Symlinks
+Application engineer: Warren Gifford
+Customer: Typeform 
+Date: December 15, 2021
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link: 
+Doc Update Link: n/a
+Summary: A customer found that deploy.yaml files known to exist didn't appear in search
+This involved trying the searches and attempting to reproduce the issue once it was identified that indexes were up to date. The customer eventually realized that the files that didn't appear were all symlinks
+Filed public issue to track engineering improvements
+n/a
+n/a

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 4741
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4741
+title: booking.com question
+Application engineer: Stomzy Mwendwa
+Customer: Booking.com 
+Date: Nov 24
+Version: 3.13.1​
+Deployment: cluster
+External Services: GITLAB
+Auth Providers: builtin,gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1637763255099900
+GitHub Issue Link:
+Doc Update Link:
+Summary: Is there a limit in the size of files for those to be indexed? we have some JSON files of almost 5MB that should be indexed as they're needed for Bazel
+Hey @manuel.naranjo-booking.com. Happy to jump in and help answer your question for you.@Simon Waterer has provided some great insights and is correct. More on that here.Adding this into your site configuration will enable matching files to be indexed and searched no matter how big they are. For context, this will also increase the size of your indexes in zoekt-indexserver as well (in the event the files are quite numerous)You can of course, glob specific files by their names/paths to explicitly index them.Lastly, when you add this configuration to the site, please allow some time for reindexing for changes to take effect and the files to become searchable.If possible, you could a few hours for the reindex to occur and confirm that this was successful by going to the repo Settings \> Indexing page).When it's successful, searching these files will be available.I hope that helps answer your question.
+https://docs.sourcegraph.com/code_search/explanations/search_details
+https://docs.sourcegraph.com/admin/config/site_config

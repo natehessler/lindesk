@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Coupang 
+-   Date: June 2, 2022
+-   Version: ​3.39.1
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02NFUV7V9A/p1654248345344669
+-   GitHub Issue Link: N/A
+-   Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/36711
+Hi, team!. We have problems on integrating AWS RDS postgresql. Because AWS RDS aurora don't give the superuser permission to users, we need to set the sourcegraph's permission by manual. In case of CodeIntelDB, we use it below for permission. Is it enough? or Do we need to add other permission?
+Hello, Thanks for checking. I resolved this problem, that was a permission issue. When we use Postgresql of AWS RDS, AWS don't give the admin permission directly. So I moved my db account to rds_superuser group, and the database setting was finished successfully, and migrator pod working well.
+https://github.com/sourcegraph/sourcegraph/pull/36711

@@ -1,0 +1,12 @@
+-   Application engineer: Michael Bali
+-   Customer: runtastic GmbH 
+-   Date: June 19, 2022
+-   Version: 3.34.2​
+-   Deployment: docker-container
+-   External Services: BITBUCKETSERVER,GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C02GKJ51WK1/p1655718841465459
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I could need a little help with a structural search query, and I don't know if this should be possible. I'm trying to find cases where a method named 
+https://docs.sourcegraph.com/code_search/reference/structural 

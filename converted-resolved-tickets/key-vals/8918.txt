@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8918
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8918
+title: # New Slack message in support-grail-sourcegraph
+Application engineer: Alex Jean-Baptiste
+Customer: GRAIL 
+Date: June 13, 2022
+Version: 3.30.4​
+Deployment: Docker Compose
+External Services: AWSCODECOMMIT,OTHER,PHABRICATOR
+Auth Providers: builtin,http-header
+Slack Links: https://sourcegraph.slack.com/archives/C0375F8G3JA/p1655127219986089 https://sourcegraph.slack.com/archives/C022SPMNR0W/p1655338791642699?thread_ts=1655318605.871239&cid=C022SPMNR0W
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: FYI I increased the interval of indexing code Intel to once per 10 mins and sourcegraph seems to be error out during processing every once in a while. ​
+​I see now. Based on that information the issue most likely points to intermittent network issues (i.e. packet loss or bandwidth constraints) We have seen this with customers before. I'm going to collaborate with some colleagues working on the Code Intelligence team to see what we can do to address this.But ultimately this issue isn't stopping you from performing LSIF uploads, correct? It's just annoying that this happens about 1 in every 10 uploads? ​ //////////////////SOLUTION//////////////////////// ​ MinIO was discovered to be experiencing an OOM (Out of Memory Exception).
+N/A

@@ -1,0 +1,19 @@
+zendeskTicketNumber: 9482
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9482
+title: New Slack message in trial-sb
+Application engineer: Stomzy Mwendwa
+Customer: Simply Business 
+Date: July 4, 2022
+Version: ​3.40.2
+Deployment: Docker-compose
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C03KUN7SPRA/p1656938027116319
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Hi, i'm trying to create some insights.  How would i do the following query:
+1.  we have a .ruby-version in every repo, how would i write a query to do that. Example file contents:
+3.0.3
+2.  get the version of a gem used by apps from either Gemfile or Gemfile.lock. ie nokgiri version across all our apps
+@adam , got a couple of options for you to try out here for; file:.ruby-version.tt content:
+file:Gemfile nokogiri (

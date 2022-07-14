@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: Weride 
+-   Date: Feb 14
+-   Version: N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I'd like to know can we use a free plan in our company environment, If our users are more than 10 people?
+You can only use the free plan for a maximum of 10 users. if you would like to use sourcegraph for more than 10 users you would have to upgrade to either the Teams plan which allows up to 25 users or the Enterprise Plan which allows an unlimited number of users. To learn more about our Pricing kindly visit our pricing page here.
+https://about.sourcegraph.com/pricing/

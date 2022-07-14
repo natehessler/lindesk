@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Roblox Corporation 
+-   Date: Nov 16
+-   Version: 3.32.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there another way to handle permissions sync issues as a result of upgrading GHE?
+Ask affected users to logout and log back in OR
+stop sourcegraph instance while upgrading GHE, then start back up once GHE has upgraded.

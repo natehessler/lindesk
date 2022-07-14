@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4624
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4624
+title: Re: Re: Re: Re: Gitlab Repo Permissions
+Application engineer: Mariam Adedeji
+Customer: bet365 
+Date: Nov 17
+Version: 3.30.4​
+Deployment: docker-compose
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links:N/A
+GitHub Issue Link:N/A
+Doc Update Link:N/A
+Summary: An issue with GitLab repo permission
+I believe he needs to sign in against the GitLab he has access to so that Sourcegraph can map his user in GitLab to his user in Sourcegraph and bear in mind that these steps are not required at every sign in - only during the initial account creation. See https://docs.sourcegraph.com/admin/repo/permissions
+Also, in regards to the database table, could you kindly run the query select \* from repo_permissions; again after he has signed in through GitLab2, this is to help clarify if the permission would be set after the user mapping.

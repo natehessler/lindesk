@@ -1,0 +1,14 @@
+zendeskTicketNumber: 5230
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5230
+title: Subscription not displayed on the open source development
+Application engineer: Mariam Adedeji
+Customer: 
+Date: Dec 19
+Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1639883809113100
+GitHub Issue Link:
+Doc Update Link:
+ttps://github.com/sourcegraph/sourcegraph/issues/28987issue
+ need extra configuration to show the Subscription component?
+d try running this instead: SOURCEGRAPH_API_URL=https://sourcegraph.com sg start web-standalone
+s://github.com/sourcegraph/sourcegraph/blob/20a1003caf37c8275a853411e9923cdc7dc6cfd9/sg.config.yaml
+Summary: 

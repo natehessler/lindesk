@@ -1,0 +1,11 @@
+-   Application engineer: Giselle Northy
+-   Customer: Segment.io Inc 
+-   Date: Feb 22
+-   Version: 3.35.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Our monitoring of repos that haven't synced for x amount of hours (and should have) is not great. PR https://github.com/sourcegraph/customer/issues/766 Addressed in sourcegraph/sourcegraph

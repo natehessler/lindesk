@@ -1,0 +1,21 @@
+zendeskTicketNumber: 5422
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5422
+title: repositoriesMatchingQuery isn't returning the same amount of repos as the same query in code search and 403 from my code host when creating drafts
+Application engineer: Michael Bali
+Customer: Rapha 
+Date: Jan 6, 2021
+Version: ​3.34.1
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02NLUQG0E5/p1641490125004800
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The 
+-   maybe adding count all would help?
+-   Please can you try searching for this same repos using the src-cli, I want to know if you are able to access this repos using the cli. I am trying to rule out permissions issue with the src-cli. The customer confirmed it worked.
+-   The customer solved this bit of the problem. "I was searching for a keyword in the query which would have matched in 26 files but then in my step I was doing a further filter on the keyword. Basically the keyword has a : in it which the matching query didn't like but comby had no problem with finding"
+-   Key question I asked that helped solved the second issue was their SG version.
+-   we had some similar behaviour with draft on 3.34 . However, this was fixed in a newer version here.
+-   First issue : I was searching for a keyword in the query which would have matched in 26 files but then in my step I was doing a further filter on the keyword. Basically the keyword has a : in it which the matching query didn't like but comby had no problem with finding
+-   Second Issue: Upgrading the SG version to 3.35.1 fixed it.

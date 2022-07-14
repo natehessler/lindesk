@@ -1,0 +1,17 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Red Ventures 
+-   Date: Feb 7
+-   Version: 3.36.2​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Repos weren't syncing. This was a managed instance, FYI.
+Checked the usual suspect logs: sourcegraph-frontend-\*, repo-updater, gitserver...
+Checked their site-config, did a bit of JSON-format linting (removing commas that had nothing coming after them), and also added an email.address to remove some of the noise in the logs that had surfaced.
+Ultimately, the steps I took didn't do much, and I had actually been looking at their 2nd, healthy instance, instead of the one they had asked about (oops). But the \
+Crystal had done some work, but I neglected to get details of exactly what she had done...:
+> Side note - I implemented a change to the infrastructure that may actually resolve some (all?) of the timeout issues they were seeing. The monitoring so far looks much, much better - Crystal
+But it seemed to have solved the issue. Yay!

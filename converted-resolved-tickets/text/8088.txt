@@ -1,0 +1,12 @@
+-   Application engineer: Ben Gordon
+-   Customer: Hudson River Trading LLC 
+-   Date: May 9
+-   Version: 3.28.0​
+-   Deployment: docker-compose
+-   External Services: GITLAB,OTHER
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C01134Y4D5H/p1652127492806269
+-   customer reports difference in results when running type:symbol queries in src-cli vs sourcegraph.com
+-   run a series of smaller queries to determine where the interruption exists
+-   A teammate suggests that this could be a result of our streaming API
+-   our streaming API serves different results than our paginated API, the user fetches his type:symbols query successfully using src-cli when adding the --streaming flag

@@ -1,0 +1,18 @@
+-   Application engineer: Warren Gifford
+-   Customer: Dropbox 
+-   Date: Nov 18
+-   Version: 3.29.1​
+-   Deployment: docker-compose
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links: 
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a this is purposefully omitted from docs for security reasons
+> How can I view redacted content from codehost config json?
+You can query the database directly for the configurations
+warrengifford@Warrens-MacBook-Pro ~ % kubectl -n ns-sourcegraph exec -it pgsql-84c986dbc8-55w7x -- psql -U sg
+Defaulted container "pgsql" out of: pgsql, pgsql-exporter, correct-data-dir-permissions (init)
+psql (12.6)
+Type "help" for help.
+sg=
+sg-

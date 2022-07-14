@@ -1,0 +1,11 @@
+-   CSE: Alex Jean-Baptiste
+-   Customer: Reddit 
+-   Date: 28 October 2021
+-   Version: ​3.32.0
+-   Deployment: Kubernetes
+-   External Services: Github
+-   Auth Providers: Built-in, Github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1633630718247000
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I inquired if the customer had Github webhooks set up, they did not. I asked for a screenshot of the github-proxy service from the Grafana dashboard. I asked the customer to try opening the Batch Changes URL in the Safari browser and the error persisted. I recreated the issue by applying 38,000+ changes in one batch change and found that memory issues occurred in both Safari and Chrome browsers but I did not experience the "auto-refresh" behavior that the customer experienced. I communicated the inability to replicate to the customer and they communicated that they have not experienced the issue since but will be on the lookout if it occurs again.

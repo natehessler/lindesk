@@ -1,0 +1,19 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Snapdocs Inc 
+-   Date: Jan 6
+-   Version: 3.21
+-   Deployment: k8s
+-   External Services: None known
+-   Auth Providers: None known
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C029VE4A12R/p1641506269005000), [CE generated request](https://sourcegraph.slack.com/archives/C01HW836940/p1641830390006600)
+-   GitHub Issue Link: [GitHub Issue (Helm)](https://github.com/sourcegraph/customer/issues/626)
+-   Doc Update Link: None
+1.) Any ideas on backing up data in EFS volume?
+2.) How to upgrade while using Helm?
+1.) From Kelvin:
+> I don't seen any past case history that would suggest any unexpected turbulence with doing a EFS volume backup and then upgrading, in case you wanted extra confidence. So it might be as isolated of an operation as just following Amazon's guide
+From Emily C.:
+> To add to what Kelvin mentioned, the backups that we're most concerned about would be of the databases---we outline more info here: https://docs.sourcegraph.com/admin/install/migrate-backup (Specifically the postgres database, as it can't otherwise be restored.)
+2.) Uhhh: [GitHub](https://github.com/sourcegraph/customer/issues/626)
+Ultimately, it ended [here](https://sourcegraph.slack.com/archives/C029VE4A12R/p1642107541024400?thread_ts=1641506269.005000&cid=C029VE4A12R), and turned into something else, [here](https://sourcegraph.slack.com/archives/C029VE4A12R/p1642097846018900), which had its own issue filed, [here](https://github.com/sourcegraph/customer/issues/630). Also related to Helm.
+Error: UPGRADE FAILED: cannot patch "sourcegraph-frontend" with kind Service: Service "sourcegraph-frontend" is invalid: spec.ports\[0\].nodePort: Forbidden: may not be used when 'type' is 'ClusterIP'

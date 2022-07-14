@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: Databricks 
+-   Date: Feb 22
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1645581608150879
+-   GitHub Issue Link: https://github.com/sourcegraph/lsif-java/issues/399
+-   Doc Update Link: N/A
+Case class "Find References" includes ALL case class definitions in precise code intelligence. This could have been due to the fix in
+An [rfh](https://github.com/sourcegraph/lsif-java/issues/399) was created.
+The code intel team triggered a v0.7.6 release with the bugfixes for this issue and a few other case class-related issues (see \[
+N/A
+N/A

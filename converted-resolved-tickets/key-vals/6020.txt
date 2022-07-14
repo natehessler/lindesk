@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6020
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6020
+title: Workiva Question externalize Code Insights DB Database
+Application engineer: Giselle Northy
+Customer: Workiva 
+Date: Feb 3
+Version: 3.35.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/CTJUDV6JH/p1643919339472869
+GitHub Issue Link:
+Doc Update Link:
+Summary: I am looking into moving the in-cluster DBs to external ones using https://docs.sourcegraph.com/admin/external_services/postgres, It says that you guys don't support codeinsights-db to be run externally, can you guys elaborate?
+The current idea would be to run an EC2 instance with a timescaledDB AMI
+Turns out that can can externalize the code insights db but only on to database providers that support TimescaleDB - of which Amazon RDS does not.
+The long answer is we have a plan to start migrating away from the use of TimescaleDB specific tables starting in 3.37. This will allow users to remove the TimescaleDB image manually if they choose to do so. This will be a manual step in 3.37, and will become automated in 3.38, after which point we will have officially retired TimescaleDB and users will be able to freely use any database solution that supports our standard Postgres installation.

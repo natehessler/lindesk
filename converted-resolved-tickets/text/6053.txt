@@ -1,0 +1,14 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: 
+-   Date: Feb 5
+-   Version: ​3.36.3
+-   Deployment: Sourcegraph.com
+-   External Services:
+-   Auth Providers:
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer was curious as to whether they could be able to search for metadata, specifically, language statistics of all GitHub repos in existence with JSON files( including forked and archived repos).
+As per this query I tried: https://sourcegraph.com/api/console?\_ga=2.41833442.1736138375.1644234635-1100925056.1641909161
+Passing one huge repository, such as Sourcegraph/Sourcegraph, resulted in a 30 to 40 second wait to retrieve language statistics. Searching for all GitHub repos of course would timeout because the query is extremely expensive and really not feasible to try and achieve.
+N/A 

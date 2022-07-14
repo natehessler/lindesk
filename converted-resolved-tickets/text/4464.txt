@@ -1,0 +1,12 @@
+-   CSE: Michael Bali
+-   Customer: 
+-   Date: Nov 7, 2021
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I would like to delete my account since I am not using it.
+Did a search using the user's email address Found a username for the email address. verified with the user before taking further actions The user confirmed and I deleted it.

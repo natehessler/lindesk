@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Netflix 
+-   Date: Dec 10
+-   Version: 3.34.2​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+-   Slack Links: https://sourcegraph.slack.com/archives/C012V43N8E7/p1639156146085400
+-   GitHub Issue Link:
+-   Doc Update Link:
+We are doing work to remediate CVE-2021-44228 (which is related to the Java log4j library) and wanted to confirm if any of the containers that run as part of Sourcegraph are Java-based?
+No, none of the containers that make up sourcegraph are java based.
+Checked all relevant repos for java language

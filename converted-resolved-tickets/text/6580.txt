@@ -1,0 +1,20 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Booking.com 
+-   Date: Mar 1
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1646213111155159
+-   GitHub Issue Link:
+-   Doc Update Link:
+While looking into the cause of this, their two searcher pods also got evicted for using which look like it was using much local storage and it kept on getting worse.
+I requested the logs from this service as well as the resources that have been assigned to it.
+resources: limits: cpu: "2" ephemeral-storage: 26G memory: 2G requests: cpu: 500m ephemeral-storage: 25G memory: 500M
+Status: Failed Reason: Evicted Message: Pod ephemeral local storage usage exceeds the total limit of containers 26G.
+Based on what I picked up from the engineers, I suggested this to them:
+The best thing to do is to create a gap: make the ephemeral storage setting larger than MaxCacheSizeBytes. The cache eviction process runs every ten seconds, so the pods won't be evicted as long as the amount of data written in that window is smaller than empeheral_storage - MaxCacheSizeBytes. A good starting point for the gap's size is 2x what the working copy size of your largest repository is. (This doc could help you calculate this).
+We're also wondering if this your team uses code insights? If so, that might be another source of load to the searcher (more search results that request varied revisions of a given repository -\> more entries in searcher's cache -\> more evictions). In this case, the recommendation would be the same (create a gap), but the gap might need to be larger
+They have already extended that gap and pushed the storage up by a lot, so they will monitor.
+Searcher pods getting evicted
+The best thing to do is to create a gap: make the ephemeral storage setting larger than MaxCacheSizeBytes. The cache eviction process runs every ten seconds, so the pods won't be evicted as long as the amount of data written in that window is smaller than empeheral_storage - MaxCacheSizeBytes. A good starting point for the gap's size is 2x what the working copy size of your largest repository is. (This doc could help you calculate this).

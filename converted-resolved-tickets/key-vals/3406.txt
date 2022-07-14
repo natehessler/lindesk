@@ -1,0 +1,16 @@
+zendeskTicketNumber: 3406
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3406
+title: Batch Changes Permission Sync Issue
+CSE: Michael Bali
+Customer: SafetyCulture 
+Date: 28 October 2021
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02F0FUKH5E/p1632110147011800
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer was testing batch changes, got an error 
+Did some investigation, Can you modify your token by unchecking everything in the repo scope and check/enable the root scope admin.org and write: discussion and retry? We use the global token for changeset syncing, you would need to configure the "Global service account token" with the right credentials. Using this documentation as a guide. What you are currently making use of is a personal access token described further up the page.
+We use the global token for changeset syncing, you would need to configure the "Global service account token" with the right credentials. Using this documentation as a guide. What you are currently making use of is a personal access token described further up the page. The customer confirmed that it resolved the issue.

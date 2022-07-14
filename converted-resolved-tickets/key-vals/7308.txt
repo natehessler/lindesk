@@ -1,0 +1,27 @@
+zendeskTicketNumber: 7308
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7308
+title: New Slack message in support-mercadolibre
+Application engineer: Riana Shahid
+Customer: MercadoLibre 
+Date: Apr 1
+Version: 3.29.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1648835178010769
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/804
+Doc Update Link: n/a
+Summary: Customer thought that repo permissions were not syncing
+Customer had to set 
+    SELECT
+      COUNT(repo.name)
+    FROM
+       repo
+       LEFT JOIN repo_pending_permissions ON repo.id = repo_pending_permissions.repo_id
+       LEFT JOIN repo_permissions ON repo.id = repo_permissions.repo_id
+    WHERE
+      repo.private
+      AND repo.deleted_at IS NULL
+      AND ARRAY_LENGTH(repo_pending_permissions.user_ids_ints, 1) = 0
+      AND ARRAY_LENGTH(repo_permissions.user_ids_ints, 1) = 0;
+This ticket got p1 status because they wouldn't move forward to onboard their users until this was resolved

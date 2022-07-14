@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7705
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7705
+title: DWP Digital Question
+Application engineer: Stomzy Mwendwa
+Customer: GOV.UK 
+Date: Apr 19
+Version: 3.37.0​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1650377688540479
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: We've recently brought our Sourcegraph back online after Kubernetes cluster issues by restoring codeintel-db and pgsql volumes per https://docs.sourcegraph.com/admin/install/migrate-backup
+To get back your old insights, re-attaching the previous PVC for should be able to do the trick.
+https://docs.sourcegraph.com/admin/install/migrate-backup

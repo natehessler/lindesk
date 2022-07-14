@@ -1,0 +1,22 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Carrier 
+-   Date: May 11, 2022
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: AWSCODECOMMIT,GITHUB,OTHER
+-   Auth Providers: builtin,saml
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Customer received Error Validating SAML assertions. Try signing in again. If the problem persists, a site admin must check the configuration
+In addition, their Okta SSO auth flow was pointing from prod environment to Dev.
+Hi Siva, Hi Naveen,
+I think I may have found the cause to the re-route to the prod Okta sign on page.
+Mike graciously shared with me both configs for dev and prod and I was able to see what the issue is associated with. Let's have a look see, shall we?
+Prod: "auth.providers": \[ { "type": "builtin" }, { "allowSignup": true, "configID": "okta", "displayName": "Okta", "identityProviderMetadataURL": "https://sso.apps.carrier.com/app/exk5vilk929T7wkBj4x7/sso/saml/metadata", "type": "saml" } \], "externalURL": "https://sourcegraph.innersource.carrier.com (https://sourcegraph.innersource.carrier.com/)"
+Dev: "auth.providers": \[ { "type": "builtin" }, { "allowSignup": true, "displayName": "Okta", "identityProviderMetadataURL": "https://sso.apps.carrier.com/app/exk5vilk929T7wkBj4x7/sso/saml/metadata", "type": "saml" } \], "externalURL": "http://10.207.10.184:3080 (http://10.207.10.184:3080/)"
+What caught my eye is the MetadataURL match on both configurations and that makes sense why on dev, the Okta SSO page for prod was popping up. The config is also missing the "configID": "okta", section. We should add this as well.
+Luckily it's a quick fix, using the steps in our docs. We could, (if it's not created yet) create a separate app integration with it's own SSO flow specifically for dev and pass this along in the MetadataURL. This of course will be pointing to "http://10.207.10.184:3080.
+Would you mind if we can do a quick password reset and send that over to you to help fast track the process on your side?
+Happy to help out with further information if you'd like.
+N/A

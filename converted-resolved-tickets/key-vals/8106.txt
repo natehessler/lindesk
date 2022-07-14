@@ -1,0 +1,15 @@
+zendeskTicketNumber: 8106
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8106
+title: Realtor.com - search discrepancy
+Application engineer: Warren Gifford
+Customer: realtor.com 
+Date: May 10
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: I see inconsistencies in the searches, but I don't know if there is a SourceGraph issue or deployment configuration setup.For example: A repo org/some-repo has a file called yarn.lock. I can see the file from Github has rdc-app-shell in the file, but when searching repo:\
+Hey @jt.archie @johan.muedsam happy to help check out the inconsistencies your you're observing here between github and SourcegraphThere is indeed a limit to the size of files that Sourcegraph will index by default. Theres a little bit about this here. TL;DR site admins can explicitly specify which large files to index in the site config with the search.largeFiles setting.I'm not sure if this is the problem you're running into but its definitely a possibility, let me know what you think!

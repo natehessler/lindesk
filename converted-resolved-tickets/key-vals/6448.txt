@@ -1,0 +1,26 @@
+zendeskTicketNumber: 6448
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6448
+title: Code Insights db server refused TLS connection
+Application engineer: Quinlan Sparks
+Customer: Neo Financial 
+Date: Feb 23
+Version: 3.37
+Deployment: Docker-Compose
+External Services: AWS
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02QAEHR9EG/p1645646441023619 https://sourcegraph.slack.com/archives/C02QAEHR9EG/p1645647790523349
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/733
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/31948
+Summary: At first the customer was running into the expected issues with attempting to upgrade directly from 3.35 to 3.37. It was a new instance, so they dumped everything and started fresh with a clean installation of 3.37. That resolved the migration problem, but surfaced a refused TLS connection to the Code Insights database - which was odd, considering the customer and I would both have expected the external frontend and Code Intelligence databases to have trouble connecting if there was going to be a problem, not the internal Code Insights db.
+I first noticed that the 
+Delivery was able to reproduce the behavior by setting up a local pgsql databse that enforces SSL, then setting the 
+Setting 
+After ensuring that the 
+- CODEINSIGHTS_PGHOST=codeinsights-db
+- CODEINSIGHTS_PGPORT=5432
+- CODEINSIGHTS_PGUSER=postgres
+- CODEINSIGHTS_PGPASSWORD=password
+- CODEINSIGHTS_PGDATABASE=postgres
+- CODEINSIGHTS_PGSSLMODE=disable
+https://docs.sourcegraph.com/admin/external_services/postgres
+failed to initialize insights: Failed to connect to codeinsights database: DB not available: server refused TLS connection

@@ -1,0 +1,48 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Snapdocs Inc 
+-   Date: Mar 10
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C029VE4A12R/p1646941079822639?thread_ts=1646940663.902629&cid=C029VE4A12R)
+-   GitHub Issue Link: Many related ones, shared below
+-   Doc Update Link: None
+During the login flow via GitHub (and that I would guess is possible via any external auth service e.g. GitLab), users report they land on 
+-   Tried getting sourcegraph-frontend-\* logs, but they don't report any useful information
+-   Tried to grab info about the users to differentiate them, but that didn't report any useful differentiating information. Query in case you curious:
+    query{
+     users{
+      nodes {
+        id,
+        username,
+        displayName,
+        url,
+        builtinAuth,
+        siteAdmin,
+        organizations{
+          nodes {
+            id,
+            name,
+            displayName
+          }
+        },
+        emails {
+          email,
+          verificationPending
+        }
+      }
+    }
+    }
+-   Checked 
+Doing research, it's probably just a versioning issue. Lots of reports of this have been made before. They seemed like old'ish issues. Hopefully they get resolved by an upgrade. The history of reports: - https://github.com/sourcegraph/sourcegraph/issues/3917
+-   https://github.com/sourcegraph/sourcegraph/issues/2263
+-   https://github.com/sourcegraph/customer/issues/674 (customer repo)
+-   https://github.com/sourcegraph/customer/issues/105 (customer repo)
+-   https://github.com/sourcegraph/sourcegraph/pull/14610
+**Recommended an upgrade. No feedback yet if it actually succeeds, but customer appreciated the recommendation.**
+The most pertintent: 
+Others that one might run into while testing, but that do not come up for this ticket: - 
+    oauth2: error in token fetch response: bad_verification_code
+    error_description: The code passed is incorrect or expired
+Seems to happen if refreshing the /.auth/github/callback/code=\

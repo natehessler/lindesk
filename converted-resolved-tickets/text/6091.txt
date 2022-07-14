@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: The Motley Fool 
+-   Date: Feb 8
+-   Version: 3.36.2​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C020ZQA5MH8/p1644333181382159
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Are there any known issues from Sourcegraph's side when using Github Enterprise Cloud's "enterprise" setup? Right now, we have a single org setup for Sourcegraph (themotleyfool) and I'm very tempted to upgrade our account to the "enterprise" account (detailed here). I've spoken with Github support and AFAIK, the org themotleyfool will continue to exist and access to it through PAT will not change. It appears to be around having multiple orgs under one set of management for SSO and compliance.
+Thanks for the response, @tushon!  After looking through the data on our side Sourcegraph at this time has no known issues with interacting with GitHub Enterprise Cloud's enterprise setup. (edited)
+https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-enterprise-accounts

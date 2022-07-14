@@ -1,0 +1,18 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: Lyft, Inc. 
+-   Date: Feb 14
+-   Version: 3.36.3
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0174NVAREV/p1644854666651859 https://sourcegraph.slack.com/archives/C0174NVAREV/p1644854767124999
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer was experimenting with Code Insights and encountered two issues - two labels were swapped on one graph, and there were intermittent issues with displaying more than one or two insights.
+Inability to display more than two insights: I advised the customer to increase 
+Time series label swap: This was a known and addressed issue, which should be solved by upgrading from version 3.33 to 3.36. The customer also asked to clarify if they needed to upgrade one version at a time.
+Increasing 
+The upgrade resolved the label swap, as anticipated.
+https://docs.sourcegraph.com/admin/config/postgres-conf
+https://docs.sourcegraph.com/admin/updates
+https://github.com/sourcegraph/sourcegraph/issues/27879

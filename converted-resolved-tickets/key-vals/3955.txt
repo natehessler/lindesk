@@ -1,0 +1,18 @@
+zendeskTicketNumber: 3955
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3955
+title: sourcegraph oss setup
+CSE: Warren Gifford
+Customer: 
+Date: 28 October 2021
+Version: ​n/a
+Deployment: oss development
+External Services: n/a
+Auth Providers: n/a
+Slack Links: (https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1634860582013800?thread_ts=1634674087.045500&cid=C02BG0M0ZJ7)\[https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1634860582013800?thread_ts=1634674087.045500&cid=C02BG0M0ZJ7\]
+GitHub Issue Link:
+Doc Update Link:
+Summary: This was a hacktober fest open source setup question. In particular the user encountered troubles starting up the db 1) The customer attempted to initialize and access the database from inside a vscode terminal which docker does not have access to by default 2) The user had not installed postgres and redis on their local system 3) Various instructions were required to troubleshoot initializing the local database
+Attempt to get psql running locally and follow error trails.
+The user reinstalled postgres and followed the correct procedure to initialize a local database. They also under advisement ceased to use the vscode terminal to run containerized dbs
+createuser: error: connection to server at "localhost" (::1), port 5432 failed: FATAL: role "sourcegraph" does not exist
+createdb: error: connection to server at "localhost" (::1), port 5432 failed: server closed the connection unexpectedly This probably means the server terminated abnormally before or while processing the request.

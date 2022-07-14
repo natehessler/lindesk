@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5885
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5885
+title: BitBucke Data Center support
+Application engineer: Gabe Torres
+Customer: Pandora Media, Inc. 
+Date: Jan 28
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1643400153349549
+GitHub Issue Link:
+Doc Update Link:
+Summary: Have you guys ever tested this in Bitbucket Data Center? 
+We are currently validating support for Bitbucket Data Center as of January 2022. There are similarities between BBDC and Bitbucket Server but they have not been tested. https://github.com/sourcegraph/sourcegraph/issues/30175
+https://docs.sourcegraph.com/integration/bitbucket_server

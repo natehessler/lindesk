@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5591
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5591
+title: Is there a way to see the repositories that got caught in the repositoriesMatchingQuery but did not result in changeset spec ?
+Application engineer: Michael Bali
+Customer: RVU 
+Date: Jan 13, 2022
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C01L8M80YAY/p1642156179011300
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: I want to know the difference between the repos that were produced by repositoriesMatchingQuery and the repos where changes were applied.For example, say my repositoriesMatchingQuery returned 60 repos but after running through the steps, only 55 repos had changes applied.Is there a way to find the names of the 5 repos that didn't get changed applied?
+I just confirmed, at the moment there isn't any definite way to view this, However, this feature would be available when the new server-side batch changes get to General availability.
+N/A 

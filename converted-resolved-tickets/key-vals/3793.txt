@@ -1,0 +1,16 @@
+zendeskTicketNumber: 3793
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3793
+title: A Search Query to get a result of bitbucket repos and their owners.
+CSE: Michael Bali
+Customer: Atlassian 
+Date: 28 October 2021
+Version: 3.29.1​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1634018321031800
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Customer wants to fetch the repositories and their owners through the SourceGraph query itself, which I can export later to have a 1:1 mapping between repo and owner.
+At the moment, The author:
+A feature request is to be created by the CE to get the prooduct team to look into the possibilities of fetching bitbucket owners using a search query.

@@ -1,0 +1,21 @@
+-   Application engineer: Michael Bali
+-   Customer: Allegro 
+-   Date: June 8, 2022
+-   Version: ​3.41.0
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1654761580340619
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/1049
+-   Doc Update Link: N/A
+After migrating their Sourcegraph's PostgreSQL databases (pgsql, codeintel-db, codeinsights-db) from Kubernetes to a dedicated PostgreSQL cluster they're experiencing some performance problems on some pages - especially on the 
+-   Requested logs from the frontend
+-   I see that both the [event logs](https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/internal/database/event_logs.go?L252:113) query and [webhook logs](https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/internal/database/webhook_logs.go?L237:30) you see are from the database as referenced in the linked LOC. Unfortunately, we could not get anything tangible from the Postgres logs.
+-   I went on a call to understand how their external Db is set up and I noticed the UI performance is very slow as it takes a long time for the page to load completely
+-   It's important to note that there are no slow responses while performing code search.
+-   Did the customer already run 
+-   Are there any connection limits or other quotas imposed by their cluster?
+The overall connection limit was set to 2000, they had their database user's connections limit set only to 50. After increasing this limit, performance seems to be better and more stable so far.
+    {“SeverityText”:“WARN”,“Timestamp”:1654759322458144650,“InstrumentationScope”:“http”,“Caller”:“trace/httptrace.go:261”,“Function”:“[github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1](http://github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1)”,“Body”:“slow http request”,“Resource”:{“service.name”:“frontend”,“service.version”:“3.40.1",“service.instance.id”:“sourcegraph-frontend-8d6d545fc-h8bsw”},“Attributes”:{“route_name”:“graphql: HomePanelsQuery”,“method”:“POST”,“url”:“/.api/graphql?HomePanelsQuery”,“code”:200,“duration”:24.241706331,“x_forwarded_for”:“172.26.137.227”,“user”:1}}
+    {“SeverityText”:“WARN”,“Timestamp”:1654760315911094947,“InstrumentationScope”:“http”,“Caller”:“trace/httptrace.go:261”,“Function”:“[github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1](http://github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1)”,“Body”:“slow http request”,“Resource”:{“service.name”:“frontend”,“service.version”:“3.40.1",“service.instance.id”:“sourcegraph-frontend-8d6d545fc-h8bsw”},“Attributes”:{“route_name”:“graphql: HomePanelsQuery”,“method”:“POST”,“url”:“/.api/graphql?HomePanelsQuery”,“code”:200,“duration”:60.057252496,“x_forwarded_for”:“172.26.130.219”,“user”:3}}
+    {“SeverityText”:“WARN”,“Timestamp”:1654778824955400773,“InstrumentationScope”:“http”,“Caller”:“trace/httptrace.go:261”,“Function”:“[github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1](http://github.com/sourcegraph/sourcegraph/internal/trace.HTTPMiddleware.func1)”,“Body”:“slow http request”,“Resource”:{“service.name”:“frontend”,“service.version”:“3.40.1",“service.instance.id”:“sourcegraph-frontend-8d6d545fc-h8bsw”},“Attributes”:{“route_name”:“graphql: ExternalServicesScopes”,“method”:“POST”,“url”:“/.api/graphql?ExternalServicesScopes”,“code”:200,“duration”:73.564574982,“x_forwarded_for”:“172.26.1.142”,“user”:3}}

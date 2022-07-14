@@ -1,0 +1,13 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Lockheed Martin Space Systems 
+-   Date: Mar 7
+-   Version: ​3.36.3
+-   Deployment: kubernetes
+-   External Services: gitlab
+-   Auth Providers: openid
+-   Slack Links: https://sourcegraph.slack.com/archives/C030CPM2ELR/p1646680932663689
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/685
+-   Doc Update Link:https://github.com/sourcegraph/sourcegraph/pull/33150
+​The customer attempted to use sudo-level access token permissions to set repository permissions for their Sourcegrph instance and received the following error. ​ Did not find authentication provider matching type openidconnect and configID rms-plusplus-sourcegraph. Check the site configuration to verify that an entry in auth.providers matches the type and configID.
+​After a customer call with SWE Asdine El Hrychy and CE Leo Abreu, it was discovered that theconfigID field was missing from the customer's openID auth provider.
+https://docs.sourcegraph.com/admin/auth

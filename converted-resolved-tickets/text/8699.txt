@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: GRAIL 
+-   Date: June 2, 2022
+-   Version: 3.30.4​
+-   Deployment: kubernetes
+-   External Services: AWSCODECOMMIT,OTHER,PHABRICATOR
+-   Auth Providers: builtin,http-header
+-   Slack Links: https://sourcegraph.slack.com/archives/C0375F8G3JA/p1654235807763209
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Hey folks, is it possible to turn on auto indexing for our instance? https://docs.sourcegraph.com/code_intelligence/explanations/auto_indexinghttps://docs.sourcegraph.com/code_intelligence/explanations/auto_indexing\>
+Yes it's possible. Auto indexing is still experimental. However, this doc explains how to get it all setup on your instance
+https://docs.sourcegraph.com/code_intelligence/how-to/enable_auto_indexing

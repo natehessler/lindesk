@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6691
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6691
+title: Databricks - limit extensions
+Application engineer: Warren Gifford
+Customer: Databricks 
+Date: Mar 7
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: How can @william.chau best ensure only extensions created by Sourcegraph are accessible within their instance?
+Hey @william.chau I did some investigation and found that at present, the best option here is unfortunately to use the extensions.allowRemoteExtensions option and manually write out the list of Sourcegraph extensions (with all of our language extensions this comes out to something around 40-60)That said I know this is something that has come up before, and that our product team is aware of this as an inconvenience. @Nate Maynard could you please initiate another feature request to allow a site admin option to only allow extensions published by Sourcegraph?
+https://docs.sourcegraph.com/admin/extensions

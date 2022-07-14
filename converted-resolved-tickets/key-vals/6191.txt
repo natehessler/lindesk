@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6191
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6191
+title: How to collapse or hide the left nav in Sourcegraph UI
+Application engineer: Michael Bali
+Customer: Tableau 
+Date: Feb 10, 2022
+Version: 3.36.3​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C011899KB6U/p1644539814562649
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Is there a way to hide or collapse the left nav in the latest sourcegraph UI after you do a search?
+There is a collapsible arrow on the left nav, you can use it to collapse all the nav. In addition, you can decide whether the sidebar on the repo view should be open by default or not just by setting at the global level (by site admins), the organization level (by organization members), and at the individual user level. 
+This hides the sidebar in the repo view after search. I hope this answers your question?
+N/A

@@ -1,0 +1,12 @@
+-   Application engineer: Ben Gordon
+-   Customer: Pandora Media, Inc. 
+-   Date: May 19, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+-   How to execute structural search from src-cli
+-   Add count:all to ensure all results are returned (structural search behaves differently with the count: flag than other search types

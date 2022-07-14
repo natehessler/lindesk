@@ -1,0 +1,18 @@
+zendeskTicketNumber: 5193
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5193
+title: lsif-java - protobuff
+Application engineer: Warren Gifford
+Customer: Databricks 
+Date: Dec 16
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: A customer running lsif-semanticdb on some scala repos ran into troubles, with a whiny compiler
+Confirm compiler command, as well as java build system configuration
+It appears to be the case that a file was tagged with semanticdb when it was not a semantic db file. protobug is used to mock semanticdb files in lsif-java
+    eg Generating LSIF... [
+    processedcom.google.protobuf.InvalidProtocolBufferException: Protocol message contained an invalid tag (zero).

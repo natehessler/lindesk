@@ -1,0 +1,40 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: Roblox Corporation 
+-   Date: Feb 15
+-   Version: 3.35.1
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01MX8ATDNY/p1644961026576259
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/717
+-   Doc Update Link: N/A
+The customer was testing their ability to complete Batch Changes on one of their development machines, an M1 Macbook. Running 
+Initial [research](https://toolspond.com/fix-transport-endpoint-is-not-connected/) indicated that the transport endpoint is not connected element of the error is something that can often be resolved just by rebooting the computer or unmounting the virtual file system for a while. I asked them to try applying the Batch Change again, just to make sure the error was consistent.
+The error was not consistent! With the second attempt, it made it further before getting stuck on one of their repos.
+I reached out to the Batch Changes team, who were able to confirm that the initial error was a bug in Docker Desktop for Mac, but the second was something they'd seen before and, unfortunately, have not found a way to prevent yet.
+I pointed the customer toward Server-side Batch Changes as an experimental workaround, and passed along some commands from the Batch Changes team to confirm that this was, in fact, the same bug they had seen before. The customer thanked me for the update, and, at time of writing, has not reported any further issues with Batch Changes hanging on a repo. They will be addressing the Docker Desktop for Mac bug with their support contact at Docker and are satisfied with how things have settled here.
+https://docs.sourcegraph.com/batch_changes/references/requirements
+https://docs.sourcegraph.com/batch_changes/explanations/server_side
+Initial error:
+github.rbx.com/Roblox/ml-client: Done!
+github.rbx.com/Roblox/nchau-sandbox: docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/1299701858: transport endpoint is not connected.
+github.rbx.com/Roblox/moderation-decision-service: getting diff produced by step: git diff:
+docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/src-run-911990573: transport endpoint is not connected.
+See 'docker run --help'.: Docker output:
+docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/src-run-911990573: transport endpoint is not connected.
+See 'docker run --help'.: exit status 125
+github.rbx.com/Roblox/mtambawala-sandbox: docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/3326438145: transport endpoint is not connected.
+github.rbx.com/Roblox/moderation-policy: getting diff produced by step: git diff:
+docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/src-run-3481196598: transport endpoint is not connected.
+See 'docker run --help'.: Docker output:
+docker: Error response from daemon: invalid mount config for type "bind": stat /host_mnt/private/tmp/src-run-3481196598: transport endpoint is not connected.
+See 'docker run --help'.: exit status 125
+Second error(s)
+✅ Found 471 workspaces with steps to execute
+✅ Found 0 cached changeset specs; 471 tasks need to be executed
+⠼  Executing... (93/471, 1 errored)  █████████████████████████████████████████▏
+⠦  Executing... (94/471, 2 errored)  █████████████████████████████████████████▌
+⠧  Executing... (95/471, 3 errored)  ██████████████████████████████████████████
+⠧  Executing... (96/471, 4 errored)  ██████████████████████████████████████████▍
+─ 
+15h46m57s

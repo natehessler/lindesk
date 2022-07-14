@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Twitter 
+-   Date: Dec 9
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link: \[https://github.com/sourcegraph/customer/issues/525
+-   Doc Update Link:
+This was about checking out resource allocations for Twitters monorepo
+After review of the resource allocations provided I believe the instance is correctly provisioned
+\[https://docs.sourcegraph.com/admin/install/kubernetes/scale

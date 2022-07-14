@@ -1,0 +1,16 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Goldman Sachs 
+-   Date: May 20, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer received this error message when performing an upgrade from 3.36 to 3.37. FATA\[0000\] failure: {"status":"failure","reason":"failed to process signing request: failed to process artifact cimage:registry.aws.site.gs.com:443/dx/code-search-tools/sourcegraph/sourcegraph/migrator:release-3.37.0: failed to obtain manifest for image \[registry.aws.site.gs.com:443/dx/code-search-tools/sourcegraph/sourcegraph/migrator:release-3.37.0\]: failed to perform bearer auth query with registry https://registry.aws.site.gs.com:443/v2/dx/code-search-tools/sourcegraph/sourcegraph/migrator/manifests/release-3.37.0; status code is 404"}
+Also, their remote published extensions weren't showing up after publishing.
+The error is related to the migrator service which was introduce in 3.37.
+We updated the frontend yaml with this: https://github.com/sourcegraph/deploy-sourcegraph/blob/v3.37.0/configure/migrator/migrator.Job.yaml
+On offline extensions, the problem was just the license key wasn't applied on dev.
+N/A

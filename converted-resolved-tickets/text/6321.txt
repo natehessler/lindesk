@@ -1,0 +1,21 @@
+-   Application engineer: Michael Bali
+-   Customer: Hidglobal 
+-   Date: Feb 16, 2022
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customer is trying to install sourcegraph on CentOS and it keeps terminating.
+-   Are you running this installation on an M1 mac or on a windows machine?
+-   How are you deploying sourcegraph? Are you installing a single-container Sourcegraph with Docker, docker-compose, or Kubernetes?
+-   share logs from the docker container?
+-   I would also like to know if you followed the installation process stated in this \[guide\](https://learn.sourcegraph.com/how-to-install-sourcegraph-on-linux-with-docker
+-   I later understood that the customer installed an old version of sourcegraph and was trying to install a new version but the frontend was still seeing the old installation.
+-   Told the customer to remove the container and volume via the following: 
+-   And then remove the volumes with : 
+-   Then perform a fresh installation.
+-   You can also change the .sourcegraph directory for this fresh installation. Something like the below; 
+https://learn.sourcegraph.com/how-to-install-sourcegraph-on-linux-with-docker

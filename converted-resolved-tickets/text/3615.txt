@@ -1,0 +1,30 @@
+-   CSE: Warren Gifford
+-   Customer: Apple 
+-   Date: 28 October 2021
+-   Version: 3.31.2​
+-   Deployment: docker-container
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links: (https://sourcegraph.slack.com/archives/C0225J36ZTR/p1633026776028700)\[https://sourcegraph.slack.com/archives/C0225J36ZTR/p1633026776028700\]
+-   GitHub Issue Link: (https://github.com/sourcegraph/customer/issues/507)\[https://github.com/sourcegraph/customer/issues/507\]
+-   Doc Update Link:
+The customer reported that many repos had not been synching for weeks, zoekt-indexserver logs indicated failure to shut down processes in the go automation of indexing processes
+remove the repo and re-add restart the zoekt-indexserver (worked in our case test instance but not in customer single container) look for "poison pill" repo to remove
+This issue was only resolved after upgrading from v3.30.3 to v3.31.2 I'm unable to gather more info from the customer but it is suspected that the single-container instance was resource constrained and upgrading rolled in many CPU and mem performance improvements that ultimately resolved this issue for the customer.
+"_raw","_time",host,index,linecount,source,sourcetype,"splunk_server"
+"{""line"":""\u001b[0;32m20:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m20:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m20:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m20:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m19:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m19:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m19:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m19:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m18:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m18:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m18:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m18:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m17:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m17:59:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m17:29:50         zoekt-indexserver 
+"{""line"":""\u001b[0;32m17:29:50         zoekt-indexserver 

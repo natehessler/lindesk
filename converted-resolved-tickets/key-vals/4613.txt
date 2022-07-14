@@ -1,0 +1,18 @@
+zendeskTicketNumber: 4613
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4613
+title: Can the code insights db be run on an external service?
+Application engineer: Jason Harris
+Customer: Segment.io Inc 
+Date: Nov 17
+Version: 3.28.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1637167881014500
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Can we migrate the codeinsights-db to an external service?
+Sourcegraph does not support running the codeinsights-db as an external service. It is a TimescaleDB instance and not a traditional postgres database.
+https://sourcegraph.slack.com/archives/C017J5QN4FJ/p1616777889018000?thread_ts=1616707738.014000&cid=C017J5QN4FJ
+https://docs.sourcegraph.com/code_insights/quickstart
+https://docs.sourcegraph.com/admin/how-to/enable-experimental-feature

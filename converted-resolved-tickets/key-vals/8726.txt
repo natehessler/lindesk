@@ -1,0 +1,15 @@
+zendeskTicketNumber: 8726
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8726
+title: Docker Compose version requirement
+Application engineer: Gabe Torres
+Customer: Sony Interactive Entertainment 
+Date: June 3, 2022
+Version: ​3.17.3
+Deployment: single container
+External Services: GITLAB, GITHUB
+Auth Providers: github, builtin
+Slack Links: https://sourcegraph.slack.com/archives/C01CF949J6L/p1654276947841859
+GitHub Issue Link:
+Doc Update Link:
+Summary: Have you tested the sourcegraph docker compose setup with docker compose v2? If so, which versions of sourcegraph are compatible with it?
+We haven't seen any issues with Docker Compose v2.5. We do use  service_completed_successfully which was introduced in Docker Compose v1.29 so that would be the minimum version required.

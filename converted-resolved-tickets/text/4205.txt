@@ -1,0 +1,15 @@
+-   CSE: Alex Jean-Baptiste
+-   Customer: Reddit 
+-   Date: 28 October 2021
+-   Version: ​3.32.0
+-   Deployment: Kubernetes
+-   External Services: Github
+-   Auth Providers: Built-in, Github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1635358124045100
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer was using the unstable Python LSIF Indexer and received an error.
+The Python LSIF Indexer is not officially supported due to its instability.
+N/A
+root@eefe6eb51beb:/src/lsif-py-master
+Indexing file lsif_indexer/index.py Traceback (most recent call last): File "./lsif-py", line 6, in \

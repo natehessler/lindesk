@@ -1,0 +1,15 @@
+-   Application engineer: Michael Bali
+-   Customer: 
+-   Date: Jan 2,2022
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1641180315156400
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+what are the limitations of using the single docker container in prod? Is there a simpler docker-compose file with just the required components (no grafana and stuff) that I can use?
+We do not recommend using a single docker container for a production instance.  To test Sourcegraph in a low-resource environment you may want to disable some of the observability tools (Prometheus, Grafana, and Jaeger). Add -e DISABLE_OBSERVABILITY=true to your docker run command. If deploying a production instance, We recommend Docker Compose for most initial production deployments then you can now migrate to another type of [deployments](https://docs.sourcegraph.com/admin/install). The [resource estimator](https://docs.sourcegraph.com/admin/install/resource_estimator) tool is also a good starting point for your deployment. Currently, The docker-compose.yaml file currently depends on configuration files that live in the repository, so you must have the entire repository cloned onto your server to deploy sourcegraph with docker-compose. we strongly recommend that you create and run Sourcegraph from your own fork of the \[reference repository\](https://docs.sourcegraph.com/admin/install/docker-compose
+This will make \[upgrades\](https://docs.sourcegraph.com/admin/install/docker-compose/operations
+-   https://docs.sourcegraph.com/admin/install/docker-compose/operations
+-   https://docs.sourcegraph.com/admin/install/docker-compose

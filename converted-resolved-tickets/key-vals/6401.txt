@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6401
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6401
+title: How to delete repos
+Application engineer: Donavon Ellison
+Customer: Booking.com
+Date: Feb 22
+Version: 3.33.0​
+Deployment: docker-compose
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1645549935751529
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: How to delete a lot of repos
+https://docs.sourcegraph.com/admin/how-to/remove-repo
+https://docs.sourcegraph.com/admin/how-to/remove-repo

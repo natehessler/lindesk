@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Redhat
+-   Date: Jan 18
+-   Version: ​n/a
+-   Deployment: n/a
+-   External Services: n/a
+-   Auth Providers: n/a
+-   Slack Links: n/a
+-   GitHub Issue Link: [Issue](https://github.com/sourcegraph/sourcegraph/issues/27520)
+-   Doc Update Link: n/a
+Customer was following up on an question about their search query and inconsistent results they were getting. The number of results didn't match the result count, which also fluctuated for each search even though the query was the same.
+Tagged the search team to look into this and they recommended the customer edit their search query. This doesn't give the exact results the customer was trying to get but for now that's the best that can be done in terms of what Sourcegraph currently supports
+n/a

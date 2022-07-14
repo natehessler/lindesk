@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7849
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7849
+title: Search context question
+Application engineer: Stomzy Mwendwa
+Customer: Fiverr, Ltd. 
+Date: Apr 26
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: github,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: I'm trying to create a search context based on a query and added "experimentalFeatures.searchContextsQuery": true to my settings, but I still can't find the "Create context" button as mentioned in the docs (we're on 3.36.2 so should have this). Am I missing something? or should this be enabled by the admins first?
+@roee.zolantz I think you may have to first enable search contexts first in your experimental settings. Your settings config should look something like: "experimentalFeatures": { "showSearchContext": true, "searchContextsQuery": true }, Please give this a try.
+https://docs.sourcegraph.com/code_search/how-to/create_search_context_graphql

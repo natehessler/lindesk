@@ -1,0 +1,13 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Nutanix, Inc. 
+-   Date: Nov 30
+-   Version: 3.29.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB,OTHER
+-   Auth Providers: builtin,saml
+-   Slack Links:https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1638277376029800
+-   GitHub Issue Link:
+-   Doc Update Link:
+Have one question regarding codeintel-db ..i observe codeinteldb is located at two places...one with main database and one at codeintel itself. any plans to remove/drop the main one as i dont see any use case of that database ?
+If their Sourcegraph instance is pointed to B for the codeintel-db then you should be able to drop the codeinteld from A. It shouldn't be used by the instance at all.
+You might want to check to see if there's any data in the codeintel-db on A before dropping it, but if code intel is working correctly for them it doesn't really matter (and might be hard to rescue anyway).

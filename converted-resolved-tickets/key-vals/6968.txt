@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6968
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6968
+title: New Slack message in support-unity-users: searching for repos that contain a specific library - attempted with repo:deps
+Application engineer: Riana Shahid
+Customer: Unity 
+Date: Mar 17
+Version: 3.36.2
+Deployment: kubernetes
+External Services: GITHUB,GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1647541001035359
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: Customer wanted to search for all repos that have a specific library but got zero results using the 
+From what I could find about beta features, they should be available to all and only features labeled "experimental" would need to be manually enabled. 
+https://docs.sourcegraph.com/admin/beta_and_experimental_features 

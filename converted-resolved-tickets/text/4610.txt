@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Eventbrite 
+-   Date: Nov 17
+-   Version: 3.33.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Hi! I was looking at https://sourcegraph.com/extensions/sourcegraph/sentry and I was wondering if there's a way to pass a per project based URL for self hosted sentry servers. I've looked at the docs and it's pretty good on configuring org/project but everything seems to point to cloud version of sentry. Is that correct?
+Hi. Back with an update.It seems that currently we only have the option for the cloud version for Sentry available for use based on this I took a look at a couple of examples and all saw that they pointed to organizations within sentry.io
+"sentry.organization": "

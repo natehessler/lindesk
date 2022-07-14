@@ -1,0 +1,18 @@
+zendeskTicketNumber: 9314
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9314
+title: Booking.com Question
+Application engineer: Stomzy Mwendwa
+Customer: Booking.com 
+Date: June 24, 2022
+Version: 3.41.0
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1656075990204979
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Customer received this error:
+Sourcegraph encountered an unexpected error. If reloading the page doesn't fix it, contact your site admin or Sourcegraph support. Unable to fetch repo revisions
+Checked with the customer whether gc.auto 0 is enabled
+Can you exec into the gitserver directory for this repo and run git prune and git fetch ? Let's take note of errors here. You can slack them over to me. We can try to fix the repo with git gc and re-running git fetch again.
+Final update for the week (I hope):  git gc  again returned some invalid objects. I did another round of cleaning. Seems there's still an issue lingering; will plan for a fresh clone in the near future. For now: Have a great weekend. Thanks for your prompt support,

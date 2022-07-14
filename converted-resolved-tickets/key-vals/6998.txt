@@ -1,0 +1,18 @@
+zendeskTicketNumber: 6998
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6998
+title: # Sourcegraph v3.33 upgrade issue
+Application engineer: Alex Jean-Baptiste
+Customer: Goldman Sachs 
+Date: Mar 18
+Version: ​3.33.0
+Deployment: Kubernetes
+External Services: gitlab, cvs
+Auth Providers: saml
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer received the following error: ​Post "http://gitserver-0.gitserver:3178/repos": dial tcp: lookup gitserver-0.gitserver on 10.100.0.10:53: no such host in the UI. ​
+Searched through recently resolved tickets for this customer and saw that the issue had a previous resolution involving provisioning more resources for gitserver Communicated to the customer that they should check their Grafana dashboard for signs intensive resource load on the gitserver service
+​The customer lowered the gitserver replica count from 2 to 1 which reduced resource usage and resolved the issue.
+None. ​
+​"log": "2022-03-17T18:31:42.500132735Z stderr F {\"level\":\"warn\",\"ts\":1647541902.5000348,\"caller\":\"channelz/logging.go:75\",\"msg\":\"\[core\]grpc: addrConn.createTransport failed to connect to {jaeger-collector:14250 jaeger-collector:14250 

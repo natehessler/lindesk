@@ -1,0 +1,17 @@
+zendeskTicketNumber: 7219
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7219
+title: dropbox, structural search, regex, negation / exclusion / lookahead / lookbehind / lookaround
+Application engineer: Kelvin Lee
+Customer: 
+Date: Mar 28
+Version: ​3.38.0
+Deployment: docker-compose
+External Services: unrelated
+Auth Providers: unrelated
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C02M9ASQ2LC/p1648508815363279)
+GitHub Issue Link: [RFH](https://github.com/sourcegraph/customer/issues/795)
+Doc Update Link: None
+Summary: They want to find all calls to a function that exclude a flag. Specifically:
+"
+Can't at this time. See discussion in the [RFH](https://github.com/sourcegraph/customer/issues/795). Also [this dicussion](https://github.com/sourcegraph/sourcegraph/issues/31454) around RegEx lookaround.
+https://docs.sourcegraph.com/code_search/reference/structural

@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Twitter 
+-   Date: Feb 28
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Relating to the behavior of the favicon
+> does it link to that URI or is it downloading the favicon and putting it on the filesystem though?
+Hey @jmeador had a chance to look into this -- the code that handles this is here, I believe when branding.favicon is set SG is linking to the URI, otherwise it uses the default symbol which is stored in .assetsI'm able to effectively toggle the favicon on and off with a page refresh and commenting out branding.favicon

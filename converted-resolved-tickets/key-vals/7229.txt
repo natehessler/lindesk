@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7229
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7229
+title: Dropbox Question
+Application engineer: Quinlan Sparks
+Customer: Dropbox 
+Date: Mar 29
+Version: 3.36.2
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C02M9ASQ2LC/p1648565677858249
+GitHub Issue Link:
+Doc Update Link:
+Summary: > any tips for finding deleted files through sourcegraph? as in, if we know the path of the file, can sourcegraph tell us the last rev that it existed in?
+> That's absolutely something you can do, taking advantage of \[commit diff search\](https://docs.sourcegraph.com/code_search/explanations/features
+https://docs.sourcegraph.com/code_search/explanations/features

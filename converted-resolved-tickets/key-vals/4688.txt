@@ -1,0 +1,14 @@
+zendeskTicketNumber: 4688
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4688
+title: Canceling Cloud Subscription
+Application engineer: Gabe Torres
+Customer: 
+Date: Nov 22
+Version: ​NA
+Deployment: NA
+External Services: NA
+Auth Providers: NA
+Slack Links: https://sourcegraph.slack.com/archives/CU93UDUBV/p1637684483293200 https://sourcegraph.slack.com/archives/C018LT2BTTN/p1637604962140700
+urcegraph Cloud customer had a request regarding their subscriptions. The customer had two subscriptions and they wanted to cancel one and change the other from auto-renewal to payment-on-invoice.
+finance team was able to process the requests for the customer. The CE team was able to generate a new license key as self-service auto-renewal license keys don't autogenerate.
+Summary: 

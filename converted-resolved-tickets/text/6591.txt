@@ -1,0 +1,14 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Atlassian 
+-   Date: Mar 2
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1646244947736049
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer experienced a lack of search results after using the phrase "try trello premium free for 14 days" . After a discussion with CE Emily Chapman, the customer discovered that their search used OSX smart quotes which are not currently being handled by Sourcegraph. A feature request has been filed by CE Emily Chapman to include that handling.
+A customer call was done to observe the customer's search input. ​
+The customer used non-smart quotes and received their search results.
+https://support.apple.com/guide/mac-help/replace-text-punctuation-documents-mac-mh35735/mac ​

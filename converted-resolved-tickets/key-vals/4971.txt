@@ -1,0 +1,17 @@
+zendeskTicketNumber: 4971
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4971
+title: Clearing Migration Errors & AWS IAM Policy For Storage Volume
+Application engineer: Alex Jean-Baptiste
+Customer: VideoAmp 
+Date: Dec 9
+Version: ​3.34.1
+Deployment: Kubernetes
+External Services: GitHub
+Auth Providers: Built-in, GitHub
+Slack Links: https://sourcegraph.slack.com/archives/C02P8ANKTJ9/p1639066970000200
+GitHub Issue Link: N/A
+Doc Update Link:N/A
+Summary: The customer was experiencing failed database migrations when attempting to set up their external AWS RDS database. Once the database migration errors were cleared the customer experienced a storage volume error that was resolved with AWS IAM policy configuration.
+The customer was directed towards documentation on fixing database migration errors as well as the source code of the offending migrations. When the storage volume errors appeared this StackOverflow answer was used as a reference for diagnosing the error.
+https://docs.sourcegraph.com/admin/how-to/dirty_database
+https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/migrations/frontend/1528395862_remove_sg_service_role.up.sql?subtree=true https://stackoverflow.com/questions/68725070/k8s-pods-failure-error-while-running-volumebinding-prebind-plugin-for-pod-a?rq=1

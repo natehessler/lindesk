@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Netflix 
+-   Date:
+-   Version: ​3.33
+-   Deployment: pure-docker
+-   External Services:
+-   Auth Providers:
+-   Slack Links: private channel
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/10820
+-   Doc Update Link:
+Is there a way to order results by date?
+Currently, no. There is an open public issue on this: https://github.com/sourcegraph/sourcegraph/issues/10820
+https://github.com/sourcegraph/sourcegraph/issues/10820

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8011
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8011
+title: Nested structured search is Sourcegraph?
+Application engineer: Warren Gifford
+Customer: Sourcegraph 
+Date: May 4
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/918
+Doc Update Link:
+Summary: This came in via stackOverflow I would like to search Java annotations with another annotations inside. I don't know how many nested levels there are or I don't want to specify it. Finally, I would like to search for examples of @ApiImplicitParams with param type body and with @Example annotations inside.
+See response in stack overflow posting -- https://stackoverflow.com/questions/72040712/nested-structured-search-is-sourcegraph/72133938
+https://docs.sourcegraph.com/code_search/reference/structural

@@ -1,0 +1,12 @@
+-   Application engineer: Gabe Torres
+-   Customer: Netflix 
+-   Date: June 3, 2022
+-   Version: 3.37.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+Question on batch changes. Is there a concept of multi commit change? basically a way to commit in between run steps?
+It's not possible to run multiple commits in one batch change. What Batch Changes does is:\
+Generate the diff locally,\
+Send it to the Sourcegraph instance,\
+then, the Sourcegraph instance creates a commit and uses the configured credentials to push it to a branch and open a changeset.

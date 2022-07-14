@@ -1,0 +1,11 @@
+-   Application engineer: Gabe Torres
+-   Customer: Telus 
+-   Date: June 14, 2022
+-   Version: ​
+-   Deployment: Kubernetes
+-   Slack Links: https://sourcegraph.slack.com/archives/C03E2ML7KL6/p1655242569495139
+-   GitHub Issue Link:
+-   Doc Update Link:
+how can i get the name of the repository within a batch change script? the usual methods i tried from here don't seem to work since sourcegraph downloads an archive of the repo: 
+You can use the name of the repo in the batch spec by using \${{ repository.name }}.
+https://docs.sourcegraph.com/batch_changes/references/batch_spec_yaml_reference

@@ -1,0 +1,21 @@
+zendeskTicketNumber: 5698
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5698
+title: Git cloning over SSL Congifuration``{=html}
+Application engineer: Alex Jean-Baptiste
+Customer: Lockheed Martin Space Systems 
+Date: Jan 20
+Version: ​3.35.1
+Deployment: Kubernetes
+External Services: GitLab
+Auth Providers: builtin
+Slack Links: https://sourcegraph.slack.com/archives/C030CPM2ELR/p1643216273011700
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/659
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/commit/b499d3e8055ec50001ff3fd103923de6897ec393
+Summary: The customer was not able to clone any repos into Sourcegraph. The customer has a self-managed GitLab instance that requires an internally signed SSL certificate in order to be accessed.
+The customer was able to successfully clone repos from Sourcegraph as follows:
+1.  exec into the gitserver pod
+2.  create the file /etc/gitconfig
+3.  contents of /etc/gitconfig
+\[http\] sslcainfo = /etc/ssl/certs/rootCA.pem
+4.  add pem file to /etc/ssl/certs/rootCA.pm
+For a permanent fix, the customer is currently using the experimental tls.external flag located in the example site config here.

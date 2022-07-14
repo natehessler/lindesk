@@ -1,0 +1,47 @@
+zendeskTicketNumber: 6660
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6660
+title: kubernetes, aws ebs csi, persistent volume , node creation
+Application engineer: Kelvin Lee
+Customer: MercadoLibre 
+Date: Mar 4
+Version: 3.29.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers:
+Slack Links: [Slack Thread](https://sourcegraph.slack.com/archives/C021PRG65DH/p1646432160945219)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Issues still arising after going through the [aws-ebs-csi-driver add-on installation guide](https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html).
+I sent the customer some resources/my research (shared below). It seemed to help the customer; they report that they see a new, different problem instead:
+But also want to share my research notes, and if I can, ~~get the customer's perspective/insight on what they fixed.~~ The customer shared that they followed \[this\](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/issues/748
+My research notes:
+> From what I'm learning/gathering:
+>
+> (Disclaimer: I am generally not sure lol)
+>
+> Assumptions:
+>
+> Establishing (50% confidence) that dynamic provisioning seems to be some sort of pre-requisite for persistent volume creation, in some way: https://docs.bitnami.com/kubernetes/faq/troubleshooting/troubleshooting-persistence-volumes/
+>
+> -   Reading: "this may be because your cluster does not support dynamic provisioning (such as a bare metal cluster). In this case, the pod is unable to start because the cluster is unable to fulfil the request for a persistent volume and attach it to the container."
+>
+> Establishing (99% confidence) that AWS EBS CSI driver is a choose-able pre-requisite for for persistent volume creation as part of an EKS architecture: https://aws.amazon.com/premiumsupport/knowledge-center/eks-persistent-storage/
+>
+> -   Reading: "You can set up persistent storage in Amazon EKS using either of the following options:..."
+>
+> Noteworthy:
+>
+> -   As mentioned here && captured in the screenshot here, the pgsql service seems to be targeting an un-listed node(Ip-10-123-88-220.ec2.internal). List of nodes shared here . Pretty sure that kubectl get nodes is exhaustive i.e. it would list all nodes, so I think we're sure it's missing.
+> -   There is a real difference between a persistent volume, and a persistent volume claim. The "Introduction" section here describes them. I didn't yet read this, but information for the backpocket/parsing the conversation.
+>
+> My personal next steps would be:
+>
+> -   Try to understand the cluster creation lifecycle, with specific attention to a node, PV, and PVCs. Do they need to be created in a certain order? Which failure (node creation, PV creation, PVC creation) is the first blocker for the process that the customer is going through?
+> -   Already asked for sourcegraph-frontend-\* logs, but now thinking about it, it will probably be non-root-cause information.
+> -   Really curious why pgsql is targeting an unlisted node... Hmmm...
+None
+https://stackoverflow.com/questions/44891319/kubernetes-persistent-volume-claim-indefinitely-in-pending-state
+https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/
+https://aws.amazon.com/premiumsupport/knowledge-center/eks-persistent-storage/
+https://kubernetes.io/docs/concepts/storage/storage-classes/
+https://github.com/kubernetes-sigs/aws-ebs-csi-driver/issues/748

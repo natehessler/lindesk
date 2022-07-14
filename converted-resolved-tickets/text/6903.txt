@@ -1,0 +1,28 @@
+-   Application engineer: Gabe Torres
+-   Customer: Netflix 
+-   Date: Mar 15
+-   Version: 3.37.0​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+-   Slack Links: https://sourcegraph.slack.com/archives/C01UR6C9K3R/p1647310521340519
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer was getting an error with a particular batch change. They were able to create other batch changes.
+I looked at the batch spec and everything seemed fine. The fact that the customer was able to create other batch changes seemed to indicate there was an error with the repos in this batch change.
+I looked at the gitserver logs and found an error with a repo being used in the batch change. The repo seemed to be corrupt with the message 'got bad commit'. Excluding this repo from the batch change should work.
+    ❌ Error:
+       resolving repositories: resolving "(repo:org/name) file:.gitignore not .metatron": GraphQL errors: 2 errors occurred:
+        * {
+         "message": "GetObject \"http://gitserver/commands/get-object\": GetObject: http status 500 getting object",
+         "path": [
+           "search",
+           "results",
+           "results",
+           3,
+           "repository",
+           "defaultBranch",
+           "target",
+           "oid"
+         ]
+       }

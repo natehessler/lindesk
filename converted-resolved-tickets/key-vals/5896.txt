@@ -1,0 +1,17 @@
+zendeskTicketNumber: 5896
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5896
+title: New Slack Message in help
+Application engineer: Stomzy Mwendwa
+Customer: 
+Date: Jan 29
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1643462049004899
+GitHub Issue Link:
+Doc Update Link:
+Summary: How to setup repo groups and where to define them.
+You can create a repogroup alias in your user settings using "search.repositoryGroups": {}
+You'd define the URL's of the repositories in the group in the curly braces.This would look like:
+"search.repositoryGroups": {       "repoGroupName": \[     "excodehost.com/example/example_repo1" "excodehost.com/example/example_repo2" "excodehost.com/example/example_repo3" \], },

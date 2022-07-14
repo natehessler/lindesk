@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: NYDIG 
+-   Date: Feb 14
+-   Version: ​v3.35.1
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/701
+-   Doc Update Link:
+Customer reports inability to generate any successful all scope insights
+This issue is unresolved but likely to be resolved by upgrade to version
+Currently believed to be a bug fixed here https://docs.sourcegraph.com/CHANGELOG

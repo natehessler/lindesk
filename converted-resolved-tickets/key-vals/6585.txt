@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6585
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6585
+title: Are my gitserver and zoekt pods underresourced?
+Application engineer: Jason Harris
+Customer: Booking.com 
+Date: Mar 2
+Version: 3.33.0​
+Deployment: docker-compose
+External Services: GITLAB
+Auth Providers: gitlab
+Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1646218814536529
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer was concerned that their gitserver and zoekt pods were under-resourced based on Grafana metrics in their monitoring.
+I asked them to send their yaml file with their resource provisions, then confirmed using the estimator that they were, in fact, under-resourced. For the gitserver I recommended increasing requests and limits on both CPU and memory, as well as changing gitserver replicas from 1 to 3.
+The zoekt-indexserver was over provisioned on requests and underprovisioned on replicas. The zoekt-webserver was very under provisioned, so I asked them to increase those resources as well.

@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Unity 
+-   Date: Mar 7
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1646735581312999
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer reported that they were seeing this error while searching for a file which they confirmed they could see in their repository: Post "http://gitserver-3.gitserver:3178/exec": dial tcp: lookup gitserver-3.gitserver on 10.3.240.10:53: no such host
+Check for gitserver health and look for signs of OOM'ing or Crashloopbackoff.
+The fix involved increasing gitserver memory limits as well as removing empty/archived repos

@@ -1,0 +1,14 @@
+zendeskTicketNumber: 5030
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5030
+title: Running out of disk space in private instance
+Application engineer: Ben Gordon
+Customer: Let's Do This 
+Date: Dec 13
+Version: ​3.34.2
+Deployment: docker-container
+External Services: GitHub
+Auth Providers: builtin
+Is there an option to automatically prune old LSIF uploads?
+Configure LSIF Retention policy to avoid unbounded LSIF directory growth
+https://docs.sourcegraph.com/admin/updates
+Summary: 

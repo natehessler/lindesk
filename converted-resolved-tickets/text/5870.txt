@@ -1,0 +1,20 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: 
+-   Date: Jan 27
+-   Version: ​3.36.1
+-   Deployment: Sourcegraph.com
+-   External Services:
+-   Auth Providers:
+-   Slack Links: N/A
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/669
+-   Doc Update Link:
+The customer ran a regex query on Sourcegraph.com and this timed out with an error message exposing internal infrastructure details. The request was to "http://" and not "https://", so it's unencrypted. That doesn't make it readable from the outside, but shows a bit how the infrastructure is set up - likely without mTLS in the whole cluster (most solutions for mTLS like service meshes cover all services and not just a few). There's a node in your cluster with the IP address 10.164.30.8, and the port is shown as well. If someone were to breach into the cluster, this could make navigating through the network easier. I'm not a security expert, but I was surprised to see this and just wanted to let you know, in case you want to change it.
+N/A
+All our internal in-cluster communication happens un-encrypted. This is an area for extra hardening, but just adding that doesn't really buy us anything except maybe checking a textbox on checklist. Adding service level identity (and mTLS?) would help mitigate some of this by just making an attacker life a little harder.
+The main action item I see here is we should better sanitize all error messages on dot-com and rather reference a unique string we can grep for. For private instances it is useful to include these error messages since it makes bug reporting so much easier.
+We use "JSON-RPC-over-HTTP" as the communication protocol (i.e. unencrypted HTTP and hand-rolled JSON marshalling of requests / responses).
+Regarding "If someone were to breach into the cluster" (say, got access to shell inside a pod or injected code), I think they can:
+access our DB
+decrypt all our KMS encrypted data
+send requests to private services, some of which don't implement their own authorization
+which seems far worse than navigating the network.

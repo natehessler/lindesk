@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Sourcegraph 
+-   Date: Apr 5
+-   Version: ​3.37
+-   Deployment: Kubernetes
+-   External Services: github
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C024QE1K0FP/p1649175206743419
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+How do I return content of files from a stream search without using src?
+you have to trick the API into returning the file contents by using select: content then using the regex for select everything .\*. i.e.:
+src search -stream "r:sourcegraph/sourcegraph file:.yml select:content .\* count:all patternType:regexp

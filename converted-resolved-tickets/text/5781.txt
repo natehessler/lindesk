@@ -1,0 +1,14 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Avito 
+-   Date: Jan 24
+-   Version:
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1643102140026300
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer wanted to know if it's possible to work with external Postgres through a connection pooler. There is already an ongoing discussion around their external DB environment which is different from what we currently have. And I noticed that Elzanne their CE is already working with the team to write a doc around their environment and she also jumped on this request to note the ongoing work which may be likely shared today.
+Can SourceGraph work with external Postgres through connection pooler (pgbouncer)?
+None Answer from CE Feedback from our Delivery team is that they should be able to use pgbouncer without any issue.
+https://github.com/sourcegraph/sourcegraph/blob/6551d0d23b5a1df9cb8f3cdaccf17538657fcaa1/doc/admin/external_services/postgres.md

@@ -1,0 +1,12 @@
+-   Application engineer: Riana Shahid
+-   Customer: MercadoLibre 
+-   Date: May 3
+-   Version: 3.29.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C021PRG65DH/p1651599944527489
+-   GitHub Issue Link:
+-   Doc Update Link:
+We got some alerts on graphana dashboard, are there any actionable for it? or should I worry about those notification? ![image (1)](https://user-images.githubusercontent.com/68962880/168638766-59ce9845-0183-4748-b601-495f20afc252.png)
+https://github.com/sourcegraph/sourcegraph/issues/34616 

@@ -1,0 +1,205 @@
+zendeskTicketNumber: 3971
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3971
+title: New Slack message in support-indeed
+CSE: Jason Harris
+Customer: Indeed 
+Date: 28 October 2021
+Version: 
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: 
+Slack Links: https://sourcegraph.slack.com/archives/CSKMGUJ58/p1634756475053300
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/538
+Doc Update Link: n/a
+Summary: When upgrading from 
+-   I went through a couple of issues ([364](https://github.com/sourcegraph/customer/issues/364), [377](https://github.com/sourcegraph/customer/issues/377)), which seemed related at the time, but found that they, in fact, only appeared so.
+-   Asked for the output of two commands, because I suspected these would give me info on whether this had to do with an admissions controller being used with a mutatingWebHook
+    -   Asked for the output of the command 
+    -   Asked for the output of the command 
+-   Asked for more information on their 
+-   Asked if they were running as root in 
+    -   Their answer was that they had always run with non-root.
+    -   Reason for my asking was that I thought they may have not migrated to non-privileged overlay when upgrading.
+-   Asked if they were using an external database that sourcegraph couldn't recognize. They answered no.
+-   Used a \[diff comparison\](https://sourcegraph.com/github.com/sourcegraph/deploy-sourcegraph/-/compare/v3.30.4...v3.31.2
+-   Checked the 
+I ultimately filed an issue, linked above, with delivery. I posted their original, non-functional, yaml file in the issue (pasted below):
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      annotations:
+        description: Code Insights TimescaleDB instance.
+      labels:
+        app.kubernetes.io/component: codeinsights-db
+        deploy: sourcegraph
+        sourcegraph-resource-requires: no-cluster-admin
+      name: codeinsights-db
+      namespace: sourcegraph 
+    spec:
+      minReadySeconds: 10
+      replicas: 1
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          app: codeinsights-db
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            deploy: sourcegraph
+            app: codeinsights-db
+            group: backend
+        spec:
+          containers:
+          - name: timescaledb
+            image: index.docker.io/sourcegraph/codeinsights-db:3.31.2@sha256:912ba3900ab688b8ac23d8f7906e638160dda49c71490b8e3f69f04e81ffe8bf
+            securityContext: 
+                allowPrivilegeEscalation: false
+                runAsUser: 70
+                runAsGroup: 70
+            env:
+            - name: POSTGRES_PASSWORD 
+              value: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRESQL_CONF_DIR
+              value: "/conf"
+            terminationMessagePolicy: FallbackToLogsOnError
+            ports:
+            - containerPort: 5432
+              name: timescaledb
+            resources:
+              limits:
+                cpu: "4"
+                memory: 2Gi
+              requests:
+                cpu: "4"
+                memory: 2Gi
+            volumeMounts:
+            - mountPath: /data
+              name: disk
+            - mountPath: /conf
+              name: timescaledb-conf
+            - mountPath: /tmp
+              name: tmpdir
+            - mountPath: /var/run/postgresql
+              name: tmpdir2
+          terminationGracePeriodSeconds: 120
+          securityContext: 
+            runAsUser: 70
+          volumes:
+          - name: disk
+            persistentVolumeClaim:
+              claimName: codeinsights-db
+          - name: timescaledb-conf
+            configMap:
+              defaultMode: 0777
+              name: codeinsights-db-conf
+          - name: tmpdir
+            emptyDir: {}
+          - name: tmpdir2
+            emptyDir: {}
+Dave jumped in and tested this. He determined that they needed to use 
+The issue was solved with the following adjustments in the 
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      annotations:
+        description: Code Insights TimescaleDB instance.
+      labels:
+        app.kubernetes.io/component: codeinsights-db
+        deploy: sourcegraph
+        sourcegraph-resource-requires: no-cluster-admin
+      name: codeinsights-db
+      namespace: sourcegraph 
+    spec:
+      minReadySeconds: 10
+      replicas: 1
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          app: codeinsights-db
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            deploy: sourcegraph
+            app: codeinsights-db
+            group: backend
+        spec:
+          initContainers:
+          - name: correct-data-dir-permissions
+            image: index.docker.io/sourcegraph/alpine-3.12:3.31.2@sha256:775d9ae7ec5a8f32c81ce634251f022f1bf63acd006ef8c6de936350d5c4df2e
+            command: ["sh", "-c", "if [ -d /data/pgdata ]; then chmod 750 /data/pgdata; fi"]
+            volumeMounts:
+            - mountPath: /data
+              name: disk
+            securityContext: 
+              runAsUser: 70
+              runAsGroup: 70
+            resources:
+              limits:
+                cpu: "10m"
+                memory: "50Mi"
+              requests:
+                cpu: "10m"
+                memory: "50Mi"  
+          containers:
+          - name: timescaledb
+            image: index.docker.io/sourcegraph/codeinsights-db:3.31.2@sha256:912ba3900ab688b8ac23d8f7906e638160dda49c71490b8e3f69f04e81ffe8bf
+            securityContext: 
+                allowPrivilegeEscalation: false
+                runAsUser: 70
+                runAsGroup: 70
+            env:
+            - name: POSTGRES_PASSWORD 
+              value: password
+            - name: PGDATA
+              value: /data/pgdata
+            - name: POSTGRESQL_CONF_DIR
+              value: "/conf"
+            terminationMessagePolicy: FallbackToLogsOnError
+            ports:
+            - containerPort: 5432
+              name: timescaledb
+            resources:
+              limits:
+                cpu: "4"
+                memory: 2Gi
+              requests:
+                cpu: "4"
+                memory: 2Gi
+            volumeMounts:
+            - mountPath: /data
+              name: disk
+            - mountPath: /conf
+              name: timescaledb-conf
+            - mountPath: /tmp
+              name: tmpdir
+            - mountPath: /var/run/postgresql
+              name: tmpdir2          
+          terminationGracePeriodSeconds: 120
+          securityContext:
+            runAsUser: 70
+            runAsGroup: 70
+            fsGroup: 70
+            fsGroupChangePolicy: "OnRootMismatch"        
+          volumes:
+          - name: disk
+            persistentVolumeClaim:
+              claimName: codeinsights-db
+          - name: timescaledb-conf
+            configMap:
+              defaultMode: 0777
+              name: codeinsights-db-conf
+          - name: tmpdir
+            emptyDir: {}
+          - name: tmpdir2
+            emptyDir: {}
+    chmod: /var/run/postgresql: Operation not permitted
+    The files belonging to this database system will be owned by user "postgres".
+    This user must also own the server process.
+    /usr/local/bin/docker-entrypoint.sh: sourcing /docker-entrypoint-initdb.d/000_install_timescaledb.sh
+    /docker-entrypoint-initdb.d/000_install_timescaledb.sh: line 39: /conf/postgresql.conf: Read-only file system

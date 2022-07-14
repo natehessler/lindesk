@@ -1,0 +1,13 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Segment.io Inc
+-   Date: Feb 3
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1643908141650909
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is the preferred way of updating a secret/ client ID through the site config?
+Yes
+N/A

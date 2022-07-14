@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8911
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8911
+title: How do i manually index a repo?
+Application engineer: Jason Harris
+Customer: Snowflake, Inc. 
+Date: June 10, 2022
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: https://sourcegraph.slack.com/archives/C021MU16S1F/p1654893864893469
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: This initially started as a How to, with the customer asking how to properly index a repo.
+Checked the queue in pgsql for the repo in question, which wasn't there. confirming that the repo was never set to index in the first place. Determined that while a private repo, several other private/internal repos were indexing. Tried manually adding the repo in question to the code host config. Repo still not showing up.
+They had a generic github user that needed read permissions to the repo.

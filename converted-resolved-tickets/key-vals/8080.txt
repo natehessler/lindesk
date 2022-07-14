@@ -1,0 +1,19 @@
+zendeskTicketNumber: 8080
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8080
+title: Re: Sourcegraph - Performance Testing
+Application engineer: Stomzy Mwendwa
+Customer: Goldman Sachs 
+Date: May 9
+Version: ​3.35.0
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Before going organization wide live with Sourcegraph, we would like to performance test the application. Do you guys have any existing solution in place that we can use?
+Happy to jump in and help out with your question.
+We do have a doc that helps with validation. This will be achieved primarily through src (which is a command line interface tool. More on that here).
+If I may add, I personally use the critical alerts and container health provisions in Grafana. Any alerts that fire are logged in here from Prometheus so this would be the best place to confirm if Sourcegraph is running smoothly. I find that this is more detailed and easier because it helps pinpoint where something isn't working as expected and necessary tweaks done.
+I hope this helps.
+https://docs.sourcegraph.com/admin/validation https://docs.sourcegraph.com/cli

@@ -1,0 +1,26 @@
+zendeskTicketNumber: 7135
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7135
+title: syntect / code intelligence / HSS worker timeout
+Application engineer: Kelvin Lee
+Customer: Databricks 
+Date: Mar 23
+Version: ​3.38.0
+Deployment: docker-compose
+External Services: GitHub
+Auth Providers: SAML
+Slack Links: [Slack with customer](https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1648083106790159), and an internal thread of huge help [here](https://sourcegraph.slack.com/archives/CHXHX7XAS/p1648790924079399)
+GitHub Issue Link: [RFH](https://github.com/sourcegraph/customer/issues/801) , and [public issue filed](https://github.com/sourcegraph/sourcegraph/issues/33697)
+Doc Update Link: None
+Summary: -   check health of 
+    -   reasoning, provided by Stompy:  \> Reason I ask for this is because, syntect does rely on a healthy gitserver in order to highlight code. After an upgrade, as gitserver starts serving repository data, syntect may throw some of the HSS timeout errors as the data gets brought up.
+:warning: The following experiments below ought to be considered as *high-effort* asks for the customer. So if you want to share the experiments with them, make sure to let them know this will take a bit of effort on their end. Also, the best person to evaluate the numbers/results of the experiments would be a code-intel engineer. An AER can attempt to evalute the results by learning from the RFH.
+-   There's an experiment that can be run, as alluded to in the RFH, \[here\](https://github.com/sourcegraph/customer/issues/801
+    > Locally copy the file that is timing out, say at /path/to/File.scala. Clone our syntect repo. git clone https://github.com/sourcegraph/syntect.git && cd syntect. Test highlighting times with two branches: slimsag-main and main. (Showing the steps for slimsag-main below, same steps would apply with main).
+        git checkout slimsag-main
+        git submodule update --init
+        cargo build --release --example synhtml
+        hyperfine './target/release/examples/synhtml /path/to/File.scala'
+    > Then \[they\] can share the results of hyperfine for slimsag-main and main branches. These instructions are meant to evaluate the performance of syntax-highlighting on a single code file. Evaluating the performance will help us determine if (a) we ought to file a public issue for the code file's programming language or (b) investigate elsewhere.
+-   Another whacky set of experiments, as suggested by varungandhi-src (GitHub user): \> One experiment I propose here, if William is up for it: \> 1. Take a few files that are consistently timing out in the UI. E.g. say something of the form of repo:my-repo mytext where mytext does have hits in the slow-to-highlight files =\> this should show highlighting errors in the UI (as a cross-check). \> 1. Copy some slow-to-highlight files into a temporary git repo, commit/push and make sure that repo is synced into Sourcegraph. Make sure that there are no LSIF indexes for that repo (normally, there shouldn't be, unless auto-indexing is configured). \> 1. Do some queries which would require snippets from that repo to be highlighted, similar to step 1 (e.g. repo:tmp-repo mytext). Is there still a timeout, or is there no timeout? \> \> While doing this, avoid scrolling immediately so that code snippets do not go out of view (I'm not 100% sure if that triggers cancellation) and make sure Caching is disabled in the browser's Web Dev Tools. \> That would help confirm if the problem is indeed is due to the reference information, or due to something else.
+[Issue filed and fixed](https://github.com/sourcegraph/sourcegraph/issues/33697) by varungandhi-src (GitHub user).
+None

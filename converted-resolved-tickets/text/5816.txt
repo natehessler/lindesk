@@ -1,0 +1,16 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Goldman Sachs 
+-   Date: Jan 25
+-   Version: ​3.32
+-   Deployment: Kubernetes on AWS
+-   External Services:
+-   Auth Providers: GitLab SSO
+-   Slack Links: N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link:
+Below are two critical alerts I have observed in prod sourcegraph instance. I have attached our kustomization file for the resource and cpus. What disk space size needed for the gitservers ? gitserver: less than 25% disk space remaining by instance gitserver: 25+ repository clone queue size
+Stomzy Mwendwa Assign Yesterday 12:29 am Hi Jit,
+Happy to jump in here and help out with this.
+Just a quick question for you regarding the first and third warning: less than 25% disk space remaining by instance, and less than 15% disk space remaining by instance.Are there any new repos being cloned into the instance or are the current repos seeing frequent commits? If so, is it possible to see the total disk space in use by running df -h whilst exec'd into gitserver(not sure if this is possible now)? I'd suggest using the following env var:
+-   name: SRC_REPOS_DESIRED_PERCENT_FREE value: "10" What this does is set up inactive/stale repos deletion from the gitserver to ensure that disk space is optimized for your instance. I think this would be able to help maintain the current disk space/resources as they are.
+Also, another way to alleviate this error is to horizontally scale gitserver. An additional 1 or 2 replicas seems to make more sense than vertically scaling storage.

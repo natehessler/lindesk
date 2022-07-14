@@ -1,0 +1,16 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Pandora Media, Inc. 
+-   Date: May 6, 2022
+-   Version: ​3.34.0
+-   Deployment: Nomad (POC)
+-   External Services: BitBucket Server
+-   Auth Providers: One Login
+-   Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1651855667285999
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer is experiencing socket disconnections from their Sourcegraph instance when using VS Code. ​
+1.  The customer attempts a search from their VS Code extension to their POC Sourcegraph instance.
+2.  The sporadically receive a network error. ​
+No resolution due to the fact that the customer's installation exists outside of a supported deployment path. ​
+N/A
+​request to https://sourcegraph.docker.sv5.savagebeast.com/.api/graphql?HighlightedFile failed, reason: Client network socket disconnected before secure TLS connection was established

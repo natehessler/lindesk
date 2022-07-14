@@ -1,0 +1,29 @@
+zendeskTicketNumber: 7309
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7309
+title: Capital One question
+Application engineer: Ben Gordon
+Customer: Capital One 
+Date: Apr 1
+Version: 3.36
+Deployment: Custom ECS
+External Services: GitHub
+Auth Providers: GitHub
+Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1648835214579539\
+Can I add user account and promote to site admin using an API?
+Yes, here is a doc: https://docs.sourcegraph.com/admin/how-to/mutate-user-api
+Summary: -   And examples:
+Create a new user:
+  mutation{
+    createUser(username:"", email: ""){
+      user{
+        id,
+        username
+      }
+      resetPasswordURL
+    }
+  }
+Promote user to site admin:
+  mutation{
+    setUserIsSiteAdmin(userID:"", siteAdmin: true){}
+  }
+-   https://docs.sourcegraph.com/admin/how-to/mutate-user-api 

@@ -1,0 +1,10 @@
+zendeskTicketNumber: 9089
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9089
+title: Cloud Run
+Application engineer: Gabe Torres
+Customer: Sourcegraph 
+Date: June 16, 2022
+Slack Links:https://sourcegraph.slack.com/archives/C03E2ML7KL6/p1655418703616649
+d there be a way to deploy a sourcegraph instance via Cloud Run?
+on't support deployments on Cloud Run since it doesn't support multi-container, stateful apps like Sourcegraph.
+Summary: 

@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: Nuro AI 
+-   Date: June 22, 2022
+-   Version: 3.19.1​
+-   Deployment: docker-container
+-   External Services: GITHUB
+-   Auth Providers: openidconnect,builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C01EJ09NR8S/p1655947040622269
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+I have a new repo I would like to hook up with Sourcegraph code search. Is there a standardized process for this?
+If you are a non-admin on your sourcegraph instance. You would definitely need the help of your site admin to get this done and make this repo searchable in sourcegraph.
+N/A 

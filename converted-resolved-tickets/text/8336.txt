@@ -1,0 +1,12 @@
+-   Application engineer: Ben Gordon
+-   Customer: Pandora Media, Inc. 
+-   Date: May 19, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+-   How to enable a Sourcegraph extension for all users?
+-   Add the extension by name to the site configuration file

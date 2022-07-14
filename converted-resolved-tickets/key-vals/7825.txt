@@ -1,0 +1,15 @@
+zendeskTicketNumber: 7825
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7825
+title: Is there JSONNET syntax highlighting?
+Application engineer: Michael Bali
+Customer: Databricks 
+Date: Apr 24
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1650676923697749
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Is there JSONNET syntax highlighting? It appears that all the JSONNET files do not have syntax highlighting
+I did a quick test on my end, and I can also confirm that the jsonnet files do not have syntax highlighting. I can confirm that we currently don't have syntax highlighting for JSONNET files. This would go for a feature request

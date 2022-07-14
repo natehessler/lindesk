@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6019
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6019
+title: New Slack message in support-indeed-campaigns
+Application engineer: Alex Jean-Baptiste
+Customer: Indeed 
+Date: Feb 3
+Version: 3.33.2​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1643919029262549
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/30914
+Summary: Hi all, Is there a way to see the logs from the script run in the container for each repo? Specifically, I'm trying to get more detail on why the change attempt fails. I feel like I must be missing something simple.
+The flag -keep-logs applied to either the src batch apply or src batch preview command.
+https://docs.sourcegraph.com/batch_changes/references/troubleshooting

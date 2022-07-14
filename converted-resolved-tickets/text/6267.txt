@@ -1,0 +1,16 @@
+-   Application engineer: Gabe Torres
+-   Customer: FactSet 
+-   Date: Feb 15
+-   Version: 3.32.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB,OTHER
+-   Auth Providers: saml, github
+-   Slack Links:
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/710 https://github.com/sourcegraph/customer/issues/712
+-   Doc Update Link:
+The customer saw a 'Can't connect to GitHub'. This error was caused when the external sync was marked as errored because GitHub returned a 404 when we reach the end of pagination. This was fixed in https://github.com/sourcegraph/customer/issues/710\
+Another issue was caused when the database reached the max value for type integer.  It looks like we reached the int limit of 2,147,483,647. https://github.com/sourcegraph/sourcegraph/blob/7148009913d77239bb24e79274682cc1e0866c32/enterprise/internal/database/perms_store.go
+The thing that stands out to me is the repositoryQuery: public method of adding repos. I see here that the repo list is built by querying the API 100 repos at a time. Though I don't see what the exit condition is. If you visit the page that creates the error it does return a 404. https://github.com/api/v3/repositories?per_page=100&since=66941 I tested this a bit on ghe.sgdev.org and I could see that anything past 442286 returned a 404. I tried to query another GHE API and anything past the last repo returned an empty array instead of a 404 page. This leads me to believe that there are no repos past 66941 so GitHub returns a 404, and the function exits here. https://github.com/api/v3/repositories?per_page=100&since=66940 returns a single repo which is the repo with id 66941.
+Bug fixes in the issues mentioned above.
+t=2022-02-15T21:49:37+0000 lvl=eror msg=source.list-repos error="1 error occurred:
+t=2022-02-17T02:08:54+0000 lvl=eror msg="Failed to sync permissions" type=1 id=82424 err="set repository pending permissions: load user pending permissions IDs from upsert pending permissions: ERROR: nextval: reached maximum value of sequence \"user_pending_permissions_id_seq\" (2147483647) (SQLSTATE 2200H)"

@@ -1,0 +1,25 @@
+zendeskTicketNumber: 5148
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5148
+title: Grafana does not work on HTTPS
+Application engineer: Michael Bali
+Customer: PDT Partners 
+Date: December 15, 2021
+Version: N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: Email
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/629
+Doc Update Link: N/A
+Summary: The customer has a custom Apache server configuration file that he's using to forward requests to Sourcegraph. Grafana works fine on open port but for security reasons, they don't want to run Grafana on an open port and bind only to 127.0.0.1 instead of 0.0.0.0 and then force access to go through our apache proxy running on the same host.
+-   Created a rfh to Engineering on this one.
+-   We have been able to establish that the cause of this issue is probably related to the Apache config setting.This could be caused by your reverse proxy settings
+-   Asked if the customer is willing to share their config details but got no feedback.
+since the customer is using a custom configuration that's not documented on Sourcegraph, we're fairly limited in what support we can offer here. They haven't provided us with their complete Apache VirtualHost configuration, so I can't try to troubleshoot anything directly. They can refer to our documented examples of using HTTPS with nginx and caddy, to replicate the same setup in Apache. For both of those, there is no special handling for Grafana: the reverse proxy is set up on the entire hostname.
+N/A
+    If you're seeing this Grafana has failed to load its application files
+    1. This could be caused by your reverse proxy settings.
+    2. If you host grafana under subpath make sure your grafana.ini root_url setting includes subpath. If not using a reverse proxy make sure to set serve_from_sub_path to true.
+    3. If you have a local dev build make sure you build frontend using: yarn start, yarn start:hot, or yarn build
+    4. Sometimes restarting grafana-server can help
+    5. Check if you are using a non-supported browser. For more information, refer to the list of supported browsers.

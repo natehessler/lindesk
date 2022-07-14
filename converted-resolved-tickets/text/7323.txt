@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Salesforce.com 
+-   Date: Apr 4
+-   Version: 3.17.2​
+-   Deployment: single docker
+-   External Services:
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1649070260947679
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/33399
+-   Doc Update Link:
+The customer wasn't receiving critical alerts after setting up Prometheus. All email alerts were failing
+This is a known issue in 3.38 via inc-93-triggered-observability-alerts-are-not-delivered
+Patch done and delivered in 3.38.1 via https://github.com/sourcegraph/sourcegraph/issues/33399

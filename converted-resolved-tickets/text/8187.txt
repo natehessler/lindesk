@@ -1,0 +1,15 @@
+-   Application engineer: Riana Shahid
+-   Customer: 
+-   Date: May 12
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03AGA23X0V/p1652383890069629
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+is it possible to generate individual series off of a capture group in the 
+what I'm expecting is one series per child subdirectory, ie 
+I'm just seeing now that for the 
+A capture group in a filter, like repo or file , is currently unsupported
+https://docs.sourcegraph.com/code_insights/explanations/automatically_generated_data_series

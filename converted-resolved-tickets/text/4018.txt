@@ -1,0 +1,17 @@
+-   Application engineer: Warren Gifford
+-   Customer: Twitter 
+-   Date: Oct 21
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Unable to reproduce this issue in production, simulating pod eviction with pod metadata.name 's altered to have the -prod suffix
+Attempted to simulate symbols pod endpoints issue by killing the symbols pod. Unable to reproduce issue.
+Admin unresponsive on debugging, closing for timeout after best effort testing
+n/a
+t=2021-10-22T18:05:31+0000 lvl=eror msg="error getting search suggestions: " error="1 error occurred:\n\t* symbol search failed: no symbols endpoints could be found (this may indicate more symbols replicas are needed, contact support@sourcegraph.com for assistance)\n\n"
+t=2021-10-22T04:56:08+0000 lvl=warn msg="zoektIndexedRepos failed" error="no indexed-search endpoints could be found (this may indicate more indexed-search replicas are needed, contact support@sourcegraph.com for assistance)"
+\

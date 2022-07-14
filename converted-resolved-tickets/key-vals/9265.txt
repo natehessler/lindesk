@@ -1,0 +1,15 @@
+zendeskTicketNumber: 9265
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9265
+title: New Slack message in trial-sb
+Application engineer: Stomzy Mwendwa
+Customer: Simply Business 
+Date: June 23, 2022
+Version: ​3.40.2
+Deployment: Docker-compose
+External Services:
+Auth Providers:
+Slack Links:https://sourcegraph.slack.com/archives/C03KUN7SPRA/p1655982809638029
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Does the scip-typescript index command work for projects that are a mix of Ruby & Javascript?
+Hey @adam I just got confirmation that for a bi-lingual or multi-lingual project/repo, you'd have to run indexes for both(scip-typescript index and scip-ruby index) --- this will generate two indexes, both of which would need  to be uploaded for precise code intel.

@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: Mercari 
+-   Date: Mar 29
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links: https://sourcegraph.slack.com/archives/C018U1ZRFQC/p1648617409287809
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Is it possible to use GitHub App to allow sourcegraph access to your  organization / private repos.
+At the moment, it is not possible to use a GitHub App. This is an effort underway right now and hopefully this would be available soon. Today, users can either: - Connect with GitHub and add repos as an individual through OAuth - Create an organization (in the limited access) and use connect with GitHub with a PAT, where the PAT belongs to themselves or machine account
+N/A 

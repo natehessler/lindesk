@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4526
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4526
+title: New Slack message in support-improbable
+Application engineer: Stomzy Mwendwa
+Customer: Improbable 
+Date: Nov 10
+Version: ​3.32
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02LRB9SLQ5/p1636545737004600
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/558
+Doc Update Link:
+Summary: The customer was seeing the following error when attempting to make a batch change: Failed to run operations on changeset. Creating commit from patch repository....pushing ref: exit status 128
+I moved my SSH keys in \~/.ssh to a different location so git won't use them. I did unset SSH_AUTH_SOCK so gitserver won't access the keyagent that's still running on macOS I started sg start
+This turned out to be a bug that was broken from 3.27. Thorsten from batch changes helped with the fix.

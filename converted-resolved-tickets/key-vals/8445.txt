@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8445
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8445
+title: # Inquiry About Getting Usage Data In More Detail
+Application engineer: Alex Jean-Baptiste
+Customer: Unity 
+Date: May 25, 2022
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB,GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01FKCMAVH9/p1653490328710639
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: ​Is there a way to get usage data in more detail? For example a level of daily activity and perhaps even the actual searches that were conducted? For the moment I seem to only be able to get total search count of the user over all time. There's also no way to tell if the searches were scoped to codehosts or repos which are all important in determining user personas and helping to drive adoption and providing training in the right areas. ​
+​After collaboration with my colleagues we have determined that he best option currently would be to use the information at the following url:\[SOURCEGRAPH SITE URL\]/users/
+​https://sourcegraph.com/github.com/sourcegraph/sourcegraph

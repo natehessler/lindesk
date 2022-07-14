@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Quantcast 
+-   Date: Apr 26
+-   Version: 3.34.2​
+-   Deployment: docker-container
+-   External Services: GITHUB
+-   Auth Providers: openidconnect
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer found that repos were cloning and updating fine but noticed that the repos hadn't been indexed for 2 months
+Check out logs from the zoekt services as well as gitserver. Also take a look at grafana charts
+It turned out that during a previous upgrade the admin had neglected to upgrade the version of the indexed search pods, correcting this error resolved this.

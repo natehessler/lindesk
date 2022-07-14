@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8220
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8220
+title: User unable to see repositories after first sign up
+Application engineer: Michael Bali
+Customer: Unity 
+Date: May 15
+Version: 3.36.2​
+Deployment: kubernetes
+External Services: GITHUB,GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1652686340363129
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer logged in for the first time and was able to log in but get this 
+It takes a while for repositories to sync for new users when they log in for the first time.
+N/A

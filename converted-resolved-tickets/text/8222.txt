@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: bet365 
+-   Date: May 16
+-   Version: 3.35.1​
+-   Deployment: docker-compose
+-   External Services: GITLAB
+-   Auth Providers: gitlab,gitlab
+-   Slack Links:N/A
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Our Observability Team had brought to my attention that the Docker Host Server for SourceGraph was often consuming swap memory at over 99%. We were of thinking of increasing the 2g to 4g to see if this helps, as the Docker Host itself has plenty of available memory still, would this be ok to?
+Yes it's absolutely okay to bump up mem_limit. Just for reference, our current docker manifest has it defaulted to 4g. Please feel free to scale up or down as needed.
+https://github.com/sourcegraph/deploy-sourcegraph-docker/blob/master/docker-compose/docker-compose.yaml

@@ -1,0 +1,12 @@
+-   Application engineer: Warren Gifford
+-   Customer: Sourcegraph 
+-   Date: May 27, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way to include line numbers in search? E.g. from a stacktrace I might get something likemy_foo.py:123 insert_crash_info_here, but in sourcegraph right now I end up first searching for my_foo and then ctrl-f-ing for line 123. Would be nice if there was a way to do this in one step
+Hey Lifan we don't currently have a feature that allows you to specify the line number that you want to target with a search in a specific file.We do however have the ability to construct a url that can point to specific files -- for example: https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/blob/cmd/gitserver/main.go?L92-96&subtree=true this points to line 92-96 in cmd/gitserver/main.goLet me know if I'm tracking your request correctly here, for me ctrl f actually won't highlight the lines provided in a Sourcegraph blob display so I want to make sure I'm understanding your question correctly.

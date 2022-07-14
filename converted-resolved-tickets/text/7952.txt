@@ -1,0 +1,13 @@
+-   Application engineer: Warren Gifford
+-   Customer: Apple 
+-   Date: May 2
+-   Version: 3.32.0​
+-   Deployment: docker-container
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way we can do a multi-line search 
+Hey @Prasanna Vasudevan I've had some luck with structural search here. Heres an example (edited for a slightly better example). The syntax for structural search can be a little hard to get used to so let me know if that example helps out
+see above

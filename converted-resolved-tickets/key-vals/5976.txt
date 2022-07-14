@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5976
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5976
+title: New Slack message in trial-avito
+Application engineer: Stomzy Mwendwa
+Customer: Avito 
+Date: Feb 2
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1643814763844459
+GitHub Issue Link:
+Doc Update Link:
+Summary: Should all migrations from this directory be applied? https://github.com/sourcegraph/sourcegraph/tree/main/migrations/frontend
+Happy to answer this for you.Migrations are done during startup by the frontend So pretty much all the migrations you've spotted will be done automatically.Thanks for sharing the log snipped above. Based on this, everything checks out and looks good!

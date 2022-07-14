@@ -1,0 +1,21 @@
+-   Application engineer: Warren Gifford
+-   Customer: Dropbox 
+-   Date: Nov 19
+-   Version: 3.33.2​
+-   Deployment: docker-compose
+-   External Services: OTHER
+-   Auth Providers: saml
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer experiencing alerts
+Multiple inquires are logged in this ticket:
+are any of the worker jobs resource-intensive? somehow these are the only alerts that are firing since we deployed 3.30.4 (maybe explain this), alerts below
+symbols: 25+ current fetch queue size zoekt-webserver: 5% Indexed search request errors every 5m by code for 5m0s frontend: 20s+ 99th percentile code-intel successful search request duration over 5m frontend: 15s+ 90th percentile code-intel successful search request duration over 5m wondering if we should just double gitserver instead.
+Info:
+workers seem to be at like 1% CPU/mem. gitserver also seems to run at \
+check grafana provisioning indicators observe logs after adding "observability.logSlowSearches": 20, in site config json to determine consistency of long code-intel searches
+This issue is unresolved until symbols is improved with major overhaul due in v3.35
+As temporary solution adding a second well-provisioned gitserver
+    ESC[32;1msourcegraph-frontend-2           
+    ESC[32;1msourcegraph-frontend-2           

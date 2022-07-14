@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6675
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6675
+title: apple-onlinestore-splunk
+Application engineer: Warren Gifford
+Customer: Apple 
+Date: Mar 7
+Version: 3.37.0​
+Deployment: kubernetes
+External Services: OTHER
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C01HW836940/p1646895354357019
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/749
+Doc Update Link:
+Summary: Do we have a particular log aggregator, how do you setup splunk
+Hey @Saibhargav Reddy after discussing this internally, what I've found is that we don't have any official guidance or recommendations about specific log aggregators. As mentioned above some customers do use Splunk to ingest Sourcegraph logs -- I believe the setup follows the general process to setup Splunk with any kubernetes application. If you decided to go that route, you may want to take a look at our log levels doc.

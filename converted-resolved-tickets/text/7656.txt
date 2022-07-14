@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Glovo 
+-   Date: Apr 14
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+    "repositoryQuery": \[ "org:Glovo type:internal"\],
+To make Sourcegraph fetch only internal repos, without us having to write a whole new script maintaining an explicit list?
+"repositoryQuery": \[ "org:Glovo is:internal" \],

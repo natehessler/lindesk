@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4805
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4805
+title: How to exclude repos from results
+Application engineer: Gabe Torres
+Customer: Atlassian 
+Date: Nov 30
+Version: 3.34.1​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1638315880028900
+GitHub Issue Link:
+Doc Update Link:
+Summary: Is there an easy way to remove repos from what I'm searching for?
+You can exclude these repos by name or regex pattern by using NOT repo: or -repo:. Additionally, you can create a search context that will target a specified set of repos.
+https://docs.sourcegraph.com/code_search/reference/queries

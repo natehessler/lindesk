@@ -1,0 +1,19 @@
+zendeskTicketNumber: 5334
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5334
+title: LSIF uploads generate non-useful link for non-admin users``{=html}
+Application engineer: Kelvin Lee
+Customer: 
+Date: December 29, 2021
+Version: ​3.35
+Deployment: K8s
+External Services: (Sourcegraph.com external services)
+Auth Providers: (Sourcegraph.com external services)
+Slack Links: [Community Slack](https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1640858812139300)
+GitHub Issue Link: [Feedback link](https://github.com/sourcegraph/sourcegraph/issues/29665)
+Doc Update Link: None
+Summary: ! This is more a feature request but uhhh I guess still writing a case summary in case it might help us in the future
+LSIF uploads generate non-useful link for non-admin users
+None
+None
+None
+None

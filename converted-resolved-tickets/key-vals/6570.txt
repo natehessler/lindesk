@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6570
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6570
+title: Using your own prometheus and grafana monitoring
+Application engineer: Giselle Northy
+Customer: Pandora Media, Inc. 
+Date: Mar 1
+Version: ​
+Deployment: Kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Can we use our existing Prometheus and Grafana monitoring?
+Yes, is possible to use your existing monitoring. That said, the built in one already has alerts and dashboards configured so if you use your own, that would need to be set up on your end of things. You can read more about that here: https://docs.sourcegraph.com/admin/faq
+Additionally, we've had some folks run into troubles when enabling both monitoring (for instance, prometheus metrics running in the same space) That can cause the metrics to double count when they're on the same namespace. So you'll want to be careful with that.
+Finally, we also have the queries that generate the metrics. Basically we have this alerting page, and if you click into the link by the alert, it brings you to the query that generates it.
+1.  To do that you'd go here: https://docs.sourcegraph.com/admin/observability/alert_solutions
+2.  Each alert has a link called Dashboards reference". Click that then...
+3.  Select Technical Details and there you'll see the query

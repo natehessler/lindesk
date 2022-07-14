@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Salesforce.com 
+-   Date: Feb 9
+-   Version: 3.17.2​
+-   Deployment: single docker
+-   External Services:
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C01D50MSA7L/p1644451749687189
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/issues/31331
+-   Doc Update Link:
+One of the customer's users reported a no results found error for a relatively simple query that should be able to return results. The disk I/O in the thread was at 95% utilization as context
+The idea would be to have a large repository served by a single container instance with minimal resources. In this case, a Docker Desktop deployment and then adding large monorepos. Performing a simple query always times out
+This is a resources issue and the customer should bump up their disk to accommodate additional users on PoC with the current scope of searches done concurrently. Good thing is, they are moving the instance to better infra to help with the extended PoC.

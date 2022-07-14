@@ -1,0 +1,17 @@
+zendeskTicketNumber: 4172
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4172
+title: How to stop a Batch Change or change the speed at which they are applied
+CSE: Alex Jean-Baptiste
+Customer: Reddit 
+Date: 28 October 2021
+Version: ​3.32.0
+Deployment: Kubernetes
+External Services: Github
+Auth Providers: Built-in, Github
+Slack Links:https://sourcegraph.slack.com/archives/C02BJ8T258D/p1635279291034000
+GitHub Issue Link: N/A
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/26723
+Summary: The customer wished to stop an applied Batch Change before the remaining repos were affected.
+The customer attempted to set the published property of the previously applied batch change to false and then apply the batch change before the previous one was finished applying. The customer inquired if there was a way to apply batch changes slowly over time. The customer was informed of the global rollout window setting within Sourcegraph and given the following global rate suggestion: {"rate": "10/minute"} by Batcher Support.
+The customer expressed that the suggested global rate configuration was a good solution.
+N/A

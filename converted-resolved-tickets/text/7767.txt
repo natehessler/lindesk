@@ -1,0 +1,16 @@
+-   Application engineer: Ben Gordon
+-   Customer: VideoAmp 
+-   Date: Apr 21
+-   Version: 3.34.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02P8ANKTJ9/p1650556134737379
+-   How can I run a search across all branches of my repo?
+    https://docs.sourcegraph.com/code_search/reference/language
+    This doc is useful as a comprehensive guide, but here are two quick examples:
+    Use rev search to target a specific tag or a branch:
+    https://sourcegraph.com/search?q=context:global+r:%5Egithub.com/sourcegraph/sourcegraph%24+rev:v3.39.0&patternType=regexp
+    Use glob syntax to target all branches:
+    https://sourcegraph.com/search?q=context:global+repo:%5Egithub.com/sourcegraph/sourcegraph%24%40*refs/heads/*+&patternType=literal
+https://docs.sourcegraph.com/code_search/reference/language

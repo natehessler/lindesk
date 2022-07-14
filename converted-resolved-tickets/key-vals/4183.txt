@@ -1,0 +1,41 @@
+zendeskTicketNumber: 4183
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4183
+title: SMTP server setup not working with test query
+Application engineer: Kelvin Lee
+Customer: Tinder 
+Date: Oct 26
+Version: 3.33.0​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,saml
+Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C01574FJV35/p1635287104007400) , [Slack thread establishing Prometheus as a reliable source of truth](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1635973200256500), which also linked to a [useful Slack thread with another SMTP issue](https://sourcegraph.slack.com/archives/C02BJ8T258D/p1633540112217200)
+GitHub Issue Link:
+Doc Update Link:
+Summary: Note: Client and Application Engineer were working on two tickets simultaneously, so you might see mentions of a "repo sync" ticket/issue interspersed. That was a separate issue.
+Client was not getting successful test emails after attempting to set up their email/SMTP server.
+Eventual solution was to recommend 
+Customer was unable to get successful test emails after configuring their SMTP server.
+When testing out a new SMTP/email configuration, it is definitely recommended to restart the 
+One can use the CLI and input the command 
+Oh, to specifiy where the test email should go, look in the Site Admin configuration for 
+{
+ "level": "critical",
+ "notifier": {
+ "type": "email",
+ // Address where alerts will be sent
+ "address": "kelvin@sourcegraph.com"
+ }
+ }
+During testing, as mentioned [here](https://sourcegraph.slack.com/archives/C01574FJV35/p1636079665029700?thread_ts=1635287104.007400&cid=C01574FJV35), and quoted below:
+> If you would like to fiddle with noVerifyTLS, I recommend restarting the aforementioned containers (sourcegraph-frontend-\[0/1/2/internal\] , and prometheus) between attempts. A successful email surfaced for me in about \~1 minute. A warning/error log would surface in about \~1-2 minutes into prometheus).
+... Though the main one to restart is almost definitely 
+After testing out 
+\[Doc followed by client\](https://docs.sourcegraph.com/admin/observability/alerting
+\[GitHub source code mentioning noVerifyTLS\[(https://github.com/sourcegraph/sourcegraph/blob/622beb5300018e96a7a60311ea44caacec45270a/schema/site.schema.json)
+\[More GitHub source code mentioning noVerifyTLS\](https://github.com/sourcegraph/sourcegraph/blob/05aacc62ae125c6885a327b658ff1fd3ac761b9b/internal/txemail/txemail.go
+[Docker restart command](https://docs.docker.com/engine/reference/commandline/restart/)
+[Docker logs command](https://docs.docker.com/engine/reference/commandline/logs/)
+    t=2021-11-01T17:15:45+0000 lvl=eror msg="API HTTP handler error response" method=POST request_uri=/.internal/send-email status_code=500 error=EOF trace= traceID=
+\
+The following from prometheus container is the "smoking gun" of this issue:
+    level=warn ts=2021-11-05T01:46:28.878Z caller=notify.go:723 component=dispatcher receiver=src-critical-receiver integration=email[0] msg="Notify attempt failed, will retry later" attempts=1 err="'require_tls' is true (default) but \"smtp.gmail.com:465\" does not advertise the STARTTLS extension"

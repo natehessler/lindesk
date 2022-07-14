@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4002
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4002
+title: search for list of repos that contain a named file
+Application engineer: Kelvin Lee
+Customer: Toast 
+Date: Oct 21
+Version: 3.30.3​
+Deployment: docker-container
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C01FY24RFB7/p1634848246000500)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: The customer asked if you can search for a list of repos that contain a certain file name.
+We had some issue with counts and patterns, but the answer is still yes.
+Unfortunately, we didn't really resolve the counts/pattern stuff, but the customer seemed to have disengaged.
+Can you conduct a search that returns a list of repos that contain a file that is named a certain name e.g. all repos that contain a "README" file?
+Yes, using 
+https://docs.sourcegraph.com/code_search/reference/queries

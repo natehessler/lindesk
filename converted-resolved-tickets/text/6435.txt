@@ -1,0 +1,15 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: kiwi 
+-   Date: Feb 22
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C027433JXKN/p1645608287286199
+-   GitHub Issue Link:
+-   Doc Update Link:
+SRC not working on Colima docker
+I am trying to run batch change from my localhost Mac with Apple silicon and I am getting an error as:
+gitlab.skypicker.com/infra/finance/sandbox: creating workspace: preparing local git repo: preparing workspace: Docker output: docker: Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /tmp/src-run-3546096955. See 'docker run --help'.: exit status 125
+Maybe you have seen such issues before? Do you have any hints
+Workaround: Set SRC_BATCH_TMP_DIR to a directory that is definitely available within the Docker VM. For example, I think that would be /tmp/colima in Colima case

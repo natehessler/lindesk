@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: 
+-   Date: Mar 1
+-   Version: ​3.36.3
+-   Deployment: Kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/CTJCMDCCS/p1646198959624749
+-   GitHub Issue Link:
+-   Doc Update Link:
+Is there a way for me to search with regex by default?
+Yes there is a way to default to regex. Your site admin can change search to default to regex under Global Settings and setting the field "search.defaultPatternType"" to regex
+https://docs.sourcegraph.com/admin/config/settings

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 8426
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8426
+title: Roblox - batch changes and archived after the fact repos
+Application engineer: Warren Gifford
+Customer: Roblox Corporation 
+Date: May 24, 2022
+Version: 3.37.0​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Changesets on archived repos don't move into the archived state!
+Reproduced clarified issue -- turns out archived state of a repo is unrelated to archived state of a changeset
+Shared public issues with admins
+https://github.com/sourcegraph/customer/issues/1022

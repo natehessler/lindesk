@@ -1,0 +1,13 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Unity 
+-   Date: Apr 11
+-   Version: 3.36.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1649708252033299)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+> Hey Sourcegraph! I've looked through documentation but I would like to know if I'm missing anything. Is there a way to filter repositories based on Github Team or Tags?
+Filtering based on teams is not supported. We support filtering on tags/revisions, as described \[here\](https://docs.sourcegraph.com/code_search/reference/queries
+https://docs.sourcegraph.com/code_search/reference/queries

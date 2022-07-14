@@ -1,0 +1,13 @@
+-   CSE: Michael Bali
+-   Customer: Allegro 
+-   Date: 28 October 2021
+-   Version: ​Trial
+-   Deployment: Trial
+-   External Services: Trial
+-   Auth Providers: Trial
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BF1E7VAN/p1634195024043300
+-   GitHub Issue Link:
+-   Doc Update Link:
+one of the developers is searching repositories, but he wants to narrow the results only to those where he has the role "administrator".
+CE jumped in.
+While we don't support the ability to search for repo's where you are the administrator, Search Context can be used as workaround to save repositories where he is the administrator.  This can be done in two ways: 1.) He can create and save a context with all the repo's where he is the admin. More information can be found here: https://docs.sourcegraph.com/code_search/how-to/search_contexts 2.) Using the API (https://sourcegraph.com/api/console), he can use SearchContext to set up or automate the context.

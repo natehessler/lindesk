@@ -1,0 +1,12 @@
+-   Application engineer: Riana Shahid
+-   Customer: Vmware 
+-   Date: June 23, 2022
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C03DYKCM3PD/p1656001069298149
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer noticed that a couple of their repos had gone un-synced for 19 days and 9 days respectively. This is a problem because the reindexing period should not be more than 8 hours.
+The repos appeared to get re-indexed automatically before we could look into this so closing this issue for now. customer will reach out if they see this problem again. it may be useful to check grafana to see if there are any alerts there.

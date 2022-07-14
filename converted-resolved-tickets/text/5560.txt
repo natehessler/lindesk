@@ -1,0 +1,14 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Criteo 
+-   Date: Jan 13
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/CV5KX7T70/p1642087632003600
+-   GitHub Issue Link:
+-   Doc Update Link:
+Hi, I've started the upgrade in prod environment and I have a Issue. The frontend do not start and I have the bellow error: "t=2022-01-13T15:25:40+0000 lvl=info msg="Checked current version" schema=frontend version=1528395954 dirty=true t=2022-01-13T15:25:40+0000 lvl=info msg="Checked current version" schema=frontend version=1528395954 dirty=true ERROR: failed to connect to frontend database: dirty database: schema is marked as dirty but no migrator instance appears to be running The target schema is marked as dirty and no other migration operation is seen running on this schema. The last migration operation over this schema has failed (or, at least, the migrator instance issuing that m igration has died). Please contact support@sourcegraph.com for further assistance."
+We have a document that will walk you through the process of resolving this here: https://docs.sourcegraph.com/admin/how-to/dirty_database
+I can walk you through it on a call if you'd want that
+https://docs.sourcegraph.com/admin/how-to/dirty_database

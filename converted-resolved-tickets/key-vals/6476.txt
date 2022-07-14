@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6476
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6476
+title: How to enable LSIF for Clojure repo
+Application engineer: Jason Harris
+Customer: Netflix 
+Date: Feb 24
+Version: 3.36.3​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://netflix.slack.com/archives/CHKL4G5PG/p1645722233111819 https://sourcegraph.slack.com/archives/CHXHX7XAS/p1645729234108969
+GitHub Issue Link: n/a
+Doc Update Link: n/a
+Summary: How do I add LSIF for clojure?
+TL;DR we do not currently offer built-in indexers for clojure for a number of reasons.
+Clojure does not crack the top 20 languages searched with sourcegraph. The current priorities are more widely used languages like python, C
+There is also an added level of complexity, because of the unique ability for clojure users to choose their own adventure when it comes to how they want to implement type checking. There are three ways to type check in clojure. Accounting for each of those would make building an indexer a time consuming and difficult venture. Lastly, macros. So far, sourcegraph hasn't really worked with languages which make heavy use of macros. Macros pose interesting challenges for code nav, and make something like batch changes essentially impossible to do 100% reliably.

@@ -1,0 +1,13 @@
+-   Application engineer: Riana Shahid
+-   Customer: Tinder 
+-   Date: Jan 19
+-   Version: 3.36.2​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1635287104007400
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/643 , https://github.com/sourcegraph/customer/issues/687, https://github.com/sourcegraph/sourcegraph/issues/30246
+-   Doc Update Link: n/a
+Customer reported that they configured an email server but were not receiving email alerts when they tested with their API console, as recommended by this \[doc\](https://docs.sourcegraph.com/admin/observability/alerting
+Their goal is for these emails to be used for notification-generating features like code monitoring or batch change status updates. \
+They first tried changing settings under email.smtp, specifially the port number 👎 Later we thought setting noverifyTLS to true might work but enabling TLS on our end would expose our SMTP server password so 👎 

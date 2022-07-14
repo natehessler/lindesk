@@ -1,0 +1,13 @@
+-   Application engineer: Michael Bali
+-   Customer: 
+-   Date: Mar 29
+-   Version: ​None
+-   Deployment: None
+-   External Services: None
+-   Auth Providers: None
+-   Slack Links: Email
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer wants to know why he isn't able to see the site-admin option in his sourcegraph account?
+If the account was created on sourcegraph.com, there are no site-admin options for users on sourcegraph.com. However, I believe this shouldn't prevent you from connecting to GitLab, there is a page for code host connections under settings in your user account that allows you to Connect with your code hosts. Then, add repositories to search with Sourcegraph. If you would like to have admin options you would have to deploy a [self-hosted](https://docs.sourcegraph.com/admin/install) Sourcegraph instance.
+-   https://docs.sourcegraph.com/admin/install

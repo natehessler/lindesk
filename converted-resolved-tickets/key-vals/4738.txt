@@ -1,0 +1,34 @@
+zendeskTicketNumber: 4738
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4738
+title: Issue with dirty database during upgrade
+Application engineer: Michael Bali
+Customer: GOV.UK 
+Date: Nov 24
+Version: 3.34.0​
+Deployment: Kubernetes
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1637760377020900
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Issue with dirty database during upgrade
+-   Shared documentation that explains the step to go through in resolving this.
+-   Customer ran into unique index creation errors because of duplicate values.
+The customer dropped and recreated the index and completed the troubleshooting steps in the doc and all the frontend pods are now back up.
+-   https://sourcegraph.slack.com/archives/C02E4HE42BX/p1635460607076300?thread_ts=1635452729.068200&cid=C02E4HE42BX
+-   https://docs.sourcegraph.com/admin/how-to/dirty_database
+    sg=
+      version   
+    ------------+-------
+     1528395935 
+    (1 row)
+    sg=
+    sg-
+    NOTICE:  relation "repo_stars_desc_id_desc_idx" already exists, skipping
+    CREATE INDEX
+    sg=
+                                                Table "public.repo"
+            Column         
+    -----------------------+--------------------------+-----------+----------+----------------------------------
+    Indexes:
+        "repo_stars_desc_id_desc_idx" btree (stars DESC NULLS LAST, id DESC) WHERE deleted_at IS NULL AND blocked IS NULL INVALID

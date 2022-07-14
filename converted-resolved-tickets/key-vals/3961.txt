@@ -1,0 +1,23 @@
+zendeskTicketNumber: 3961
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3961
+title: How could I find unpublished batch changes
+CSE: Michael Bali
+Customer: Indeed 
+Date: 28 October 2021
+Version: 3.30.4​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1634731632023100
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: -   Customer ssh into a remote machine to run a batch change and now can't see the URL for the batch change preview.
+-   Batch Changes take longer hours
+-   The customer wants to know if src-cli preserves logs for later.
+-   can we use the GitLab native webhooks to update both Changesets and Repo commits, instead of having to set up two?
+-   you can use tmux to have a persistent remote session, then when you lose connection, you can just connect the ssh then run tmux attach and get back to the session.
+-   Please do you have webhook configured on your instance? Using webhooks is highly recommended when using batch changes since they speed up the syncing of pull request data between GitHub and Sourcegraph and make it more efficient.
+-   To make batch changes process faster, Using webhooks is highly recommended.
+-   the sourcegraph-cli can output the logs to a file so that this be can checked later.For example: src batch preview -f 
+-   At the moment you would have to set up two different processes. The Gitlab native webhook is repo-specific.  There is certainly room for improvements with this and it would only get better eventually.
+None

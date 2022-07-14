@@ -1,0 +1,20 @@
+zendeskTicketNumber: 6425
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6425
+title: twitter-upgrade-3.37.0-fail
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Feb 22
+Version: 3.36.3​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Twittters upgrade to v3.37.0 failed
+Inspect the init container logs for frontend with kubectl logs ... -c migrator look at manifest
+After looking at the container logs correctly we discovered that the frontend was crashlooping because the migratory service was attempting to connect to codeinsight-db and failing to connect -- this is because the image had been tagged incorrectly in Twitters custom image registry
+Warning FailedCreate 40s (x6 over 119s) replicaset-controller (combined from similar events): Error creating: pods "sourcegraph-frontend-staging-697b56c9b7-jn5vw" is forbidden: failed quota: preemptible-compute-resources: must specify limits.cpu,limits.memory
+Init Containers: migrator: Container ID: containerd://7393fa940b86916f1fe3b5b056fb77b5df681a6a2fa7108f485c6ed8c1516d8d Image: gcr.io/twttr-compute-images-prod/sourcegraph-gke/migrator:3.37.0 Image ID: gcr.io/twttr-compute-images-prod/sourcegraph-gke/migrator@sha256:a18bf12a0795a43f0adffd811f0d554ef96ccfa30d509498b40d01bc0f182f58 Port: 
+kubectl -n sourcegraph-gke-staging logs sourcegraph-frontend-staging-57c94bfc57-z4fs6 -c migrator error: DB not available: timeout: dial tcp 10.238.144.47:5432: i/o timeout
+codeinsights-db-staging-5c7644d488-qrjc9 0/1 ImagePullBackOff 0 6h22m

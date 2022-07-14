@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5828
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5828
+title: Code Monitor use case
+Application engineer: Gabe Torres
+Customer: Tinder 
+Date: Jan 26
+Version: 3.36.2​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1643222163056800
+ should we expect a diff to trigger a code monitor? Is that strictly after the PR has been merged into default branch?
+ feature branch commits something temporarily that would trigger a code montitor, and then a subsequent commit on the same feature branch undoes that change, should we expect that to trigger that to still trigger the code monitor when that feature branch is merged into default branch?
+Summary: The code monitor will trigger when there are results in Sourcegraph for the diff search. If you are tracking the default branch then the monitor will trigger when the PR has been merged into the default branch. In the second case, if you are tracking the main branch, diff search will show all the commits that have been merged. So if you are tracking for changeA and this is removed at a different commit, diff search will show the commit where changeA was added or removed.
+https://docs.sourcegraph.com/code_monitoring/how-tos/starting_points

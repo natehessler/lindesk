@@ -1,0 +1,17 @@
+zendeskTicketNumber: 6124
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6124
+title: Insights taking too long to load
+Application engineer: Jason Harris
+Customer: GOV.UK 
+Date: Feb 9
+Version: 3.36.1​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Insights taking a very long time to load.
+Check logs, old tickets.
+Hey @adam.moss. Happy to keep the conversation going with @Jason Harris out today.As @Stephen.Kershaw pointed out above, typically when this type of error comes up, raising max_connections in the Postgres Config map tends to fix it.Also, raising work_mem helps sustain memory requirements that the additional maximum connections may require.Please see more here.
+This is one way this problem can be fixed, but we don't know because the customer never got back to us on it.

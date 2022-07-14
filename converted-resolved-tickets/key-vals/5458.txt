@@ -1,0 +1,20 @@
+zendeskTicketNumber: 5458
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5458
+title: Network timeout due to a firewall, VPN or proxy, or a failure with the Sourcegraph server
+Application engineer: Michael Bali
+Customer: Atlassian 
+Date: Jan 9, 2022
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: BITBUCKETCLOUD,BITBUCKETSERVER,GITHUB
+Auth Providers: saml
+Slack Links: https://sourcegraph.slack.com/archives/C0183JV3Q0Y/p1641791495001500
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/595
+Doc Update Link: N/A
+Summary: The customer was getting the following error when searching: "The connection was closed before your search was completed. This may be due to a problem with a firewall, VPN or proxy, or a failure with the Sourcegraph server."
+-   Requested for frontend logs
+-   checked to see if all the pods are healthy.
+-   Asked if there were any changes to the pgsql.
+Running kubectl-apply-all.sh didn't apply the updated sourcegraph-frontend role and force applying the role seems to have fixed the issue.
+N/A
+    "The connection was closed before your search was completed. This may be due to a problem with a firewall, VPN or proxy, or a failure with the Sourcegraph server."

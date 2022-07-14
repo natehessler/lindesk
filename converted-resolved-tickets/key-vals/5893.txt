@@ -1,0 +1,38 @@
+zendeskTicketNumber: 5893
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5893
+title: delete one or more user / users from Sourcegraph (can be via API)
+Application engineer: Kelvin Lee
+Customer: Apple 
+Date: Jan 28
+Version: 3.32.0​
+Deployment: docker-container
+External Services: OTHER
+Auth Providers: saml
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C0225J36ZTR/p1643414842715629)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: How to delete user(s) via the API
+I answered with both (a) a single user method and (b) a multiple users method:
+(A) https://docs.sourcegraph.com/admin/how-to/mutate-user-api
+(B) A workaround seemed to be circulating (in [this thread](https://sourcegraph.slack.com/archives/C01HW836940/p1643389044946689)), which I shared to the customer.
+Copy/pasted here:
+> The description is as follows: files.zip contains:
+>
+> cleanup_users.py : deletes users who have been inactive for more than x days
+>
+> find_users_to_delete.sh: hacky shell script to compare the users in sourcegraph with those from another system
+>
+> download_configuration.py : downloads site-config.json and global-settings.json
+>
+> sourcegraph a very simple interface to the graphql apis on sourcegraph
+>
+> NOTE: none of these are officially supported by sourcegraph.  The GraphQL APIs are of course.  But, these scripts were written to be examples. Please run these against your test cluster first :slightly_smiling_face: Required python modules:
+>
+> jstyleson (https://pypi.org/project/jstyleson/) requests (https://docs.python-requests.org/en/latest/user/install/)
+>
+> Examples: NOTE: you will likely need to set PYTHONPATH (export PYTHONPATH=
+>
+> python3 download_configuration.py -e http://sourcegraph.example.com -a YOUR_sudo_ACCESS_TOKEN -u YOUR_USERNAME delete all users that have not been active in last 365 days: python3 cleanup_users.py -e http://sourcegraph.example.com -a YOUR_sudo_ACCESS_TOKEN -u YOUR_USERNAME -d 365
+Originally supplied by Mike McLaughlin.
+And the files.zip, attached. [files.zip](https://github.com/sourcegraph/support-tools-internal/files/7998484/files.zip)
+https://docs.sourcegraph.com/admin/how-to/mutate-user-api

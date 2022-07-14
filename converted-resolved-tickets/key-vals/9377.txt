@@ -1,0 +1,18 @@
+zendeskTicketNumber: 9377
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9377
+title: New Slack message in support-runtastic
+Application engineer: Stomzy Mwendwa
+Customer: runtastic GmbH 
+Date: June 28, 2022
+Version: 3.34.2​
+Deployment: docker-container
+External Services: BITBUCKETSERVER,GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/C02GKJ51WK1/p1656418935715409
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: I tried to set up email alerts as described here, but I'm now seeing this error message. Prometheus must be running though, since I can query it via the built in grafana
+N/A
+We did ship a fix here.
+We can add the following flag to the docker manifest as a workaround for now -e PROMETHEUS_URL=http://localhost:9090 (http://localhost:9090/)
+The docker run command will then be: docker run --publish 7080:7080 --publish 127.0.0.1:3370:3370 --rm --volume \~/.sourcegraph/config:/etc/sourcegraph --volume \~/.sourcegraph/data:/var/opt/sourcegraph -e PROMETHEUS_URL=http://localhost:9090 (http://localhost:9090/) sourcegraph/server:3.34.2

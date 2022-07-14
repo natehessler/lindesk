@@ -1,0 +1,15 @@
+zendeskTicketNumber: 4446
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4446
+title: oo many open file
+CSE: Mariam Adedeji
+Customer: 
+Date: Nov 4
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph-community.slack.com/archives/C02BG0M0ZJ7/p1636099586033200
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: https://handbook.sourcegraph.com/support/zendesk-ticket-exporter
+I suggested increasing their system ulimit value by running command ulimit -n 10000 and that fixed it for him

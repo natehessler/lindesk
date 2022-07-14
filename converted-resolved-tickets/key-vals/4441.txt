@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4441
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4441
+title: Is there an extension to see the base and head branch in sourcegraph / compare view
+Application engineer: Kelvin Lee
+Customer: Apple 
+Date: Nov 4
+Version: 3.31.2​
+Deployment: docker-container
+External Services: OTHER
+Auth Providers: saml
+Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C01NM1WFVH8/p1636065941005400), and a ping from an engineer, [here](https://sourcegraph.slack.com/archives/CU93UDUBV/p1636099493144000)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Is there an extension to see the base and head branch in sourcegraph
+No, not really, but the "compare" view might satisfy their requirement.
+As mentioned in the thread between the application engineer and the client:
+> You might be able to see something similar by going to a similar URL, probably formed something like 
+And another example: https://sourcegraph.com/github.com/sourcegraph/sourcegraph/-/compare
+None

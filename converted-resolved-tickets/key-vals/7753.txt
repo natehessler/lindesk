@@ -1,0 +1,17 @@
+zendeskTicketNumber: 7753
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7753
+title: F5: Large File Configs
+Application engineer: Ben Gordon
+Customer: F5 Networks Inc. 
+Date: Apr 20
+Version: 3.35.1​
+Deployment: kubernetes
+External Services: GITLAB,PERFORCE
+Auth Providers: saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: -   customer reports results from their large .c files are not reachable through Search
+-   this is expected, as large files over 1MB are exluded from search results unless an exemption is made.
+-   search.largeFiles configuration must be added to the site config
+-   https://docs.sourcegraph.com/admin/config/site_config

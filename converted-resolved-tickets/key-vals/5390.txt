@@ -1,0 +1,46 @@
+zendeskTicketNumber: 5390
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5390
+title: repos not getting indexed / not getting synced / getting evicted
+Application engineer: Kelvin Lee
+Customer: Apple 
+Date: Jan 4
+Version: 3.32.0​
+Deployment: docker-container
+External Services: OTHER
+Auth Providers: saml
+Slack Links: [Slack](https://sourcegraph.slack.com/archives/C01NM1WFVH8/p1641408184019500)
+GitHub Issue Link: [GitHub RFH](https://github.com/sourcegraph/customer/issues/615), [Feature Request](https://github.com/sourcegraph/sourcegraph/issues/29588)
+Doc Update Link: None
+Summary: Repo sync/index issues.
+Most of these were red-herrings/non-useful: It eventually led to a feature request where our error logs were mis-reporting the symptoms/where our error logs were not that useful. But here goes anyways...:
+Typical grab logs from gitserver, repoupdater, sourcegraph-frontend-\*
+Check for database corruption using \[this\](https://docs.sourcegraph.com/admin/migration/3_31
+Eventually customer, at their own accord, deleted their whole instance and just started over 😓
+Customer discovered that it was a storage issue:
+> After deleting instance, we found that, storage was the issue and sourcegraph errored with unable to connect to github rather than "insufficient space/memory error". We gave 200GB as storage for gitserver statefulset.
+> Earlier it was 20GB and there was not enough space to download 1700 git repos.  With this can you reproduce this issue and make sure sourcegraph error logs for insufficient space. This helps you with other customers also.
+> Which resulted in resolution of github connectivity error here
+We ended up filing a [feature request](https://github.com/sourcegraph/sourcegraph/issues/29588) for a more accurate error log.
+https://docs.sourcegraph.com/admin/how-to/troubleshoot-pod-eviction
+"crashloopbackoff"
+"evicted" pods
+gitserver: (didn't help much but was reported) 
+gitserver: (didn't help much but was reported) 
+gitserver: (didnt help much but was reported) 
+github-proxy: 
+Weird hexadecimal adress logs: 
+    goroutine 695 [running]:
+    github.com/sourcegraph/sourcegraph/internal/repos.(*Syncer).sync(0xc0004fd880, {0x25fcf08, 0xc001b9ea80}, 0xc001b56fc0, 0xc0001a4f00)
+      github.com/sourcegraph/sourcegraph/internal/repos/syncer.go:632 +0xfec
+    github.com/sourcegraph/sourcegraph/internal/repos.(*Syncer).SyncExternalService(0xc0004fd880, {0x25fcfb0, 0xc001b928d0}, 0xc001b7d7d0, 0x40d207)
+      github.com/sourcegraph/sourcegraph/internal/repos/syncer.go:459 +0x725
+    github.com/sourcegraph/sourcegraph/internal/repos.(*syncHandler).Handle(0xc001717380, {0x25fcfb0, 0xc001b928d0}, {0x25ba7a0, 0xc001b665b0})
+      github.com/sourcegraph/sourcegraph/internal/repos/syncer.go:123 +0x7e
+    github.com/sourcegraph/sourcegraph/internal/workerutil.(*Worker).handle(0xc0013fee00, {0x25fcf08, 0xc001b8e400}, {0x25ba7a0, 0xc001b665b0})
+      github.com/sourcegraph/sourcegraph/internal/workerutil/worker.go:305 +0x1df
+    github.com/sourcegraph/sourcegraph/internal/workerutil.(*Worker).dequeueAndHandle.func2()
+      github.com/sourcegraph/sourcegraph/internal/workerutil/worker.go:291 +0x91
+    created by github.com/sourcegraph/sourcegraph/internal/workerutil.(*Worker).dequeueAndHandle
+      github.com/sourcegraph/sourcegraph/internal/workerutil/worker.go:275 +0x429
+\
+!!! NOTE: Most of the error logs were red-herrings, but just recording here just in case it helps draw some comparisons to your case.

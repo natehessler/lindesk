@@ -1,0 +1,12 @@
+-   Application engineer: Kelvin Lee
+-   Customer: realtor.com 
+-   Date: May 2
+-   Version: 3.38.1
+-   Deployment: kubernetes
+-   External Services: github
+-   Auth Providers: builtin, saml
+-   Slack Links: The issue originally started [here](https://sourcegraph.slack.com/archives/C0375T8M92N/p1651517179190509), but the customer didn't... really seem to try that hard to get the question answered in that thread. Instead, this issue summary covers [this](https://sourcegraph.slack.com/archives/C0375T8M92N/p1652131754825459?thread_ts=1651517179.190509&cid=C0375T8M92N) question.
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+> Does count mean the number of occurrences or number of files?
+None

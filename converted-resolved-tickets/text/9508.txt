@@ -1,0 +1,15 @@
+-   Application engineer: Warren Gifford
+-   Customer: 
+-   Date: July 5, 2022
+-   Version: ​v3.40.2
+-   Deployment: managed instance (docker-compose)
+-   External Services: GitHub
+-   Auth Providers:
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+A customer was locked out of their managed instance during setup -- the database (under the USERS table) showed that the instance had the registered user (created by our admins).
+On further investigation, the frontend logs revealed that the admin had been trying to log in via the wrong username after receiving the password reset link and attempting to update the password
+t=2022-07-05T18:09:19+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:13:37+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:13:40+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:13:42+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:13:50+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:28:18+0000 lvl=eror msg="Authentication failed" err="user not found: \[ianhjones\]" t=2022-07-05T18:28:55+0000 lvl=eror msg="Authentication failed" t=2022-07-05T18:28:57+0000 lvl=eror msg="Authentication failed" t=2022-07-05T18:29:28+0000 lvl=eror msg="Authentication failed" t=2022-07-05T18:29:59+0000 lvl=eror msg="Unable to reset password because email sending is not configured on this site" t=2022-07-05T18:30:12+0000 lvl=eror msg="Authentication failed" t=2022-07-06T22:34:45+0000 lvl=eror msg="Authentication failed" err="user not found: \[warren\]"
+I've opened a GitHub issue focused on improving the visibility of the username during the password reset workflow https://github.com/sourcegraph/sourcegraph/issues/38348
+https://github.com/sourcegraph/handbook/pull/4211 https://github.com/sourcegraph/handbook/pull/4210

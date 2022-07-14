@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5385
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5385
+title: unrecognized input error after using batch changes
+Application engineer: Kelvin Lee
+Customer: Indeed 
+Date: Jan 4
+Version: 3.33.2​
+Deployment: kubernetes
+External Services: GITLAB
+Auth Providers: saml
+Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1641335435021500)
+GitHub Issue Link: None
+Doc Update Link: None
+Summary: Problem with unrecognized input error after attempting to apply a batch change
+Suggested them the same action from a [previous case](https://github.com/sourcegraph/support-tools-internal/blob/2d768922f62c71700b75bc08e3ac5f6910a12a81/resolved-tickets/3917.md): "run src batch \[preview\
+https://github.com/sourcegraph/support-tools-internal/blob/2d768922f62c71700b75bc08e3ac5f6910a12a81/resolved-tickets/3917.md

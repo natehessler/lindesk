@@ -1,0 +1,18 @@
+zendeskTicketNumber: 6937
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6937
+title: Repo stuck in starting clone
+Application engineer: Gabe Torres
+Customer: SAP - Americas 
+Date: Mar 16
+Version: 3.35.1​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: builtin,github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: The customer saw some repos stuck with the message 'Cloning in progress, starting clone".
+Looked at logs for repo-updater and gitserver.\
+Found this error in repo-updater:\
+Got a new set of gitserver/repo-updater logs and saw a lot of latency errors.\
+Gitserver seemed to be having network issues and was using 95% memory. I suggested bumping up resources but a restart of gitserver cleared the issue. It seems like the database failure caused some cleanup jobs to be stuck in failing loops.

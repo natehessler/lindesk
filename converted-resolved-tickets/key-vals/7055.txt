@@ -1,0 +1,15 @@
+zendeskTicketNumber: 7055
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7055
+title: Eventbrite: Code Insight returning limited result set
+Application engineer: Ben Gordon
+Customer: Eventbrite 
+Date: Mar 21
+Version: 3.35.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: github
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: -   Can I make a code insight to view all of my Terraform resource usage?
+-   Not currently, we only support returning 20 results and graphing them over time.

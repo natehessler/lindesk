@@ -1,0 +1,15 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: Newscorp 
+-   Date: Nov 23
+-   Version: ​
+-   Deployment:
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02JSU299NY/p1637673968081300
+-   GitHub Issue Link:
+-   Doc Update Link:
+can you help me coming up with a regex that will also filter out commented lines? i am searching in java-environment, so any line starting with // will be counted as a commented line. the // can be preceded by any number of whitespaces, but nothing else. here is the original regex that i'd like to tune:
+This pattern (?! is currently not supported by Sourcgeraph but I found a rough workaround for their use, which is:
+if we can safely assume the match string is at least n characters from the start of the line and that there won't be other / preceding matches in matching lines either
+we can do something like [
+[

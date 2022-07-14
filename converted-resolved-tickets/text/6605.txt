@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Nutanix, Inc. 
+-   Date: Mar 2
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,OTHER
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1646293271013669
+-   GitHub Issue Link:
+-   Doc Update Link:
+Customer saw these errors in their frontend logs: lvl=eror msg="syntax highlighting failed (this is a bug, please report it) and wanted to understand what this meant.
+On Sourcegraph, search for a file and hover a piece of code. If possible, if you know a large file, try doing this as well. Chances are this may fail.
+This does require a retry as large files take some time to have their content highlighted. Also, this is a sign of a resource problem as per https://github.com/sourcegraph/customer/issues/739

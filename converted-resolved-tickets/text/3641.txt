@@ -1,0 +1,15 @@
+-   Application engineer: Warren Gifford
+-   Customer: Reddit 
+-   Date: Oct 1
+-   Version: 3.32.0​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,guithub
+-   Slack Links:
+-   GitHub Issue Link: [public](https://github.com/sourcegraph/sourcegraph/issues/27860) [private](https://github.com/sourcegraph/customer/issues/520)
+-   Doc Update Link: n/a
+A customer had written a workaround script to account for newlines returning in logs. I was able to partially reproduce this behavior and file a public issue.
+attempt reproduction see steps laid out in issue. This involved testing the behavior of the newlines created in batch changes container logs
+This issue goes unresolved due to it being an ongoing issue with a public bug report
+n/a
+2021-10-01T15:51:43.062983-07:00 stdout \

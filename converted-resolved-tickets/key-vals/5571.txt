@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5571
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5571
+title: Dirty Database/ Helm charts intergration
+Application engineer: Donavon Ellison
+Customer: Snapdocs Inc
+Date: Jan 13
+Version: ​3.32.0
+Deployment: Kubernetes
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C029VE4A12R/p1642097846018900
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/630
+Doc Update Link: N/A
+Summary: How to solve dirty database issue/ 502 bad gateway issue using helm charts
+https://docs.sourcegraph.com/admin/how-to/dirty_database https://github.com/sourcegraph/customer/issues/630
+https://docs.sourcegraph.com/admin/how-to/dirty_database

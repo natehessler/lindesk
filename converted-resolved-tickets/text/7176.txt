@@ -1,0 +1,14 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Glovo
+-   Date: Mar 25
+-   Version: 3.34.1​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: github
+-   Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1648214339296029
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+What happens in the event a repo disappears while there was a code insight being run over it? How does that interaction go if there was a duplicate repo?
+1.  It is believed that the code insight would act in the same way as the batch change you described in your past thread. The repo would disappear from the code insight if it does go away and be restored if it came back in the same configuration
+2.  Duplicate repos do not affect code insights
+N/A

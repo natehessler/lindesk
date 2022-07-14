@@ -1,0 +1,19 @@
+zendeskTicketNumber: 4507
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4507
+title: New Slack message in support-capella-sourcegraph
+CSE: Giselle Northy
+Customer: Capella Space
+Date: Nov 9
+Version: ​N/A
+Deployment: Kubernetes
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02LD3Q0918/p1636481687001800
+GitHub Issue Link:
+Doc Update Link:
+Summary: Experienced Sourcegraph downtime due to Dockerhub Rate limiting.
+We have a doc on remedying Dockerhub Rate limiting here:
+-   https://github.com/sourcegraph/sourcegraph/blob/974f783eb895ce8abc198b257973206a3a487ec9/doc/admin/install/kubernetes/troubleshoot.md
+And mentioned here:
+-   https://docs.sourcegraph.com/admin/install/kubernetes/troubleshoot
+See above.

@@ -1,0 +1,14 @@
+-   Application engineer: Michael Bali
+-   Customer: Booking.com 
+-   Date: Mar 2
+-   Version: 3.37.0​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: gitlab
+-   Slack Links: https://sourcegraph.slack.com/archives/C024D1ESXUH/p1646298509920119
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customers DB is getting restarted due to connection problems.
+-   Checked our doc, and tried to understand the meaning of max connection and I figured the max connection can be calculated by the number of replicas \* 30.
+I believe this can be resolved by increasing the max_connections value in your postgresql.conf or pgsql.ConfigMap.yaml.It may be necessary to raise your work_mem as well as more concurrent connections require more memory to process as stated in our doc
+-   https://docs.sourcegraph.com/admin/config/postgres-conf

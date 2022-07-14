@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6353
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6353
+title: Twitter - extsvc.json transition
+Application engineer: Warren Gifford
+Customer: Twitter 
+Date: Feb 18
+Version: 3.36.3​
+Deployment: kubernetes
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/707
+Doc Update Link:
+Summary: For a particular code host, if we re-order the list of repositories in the JSON config, does that have any impact on anything or possibly cause a re-clone?
+Hey @James Meador the only effect changing the order of repos should have is to change the order in which their metadata is synced from the code host. The schedule used to fetch repo data via git will remain unchanged.I'll do a little checking in about any gotchas that might exist around the extsvc,json config method here
+@James Meador Alright after reviewing some past transitions there is one thing to look out for unique to extsvc.json configurations. Changing the ordering or naming of a codehost, in your extsvc.json can trigger a reclone.So generally a script that enters repos into the repo lists within a codehost config will be fine, but you'll want to be careful that the script doesn't reorder the list of codehostsLet me know if anymore questions come up as you continue working out this script

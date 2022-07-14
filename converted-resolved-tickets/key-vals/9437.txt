@@ -1,0 +1,17 @@
+zendeskTicketNumber: 9437
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9437
+title: Disable banners for browser & ide extension
+Application engineer: Stomzy Mwendwa
+Customer: Two Sigma Investments 
+Date: June 30, 2022
+Version: ​Not sure
+Deployment:Kubernetes
+External Services:
+Auth Providers:
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: s it possible to turn off the browser & ide extension banners system-wide?
+A quick question for you. Whenever you dismiss this banner, does it pop up again in subsequent searches? The reason I ask is because, typically when I've dismissed it, it hasn't shown up again. At the moment, I am double checking with my teammates if there is a way to do this because at the top of my mind I'm not aware of a configuration on Global Settings or Site Configuration that does this.
+Happy to come back to you with feedback tomorrow.
+I can confirm that once this banner is dismissed the logic is set up to have it not pop up again. More on this PR here.

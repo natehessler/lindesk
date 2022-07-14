@@ -1,0 +1,22 @@
+zendeskTicketNumber: 8692
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8692
+title: New Slack message in support-segment
+Application engineer: Ben Gordon
+Customer: Segment.io Inc 
+Date: June 2, 2022
+Version: 3.35.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1654199899919269
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/1006
+Doc Update Link:
+Summary: -   running a batch change that uses the 
+-   run on local machine and duplicate issue
+-   Raise issue to batch changes
+-   Fixed in src-cli version 3.40.8, this was a bug with docker attaching newlines to the contents of 
+       "message": "2 errors occurred:\n\t* Must validate one and only one schema (oneOf)\n\t* headRef: Does not match pattern '
+         "path": [
+           "createChangesetSpec"
+         ]
+       }

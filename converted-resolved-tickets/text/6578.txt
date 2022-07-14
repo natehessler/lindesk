@@ -1,0 +1,18 @@
+-   Application engineer: Michael Bali
+-   Customer: Avito 
+-   Date: Mar 1
+-   Version: ​N/A
+-   Deployment: N/A
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1646203652993289
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+-   My understanding here is the customer is trying to compare multiple revisions while searching.
+-   Are there any quick methods to translate revs provided by the Sourcegraph chrome plugin (which leads to 
+-   Question1: To search multiple revisions other than the default branch, you need to specify the revisions by either appending them to the repo: filter or by listing them separately with the rev: filter. For instance, 
+-   Question2:
+    -   One is to use search contexts.
+    -   The second options is to use search snippets.
+-   https://docs.sourcegraph.com/code_search/how-to/search_contexts
+-   https://docs.sourcegraph.com/@v3.34.2/code_search/reference/queries

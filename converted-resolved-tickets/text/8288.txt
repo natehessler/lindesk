@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Nuro AI 
+-   Date: May 18, 2022
+-   Version: 3.19.1​
+-   Deployment: docker-container
+-   External Services: GITHUB
+-   Auth Providers: openidconnect,builtin
+-   Slack Links:https://sourcegraph.slack.com/archives/C01EJ09NR8S/p1652889117026529
+-   GitHub Issue Link:N/A
+-   Doc Update Link:N/A
+Hi, so since getting the VS code extension working, I've run into some issues that I wanted to highlight: 1. While the search itself is fast, opening a file is not. In the video attached, it takes \~11 seconds just to open a search result in a new tab. Is this expected? 2. By right clicking on a specific line of code and copying the sourcegraph file links, the link itself always sends me to the line before (e.g., if I want to copy a link to line 35 of a file, the link itself goes to line 34 instead). Is this the desired behavior? Or maybe it's conflicting with some other extension I have installed?
+None thus far. Customer hasn't responded in 4 days. Closing this and will re-open when it's responded to.
+None

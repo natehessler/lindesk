@@ -1,0 +1,19 @@
+zendeskTicketNumber: 8255
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8255
+title: New Slack message in support-nutanix
+Application engineer: Stomzy Mwendwa
+Customer: Nutanix, Inc. 
+Date: May 16, 2022
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: GITHUB,OTHER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/CTJCMDCCS/p1652784602320439
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: For automation purpose, I want to use SourceGraph API using CURL. My requirement is very simple - Just need content one file from one branch. Below are details for the same File : https://sourcegraph.canaveral-corp.us-west-2.aws/gateway-master/-/blob/gateway_server/ikat_control_plane/latest_build_num.sh Query : context:global repo:\
+Delighted to come back to you with next steps. I have to apologize to you because I have minimal curl experience with Sourcegraph typically because most results for queries on the terminal tend to get really messy as you can see in the screenshot. :sweat:Based on this: Just need content one file from one branch
+I thought I'd ask if you have our src cli tool installed. Reason I ask is because results streamed in from src search and consumed with the stream flag is much better for the human eye and will allow you to get results in a much more convenient way.An example of a search using src would like like: src search -stream "r:sourcegraph/sourcegraph file:.yml select:content .\* count:all patternType:regexp"
+Using your example, this would look like: src search -stream "r:gateway-master file:gateway_server/ikat_control_plane/latest_build_num.sh select:content .\* count:all patternType:regexp"
+Would you like to try this please?
+N/A

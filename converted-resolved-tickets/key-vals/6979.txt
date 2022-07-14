@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6979
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6979
+title: Twitter - lsif strato
+Application engineer: Warren Gifford
+Customer: 
+Date: Mar 17
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Customer hoping to create their own lsif language extension and register it to Sourcegraph must make a PR to Sourcegraph/Sourcegraph in order to enable hover results after enabling the extension. Some work has been done to make the configuration process for users around this easier
+A feature request/issue has been filed to improve this workflow
+Learn more in this tracking issue -- https://github.com/sourcegraph/sourcegraph/issues/32854

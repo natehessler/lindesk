@@ -1,0 +1,40 @@
+zendeskTicketNumber: 3054
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3054
+title: Twitter - Service Discovery
+CSE: Warren Gifford
+Customer: Twitter 
+Date: 28 October 2021
+Version: 3.31.2​
+Deployment: kubernetes (non-privileged overlay)
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/CTN0ZBETE/p1630509268008100
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/480
+Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/25626
+Summary: After upgrading to v3.31 Twitter finds that indexed search is no longer working. With the indexing repository status page showing a spinner that never ends.
+Troubleshooting involved looking at logs for the frontend, setting SRC_LOG_LEVEL=info in the frontend deployment yaml, and looking for logs from the frontend. See the github issue for more details.
+Twitter has altered the statefulSet naming conventions which service discovery for our new indexed-search hashing schema relies on. In order to move forward, the env var INDEXED_SEARCH_SERVERS: k8s+rpc://indexed-search:6070 must be set in frontend pods. A PR has been made to allow altered statefulSet names in v3.33
+    2021/09/05 03:11:36 loading 43 shards
+    2021/09/05 03:11:37 listening on :6070
+    2021/09/10 15:52:44 loading 1 shards
+    2021/09/10 15:52:47 loading 1 shards
+    2021/09/10 15:53:57 DBUG: search traceID= q=(and branch="HEAD" rawConfig:RcOnlyPublic
+    2021/09/10 15:53:57 DBUG: search traceID= q=(and (repobranches size=11) sym:substr:"project_file_util") Options{EstimateDocCount=false Whole=false ShardMaxMatchCount=800 TotalMaxMatchCount=800 ShardMaxImportantMatch=120 TotalMaxImportantMatch=200 MaxWallTime=997.94224ms MaxDocDisplayCount=2030} Stats{ContentBytesLoaded=817531 IndexBytesLoaded=232637 Crashes=0 Duration=0s FileCount=0 ShardFilesConsidered=0 FilesConsidered=616 FilesLoaded=15 FilesSkipped=0 ShardsSkipped=0 MatchCount=0 NgramMatches=1744 Wait=8.81µs}
+    2021/09/10 15:53:57 DBUG: search traceID= q=(and branch="HEAD" rawConfig:RcOnlyPublic
+    2021/09/10 15:54:44 loading 1 shards
+    2021/09/10 15:54:45 loading 2 shards
+    $ kubectl -n sourcegraph-gke-staging logs indexed-search-staging-0 -c zoekt-indexserver
+    2021/09/10 15:52:44 updating index git.twitter.biz/phabtw@HEAD=d65c3ad17f0a44c84abc2836e18fb5561a129615
+    2021/09/10 15:52:44 updated index git.twitter.biz/phabtw@HEAD=d65c3ad17f0a44c84abc2836e18fb5561a129615 in 238.01227ms
+    2021/09/10 15:52:44 updating index git.twitter.biz/ci-job-configs@HEAD=6a69f7e5cedfadd08d70cd53d6e5c4b34f13b84c
+    2021/09/10 15:52:47 updated index git.twitter.biz/ci-job-configs@HEAD=6a69f7e5cedfadd08d70cd53d6e5c4b34f13b84c in 3.098436856s
+    2021/09/10 15:52:47 updating index git.twitter.biz/source@HEAD=fcd6ec971360463bf0aad83b1eb53c348861cd9e
+    2021/09/10 15:53:09 error indexing git.twitter.biz/source@HEAD=fcd6ec971360463bf0aad83b1eb53c348861cd9e: command [git -C /data/index/.indexserver.tmp/tmpfriend-7-676053883/git.twitter.biz%2Fsource.git -c protocol.version=2 fetch --depth=1 http://sourcegraph-frontend-internal/.internal/git/git.twitter.biz/source fcd6ec971360463bf0aad83b1eb53c348861cd9e] failed: exit status 128
+    OUT: warning: redirecting to http://gitserver-staging-0.gitserver:3178/git/git.twitter.biz/source/
+    fatal: remote-curl: bad line length character:
+    err
+    fatal: the remote end hung up unexpectedly
+    2021/09/10 15:53:09 updating index git.twitter.biz/twitter-ios@HEAD=93f6c1fc16c15bac59a424625c6ca17f57fa712a
+    2021/09/10 15:54:45 updated index git.twitter.biz/twitter-ios@HEAD=93f6c1fc16c15bac59a424625c6ca17f57fa712a in 1m36.401310921s
+    2021/09/10 15:54:45 updating index git.twitter.biz/twitter-android@HEAD=c71a010b3a95abf7012a5eb78ef806824602abec
+Note the above logs are not indicating errors but the expected behavior.

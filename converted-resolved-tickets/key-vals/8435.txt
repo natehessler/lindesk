@@ -1,0 +1,17 @@
+zendeskTicketNumber: 8435
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8435
+title: Can we configure Sourcegraph to write logs to Splunk?
+Application engineer: Michael Bali
+Customer: Sourcegraph 
+Date: May 24, 2022
+Version: ​
+Deployment:
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/CT9P97S6L/p1653464841104429
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: we are using a 
+I looked this up internally, And we don't have any official guidance or recommendations about specific log aggregators. I understand that some customers do use Splunk to ingest Sourcegraph logs. I believe the setup follows the general process to setup Splunk with any Docker-Compose application. If you decided to go that route, you may want to take a look at our log levels \[doc\](https://docs.sourcegraph.com/admin/observability/logs
+-   https://docs.sourcegraph.com/admin/observability/logs
+-   https://docs.sourcegraph.com/admin/observability/troubleshooting

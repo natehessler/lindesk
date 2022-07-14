@@ -1,0 +1,16 @@
+zendeskTicketNumber: 4835
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4835
+title: extsvc.json update frequency and methods
+Application engineer: Kelvin Lee
+Customer: Apple 
+Date: Dec 1
+Version: 3.32.0​
+Deployment: docker-container
+External Services: OTHER
+Auth Providers: saml
+Slack Links: [Main Slack](https://sourcegraph.slack.com/archives/C0225J36ZTR/p1638408829018200), [Asking for help from support](https://sourcegraph.slack.com/archives/C01JR51JR5J/p1638478738163200), [Asking for help from engineering](https://sourcegraph.slack.com/archives/C02EDAQAJQZ/p1638484338287900)
+GitHub Issue Link: [GitHub Issue/RFH filed](https://github.com/sourcegraph/customer/issues/580)
+Doc Update Link: [Pull Request Created](https://github.com/sourcegraph/sourcegraph/pull/28546)
+Summary: When/how is the 
+Both on server restart, and on a "watch" loop. The "watch" loop is encoded [here](https://sourcegraph.com/github.com/sourcegraph/sourcegraph@f2920c028a5bda144ca165557834a7411f51e352/-/blob/cmd/frontend/internal/cli/config.go?L323:6). And [this](https://sourcegraph.com/github.com/sourcegraph/sourcegraph@f2920c028a5bda144ca165557834a7411f51e352/-/blob/cmd/frontend/internal/cli/config.go?L177) function to override the extsvc file is ran every server restart.
+https://github.com/sourcegraph/sourcegraph/pull/28546

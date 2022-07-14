@@ -1,0 +1,14 @@
+-   CSE: Donavon Ellison
+-   Customer: Reddit
+-   Date: 28 October 2021
+-   Version: ​Not provided
+-   Deployment: Kubernetes
+-   External Services: N/A
+-   Auth Providers: N/A
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BJ8T258D/p1634061267275600
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The customer was wondering If there would be any risk to using Ingress Controller for Grafana
+N/A
+There is no risk with doing so. Quote from Stephen Gutekanst "Usually, people want to make accessing monitoring tools like Grafana easy and so they'll expose it via an ingress (otherwise, your only option to access it would be port forwarding.) So this is a reasonable ask. What Reddit probably doesn't know here, is that Sourcegraph actually exposes Grafana through its web UI and integrates with it a bit more deeply (you can configure alerts through the Sourcegraph web UI, for example.) In general, you'll just make whoever you want to access Grafana a site admin on Sourcegraph and then they can do so. In theory, there could be some situation where the Sourcegraph frontend itself is down, in which case you'd be unable to access Grafana - but in practice that would be an issue you would need to debug with kubectl access and so Grafana is not useful in such a scenario. All that said, if you still want to expose Grafana with an ingress, there's no harm in doing so aside from the potential that someone you do not want to could access it. Our Grafana instance does not have authentication enabled (as that is handled by our web UI and network-level security), so if you add an ingress anyone with network access to it will have access to all of Grafana"
+N/A

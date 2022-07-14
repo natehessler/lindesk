@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5058
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5058
+title: How to perform a Custer Migration
+Application engineer: Michael Bali
+Customer: Cloudflare 
+Date: Dec 13, 2021
+Version: 3.30.4​
+Deployment: kubernetes
+External Services: BITBUCKETSERVER
+Auth Providers: builtin,openidconnect
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: The customer needs to migrate sourcegraph from one k8s cluster to another.
+The Customer needs to follow the migration steps in this [doc](https://handbook.sourcegraph.com/departments/support/process/enablement/k8-migration). This would migrate their data and users including.
+https://handbook.sourcegraph.com/departments/support/process/enablement/k8-migration

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 4768
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4768
+title: Git Garbage Collection Inefficiencies
+Application engineer: Alex Jean-Baptiste
+Customer: Nutanix, Inc. 
+Date: Nov 29
+Version: 3.34.2​
+Deployment: kubernetes
+External Services: GITHUB,OTHER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1638191494023100
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/573
+Doc Update Link: N/A
+Summary: The customer experienced slow search on their production instance and the following error: Git command \[git show-refs --heads\] failed (output:""): signal: killed
+The CE, Mike McLaughlin expressed that this issue occurred previously when gitserver was operating at 90% disk usage. The customer was able to increase the disk space for the service and the root issue was solved. The customer is not using the internal Sourcegraph git garbage collection and is instead running a custom script weekly to handle that concern. This issue evolved into an exploration of whether or not that script could be optimized to keep gitserver disk usage lower. It was explained to the customer that Sourcegraph is experimenting internally on how to make this possible and that the issue had now involved into a feature request.
+The customer increased their disk space.
+None used.

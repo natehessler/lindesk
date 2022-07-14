@@ -1,0 +1,12 @@
+-   Application engineer: Riana Shahid
+-   Customer: DoorDash 
+-   Date: May 26, 2022
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C017J5QN4FJ/p1653585268814289
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer wants a script to help remove inactive user accounts
+I believe in general, writing a script for a customer is outside the scope of support but there is a script available for deleting users, found here: https://sourcegraph.slack.com/archives/C02MA9RQWMD/p1637188514002800?thread_ts=1637187964.002100&cid=C02MA9RQWMD 

@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: Tinder 
+-   Date: Oct 6
+-   Version: 3.33.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1634149693082500
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+Customer complained of finding batch changes being "stuck in retrying" mode with correctly applied batch changes.
+asked for logs from the git-server and the github-proxy and frontend pods
+The issue appears to have gone away on it's own. Will update here should we find the cause, but as of yet have not.

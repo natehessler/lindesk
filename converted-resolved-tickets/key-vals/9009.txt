@@ -1,0 +1,28 @@
+zendeskTicketNumber: 9009
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/9009
+title: Batch change error when executing changeset specs
+Application engineer: Michael Bali
+Customer: Mercari 
+Date: June 14, 2022
+Version: 3.37.0​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/C018U1ZRFQC/p1655274148375819
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Executing the changes locally works fine, the issue appears when the changeset specs are being submitted. After approximately a minute, the request ultimately fails
+-   Are you trying to make these changes across hundreds of repositories?
+-   Is src connected to the right sourcegraph URL?
+-   In order to find out whether this problem is related to the size or scope of a batch change or with what it's trying to achieve, try reducing the scope of your batch change.
+-   You can do so by changing the 
+    on:
+      - repository: github.com/my-org/my-repo1
+      - repository: github.com/my-org/my-repo2
+-   Also, do you have [configured credentials](https://docs.sourcegraph.com/batch_changes/how-tos/configuring_credentials) with all of the required scopes and from an account with write access to the changeset's repository on the code host.
+The scope of the change was also very large, fixing that allowed even the large repo to be processed correctly.
+    ❌ Error:
+       error: 502 Bad Gateway
+    {"SeverityText":"ERROR","Timestamp":1655271409153832245,"InstrumentationScope":"database.batch.database.batch.Flush","Caller":"batch/batch.go:221","Function":"github.com/sourcegraph/sourcegraph/internal/database/batch.(*Inserter).Flush","Body":"operation.error","Resource":{"service.name":"frontend","service.version":"3.40.0","service.instance.id":"sourcegraph-frontend-7b49b45558-njpk8"},"Attributes":{"batchSize":14,"payloadSize":24,"tableName":"changeset_specs","columnNames":"rand_id,spec,batch_spec_id,repo_id,user_id,diff_stat_added,diff_stat_changed,diff_stat_deleted,created_at,updated_at,fork_namespace,external_id,head_ref,title","numColumns":14,"maxBatchSize":32760,"count":1,"elapsed":41.199225097,"error":"timeout: context canceled"}}
+    {"SeverityText":"ERROR","Timestamp":1655271409154271939,"InstrumentationScope":"enterprise.batches.dbstore.CreateChangesetSpec","Caller":"store/changeset_specs.go:128","Function":"github.com/sourcegraph/sourcegraph/enterprise/internal/batches/store.(*Store).CreateChangesetSpec","Body":"operation.error","Resource":{"service.name":"frontend","service.version":"3.40.0","service.instance.id":"sourcegraph-frontend-7b49b45558-njpk8"},"Attributes":{"Count":1,"count":1,"elapsed":48.097838065,"error":"inserter.Flush: timeout: context canceled"}}
+    {"SeverityText":"ERROR","Timestamp":1655271409154348637,"InstrumentationScope":"enterprise.batches.service.CreateChangesetSpec","Caller":"service/service.go:668","Function":"github.com/sourcegraph/sourcegraph/enterprise/internal/batches/service.(*Service).CreateChangesetSpec","Body":"operation.error","Resource":{"service.name":"frontend","service.version":"3.40.0","service.instance.id":"sourcegraph-frontend-7b49b45558-njpk8"},"Attributes":{"count":1,"elapsed":54.880328752,"error":"inserter.Flush: timeout: context canceled"}}

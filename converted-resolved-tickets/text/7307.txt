@@ -1,0 +1,63 @@
+-   Application engineer: Quinlan Sparks
+-   Customer: Indeed 
+-   Date: Apr 1
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITLAB
+-   Auth Providers: saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01EDKVG9J5/p1648834474409439
+-   GitHub Issue Link:
+-   Doc Update Link:
+The customer was attempting to run a Batch Change with the following spec:
+name: OSST-1709-replace-cypress-axe-fork
+description: &batch_change_description 
+   The [fork](https://code.corp.indeed.com/deg-accessibility/cypress-axe) of [cypress-axe](https://github.com/component-driven/cypress-axe)
+   is now [abandoned](https://code.corp.indeed.com/deg-accessibility/cypress-axe/-/commit/87dc3a5309d55b65f119cc674cf59dd22bbc6b6e).
+   You should upgrade to the upstream version.
+on:
+ - repository: code.corp.indeed.com/api-platforms/one-graph-sample-mosaic-nodejs-client
+steps:
+ - run: 
+     export MOSAIC_CONTEXT=test
+     git init
+     touch dummy_file
+     git add dummy_file
+     git commit -m 'dummy commit'
+     git remote add origin git@code.corp.indeed.com:dummy/repo.git
+     find . -type f -name package.json -not -path "*/node_modules/*" -print0 
+       directory=$(dirname "${packageFile}")
+       cd "${directory}" 
+       nvm install
+       nvm use
+       devDep=0
+       if [ $(jq '.dependencies["@indeed/cypress-axe"]' package.json) = 'null' ]; then
+         devDep=1
+       fi
+       npm uninstall @indeed/cypress-axe
+       if [ ${devDep} -gt 0 ]; then
+         npm install --save-dev cypress-axe@latest
+       else
+         npm install --save-prod cypress-axe@latest
+       fi
+       rm --recursive --force node_modules/
+       cd - 
+     done
+     rm --recursive .git
+     rm dummy_file
+   container: registry.corp.indeed.com/build-images/docker-build-environment-base/docker-build-environment-base-centos7:latest-stable
+changesetTemplate:
+ title: &changeset_title "chore(deps): Replace Indeed fork of cypress-axe with upstream"
+ body: *batch_change_description
+ branch: jira/OSST-1709__replace-cypress-axe_fork
+ commit:
+   message: *changeset_title
+   author:
+     name: Keegan Witt
+     email: kwitt@indeed.com
+ published: true
+They interpreted the following log output as an indication that it should have succeeded, and were confused about why their resulting changesets were empty:
+2022-04-01T13:32:53.751099-04:00 stdout 
+2022-04-01T13:32:53.751131-04:00 stdout 
+2022-04-01T13:32:56.558915-04:00 [Step 1] complete in 14m29.162s
+The original YAML was structured to include a workaround for an internal package that runs after any 
+https://docs.sourcegraph.com/batch_changes/explanations/how_src_executes_a\_batch_spec

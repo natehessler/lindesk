@@ -1,0 +1,14 @@
+zendeskTicketNumber: 8043
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8043
+title: Code Insights rendering incorrectly
+Application engineer: Gabe Torres
+Customer: Netflix 
+Date: May 5, 2022
+Version: 3.37.0​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://netflix.slack.com/archives/CHKL4G5PG/p1651780113710569\
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/930
+"pyproject.toml adoption" insight just finished, and it looks odd, in a permanent way. So there ends up being 2 points for May 2022, and thus I'm guessing it's confusing it.
+Summary: This is expected -- it's the snapshot! This is so, if you had a datapoint, say, May 2nd, you don't have to wait until June 2nd to see new data -- by may 17th, it's possible/likely things have changed and it's still valuable to see this, so we include the snapshot. It will update daily.

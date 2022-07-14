@@ -1,0 +1,19 @@
+zendeskTicketNumber: 6871
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6871
+title: zoekt-average-resolve-revision-duration
+Application engineer: Giselle Northy
+Customer: Dropbox 
+Date: Mar 14
+Version: 3.36.2​
+Deployment: docker-compose
+External Services: GITHUB,OTHER
+Auth Providers: saml
+Slack Links:
+GitHub Issue Link:
+Doc Update Link:
+Summary: Zendesk Slack bot Assign Mar 14 11:00 am Channel: support-dropbox
+User: jwon
+Link: https://sourcegraph.slack.com/archives/C015JREMBTR/p1647295225590379
+https://docs.sourcegraph.com/admin/observability/dashboards
+You're correct in that mono-repos have their own set of challenges. We actually have a doc on it which can be helpful. and it has guidance on how to allocate resources for mono-repos, here are the ones specifically for frontend and gitserver:The following bullets provide a general guideline to which service may require more resources: sourcegraph-frontend CPU/memory resource allocations gitserver CPU/memory resource allocations (allocate enough memory to hold your Git packed bare repositories) While each deployment is slightly different, they saw improvement on the error message after increasing memory in the frontend and gitserver. I know we talked about gitserver memory, have you had a change to increase that? Also, have you checked the frontend resources as well?
+https://docs.sourcegraph.com/admin/how-to/monorepo-issues

@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7580
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7580
+title: Is it possible to deploy Sourcegraph with dockerrun.aws.json ?
+Application engineer: Michael Bali
+Customer: 
+Date: Apr 11
+Version: ​ N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C0375T8M92N/p1649724038170949
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Are there any specific examples of deploying sourcegraph with dockerrun.aws.json?
+We currently don't have specific examples of deploying sourcegraph via 
+N/A 

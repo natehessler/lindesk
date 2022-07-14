@@ -1,0 +1,13 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Tinder
+-   Date: May 16, 2022
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: GITHUB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01574FJV35/p1652720447319189
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+The customer noticed that the code insights showed far fewer results than when the customer ran the query normally
+Attempt to make a code insight that spans over many but not all repos Note the number of results on the preview results list Run the query normally and compare the results
+This was noted as a bug by Joel and has since been patched

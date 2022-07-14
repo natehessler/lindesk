@@ -1,0 +1,19 @@
+-   Application engineer: Michael Bali
+-   Customer: Rapha 
+-   Date: Jan 6, 2022
+-   Version: ​N/A
+-   Deployment: KUBERNETES
+-   External Services: N/A
+-   Auth Providers: Github
+-   Slack Links: https://sourcegraph.slack.com/archives/C02NLUQG0E5/p1641469040000700
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+The Customer is having an issue when trying to preview batch changes.
+My guess here is the code host token is taking time to sync. I asked if this was the first time you are trying out batch changes? Told the customer to add a -clear-cache flag/option to the src batch preview command and try again. Also, asked check that your src cli is on the latest version. please consider clearing cookies as well. Batch refresh rates depend on webhooks and the current sync rate.
+Also, refreshing the repo manually does help in case this takes a long time.
+Adding the 
+N/A
+    They seem to be working for others but I keep getting the error:
+    Error
+    Sourcegraph encountered an unexpected error. If reloading the page doesn't fix it, contact your site admin or Sourcegraph support.
+    invalid id

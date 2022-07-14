@@ -1,0 +1,13 @@
+-   Application engineer: Jason Harris
+-   Customer: GOV.UK 
+-   Date: Feb 22
+-   Version: 3.37.0
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1645542209307479
+-   GitHub Issue Link: n/a
+-   Doc Update Link: n/a
+User wants to be able to use sed instead of find to improve performance.
+Please see slack thread.
+Ultimately, user figured this out themselves. They were doing something so customized, that it caused them a lot of pain and created a situation where we couldn't help them much. That said, the slack thread is relevant for anyone who wants to see a customer struggling through changing an already working script.

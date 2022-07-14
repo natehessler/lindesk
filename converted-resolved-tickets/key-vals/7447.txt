@@ -1,0 +1,17 @@
+zendeskTicketNumber: 7447
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7447
+title: Glovo: client-side batch change hangs on Determining Workspace Type
+Application engineer: Ben Gordon
+Customer: Glovo 
+Date: Apr 5
+Version: 3.34.1​
+Deployment: docker-compose
+External Services: GITHUB
+Auth Providers: github
+Slack Links: https://sourcegraph.slack.com/archives/C01NDS6BVBQ/p1649170584125529
+Customer reports their client-side batch change is stuck on 
+confirm the customer is using client-side batch changes, not server-side
+Summary: -   Checked against some historical issues, and found that this can be caused by issues with the client machines Docker install
+-   Informed customer, who then upgraded their Docker Desktop and killed their active containers
+-   After upgrading Docker Desktop, the batch change resolves as expected
+    Determining Workspace Type

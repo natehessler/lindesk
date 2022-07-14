@@ -1,0 +1,17 @@
+-   Application engineer: Warren Gifford
+-   Customer: Upwork Global Inc. 
+-   Date: May 18
+-   Version: 3.37.0​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: builtin,saml
+-   Slack Links:
+-   GitHub Issue Link:
+-   Doc Update Link:
+hi team, I have a few questions. 1. Why are these two queries not equivalent? context:global archived:no fork:no repohasfile:package.json select:repo content:/"@upwork/vue-components-core"/ patternType:regexp context:global archived:no fork:no repohasfile:package.json select:repo /"@upwork/vue-components-core"/ patternType:regexp
+The second one provides the results I expect, the first one does not provide results. The difference here is... - content:/"@upwork/vue-components-core"/ + /"@upwork/vue-components-core"/
+2.  How do I use the repos in the first result as a context to search in for a second query based on content anywhere in the repo?3.  Is it possible to search branches other than the default branch?
+Hey @lance -- I'm not sure on this one, I'd expect these to resolve the same way, the thing that comes to mind is that in search two the search is looking for the regex pattern /"@upwork/vue-components-core"/ whereas the first search with content doesn't take regex, but does require escaping of  -- I'll do some tinkering and see if I can get a more definite answer here :loading: This is actually a feature in beta at the moment, to enable it as an option you'll need to add the following field to your site-config json experimentalFeatures.search.index.query.contexts, I've attached some screenshots that show what this looks like. It should be noted that the content: filter is not currently supported Its totally possible to search branches -- for a search like repo:\
+Hey @lance quick follow up here -- I suspect the problem is indeed that the content: field doesn't take a regex argumentSee this query similar to yours using regex to target a dependency - this worksTargeting the same string as an argument to the content: filter returns nothingHowever is we remove the regexy parts of the string, we get results similar to the original queryLet me know if you have anymore questions on this!
+that is not intuitive to be honest especially when you select patternType:regexp . Ultimately I wanted to search for two different patterns to match. So my thought was to add multiple content:{\$searchPattern} segments. How would you match multiple regexp search patterns?
+Totally agree that content: not taking regex when the rest of the search pattern is set to regex is not intuitive -- that said I think the best way to do this is going to be using the AND logic operator. Heres an example and some docs on the subject. It works mostly as expected as long as the query isn't too complicated.cc: @jonah I think theres a reasonable feature request/ feedback here about the content: filter, summarizing, if patternType:regexp is set then content: should take regex.

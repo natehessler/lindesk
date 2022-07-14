@@ -1,0 +1,12 @@
+zendeskTicketNumber: 7722
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7722
+title: No results without repo filter
+Application engineer: Gabe Torres
+Customer: Upwork 
+Date: Apr 19
+Slack Links: https://sourcegraph.slack.com/archives/C01HW836940/p1650393841921939
+GitHub Issue Link:
+Doc Update Link:
+an not inspect into the org/repo repo. content:updateMessageCounters Exist in there, but when we try to look up for it in sourcegraph in a global context we find nothing. We need to specify the the repo like this in order to find content. repo:org/repo content:updateMessageCounters
+ooks like the repo is a fork and results in repository forks are excluded by default (as well as archived repos). The 'Some results excluded' button will show search suggestions or limits being applied.
+Summary: 

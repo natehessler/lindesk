@@ -1,0 +1,17 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Unity 
+-   Date: Dec 1
+-   Version: 3.33.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,GITLAB
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C01FXGSJW5R/p1638370318077500
+-   GitHub Issue Link: N/A
+-   Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/28555
+During the workspace initialization step of the batch change, the customer was receiving fetching errors during the repository archive retrieval step.
+1.  Attempt to curl the individual failed repos using WSL
+2.  Attempt to curl the individual failed repos using a native client on OSX
+3.  Discovered a 3x time difference in repository archive retrieval over the network
+The customer attempted the batch change over the native client on OSX and was able to successfully complete it.
+https://docs.sourcegraph.com/batch_changes/references/troubleshooting
+fetching repo: fetching ZIP archive: stream error: stream ID 23; INTERNAL_ERROR See full logs on ticket.

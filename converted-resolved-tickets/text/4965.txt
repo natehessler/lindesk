@@ -1,0 +1,11 @@
+-   Application engineer: Gabe Torres
+-   Customer: Netflix 
+-   Date: Dec 8
+-   Version: 3.34.2​
+-   Deployment: pure-docker
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: http-header
+I have a problem running the src batch preview command.
+Looks like the search found some repos that have been archived, I would like to see if there is an option to ignore such an error.
+We have the -skip-errors flag that will skip the repository causing errors without stopping the execution of the batch spec.
+https://docs.sourcegraph.com/cli/references/batch/preview

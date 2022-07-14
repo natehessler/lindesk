@@ -1,0 +1,17 @@
+zendeskTicketNumber: 8744
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8744
+title: # New Issue reported by VMware
+Application engineer: Alex Jean-Baptiste
+Customer: Vmware 
+Date: June 5, 2022
+Version: ​3.40.2
+Deployment: Docker Compose
+External Services: GitLab
+Auth Providers: GitLab
+Slack Links: https://sourcegraph.slack.com/archives/C03DYKCM3PD/p1654306779052459
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/975
+Doc Update Link: N/A
+Summary: ​The customer was continuously experiencing cycling in the number of repos they had authorization for. This caused inconsistency in search results as well as Batch Changes.
+​The customer's database was checked in the following tables: ​ ​repo_pending_permissions ​ ​repo_permissions ​ ​access_tokens ​
+​The customer was instructed to use a non-expiring OAuth token which is still available in GitLab 14. ​ In order to prepare for the customer's update to GitLab 15 in July the issue has been deemed fixed in GitHub issue
+​https://about.gitlab.com/blog/2022/04/18/gitlab-releases-15-breaking-changes/

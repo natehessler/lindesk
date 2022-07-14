@@ -1,0 +1,16 @@
+zendeskTicketNumber: 6912
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6912
+title: How to find all usages of Document.Error field, including implicit ones
+Application engineer: Michael Bali
+Customer: Avito 
+Date: Mar 16
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: https://sourcegraph.slack.com/archives/C02VC14H5EU/p1647428788823289
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: I'm trying to find all usages of 
+Since all the usage of 
+N/A 

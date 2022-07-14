@@ -1,0 +1,16 @@
+zendeskTicketNumber: 5173
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5173
+title: Set-up issue
+Application engineer: Ben Gordon
+Customer: Pandora Media, Inc. 
+Date: Dec 16
+Version: ​3.34.2
+Deployment: Single-Container
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C02QXK6PKMX/p1639769682098100
+Customer experiences NetworkError messages from the Sourcegraph UI on approximately 1/10 page loads.
+Checked cloud host (Nomad) for usage stats to determine resource constraints
+Summary: -   Found that CPU was spiking to 500% usage occasionally
+-   Increasing CPU and RAM for the instance fixed the issue
+    NetworkError when attempting to fetch resources

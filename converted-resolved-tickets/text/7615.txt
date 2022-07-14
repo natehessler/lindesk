@@ -1,0 +1,15 @@
+-   Application engineer: Alex Jean-Baptiste
+-   Customer: Capital One 
+-   Date: Apr 13
+-   Version: ​3.31.2
+-   Deployment: AWS ECS
+-   External Services: GitHub
+-   Auth Providers: GitHub
+-   Slack Links: https://sourcegraph.slack.com/archives/C01QNMSLTFZ/p1649858825348519
+-   GitHub Issue Link: https://github.com/sourcegraph/sourcegraph/pull/34701
+-   Doc Update Link: N/A
+The customer repeatedly attempted to delete a code host and received a 504 error on every try. ​
+Attempt to delete a code host with xxx,000 repos after changing the code host URL and the access token. ​
+The user was walked through accessing the postgres database to delete the code host using the following command TRUNCATE external_service_repos, external_services, repos CASCADE;. ​ A solution to extend the timeout for code host deletions is in flight by the repo management team as of 05/02/2022
+https://docs.sourcegraph.com/admin/how-to/run-psql ​
+​Request to https://sourcegraph.../graphql?DeleteExternalService failed with 504

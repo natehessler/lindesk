@@ -1,0 +1,14 @@
+-   CSE: Michael Bali
+-   Customer: Uber 
+-   Date: 28 October 2021
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services: BITBUCKETSERVER,GITHUB,GITOLITE,PHABRICATOR
+-   Auth Providers: http-header
+-   Slack Links: https://sourcegraph.slack.com/archives/CTGBWCKM0/p1634717856049400
+-   GitHub Issue Link: N/A
+-   Doc Update Link: N/A
+Production instance has a weird timeout issue going. Grafana Dashboard not loading and timeout.
+Check connection between auth proxy and sourcegraph load balancer (both curl and ping are fine)
+Restarted sourcegraph frontends Restarted ingress-Nginx Jaeger does not show anything interesting Grafana does not load Reported that this happened intermittently Collected Frontend logs Suspected a networking issue since the request wasn't getting to Sourcegraph
+It was discovered that it was indeed a network issue on Uber's side. 1 network route was dropped that resulted in partial traffic failure.

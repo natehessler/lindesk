@@ -1,0 +1,23 @@
+-   Application engineer: Warren Gifford
+-   Customer: Cornerstone OnDemand (CSOD) 
+-   Date: Mar 9
+-   Version: 3.27.5​
+-   Deployment: docker-compose
+-   External Services: BITBUCKETSERVER
+-   Auth Providers: builtin,saml
+-   Slack Links: n/a
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/760
+-   Doc Update Link:
+How to make a batch change PR with a specific commit author and username?
+How to have default reviewers for batch changes in Bit bucket?
+1
+Example name: hello-world2 description: Add Hello World to READMEs
+on: - repositoriesMatchingQuery: file:README.md repo:\
+steps: - run: echo Hello World \
+changesetTemplate: title: Hello World body: My first batch change! branch: hello-world
+commit: message: Append Hello World to all README.md files author: name: Sourcegraph Engineers email: engineering-team@sourcegraph.com
+2
+I believe BitBucket default reviewers wasn't added as a feature until v3.28.0 of Sourcegraph. Tracking it down it looks like there was some discussion of the subject in these github issues (
+I believe if you upgrade your instance to v3.28.0 you should start getting default reviewers on your batch change PRs. Would it be possible to upgrade?
+https://github.com/sourcegraph/sourcegraph/issues/20472 https://docs.sourcegraph.com/batch_changes/references/batch_spec_yaml_reference
+https://confluence.atlassian.com/bitbucketserver/using-repository-hooks-776639836.html

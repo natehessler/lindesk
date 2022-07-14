@@ -1,0 +1,15 @@
+-   Application engineer: Jason Harris
+-   Customer: Databricks 
+-   Date: May 9
+-   Version: ​3.39
+-   Deployment: docker-compose
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C02UM8A9M2R/p1651886151567429
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/928
+-   Doc Update Link: n/a
+The customer saw a repo failing to sync in error logs for a repo the user never added.
+Queried the graphql API and pgsql database for the repo, returning nothing for both queries. Filed issue
+What's happening here is that users are browsing to a URL like http://customer-instance/github.com/Homebrew/homebrew-core
+repo-management introduced a change a while back that is mistakenly trying to sync these repos on the host but it fails to do so since this feature is intended for cloud only. It's not an issue since the repos aren't actually being cloned.
+repo-management will work on a fix so that we don't try to clone them anymore which will also stop those errors logs from appearing.

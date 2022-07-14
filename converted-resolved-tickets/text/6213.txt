@@ -1,0 +1,12 @@
+-   Application engineer: Mariam Adedeji
+-   Customer: GOV.UK 
+-   Date: Feb 13
+-   Version: 3.36.1​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C013FEJKFPX/p1644830996855129
+-   GitHub Issue Link:
+-   Doc Update Link:
+What is the meaning of the diagonals?
+I believe this is an insight "over all repos", in which case the diagonal lines means some series do not have data. My guess is the bottom series don't exist before \~July.This has a different meaning if the insight is not "all repos" - it means that some of the specified repositories do not exist.Our team is currently looking into it here https://github.com/sourcegraph/sourcegraph/issues/29678 to make this behavior more consistent and intuitive

@@ -1,0 +1,15 @@
+zendeskTicketNumber: 5358
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/5358
+title: Multiple user seeing fewer repos than expected.
+Application engineer: Donavon Ellison
+Customer: Upwork Global Inc. 
+Date: Jan 3
+Version: 3.37.0​
+Deployment: docker-compose
+External Services: BITBUCKETSERVER
+Auth Providers: builtin,saml
+Slack Links: https://sourcegraph.slack.com/archives/C01S5DM6NG7/p1645214573124179?thread_ts=1642118933.002100&cid=C01S5DM6NG7
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/631
+Doc Update Link: N/A
+Summary: Multiple user seeing fewer repos than expected.
+Make sure the username they have for their code host is the same username that is being used for sourcegraph. It's case sensitive

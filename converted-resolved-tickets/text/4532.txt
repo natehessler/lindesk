@@ -1,0 +1,13 @@
+-   CSE: Jason Harris
+-   Customer: Cisco Meraki 
+-   Date: Nov 10
+-   Version: 3.30.4​
+-   Deployment: docker-compose
+-   External Services: GITLAB,OTHER
+-   Auth Providers: builtin
+-   Slack Links: https://sourcegraph.slack.com/archives/C02DNE235TL/p1636558695008000
+-   GitHub Issue Link: n/a
+-   Doc Update Link: https://github.com/sourcegraph/sourcegraph/pull/27375
+Customer thought the registry was showing him all the extensions that were currently active on his instance.
+The registry is available globally, but that doesn't mean they're enabled for the instance. You have to enable each extension for it to work on your instance.
+n/a

@@ -1,0 +1,17 @@
+zendeskTicketNumber: 3819
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/3819
+title: New Slack message in trial-reddit-sourcegraph
+CSE: Warren Gifford
+Customer: Reddit 
+Date: 28 October 2021
+Version: ​v3.30.3
+Deployment: kubernetes
+External Services: github
+Auth Providers: n/a
+Slack Links: (https://sourcegraph.slack.com/archives/C02BJ8T258D/p1634141423289100)\[https://sourcegraph.slack.com/archives/C02BJ8T258D/p1634141423289100\]
+GitHub Issue Link:
+Doc Update Link: doc updated after summary
+Summary: Advise increasing max_connections in postgres configuration file https://docs.sourcegraph.com/admin/config/postgres-conf
+The customer also solved this issue prior to suggestion via reducing services accessing the database:
+> I was able to 'resolve' this by downsizing the pool of app servers that is serving web traffic. This is ok for now because they weren't being used much, but it's kind of alarming that we so close to PG tipping over that 3 app servers make the difference
+UTC \[333\] FATAL: sorry, too many clients already

@@ -1,0 +1,18 @@
+zendeskTicketNumber: 7732
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7732
+title: How to Search Sourcegraph without having to Clone or Download
+Application engineer: Michael Bali
+Customer: 
+Date: Apr 20
+Version: ​N/A
+Deployment: N/A
+External Services: N/A
+Auth Providers: N/A
+Slack Links: N/A
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: Is there a value add way to use sourcegraph (RBAC controls/settings) that empowers developers to search code across an org while minimizing risk of exfiltration? For example, can i not provide ability to clone/download/edit/view all or any other capabilities typically provided by repository management tools.
+Sourcegraph is a code search and intelligence tool for developers. It lets you search and explore all of your organization's code on the web, with integrations into your existing tools.
+For your use case, you can leverage on any of our following product offerings below:
+-   [Sourcegraph Cloud](https://docs.sourcegraph.com/cloud/getting_started_on_cloud) lets you search across your personal code from GitHub.com or GitLab.com. After sign-up, you will be guided through the next two steps 2. Connect a code host using your OAuth flow. Sourcegraph Cloud natively supports Github.com and Gitlab.com repositories. 3. Next, add your repositories to Sourcegraph. Sourcegraph respects code host permissions, so you should only see repositories that you have permission to view on the code host you connected. More information about Sourcegraph Cloud can be found here.
+-   [Sourcegraph VS code extension](https://marketplace.visualstudio.com/items?itemName=sourcegraph.sourcegraph), you can sync your own private and public repositories and search all of your code in a single view in VS Code. Using the extension can help minimize the risk of data exfiltration, you don't have to download or clone a repo and you can view code files without being able to edit them. In conclusion, Sourcegraph is a developer tool that enables you to search open-source code, and codes from your org when integrated with your code host.

@@ -1,0 +1,12 @@
+zendeskTicketNumber: 7121
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7121
+title: Search context question
+Application engineer: Gabe Torres
+Customer: AppFolio 
+Date: Mar 23
+Slack Links: https://sourcegraph.slack.com/archives/C02JCB0TM26/p1648073969656559
+GitHub Issue Link:
+Doc Update Link:
+I get some clarification on what the visibility should be for a public search context that is not global (e.g. @user/portal vs context:portal) should we expect a public context that is not global to be visible to all users or at least all users that can access the repo defined in context.
+ou want the context to be publicly visible to all the users on the instance, you will want it to be the global option. The public option owned by 'user' is public, but won't actually show in the dropdown yet. (It will be surfaced as we build out more UI to display instance search contexts, however.)
+Summary: 

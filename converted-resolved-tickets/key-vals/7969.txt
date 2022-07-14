@@ -1,0 +1,16 @@
+zendeskTicketNumber: 7969
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/7969
+title: Dashboard dropdown for Insights is broken: Bug
+Application engineer: Gabe Torres
+Customer: Netflix 
+Date: May 3
+Version: 3.37.0​
+Deployment: pure-docker
+External Services: BITBUCKETSERVER
+Auth Providers: http-header
+Slack Links: https://sourcegraph.slack.com/archives/C014ZCKMCAV/p1651686390261709
+GitHub Issue Link: https://github.com/sourcegraph/customer/issues/914
+Doc Update Link:
+Summary: The Dashboard dropdown on the code insights page was not opening.
+We confirmed the data was there, by removing the CSS sheets in the browser console. The issue was the way the CSS sheets were being loaded in the customer's instance.
+We noticed the customer was using the option htmlHeadTop to insert a div into the head tag. This was causing the head to close early and the rest of the style sheets were loaded into the body, causing CSS conflicts.

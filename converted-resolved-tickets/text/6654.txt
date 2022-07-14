@@ -1,0 +1,14 @@
+-   Application engineer: Kelvin Lee
+-   Customer: Ironclad 
+-   Date: Mar 4
+-   Version: ​unknown
+-   Deployment: unknown
+-   External Services: unknown
+-   Auth Providers: unknown
+-   Slack Links: [Slack Thread](https://sourcegraph.slack.com/archives/C035PJ2NY9Z/p1646422578303419)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+Is there a nice, "go to file" shortcut that is provided in the Sourcegraph UI, similar to GitHub's go-to-file feature?
+No, not really \]: Nothing as nice as GitHub's feature. But one can try using the file: keyword to limit the search space, and also combine that with \[search contexts\](https://docs.sourcegraph.com/code_search/explanations/features
+https://docs.sourcegraph.com/code_search/explanations/features
+https://docs.sourcegraph.com/code_search/reference/queries

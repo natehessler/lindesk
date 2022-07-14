@@ -1,0 +1,15 @@
+zendeskTicketNumber: 6680
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/6680
+title: New Slack message in support-segment
+Application engineer: Ben Gordon
+Customer: Segment.io Inc 
+Date: Mar 7
+Version: 3.35.2​
+Deployment: kubernetes
+External Services: GITHUB
+Auth Providers: openidconnect
+Slack Links: https://sourcegraph.slack.com/archives/CKMSNT9C0/p1646678264873419
+customer reports version error while attempting 3.36 upgrade
+check database 
+Summary: -   rollback to 3.35
+-   after rollback, proceeding with 3.36 upgrade works as expected

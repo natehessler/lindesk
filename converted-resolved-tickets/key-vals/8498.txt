@@ -1,0 +1,16 @@
+zendeskTicketNumber: 8498
+zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/8498
+title: New Slack message in trial-kbtg-sourcegraph
+Application engineer: Stomzy Mwendwa
+Customer: KBTG 
+Date: May 25, 2022
+Version: ​3.39
+Deployment: Docker-Compose
+External Services:
+Auth Providers:
+Slack Links: https://sourcegraph.slack.com/archives/C03GRH68W7M/p1653556716557789
+GitHub Issue Link: N/A
+Doc Update Link: N/A
+Summary: How do you change named volume path in your docker-compose.yml file? I understand that i can change by use long syntax of docker named volume,  but that's required docker file 3.2,  but i just noticed your compose file is v2.4 and I'm too afraid to change that version number. Basically, i just want to change gitserver and indexed-search volume to my /app/ as mention earlier,  but i don't know how to easily do it.
+I'm sorry if I've confused you here and I believe you are spot on of your understanding of volumes here. I think I was slightly off queue here and got it jumbled up the other way round :sweat_smile: In the example you've shared, this is where compose mounts the zoekt volume that hosts the index data. And the data will be stored in /data/index/  which when we inspect , looks something like: "Mountpoint": "/mnt/docker-data/volumes/docker-compose_zoekt-0-shared/\_data", Thanks for spotting that
+Customer ended up symlinking instead.

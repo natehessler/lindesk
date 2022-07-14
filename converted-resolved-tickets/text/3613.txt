@@ -1,0 +1,29 @@
+-   **CSE:** Jason Harris
+-   **Customer:** Lyft, Inc. 
+-   **Date:** 28 October 2021
+-   **Version:** 3.30.4​
+-   **Deployment:** kubernetes
+-   **External Services:** GITHUB
+-   **Auth Providers:** saml
+-   **Slack Links:**
+https://sourcegraph.slack.com/archives/C0174NVAREV/p1633021610031000
+https://sourcegraph.slack.com/archives/C0174NVAREV/p1633021543029600
+-   **GitHub Issue Link:** N/A
+-   **Doc Update Link:** N/A
+Customer said they were seeing an error message in the UI indicating that four of their repos could not be synced/may not be up to date.
+I noticed from another ticket that the customer mentioned that their pgsql container had index corruption ([here](https://sourcegraph.slack.com/archives/C0174NVAREV/p1633021543029600)). That being the case, no other troubleshooting steps were needed, as this was the very likely culprit of their repos not syncing.
+I sent the customer the docs for fixing corrupt Postgres indexes. After one week I received no response so I am closing this ticket. This approach has worked in the past and I'm very confident it worked here too.
+\
+CREATE EXTENSION sg=
+sg=
+sg-
+sg-
+sg-
+sg-
+sg-
+sg-
+sg-
+sg-
+sg-
+sg-
+ERROR: down-link lower bound invariant violated for index "repo_name_unique" DETAIL: Parent block=3 child index tid=(55,2) parent page lsn=

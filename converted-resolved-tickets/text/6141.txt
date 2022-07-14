@@ -1,0 +1,12 @@
+-   Application engineer: Jason Harris
+-   Customer: DoorDash 
+-   Date: Feb 9
+-   Version: 3.28.0​
+-   Deployment: kubernetes
+-   External Services:
+-   Auth Providers:
+-   Slack Links: https://sourcegraph.slack.com/archives/C017J5QN4FJ/p1644436176763869
+-   GitHub Issue Link:
+-   Doc Update Link:
+If we start a new instance, say 3.35, can we import the data from our instance in 3.28 so that we don't have to upgrade sequentially?
+Unfortunately, no. The migrations from version to version are too numerous, and will leave you with a large amount of dirty database errors that will be more trouble that it's worth.

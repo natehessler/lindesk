@@ -1,0 +1,12 @@
+-   Application engineer: Kelvin Lee
+-   Customer: 
+-   Date: Dec 22
+-   Version: ​3.34.2
+-   Deployment: Kubernetes
+-   External Services: GithHub, other, Gerrit
+-   Auth Providers: Saml
+-   Slack Links: [Thread](https://sourcegraph.slack.com/archives/CTJCMDCCS/p1640217078039100)
+-   GitHub Issue Link: None
+-   Doc Update Link: None
+How to specify/find a repo in sourcegraph
+Provided the customer with documentation to the 

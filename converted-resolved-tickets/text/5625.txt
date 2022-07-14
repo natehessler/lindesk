@@ -1,0 +1,19 @@
+-   Application engineer: Donavon Ellison
+-   Customer: Workiva
+-   Date: Jan 18
+-   Version: 3.35.1​
+-   Deployment: kubernetes
+-   External Services: GITHUB
+-   Auth Providers: builtin,github
+-   Slack Links: https://sourcegraph.slack.com/archives/CTJUDV6JH/p1642523413003500
+-   GitHub Issue Link: https://github.com/sourcegraph/customer/issues/650
+-   Doc Update Link: N/A
+Structural Search was not returning any results
+Attempt to perform a structural search and receive no results back
+The customer had to alter their search pod yaml file to allow write permissions
+volumeMounts: - mountPath: /mnt/cache name: cache-ssd - mountPath: /tmp name: tmpdir {{- if not .Values.sourcegraph.localDevMode }} resources: {{- toYaml .Values.searcher.resources \
+      volumes:
+      - emptyDir: {}
+        name: cache-ssd
+      - emptyDir: {}
+        name: tmpdir
