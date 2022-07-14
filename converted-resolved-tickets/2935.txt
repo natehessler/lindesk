@@ -1,0 +1,13 @@
+-   Application engineer: Stomzy Mwendwa
+-   Customer: Nutanix, Inc. 
+-   Date: August 24, 2021
+-   Version: 3.34.2​
+-   Deployment: kubernetes
+-   External Services: GITHUB,OTHER
+-   Auth Providers: builtin,saml
+-   Slack Links: https://sourcegraph.slack.com/archives/C02BQBNJVL0/p1629833739056300
+-   GitHub Issue Link:
+-   Doc Update Link:
+Picking this issue up from Amber. The customer reported slow searches and a grafana warning related to code intel search requests. On top of that, Ankit wanted to find out why the repo updater had an error around 0 repositories synced for more than 9h0m. On top of that, the symbols pod was getting evicted after deployment and dumping old data when the disk was fool
+Hopped onto a call with the customer to take a look at the Grafana dashboard and saw that the code-intel error was cleared from the frontend. This was after the upgrade. All services were stable and within threshold
+Mike and I decided to close this since the customer is in a good state after the call and their questions answered.
