@@ -11,3 +11,7 @@ for file in ./resolved-tickets/*; do
 done
 
 ./verify_process.sh
+rm -rf ./converted-resolved-tickets/key-vals
+rm -rf ./converted-resolved-tickets/text
+rm ./converted-resolved-tickets/pass.txt
+rm ./converted-resolved-tickets/shall-not-pass.txt

@@ -15,6 +15,14 @@ if [ -f ./converted-resolved-tickets/error-log.txt ]; then
     rm ./converted-resolved-tickets/error-log.txt
 fi
 
+if [ ! -d ./converted-resolved-tickets/fix ]; then
+    mkdir ./converted-resolved-tickets/fix
+fi
+
+if [ ! -d ./converted-resolved-tickets/passed ]; then
+    mkdir ./converted-resolved-tickets/passed
+fi
+
 PASS=0
 FAIL=0
 FAILURES=false
@@ -101,8 +109,10 @@ for file in ./converted-resolved-tickets/key-vals/*; do
 
     if [ "$FAILURES" = "true" ]; then
         ((FAIL++))
+        mv "$file" ./converted-resolved-tickets/fix
     elif [ "$FAILURES" = "false" ]; then
         ((PASS++))
+        mv "$file" ./converted-resolved-tickets/passed
     fi
 done
 
