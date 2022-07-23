@@ -1,8 +1,0 @@
--   Application engineer: Gabe Torres
--   Customer: Smartsheet 
--   Date: Mar 1
--   Slack Links: https://sourcegraph.slack.com/archives/C0325FV42G5/p1646173433915869
--   GitHub Issue Link:
--   Doc Update Link:
-Is it possible to pass in DNS configs to a docker container running batch changes? We have a few resources that are only accessible behind an internal DNS and it's causing the batch changes to fail
-By default, a container inherits the DNS settings of the host, as defined in the /etc/resolv.conf configuration file. Custom hosts defined in /etc/hosts are not inherited. Adding the DNS to the Docker Daemon / Docker Engine should pass in the correct DNS config to the containers. https://docs.docker.com/desktop/mac/

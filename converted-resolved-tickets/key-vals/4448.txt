@@ -1,15 +1,0 @@
-zendeskTicketNumber: 4448
-zendeskLink: https://sourcegraph.zendesk.com/agent/tickets/4448
-title: Sign up page not loading
-CSE: Mariam Adedeji
-Customer: 
-Date: Nov 4  
-Version:
-Deployment:
-External Services:
-Auth Providers:    
-GitHub Issue Link: N/A
-Doc Update Link: N/A  
-cided to work on issue https://github.com/sourcegraph/sourcegraph/issues/25216 , it has to do with the signup page which I couldn't access locally so I made changes using devtools to get the view in the second image, if I make the changes locally, how can I view it?  
-Summary: Could you try running: SOURCEGRAPH_API_URL=https://sourcegraph.com (https://sourcegraph.com/) sg start web-standalone  
-https://docs.sourcegraph.com/dev/background-information/web/web_app

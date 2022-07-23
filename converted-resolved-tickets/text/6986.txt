@@ -1,8 +1,0 @@
--   Application engineer: Gabe Torres
--   Customer: 
--   Date: Mar 17
--   Slack Links: https://sourcegraph.slack.com/archives/C034ZJQSAG6/p1647557952601719
-I just attempted to preview a batch change with our sourcegraph instance and ran in to some errors when viewing my preview:\
-ERROR: permission denied for view tracking_changeset_specs_and_changesets (SQLSTATE 42501)
-The admin had changed the view permissions for users. They were able to change them and the user was able to see the batch change preview.
-https://docs.sourcegraph.com/batch_changes/explanations/permissions_in_batch_changes

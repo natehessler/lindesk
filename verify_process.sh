@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# This script tests whether tickets have been pre-processed for db transfer correctly.
+# Do not delete!
+
 if [ -f ./converted-resolved-tickets/shall-not-pass.txt ]; then
     rm ./converted-resolved-tickets/shall-not-pass.txt
 fi
@@ -9,14 +13,6 @@ fi
 
 if [ -f ./converted-resolved-tickets/error-log.txt ]; then
     rm ./converted-resolved-tickets/error-log.txt
-fi
-
-if [ ! -d ./converted-resolved-tickets/failed ]; then
-    mkdir ./converted-resolved-tickets/failed
-fi
-
-if [ ! -d ./converted-resolved-tickets/passed ]; then
-    mkdir ./converted-resolved-tickets/passed
 fi
 
 PASS=0
@@ -76,7 +72,7 @@ for file in ./converted-resolved-tickets/key-vals/*; do
     L1=$(head -1 "$file" | tail -1)
     L2=$(head -2 "$file" | tail -1)
     L3=$(head -3 "$file" | tail -1)
-    # L4=$(head -4 "$file" | tail -1)
+    L4=$(head -4 "$file" | tail -1)
     L5=$(head -5 "$file" | tail -1)
     L6=$(head -6 "$file" | tail -1)
     L7=$(head -7 "$file" | tail -1)
@@ -91,7 +87,7 @@ for file in ./converted-resolved-tickets/key-vals/*; do
     is_equal_to "zendeskTicketNumber:" "${L1:0:20}" "$file" "1"
     is_equal_to "zendeskLink:" "${L2:0:12}" "$file" "2"
     is_equal_to "title:" "${L3:0:6}" "$file" "3"
-    # is_equal_to "Application engineer:" "${L4:0:21}" "$file" "4"
+    is_equal_to "Application engineer:" "${L4:0:21}" "$file" "4"
     is_equal_to "Customer:" "${L5:0:9}" "$file" "5"
     is_equal_to "Date:" "${L6:0:5}" "$file" "6"
     is_equal_to "Version:" "${L7:0:8}" "$file" "7"
@@ -105,10 +101,8 @@ for file in ./converted-resolved-tickets/key-vals/*; do
 
     if [ "$FAILURES" = "true" ]; then
         ((FAIL++))
-        cp "$file" "./converted-resolved-tickets/failed"
     elif [ "$FAILURES" = "false" ]; then
         ((PASS++))
-        cp "$file" "./converted-resolved-tickets/passed"
     fi
 done
 
@@ -119,4 +113,4 @@ done
     cat <$log
 } >./converted-resolved-tickets/results.txt
 
-# rm ./converted-resolved-tickets/pass.txt ./converted-resolved-tickets/shall-not-pass.txt ./converted-resolved-tickets/error-log.txt
+rm ./converted-resolved-tickets/error-log.txt

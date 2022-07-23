@@ -1,7 +1,6 @@
 #!/bin/bash
-get_ticket_number() {
-    echo "$1"
-}
+# this script runs the "transfer" script on every file inside of the resolved tickets folder
+# do not delete!
 
 for file in ./resolved-tickets/*; do
     echo "$file" >./tmp.txt
@@ -9,5 +8,6 @@ for file in ./resolved-tickets/*; do
     rm ./tmp.txt
 
     ./transfer.sh "$id"
-
 done
+
+./verify_process.sh
