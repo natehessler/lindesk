@@ -4,7 +4,7 @@ A web app that generates the most frequently used commands for different deploym
 
 <img width="1195" alt="clg" width="100%" src="https://user-images.githubusercontent.com/68532117/121770229-0008d100-cb1d-11eb-9a47-e81a4e1beb23.png">
 
-[Link to App](https://sourcegraph.github.io/support-tools/command-generator/beta)
+[Link to App](https://sourcegraph.github.io/support-generator/)
 
 ## Features
 
@@ -25,4 +25,4 @@ A web app that generates the most frequently used commands for different deploym
 - unique url for a generated command to share with customers
 - add container based on each k8s pod/service
 - redesign layout
-Hello World
+
