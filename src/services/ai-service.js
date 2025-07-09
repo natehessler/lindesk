@@ -31,8 +31,6 @@ Please provide a very detailed, well-structured analysis that includes:
 - Clear problem statement
 - Detailed reproduction steps (numbered list)
 - Technical investigation findings
-- Root cause analysis
-- Suggested solutions or next steps
 - Environment details
 - Impact assessment
 
@@ -40,7 +38,7 @@ Return only a JSON object with these fields:
 
 {
   "title": "Clear, concise technical title for the Linear issue",
-  "description": "Very detailed technical summary with proper formatting including:\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Root Cause\n[Analysis of underlying cause]\n\n## Suggested Solutions\n[Recommended fixes or investigations]\n\n## Impact\n[User/business impact]",
+  "description": "Very detailed technical summary with proper formatting including:\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Impact\n[User/business impact]",
   "priority": "Low|Medium|High|Urgent",
   "complexity": 1-5,
   "components": ["TechnicalComponent1", "TechnicalComponent2"]

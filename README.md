@@ -82,8 +82,7 @@ lindesk transfer 12345
 3. Generates a detailed, well-structured technical summary including:
    - Problem summary and environment details
    - Step-by-step reproduction instructions
-   - Investigation findings and root cause analysis
-   - Suggested solutions and impact assessment
+   - Investigation findings and impact assessment
    - Priority and complexity assessment
 4. Creates a new Linear issue with the AI-generated analysis and sets appropriate priority
 5. Links back to the original Zendesk ticket for reference
@@ -96,8 +95,6 @@ Lindesk creates Linear tickets with structured, detailed descriptions that inclu
 - **Reproduction Steps**: Numbered, step-by-step instructions
 - **Expected vs Actual Behavior**: What should happen vs what actually happens
 - **Investigation Findings**: Technical details discovered during analysis
-- **Root Cause**: Analysis of the underlying cause
-- **Suggested Solutions**: Recommended fixes or next steps
 - **Impact**: Assessment of user and business impact
 
 ## License
