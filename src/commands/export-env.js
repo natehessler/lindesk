@@ -23,6 +23,13 @@ export async function exportEnv() {
   if (config.ampEndpoint && config.ampEndpoint !== 'https://ampcode.com/api/v1/chat/completions') {
     envContent += `AMP_ENDPOINT=${config.ampEndpoint}\n`;
   }
+  if (config.ampPath && config.ampPath !== 'amp') {
+    envContent += `AMP_PATH=${config.ampPath}\n`;
+  }
+  
+  // Add Slack config if available
+  if (config.slackToken) envContent += `SLACK_TOKEN=${config.slackToken}\n`;
+  if (config.defaultSlackChannel) envContent += `DEFAULT_SLACK_CHANNEL=${config.defaultSlackChannel}\n`;
   
   // Get the current working directory
   const cwd = process.cwd();
@@ -45,7 +52,7 @@ export async function exportEnv() {
     
     // Write the file
     await fs.writeFile(envFilePath, envContent);
-    console.log(chalk.green(`✓ Environment variables exported to ${envFilePath}`));
+    console.log(chalk.green(`u2713 Environment variables exported to ${envFilePath}`));
     console.log(chalk.gray('You can now use these environment variables automatically'));
   } catch (error) {
     console.error(chalk.red(`Error writing .env file: ${error.message}`));

@@ -13,7 +13,8 @@ export async function analyzeTicket(ticket) {
     const ticketContent = {
         id: ticket.id,
         subject: ticket.subject,
-        description: fullConversation
+        description: fullConversation,
+        organization: ticket.organization // Pass along the organization name
     };
 
     return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint);
@@ -25,7 +26,7 @@ async function analyzeWithAmp(ticketContent, apiKey, endpoint) {
         const { spawn } = await import('child_process');
         const { promisify } = await import('util');
         
-        const prompt = `Analyze this complete Zendesk support ticket conversation and create a comprehensive technical summary for our Sourcegraph engineering team. 
+        const prompt = `Analyze this complete Zendesk support ticket conversation and create a comprehensive technical summary for our engineering team. Pay special attention to any internal notes (marked as 'Internal Note') as they often contain important technical context from our support team. 
 
 Please provide a very detailed, well-structured analysis that includes:
 - Clear problem statement
@@ -38,7 +39,7 @@ Return only a JSON object with these fields:
 
 {
   "title": "Clear, concise technical title for the Linear issue",
-  "description": "Very detailed technical summary with proper formatting including:\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Impact\n[User/business impact]",
+  "description": "Very detailed technical summary with proper formatting including:\n\n## Internal Notes Summary\n[Summarize key points from internal notes]\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Impact\n[User/business impact]\n\n## Engineering Recommendations\n[Suggested approach for engineers]",
   "priority": "Low|Medium|High|Urgent",
   "complexity": 1-5,
   "components": ["TechnicalComponent1", "TechnicalComponent2"]
@@ -49,7 +50,11 @@ Take your time to analyze thoroughly. Ticket #${ticketContent.id}: ${ticketConte
 ${ticketContent.description}`;
 
         return new Promise((resolve, reject) => {
-            const ampProcess = spawn('npx', ['@sourcegraph/amp'], {
+            // Use the configured path to the Amp binary or fall back to system path
+            const { ampPath } = getConfig();
+            const ampCommand = ampPath || process.env.AMP_PATH || 'amp';
+            console.log(`Using Amp at: ${ampCommand}`);
+            const ampProcess = spawn('/bin/bash', ['-c', ampCommand], {
                 stdio: ['pipe', 'pipe', 'pipe'],
                 env: {
                     ...process.env,
@@ -81,7 +86,7 @@ ${ticketContent.description}`;
                     return;
                 }
 
-                console.log('Raw Amp output:', output);
+                // Process Amp output
                 
                 try {
                     // Look for JSON content in the output - try multiple approaches
@@ -93,7 +98,7 @@ ${ticketContent.description}`;
                         try {
                             jsonContent = JSON.parse(jsonMatch[0]);
                         } catch (e) {
-                            console.log('Failed to parse JSON match:', e);
+                            // Failed to parse JSON
                         }
                     }
                     
@@ -119,28 +124,29 @@ ${ticketContent.description}`;
                             try {
                                 jsonContent = JSON.parse(jsonLines.join('\n'));
                             } catch (e) {
-                                console.log('Failed to parse JSON lines:', e);
+                                // Failed to parse JSON lines
                             }
                         }
                     }
                     
                     if (jsonContent) {
-                        console.log('Successfully parsed JSON from Amp:', jsonContent);
+                        // Successfully parsed AI analysis
                         resolve(formatAmpResponse(jsonContent, ticketContent));
                     } else {
                         // Use the raw Amp output as the description
-                        console.log('No JSON found, using raw Amp output');
+                        // No JSON found, using raw output
                         resolve({
                             title: ticketContent.subject,
                             description: output.trim(),
                             priority: 'Medium',
                             estimatedComplexity: 3,
                             components: ['General'],
-                            originalSubject: ticketContent.subject
+                            originalSubject: ticketContent.subject,
+                            ticket: ticketContent // Pass the original ticket data
                         });
                     }
                 } catch (error) {
-                    console.log('Error processing Amp output:', error);
+                    // Error processing output
                     reject(new Error(`Failed to process Amp response: ${error.message}`));
                 }
             });
@@ -171,7 +177,8 @@ function formatAmpResponse(response, ticketContent) {
         priority: response.priority || 'Medium',
         estimatedComplexity: response.complexity || 3,
         components: Array.isArray(response.components) ? response.components : ['General'],
-        originalSubject: ticketContent.subject
+        originalSubject: ticketContent.subject,
+        ticket: ticketContent // Pass the original ticket data for use in other services
     };
 }
 
@@ -195,6 +202,10 @@ function isValidAnalysis(data) {
 function buildFullConversation(ticket) {
     let conversation = `**Initial Description:**\n${cleanText(ticket.description)}\n\n`;
     
+    // Track if we have any internal notes to highlight
+    let hasInternalNotes = false;
+    let internalNotesSummary = '**Internal Notes Summary:**\n';
+    
     if (ticket.comments && ticket.comments.length > 0) {
         conversation += `**Conversation History:**\n\n`;
         
@@ -206,9 +217,21 @@ function buildFullConversation(ticket) {
             
             const cleanedComment = cleanText(comment.body);
             if (cleanedComment.trim()) {
-                conversation += `**Comment ${index + 1}:**\n${cleanedComment}\n\n`;
+                // Highlight internal notes differently
+                if (comment.internal_note) {
+                    hasInternalNotes = true;
+                    conversation += `**Internal Note ${index + 1}:**\n${cleanedComment}\n\n`;
+                    internalNotesSummary += `- ${cleanedComment.substring(0, 150)}${cleanedComment.length > 150 ? '...' : ''}\n\n`;
+                } else {
+                    conversation += `**Comment ${index + 1}:**\n${cleanedComment}\n\n`;
+                }
             }
         });
+    }
+    
+    // Add the internal notes summary at the beginning for quick reference
+    if (hasInternalNotes) {
+        conversation = `**ENGINEERING SUMMARY NEEDED - CONTAINS INTERNAL NOTES**\n\n${internalNotesSummary}\n${conversation}`;
     }
     
     return conversation.trim();

@@ -19,9 +19,16 @@ program
   .description('Transfer a Zendesk ticket to Linear with AI summary')
   .argument('<ticketId>', 'Zendesk ticket ID to transfer')
   .option('-p, --project <project>', 'Linear project key')
+  .option('-c, --channel <channel>', 'Slack channel ID to post summary to')
+  .option('--linear-only', 'Only create Linear issue, skip Slack')
+  .option('--slack-only', 'Only post to Slack, skip Linear')
   .action(async (ticketId, options) => {
     try {
-      await transferTicket(ticketId, options.project);
+      // Determine destination based on flags
+      const createLinear = !options.slackOnly;
+      const postToSlackChannel = !options.linearOnly && options.channel;
+      
+      await transferTicket(ticketId, options.project, options.channel, createLinear, postToSlackChannel);
     } catch (error) {
       console.error(chalk.red(`Error: ${error.message}`));
       process.exit(1);
