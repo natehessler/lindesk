@@ -39,7 +39,7 @@ Return only a JSON object with these fields:
 
 {
   "title": "Clear, concise technical title for the Linear issue",
-  "description": "Very detailed technical summary with proper formatting including:\n\n## Internal Notes Summary\n[Summarize key points from internal notes]\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Impact\n[User/business impact]\n\n## Engineering Recommendations\n[Suggested approach for engineers]",
+  "description": "Very detailed technical summary with proper formatting including:\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Impact\n[User/business impact]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Internal Notes Summary\n[Summarize key points from internal notes]",
   "priority": "Low|Medium|High|Urgent",
   "complexity": 1-5,
   "components": ["TechnicalComponent1", "TechnicalComponent2"]
@@ -50,11 +50,7 @@ Take your time to analyze thoroughly. Ticket #${ticketContent.id}: ${ticketConte
 ${ticketContent.description}`;
 
         return new Promise((resolve, reject) => {
-            // Use the configured path to the Amp binary or fall back to system path
-            const { ampPath } = getConfig();
-            const ampCommand = ampPath || process.env.AMP_PATH || 'amp';
-            console.log(`Using Amp at: ${ampCommand}`);
-            const ampProcess = spawn('/bin/bash', ['-c', ampCommand], {
+            const ampProcess = spawn('npx', ['@sourcegraph/amp'], {
                 stdio: ['pipe', 'pipe', 'pipe'],
                 env: {
                     ...process.env,

@@ -18,53 +18,60 @@ export async function setupConfig() {
   const zendeskEmail = await rl.question('Zendesk email: ');
   const zendeskToken = await rl.question('Zendesk API token: ');
   
-  // Linear configuration
-  console.log('\n' + chalk.yellow('Linear Configuration:'));
-  const linearApiKey = await rl.question('Linear API key: ');
-  const defaultProject = await rl.question('Default Linear project key (optional): ');
-  
-  // Amp AI Configuration
+  // Amp AI Configuration (moved right after Zendesk)
   console.log('\n' + chalk.yellow('Amp AI Configuration:'));
   console.log(chalk.gray('Configure Amp AI for ticket analysis'));
-  console.log(chalk.blue('DEBUG: About to ask for Amp path'));
   
   const ampApiKey = await rl.question('Amp API key: ');
-  console.log(chalk.blue('DEBUG: Got Amp API key'));
-  const ampEndpoint = await rl.question('Amp endpoint (optional, press Enter for default): ');
-  console.log(chalk.blue('DEBUG: Got Amp endpoint'));
-  const ampPath = await rl.question('Path to Amp CLI (e.g., /opt/homebrew/bin/amp or leave empty to use "amp" from PATH): ');
-  console.log(chalk.blue('DEBUG: Got Amp path: ' + ampPath));
   
   console.log(chalk.green('✓ Amp AI configured for ticket analysis'));
   
-  // Slack Configuration
-  console.log('\n' + chalk.yellow('Slack Configuration:'));
-  console.log(chalk.gray('Configure Slack for posting ticket summaries'));
+  // Ask what services they want to use
+  console.log('\n' + chalk.yellow('Integration Configuration:'));
+  console.log(chalk.gray('What would you like to use Lindesk with?'));
+  console.log('1. Slack only (post summaries to Slack channels)');
+  console.log('2. Linear only (create issues in Linear)');
+  console.log('3. Both Slack and Linear');
   
-  const slackToken = await rl.question('Slack Bot Token: ');
-  const defaultSlackChannel = await rl.question('Default Slack channel ID (optional): ');
+  const integrationChoice = await rl.question('Choose option (1, 2, or 3): ');
   
-  if (slackToken) {
+  let linearApiKey, defaultProject, slackToken, defaultSlackChannel;
+  
+  // Configure based on choice
+  if (integrationChoice === '1' || integrationChoice === '3') {
+    // Slack Configuration
+    console.log('\n' + chalk.yellow('Slack Configuration:'));
+    console.log(chalk.gray('Configure Slack for posting ticket summaries'));
+    
+    slackToken = await rl.question('Slack Bot Token: ');
+    defaultSlackChannel = await rl.question('Default Slack channel ID (optional): ');
     console.log(chalk.green('✓ Slack integration configured'));
+  }
+  
+  if (integrationChoice === '2' || integrationChoice === '3') {
+    // Linear configuration
+    console.log('\n' + chalk.yellow('Linear Configuration:'));
+    linearApiKey = await rl.question('Linear API key: ');
+    defaultProject = await rl.question('Default Linear project key (optional): ');
+    console.log(chalk.green('✓ Linear integration configured'));
   }
   
   // Save configuration
   config.set('zendeskDomain', zendeskDomain);
   config.set('zendeskEmail', zendeskEmail);
   config.set('zendeskToken', zendeskToken);
-  config.set('linearApiKey', linearApiKey);
   config.set('ampApiKey', ampApiKey);
-  if (ampEndpoint) {
-    config.set('ampEndpoint', ampEndpoint);
-  }
-  if (ampPath) {
-    config.set('ampPath', ampPath);
+  
+  // Save Linear config if configured
+  if (linearApiKey) {
+    config.set('linearApiKey', linearApiKey);
   }
   
   if (defaultProject) {
     config.set('defaultProject', defaultProject);
   }
   
+  // Save Slack config if configured
   if (slackToken) {
     config.set('slackToken', slackToken);
   }
