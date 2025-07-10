@@ -21,13 +21,12 @@ During setup, you'll be prompted for your Slack Bot Token and an optional defaul
    - Install the app to your workspace
    - Copy the "Bot User OAuth Token" (starts with `xoxb-`)
   
- 3.
-   - Add the bot to your channel:
-   - Open Slack
-   - Go to the channel where you want to post
-   - Right-click the channel and select "View channel details"
-   - Click "Integrations" tab
-   - Click "Add apps" and add your bot    
+ 3. Add the bot to your channel:
+    - Open Slack
+    - Go to the channel where you want to post
+    - Right-click the channel and select "View channel details"
+    - Click "Integrations" tab
+    - Click "Add apps" and add your bot    
 
 ## Posting to Slack
 
