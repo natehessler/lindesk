@@ -8,6 +8,7 @@ A CLI tool to integrate Zendesk tickets with Linear issues using AI summarizatio
 - Analyze complete ticket conversations using Amp AI
 - Generate detailed, well-structured technical summaries for engineers
 - Create a Linear issue with the AI-generated summary
+- Post ticket summaries to Slack channels
 - Link back to the original Zendesk ticket
 
 ## Prerequisites
@@ -16,6 +17,7 @@ A CLI tool to integrate Zendesk tickets with Linear issues using AI summarizatio
 - Access to Zendesk (admin privileges to generate API tokens)
 - Linear workspace access (ability to create API keys)
 - Amp account with API access
+- Slack workspace access (ability to create bot tokens) - optional
 
 ## Installation
 
@@ -39,9 +41,10 @@ lindesk setup
 
 This will prompt you for:
 - Zendesk domain, email and API token
-- Linear API key
-- Amp API key and endpoint
-- Optional default Linear project
+- Amp API key for AI analysis
+- Integration choice (Slack only, Linear only, or both)
+- Slack bot token and default channel (if Slack selected)
+- Linear API key and default project (if Linear selected)
 
 Alternatively, you can use environment variables:
 
@@ -51,11 +54,25 @@ ZENDESK_EMAIL=your-email@example.com
 ZENDESK_TOKEN=your-zendesk-token
 LINEAR_API_KEY=your-linear-api-key
 AMP_API_KEY=your-amp-api-key
-# AMP_ENDPOINT is optional, uses Amp CLI by default
+# Amp uses CLI by default, no endpoint needed
+SLACK_TOKEN=xoxb-your-slack-bot-token  # Optional
+DEFAULT_SLACK_CHANNEL=C0123ABC456  # Optional
 DEFAULT_LINEAR_PROJECT=TEAM  # Optional
 ```
 
 ## Usage
+
+### Post a Zendesk ticket summary to Slack
+
+```bash
+lindesk transfer <ticketId> --channel <slackChannelId> --slack-only
+```
+
+Example:
+
+```bash
+lindesk transfer 12345 --channel C0123ABC456 --slack-only
+```
 
 ### Transfer a Zendesk ticket to Linear
 
@@ -75,6 +92,25 @@ If you've set a default project during setup, you can omit the --project flag:
 lindesk transfer 12345
 ```
 
+### Create Linear issue AND post to Slack
+
+```bash
+lindesk transfer <ticketId> --project <linearProjectKey> --channel <slackChannelId>
+```
+
+Example:
+
+```bash
+lindesk transfer 12345 --project ENG --channel C0123ABC456
+```
+
+### Command Options
+
+- `--channel <id>` - Slack channel ID (required for Slack posting unless default is set)
+- `--project <key>` - Linear project key (required for Linear creation unless default is set)
+- `--slack-only` - Only post to Slack, skip Linear creation
+- `--linear-only` - Only create Linear issue, skip Slack posting
+
 ## How it works
 
 1. Fetches the complete ticket details and conversation history from Zendesk
@@ -84,18 +120,61 @@ lindesk transfer 12345
    - Step-by-step reproduction instructions
    - Investigation findings and impact assessment
    - Priority and complexity assessment
-4. Creates a new Linear issue with the AI-generated analysis and sets appropriate priority
-5. Links back to the original Zendesk ticket for reference
+4. Creates a new Linear issue with the AI-generated analysis and sets appropriate priority (if Linear option enabled)
+5. Posts a formatted summary to Slack channel (if Slack option enabled)
+6. Links back to the original Zendesk ticket for reference
 
 ## Output Format
 
-Lindesk creates Linear tickets with structured, detailed descriptions that include:
+Lindesk creates Linear tickets and Slack messages with structured, detailed descriptions that include:
 - **Problem Summary**: Clear overview of the issue
 - **Environment**: Technical environment details
 - **Reproduction Steps**: Numbered, step-by-step instructions
 - **Expected vs Actual Behavior**: What should happen vs what actually happens
-- **Investigation Findings**: Technical details discovered during analysis
 - **Impact**: Assessment of user and business impact
+- **Investigation Findings**: Technical details discovered during analysis
+- **Internal Notes Summary**: Key points from support team notes
+
+## Slack Integration
+
+Lindesk can post ticket summaries to Slack channels with formatted messages that include:
+- Ticket title and priority
+- Problem summary
+- Impact assessment  
+- Link to original Zendesk ticket
+- Linear issue link (if created)
+
+### Slack Setup
+
+1. **Create a Slack Bot:**
+   - Go to https://api.slack.com/apps
+   - Click "Create New App" → "From scratch"
+   - Name your app (e.g., "Lindesk") and select your workspace
+   - Under "OAuth & Permissions", add these scopes:
+     - `chat:write`
+     - `chat:write.public`
+   - Install the app to your workspace
+   - Copy the "Bot User OAuth Token" (starts with `xoxb-`)
+
+2. **Add bot to channels:**
+   - Go to the Slack channel where you want to post
+   - Right-click the channel → "View channel details" → "Integrations" → "Add apps"
+   - Add your Lindesk bot
+
+3. **Configure Lindesk:**
+   ```bash
+   lindesk setup
+   ```
+   Enter your Slack bot token when prompted.
+
+### Finding Slack Channel IDs
+
+To get a channel ID:
+- Open Slack in a browser and navigate to the channel
+- The channel ID is in the URL: `https://app.slack.com/client/T0XXX/C0123ABC456`
+- Or right-click the channel and "Copy Link" - the ID is at the end
+
+For detailed Slack setup and usage instructions, see [SLACK_GUIDE.md](./lindesk/SLACK_GUIDE.md).
 
 ## License
 
