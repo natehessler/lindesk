@@ -26,11 +26,27 @@ export async function setupConfig() {
   // Amp AI Configuration
   console.log('\n' + chalk.yellow('Amp AI Configuration:'));
   console.log(chalk.gray('Configure Amp AI for ticket analysis'));
+  console.log(chalk.blue('DEBUG: About to ask for Amp path'));
   
   const ampApiKey = await rl.question('Amp API key: ');
+  console.log(chalk.blue('DEBUG: Got Amp API key'));
   const ampEndpoint = await rl.question('Amp endpoint (optional, press Enter for default): ');
+  console.log(chalk.blue('DEBUG: Got Amp endpoint'));
+  const ampPath = await rl.question('Path to Amp CLI (e.g., /opt/homebrew/bin/amp or leave empty to use "amp" from PATH): ');
+  console.log(chalk.blue('DEBUG: Got Amp path: ' + ampPath));
   
   console.log(chalk.green('✓ Amp AI configured for ticket analysis'));
+  
+  // Slack Configuration
+  console.log('\n' + chalk.yellow('Slack Configuration:'));
+  console.log(chalk.gray('Configure Slack for posting ticket summaries'));
+  
+  const slackToken = await rl.question('Slack Bot Token: ');
+  const defaultSlackChannel = await rl.question('Default Slack channel ID (optional): ');
+  
+  if (slackToken) {
+    console.log(chalk.green('✓ Slack integration configured'));
+  }
   
   // Save configuration
   config.set('zendeskDomain', zendeskDomain);
@@ -41,9 +57,20 @@ export async function setupConfig() {
   if (ampEndpoint) {
     config.set('ampEndpoint', ampEndpoint);
   }
+  if (ampPath) {
+    config.set('ampPath', ampPath);
+  }
   
   if (defaultProject) {
     config.set('defaultProject', defaultProject);
+  }
+  
+  if (slackToken) {
+    config.set('slackToken', slackToken);
+  }
+  
+  if (defaultSlackChannel) {
+    config.set('defaultSlackChannel', defaultSlackChannel);
   }
   
   // Ask if user wants to generate .env file

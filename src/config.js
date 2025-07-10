@@ -38,9 +38,21 @@ export const config = new Conf({
       type: 'string',
       default: process.env.AMP_ENDPOINT || 'https://ampcode.com/api/v1/chat/completions'
     },
+    ampPath: {
+      type: 'string',
+      default: process.env.AMP_PATH || 'amp'
+    },
     defaultProject: {
       type: 'string',
       default: process.env.DEFAULT_LINEAR_PROJECT || ''
+    },
+    slackToken: {
+      type: 'string',
+      default: process.env.SLACK_TOKEN || ''
+    },
+    defaultSlackChannel: {
+      type: 'string',
+      default: process.env.DEFAULT_SLACK_CHANNEL || ''
     }
   }
 });
@@ -53,6 +65,9 @@ export function getConfig() {
     linearApiKey: config.get('linearApiKey'),
     ampApiKey: config.get('ampApiKey'),
     ampEndpoint: config.get('ampEndpoint'),
-    defaultProject: config.get('defaultProject')
+    ampPath: config.get('ampPath'),
+    defaultProject: config.get('defaultProject'),
+    slackToken: config.get('slackToken'),
+    defaultSlackChannel: config.get('defaultSlackChannel')
   };
 }

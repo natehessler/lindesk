@@ -35,7 +35,28 @@ export async function getZendeskTicket(ticketId) {
   
   const commentsData = await commentsResponse.json();
   
-  // Return ticket with comments
+  // Fetch the organization information if available
+  let organization = null;
+  if (data.ticket.organization_id) {
+    try {
+      const orgResponse = await fetch(`https://${zendeskDomain}/api/v2/organizations/${data.ticket.organization_id}.json`, {
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (orgResponse.ok) {
+        const orgData = await orgResponse.json();
+        organization = orgData.organization;
+        console.log('Found organization:', organization.name);
+      }
+    } catch (error) {
+      console.log('Error fetching organization:', error.message);
+    }
+  }
+  
+  // Return ticket with comments and organization
   return {
     id: data.ticket.id,
     subject: data.ticket.subject,
@@ -45,12 +66,17 @@ export async function getZendeskTicket(ticketId) {
     requester_id: data.ticket.requester_id,
     created_at: data.ticket.created_at,
     updated_at: data.ticket.updated_at,
+    organization: organization ? organization.name : null,
     comments: commentsData.comments.map(comment => ({
+      // Add all fields so we can debug
+      ...comment,
       id: comment.id,
       author_id: comment.author_id,
       body: comment.body,
       html_body: comment.html_body,
-      created_at: comment.created_at
+      created_at: comment.created_at,
+      public: comment.public !== undefined ? comment.public : !comment.metadata?.is_private,
+      internal_note: comment.public !== undefined ? !comment.public : comment.metadata?.is_private
     }))
   };
 }
