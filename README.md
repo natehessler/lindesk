@@ -1,6 +1,6 @@
 # Lindesk
 
-A CLI tool to integrate Zendesk tickets with Linear issues using AI summarization.
+Lindesk is an AI CLI tool powered by Amp that streamlines cross-functional support by automating conversations with other teams based on Zendesk tickets. It intelligently interprets ticket context and generates clear, actionable messages to Slack and/or Linear—saving time, reducing back-and-forth, and keeping workflows moving.
 
 ## Features
 
