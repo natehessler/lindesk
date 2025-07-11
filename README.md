@@ -46,11 +46,11 @@ Alternatively, you can use environment variables:
 ZENDESK_DOMAIN=your-company.zendesk.com
 ZENDESK_EMAIL=your-email@example.com
 ZENDESK_TOKEN=your-zendesk-token
-LINEAR_API_KEY=your-linear-api-key
 AMP_API_KEY=your-amp-api-key
 # Amp uses CLI by default, no endpoint needed
 SLACK_TOKEN=xoxb-your-slack-bot-token  # Optional
 DEFAULT_SLACK_CHANNEL=C0123ABC456  # Optional
+LINEAR_API_KEY=your-linear-api-key  # Optional
 DEFAULT_LINEAR_PROJECT=TEAM  # Optional
 ```
 

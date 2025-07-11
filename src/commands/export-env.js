@@ -6,17 +6,13 @@ import path from 'path';
 export async function exportEnv() {
   const config = getConfig();
   
-  // Create .env file content
+  // Create .env file content (in setup order)
   let envContent = '';
   
   // Add Zendesk config if available
   if (config.zendeskDomain) envContent += `ZENDESK_DOMAIN=${config.zendeskDomain}\n`;
   if (config.zendeskEmail) envContent += `ZENDESK_EMAIL=${config.zendeskEmail}\n`;
   if (config.zendeskToken) envContent += `ZENDESK_TOKEN=${config.zendeskToken}\n`;
-  
-  // Add Linear config if available
-  if (config.linearApiKey) envContent += `LINEAR_API_KEY=${config.linearApiKey}\n`;
-  if (config.defaultProject) envContent += `DEFAULT_LINEAR_PROJECT=${config.defaultProject}\n`;
   
   // Add Amp config if available
   if (config.ampApiKey) envContent += `AMP_API_KEY=${config.ampApiKey}\n`;
@@ -30,6 +26,10 @@ export async function exportEnv() {
   // Add Slack config if available
   if (config.slackToken) envContent += `SLACK_TOKEN=${config.slackToken}\n`;
   if (config.defaultSlackChannel) envContent += `DEFAULT_SLACK_CHANNEL=${config.defaultSlackChannel}\n`;
+  
+  // Add Linear config if available
+  if (config.linearApiKey) envContent += `LINEAR_API_KEY=${config.linearApiKey}\n`;
+  if (config.defaultProject) envContent += `DEFAULT_LINEAR_PROJECT=${config.defaultProject}\n`;
   
   // Get the current working directory
   const cwd = process.cwd();
