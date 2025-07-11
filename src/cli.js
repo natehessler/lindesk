@@ -20,13 +20,17 @@ program
   .argument('<ticketId>', 'Zendesk ticket ID to transfer')
   .option('-p, --project <project>', 'Linear project key')
   .option('-c, --channel <channel>', 'Slack channel ID to post summary to')
-  .option('--linear-only', 'Only create Linear issue, skip Slack')
-  .option('--slack-only', 'Only post to Slack, skip Linear')
   .action(async (ticketId, options) => {
     try {
-      // Determine destination based on flags
-      const createLinear = !options.slackOnly;
-      const postToSlackChannel = !options.linearOnly && options.channel;
+      // Determine destination based on provided options
+      const hasChannel = !!options.channel;
+      const hasProject = !!options.project;
+      
+      // If only channel is provided, post to Slack only
+      // If only project is provided, create Linear only
+      // If both are provided, do both
+      const createLinear = hasProject;
+      const postToSlackChannel = hasChannel;
       
       await transferTicket(ticketId, options.project, options.channel, createLinear, postToSlackChannel);
     } catch (error) {

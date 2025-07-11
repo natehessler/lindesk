@@ -15,20 +15,14 @@ Lindesk is an AI CLI tool powered by Amp that streamlines cross-functional suppo
 
 - Node.js 16+ 
 - Access to Zendesk (admin privileges to generate API tokens)
-- Linear workspace access (ability to create API keys)
 - Amp account with API access
-- Slack workspace access (ability to create bot tokens) - optional
+- Slack workspace access (ability to create bot tokens)
+- Linear workspace access (ability to create API keys)
 
 ## Installation
 
 ```bash
-npm install -g lindesk
-```
-
-Or run directly:
-
-```bash
-npx lindesk
+npm install -g .
 ```
 
 ## Setup
@@ -65,13 +59,13 @@ DEFAULT_LINEAR_PROJECT=TEAM  # Optional
 ### Post a Zendesk ticket summary to Slack
 
 ```bash
-lindesk transfer <ticketId> --channel <slackChannelId> --slack-only
+lindesk transfer <ticketId> --channel <slackChannelId>
 ```
 
 Example:
 
 ```bash
-lindesk transfer 12345 --channel C0123ABC456 --slack-only
+lindesk transfer 12345 --channel C0123ABC456
 ```
 
 ### Transfer a Zendesk ticket to Linear
@@ -106,10 +100,8 @@ lindesk transfer 12345 --project ENG --channel C0123ABC456
 
 ### Command Options
 
-- `--channel <id>` - Slack channel ID (required for Slack posting unless default is set)
-- `--project <key>` - Linear project key (required for Linear creation unless default is set)
-- `--slack-only` - Only post to Slack, skip Linear creation
-- `--linear-only` - Only create Linear issue, skip Slack posting
+- `--channel <id>` - Slack channel ID (posts to Slack only unless combined with --project)
+- `--project <key>` - Linear project key (creates Linear issue only unless combined with --channel)
 
 ## How it works
 
