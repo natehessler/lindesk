@@ -18,9 +18,10 @@ program
   .command('transfer')
   .description('Transfer a Zendesk ticket to Linear with AI summary')
   .argument('<ticketId>', 'Zendesk ticket ID to transfer')
+  .argument('[prompt]', 'Custom prompt for AI analysis (optional)')
   .option('-p, --project <project>', 'Linear project key')
   .option('-c, --channel <channel>', 'Slack channel ID to post summary to')
-  .action(async (ticketId, options) => {
+  .action(async (ticketId, customPrompt, options) => {
     try {
       // Determine destination based on provided options
       const hasChannel = !!options.channel;
@@ -32,7 +33,7 @@ program
       const createLinear = hasProject;
       const postToSlackChannel = hasChannel;
       
-      await transferTicket(ticketId, options.project, options.channel, createLinear, postToSlackChannel);
+      await transferTicket(ticketId, options.project, options.channel, createLinear, postToSlackChannel, customPrompt);
     } catch (error) {
       console.error(chalk.red(`Error: ${error.message}`));
       process.exit(1);

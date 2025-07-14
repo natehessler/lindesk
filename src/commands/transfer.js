@@ -6,7 +6,7 @@ import { createLinearIssue } from '../services/linear-service.js';
 import { postToSlack } from '../services/slack-service.js';
 import chalk from 'chalk';
 
-export async function transferTicket(ticketId, projectKey, slackChannel, createLinear = true, postToSlackChannel = false) {
+export async function transferTicket(ticketId, projectKey, slackChannel, createLinear = true, postToSlackChannel = false, customPrompt = null) {
   const config = getConfig();
   
   // Validate configuration
@@ -65,7 +65,7 @@ export async function transferTicket(ticketId, projectKey, slackChannel, createL
   
   // Step 2: Analyze ticket with Amp AI
   console.log(chalk.gray('Analyzing ticket with Amp AI...'));
-  const analysis = await analyzeTicket(ticket);
+  const analysis = await analyzeTicket(ticket, customPrompt);
   console.log(chalk.green('✓ Amp AI analysis complete'));
   
   let issue = null;

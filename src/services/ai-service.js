@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 
-export async function analyzeTicket(ticket) {
+export async function analyzeTicket(ticket, customPrompt = null) {
     const { ampApiKey, ampEndpoint } = getConfig();
 
     if (!ampApiKey) {
@@ -17,16 +17,16 @@ export async function analyzeTicket(ticket) {
         organization: ticket.organization // Pass along the organization name
     };
 
-    return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint);
+    return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint, customPrompt);
 }
 
-async function analyzeWithAmp(ticketContent, apiKey, endpoint) {
+async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = null) {
     try {
         // Use Amp CLI instead of HTTP API
         const { spawn } = await import('child_process');
         const { promisify } = await import('util');
         
-        const prompt = `Analyze this complete Zendesk support ticket conversation and create a comprehensive technical summary for our engineering team. Pay special attention to any internal notes (marked as 'Internal Note') as they often contain important technical context from our support team. 
+        const defaultPrompt = `Analyze this complete Zendesk support ticket conversation and create a comprehensive technical summary for our engineering team. Pay special attention to any internal notes (marked as 'Internal Note') as they often contain important technical context from our support team. 
 
 Please provide a very detailed, well-structured analysis that includes:
 - Clear problem statement
@@ -48,6 +48,25 @@ Return only a JSON object with these fields:
 Take your time to analyze thoroughly. Ticket #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}`;
+
+        // Use custom prompt if provided, otherwise use default
+        const prompt = customPrompt ? 
+            `${customPrompt}
+
+For the following Zendesk ticket, please return your analysis in this exact JSON format:
+
+{
+  "title": "Clear, concise title for the issue",
+  "description": "Your detailed analysis and response following the instructions above",
+  "priority": "Low|Medium|High|Urgent",
+  "complexity": 1-5,
+  "components": ["Component1", "Component2"]
+}
+
+Ticket #${ticketContent.id}: ${ticketContent.subject}
+
+${ticketContent.description}` : 
+            defaultPrompt;
 
         return new Promise((resolve, reject) => {
             const ampProcess = spawn('npx', ['@sourcegraph/amp'], {
@@ -129,11 +148,11 @@ ${ticketContent.description}`;
                         // Successfully parsed AI analysis
                         resolve(formatAmpResponse(jsonContent, ticketContent));
                     } else {
-                        // Use the raw Amp output as the description
-                        // No JSON found, using raw output
+                        // Fallback: format the raw output better for Slack
+                        const cleanOutput = formatRawOutput(output.trim());
                         resolve({
                             title: ticketContent.subject,
-                            description: output.trim(),
+                            description: cleanOutput,
                             priority: 'Medium',
                             estimatedComplexity: 3,
                             components: ['General'],
@@ -176,6 +195,32 @@ function formatAmpResponse(response, ticketContent) {
         originalSubject: ticketContent.subject,
         ticket: ticketContent // Pass the original ticket data for use in other services
     };
+}
+
+// Helper function to format raw output for better Slack presentation
+function formatRawOutput(rawOutput) {
+    // Remove common Amp output artifacts and format for Slack
+    let formatted = rawOutput
+        .replace(/^[#\*\-\=]{3,}.*$/gm, '') // Remove separator lines
+        .replace(/^\s*Thinking[.]*\s*$/gm, '') // Remove "Thinking..." lines
+        .replace(/^\s*Let me[^.]*\.\s*$/gm, '') // Remove "Let me..." lines
+        .replace(/^\s*I'll[^.]*\.\s*$/gm, '') // Remove "I'll..." lines
+        .replace(/^\s*Based on[^,]*,\s*/gm, '') // Remove "Based on..." starts
+        .replace(/\n{3,}/g, '\n\n') // Limit consecutive newlines
+        .trim();
+
+    // If the output is too long, truncate it with a summary
+    if (formatted.length > 2000) {
+        const truncated = formatted.substring(0, 1800);
+        const lastSentence = truncated.lastIndexOf('.');
+        if (lastSentence > 1000) {
+            formatted = truncated.substring(0, lastSentence + 1) + '\n\n[Analysis truncated for Slack]';
+        } else {
+            formatted = truncated + '...\n\n[Analysis truncated for Slack]';
+        }
+    }
+
+    return formatted;
 }
 
 // Helper function to validate analysis data
