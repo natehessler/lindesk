@@ -23,18 +23,26 @@ export async function postToSlack(analysis, ticketId, teamChannel, organizationN
     throw new Error('Slack channel not specified. Use --channel option.');
   }
 
-  // Use a simpler header for Slack
-  // Use the organization name passed directly from the transfer command
-  // Fall back to ticket data if available, otherwise use 'Customer'
+  // Use the AI-generated title if available, otherwise fall back to generic title
   const customerName = organizationName || ((ticket && ticket.organization) ? ticket.organization : 'Customer');
   console.log('Using customer name for Slack message:', customerName);
+  
+  // Use the AI-generated title, or fall back to generic title with customer name
+  let slackTitle = analysis.title || `Need help with below support issue for ${customerName}`;
+  
+  // Truncate title if it's too long for Slack header (max 150 characters)
+  if (slackTitle.length > 150) {
+    slackTitle = slackTitle.substring(0, 147) + '...';
+  }
+  
+  console.log('Using title for Slack message:', slackTitle);
   
   let slackBlocks = [
     {
       "type": "header",
       "text": {
         "type": "plain_text",
-        "text": `Need help with below support issue for ${customerName}`
+        "text": slackTitle
       }
     },
     {
