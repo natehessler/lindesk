@@ -1,6 +1,6 @@
 {
   "name": "lindesk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI tool to analyze Zendesk tickets with AI and create Linear tickets",
   "main": "src/index.js",
   "bin": {
