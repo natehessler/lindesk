@@ -22,10 +22,23 @@ Lindesk is an AI CLI tool powered by Amp that streamlines cross-functional suppo
 ## Installation
 
 ```bash
-npm install -g .
+npm install -g lindesk
 ```
 
 ## Setup
+
+### 1. Clone Sourcegraph Repository
+
+For optimal AI analysis with proper codebase context, clone and navigate to the main Sourcegraph repository:
+
+```bash
+git clone https://github.com/sourcegraph/sourcegraph.git
+cd sourcegraph
+```
+
+Run all `lindesk` commands from within this directory to ensure Amp has access to the full Sourcegraph codebase for context-aware analysis.
+
+### 2. Configure API Credentials
 
 Before using Lindesk, you need to configure your API credentials:
 

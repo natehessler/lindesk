@@ -9,7 +9,7 @@ export async function analyzeTicket(ticket, customPrompt = null) {
     }
 
     // Prepare the ticket data for analysis - include full conversation
-    const fullConversation = buildFullConversation(ticket);
+    const fullConversation = buildFullConversation(ticket, !!customPrompt);
     const ticketContent = {
         id: ticket.id,
         subject: ticket.subject,
@@ -240,7 +240,7 @@ function isValidAnalysis(data) {
 }
 
 // Helper function to build full conversation from ticket and comments
-function buildFullConversation(ticket) {
+function buildFullConversation(ticket, isCustomPrompt = false) {
     let conversation = `**Initial Description:**\n${cleanText(ticket.description)}\n\n`;
     
     // Track if we have any internal notes to highlight
@@ -271,7 +271,8 @@ function buildFullConversation(ticket) {
     }
     
     // Add the internal notes summary at the beginning for quick reference
-    if (hasInternalNotes) {
+    // Skip the engineering summary note if a custom prompt is provided
+    if (hasInternalNotes && !isCustomPrompt) {
         conversation = `**ENGINEERING SUMMARY NEEDED - CONTAINS INTERNAL NOTES**\n\n${internalNotesSummary}\n${conversation}`;
     }
     
