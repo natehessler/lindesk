@@ -6,7 +6,7 @@ Lindesk is an AI CLI tool powered by Amp that streamlines cross-functional suppo
 
 - Fetch ticket details from Zendesk
 - Analyze complete ticket conversations using Amp AI
-- Generate detailed, well-structured technical summaries for engineers
+- Generate comprehensive issue analysis with root causes, solutions, and next steps
 - Create a Linear issue with the AI-generated summary
 - Post ticket summaries to Slack channels
 - Link back to the original Zendesk ticket
@@ -142,26 +142,26 @@ The custom prompt will be processed by Amp AI while maintaining the structured o
 ## How it works
 
 1. Fetches the complete ticket details and conversation history from Zendesk
-2. Analyzes the entire conversation using Amp AI to create a comprehensive technical analysis
-3. Generates a detailed, well-structured technical summary including:
-   - Problem summary and environment details
-   - Step-by-step reproduction instructions
-   - Investigation findings and impact assessment
-   - Priority and complexity assessment
+2. Analyzes the entire conversation using Amp AI to create a comprehensive issue analysis
+3. Generates a detailed, well-structured analysis including:
+   - Deep issue analysis and root cause investigation
+   - Multiple potential reasons and concrete solutions
+   - Immediate workarounds and next steps
+   - Impact assessment and priority evaluation
 4. Creates a new Linear issue with the AI-generated analysis and sets appropriate priority (if Linear option enabled)
 5. Posts a formatted summary to Slack channel (if Slack option enabled)
 6. Links back to the original Zendesk ticket for reference
 
 ## Output Format
 
-Lindesk creates Linear tickets and Slack messages with structured, detailed descriptions that include:
-- **Problem Summary**: Clear overview of the issue
-- **Environment**: Technical environment details
-- **Reproduction Steps**: Numbered, step-by-step instructions
-- **Expected vs Actual Behavior**: What should happen vs what actually happens
-- **Impact**: Assessment of user and business impact
-- **Investigation Findings**: Technical details discovered during analysis
-- **Internal Notes Summary**: Key points from support team notes
+Lindesk creates Linear tickets and Slack messages with structured, detailed analyses that include:
+- **Issue Analysis**: Deep dive into what's happening and why
+- **Potential Root Causes**: List of possible reasons this issue occurred
+- **Recommended Solutions**: Concrete steps to resolve the issue, ordered by effectiveness
+- **Immediate Workarounds**: Quick fixes or temporary solutions users can implement
+- **Next Steps**: Clear action items with owners and timeline
+- **Impact Assessment**: User/business impact and urgency justification
+- **Additional Context**: Key insights from internal notes and conversation history
 
 ## Slack Integration
 

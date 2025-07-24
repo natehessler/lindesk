@@ -26,23 +26,18 @@ async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = nu
         const { spawn } = await import('child_process');
         const { promisify } = await import('util');
         
-        const defaultPrompt = `Analyze this complete Zendesk support ticket conversation and create a comprehensive technical summary for our engineering team. Pay special attention to any internal notes (marked as 'Internal Note') as they often contain important technical context from our support team. 
+        const defaultPrompt = `Analyze this complete Zendesk support ticket conversation and provide a concise, actionable analysis focused on understanding the issue, identifying root causes, and providing solutions. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
 
-Please provide a very detailed, well-structured analysis that includes:
-- Clear problem statement
-- Detailed reproduction steps (numbered list)
-- Technical investigation findings
-- Environment details
-- Impact assessment
+Please provide a well-structured but concise analysis. Keep each section brief and focus on the most important points:
 
 Return only a JSON object with these fields:
 
 {
-  "title": "Clear, concise technical title for the Linear issue",
-  "description": "Very detailed technical summary with proper formatting including:\n\n## Problem Summary\n[Brief overview]\n\n## Environment\n[Technical environment details]\n\n## Reproduction Steps\n1. Step one\n2. Step two\n3. Step three\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Impact\n[User/business impact]\n\n## Investigation Findings\n[Technical details discovered]\n\n## Internal Notes Summary\n[Summarize key points from internal notes]",
+  "title": "Clear, descriptive title that captures the core issue",
+  "description": "Concise analysis with proper formatting including:\n\n## Issue Analysis\n[Brief explanation of what's happening and why - 2-3 sentences max]\n\n## Root Causes\n[Top 3 most likely causes - bullet points]\n\n## Recommended Solutions\n[Top 3 solutions in order of effectiveness - bullet points]\n\n## Immediate Workarounds\n[Quick fixes if available - bullet points]\n\n## Next Steps\n[3-4 clear action items with timeline]\n\n## Impact Assessment\n[Brief impact and urgency justification - 1-2 sentences]",
   "priority": "Low|Medium|High|Urgent",
   "complexity": 1-5,
-  "components": ["TechnicalComponent1", "TechnicalComponent2"]
+  "components": ["RelevantArea1", "RelevantArea2"]
 }
 
 Take your time to analyze thoroughly. Ticket #${ticketContent.id}: ${ticketContent.subject}
@@ -271,9 +266,9 @@ function buildFullConversation(ticket, isCustomPrompt = false) {
     }
     
     // Add the internal notes summary at the beginning for quick reference
-    // Skip the engineering summary note if a custom prompt is provided
+    // Skip the analysis summary note if a custom prompt is provided
     if (hasInternalNotes && !isCustomPrompt) {
-        conversation = `**ENGINEERING SUMMARY NEEDED - CONTAINS INTERNAL NOTES**\n\n${internalNotesSummary}\n${conversation}`;
+        conversation = `**DETAILED ANALYSIS NEEDED - CONTAINS INTERNAL NOTES**\n\n${internalNotesSummary}\n${conversation}`;
     }
     
     return conversation.trim();

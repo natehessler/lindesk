@@ -71,7 +71,7 @@ export async function postToSlack(analysis, ticketId, teamChannel, organizationN
   // Process the description to properly format Markdown for Slack
   // Slack requires different markdown formatting
   
-  // Remove the Engineering Recommendations section if present
+  // Remove any legacy sections if present
   let descriptionWithoutRecommendations = fullDescription;
   const recommendationsRegex = /## Engineering Recommendations[\s\S]*?(?=## |$)/;
   descriptionWithoutRecommendations = descriptionWithoutRecommendations.replace(recommendationsRegex, '');
