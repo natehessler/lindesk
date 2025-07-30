@@ -15,7 +15,7 @@ program
   .version('0.1.0');
 
 program
-  .command('transfer')
+  .command('ticket')
   .description('Transfer a Zendesk ticket to Linear with AI summary')
   .argument('<ticketId>', 'Zendesk ticket ID to transfer')
   .argument('[prompt]', 'Custom prompt for AI analysis (optional)')

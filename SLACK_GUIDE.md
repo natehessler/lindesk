@@ -35,7 +35,7 @@ During setup, you'll be prompted for your Slack Bot Token and an optional defaul
 To post a Zendesk ticket summary to Slack:
 
 ```bash
-lindesk transfer 12345 --channel C0123ABC456
+lindesk ticket 12345 --channel C0123ABC456
 ```
 
 Where:
@@ -56,7 +56,7 @@ Or right-click on the channel in Slack and select "Copy Link" - the ID is at the
 If you set a default channel during setup, you can omit the `--channel` parameter:
 
 ```bash
-lindesk transfer 12345
+lindesk ticket 12345
 ```
 
 ### Posting to Multiple Channels
@@ -64,8 +64,8 @@ lindesk transfer 12345
 To post to multiple channels, run the command multiple times:
 
 ```bash
-lindesk transfer 12345 --channel C0123ABC456
-lindesk transfer 12345 --channel C9876XYZ123
+lindesk ticket 12345 --channel C0123ABC456
+lindesk ticket 12345 --channel C9876XYZ123
 ```
 
 ### Creating Linear Issue and Posting to Slack
@@ -73,7 +73,7 @@ lindesk transfer 12345 --channel C9876XYZ123
 To do both actions at once:
 
 ```bash
-lindesk transfer 12345 --project ENG --channel C0123ABC456
+lindesk ticket 12345 --project ENG --channel C0123ABC456
 ```
 
 ## Slack Message Format

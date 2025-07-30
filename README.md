@@ -72,43 +72,43 @@ DEFAULT_LINEAR_PROJECT=TEAM  # Optional
 ### Post a Zendesk ticket summary to Slack
 
 ```bash
-lindesk transfer <ticketId> --channel <slackChannelId>
+lindesk ticket <ticketId> --channel <slackChannelId>
 ```
 
 Example:
 
 ```bash
-lindesk transfer 12345 --channel C0123ABC456
+lindesk ticket 12345 --channel C0123ABC456
 ```
 
 ### Transfer a Zendesk ticket to Linear
 
 ```bash
-lindesk transfer <ticketId> --project <linearProjectKey>
+lindesk ticket <ticketId> --project <linearProjectKey>
 ```
 
 Example:
 
 ```bash
-lindesk transfer 12345 --project ENG
+lindesk ticket 12345 --project ENG
 ```
 
 If you've set a default project during setup, you can omit the --project flag:
 
 ```bash
-lindesk transfer 12345
+lindesk ticket 12345
 ```
 
 ### Create Linear issue AND post to Slack
 
 ```bash
-lindesk transfer <ticketId> --project <linearProjectKey> --channel <slackChannelId>
+lindesk ticket <ticketId> --project <linearProjectKey> --channel <slackChannelId>
 ```
 
 Example:
 
 ```bash
-lindesk transfer 12345 --project ENG --channel C0123ABC456
+lindesk ticket 12345 --project ENG --channel C0123ABC456
 ```
 
 ### Custom AI Analysis Prompts
@@ -116,20 +116,20 @@ lindesk transfer 12345 --project ENG --channel C0123ABC456
 You can provide custom instructions for the AI analysis by adding a prompt as the second argument:
 
 ```bash
-lindesk transfer <ticketId> "<custom-prompt>" --channel <slackChannelId>
+lindesk ticket <ticketId> "<custom-prompt>" --channel <slackChannelId>
 ```
 
 Examples:
 
 ```bash
 # Custom analysis for management summary
-lindesk transfer 12345 "create a brief executive summary of this issue" --channel C0123ABC456
+lindesk ticket 12345 "create a brief executive summary of this issue" --channel C0123ABC456
 
 # Root cause analysis
-lindesk transfer 12345 "analyze the root cause and suggest fixes" --channel C0123ABC456
+lindesk ticket 12345 "analyze the root cause and suggest fixes" --channel C0123ABC456
 
 # Customer-facing response
-lindesk transfer 12345 "summarize this issue and provide potential reasonings for this, along with a customer facing response" --channel C0123ABC456
+lindesk ticket 12345 "summarize this issue and provide potential reasonings for this, along with a customer facing response" --channel C0123ABC456
 ```
 
 The custom prompt will be processed by Amp AI while maintaining the structured output format for clean Slack messages and Linear tickets.
