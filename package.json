@@ -1,6 +1,6 @@
 {
   "name": "lindesk",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "CLI tool to analyze Zendesk tickets with AI and create Linear tickets",
   "main": "src/index.js",
   "bin": {
@@ -9,14 +9,20 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "start": "node src/cli.js"
+    "start": "node src/cli.js",
+    "web": "node src/server.js",
+    "dev": "node src/server.js"
   },
   "dependencies": {
     "commander": "^11.1.0",
     "dotenv": "^16.3.1",
     "node-fetch": "^3.3.2",
     "chalk": "^5.3.0",
-    "conf": "^12.0.0"
+    "conf": "^12.0.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
   },
   "devDependencies": {
     "eslint": "^8.55.0"

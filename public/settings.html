@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lindesk - Settings</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <style>
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
+        
+        :root {
+            --primary-bg: #2d3748;
+            --primary-teal: #4fd1c7;
+            --primary-teal-dark: #319795;
+            --secondary-bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e0;
+            --success-bg: #c6f6d5;
+            --success-color: #22543d;
+            --error-bg: #fed7d7;
+            --error-color: #742a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--primary-bg);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #1a202c 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header .logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .header p {
+            color: #cbd5e0;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: var(--primary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-teal);
+            transition: all 0.2s;
+            background: var(--card-bg);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            background: var(--primary-teal);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 209, 199, 0.3);
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-teal);
+            position: relative;
+        }
+
+        .form-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-teal);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79, 209, 199, 0.1);
+        }
+
+        .form-group .help-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(79, 209, 199, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 209, 199, 0.4);
+        }
+
+        .btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.success {
+            background: var(--success-bg);
+            color: var(--success-color);
+            border: 1px solid #9ae6b4;
+        }
+
+        .alert.error {
+            background: var(--error-bg);
+            color: var(--error-color);
+            border: 1px solid #fc8181;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>
+                    <img src="/logo.svg" alt="Lindesk Logo" class="logo">
+                    Lindesk Settings
+                </h1>
+                <p>Configure your API keys and integration settings</p>
+            </div>
+        </div>
+
+        <div class="nav">
+            <a href="/">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Back to Main
+            </a>
+        </div>
+
+        <div class="alert" id="alert"></div>
+        <div class="loading" id="loading">Loading configuration...</div>
+
+        <div class="form-container">
+            <form id="settingsForm">
+                <div class="form-section">
+                    <h2>Zendesk Configuration</h2>
+                    <div class="form-group">
+                        <label for="zendesk_domain">Zendesk Domain</label>
+                        <input type="text" id="zendesk_domain" name="zendesk_domain" placeholder="your-company.zendesk.com">
+                        <div class="help-text">Your Zendesk subdomain (without https://)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zendesk_email">Zendesk Email</label>
+                        <input type="email" id="zendesk_email" name="zendesk_email" placeholder="your-email@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="zendesk_token">Zendesk API Token</label>
+                        <input type="password" id="zendesk_token" name="zendesk_token" placeholder="Enter your Zendesk API token">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Amp AI Configuration</h2>
+                    <div class="form-group">
+                        <label for="amp_api_key">Amp API Key</label>
+                        <input type="password" id="amp_api_key" name="amp_api_key" placeholder="Enter your Amp API key">
+                        <div class="help-text">Required for AI-powered ticket analysis</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Slack Integration (Optional)</h2>
+                    <div class="form-group">
+                        <label for="slack_token">Slack Bot Token</label>
+                        <input type="password" id="slack_token" name="slack_token" placeholder="xoxb-your-slack-bot-token">
+                        <div class="help-text">Bot token for posting messages to Slack channels</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="default_slack_channel">Default Slack Channel ID</label>
+                        <input type="text" id="default_slack_channel" name="default_slack_channel" placeholder="C0123ABC456">
+                        <div class="help-text">Default channel to post messages (can be overridden per analysis)</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Linear Integration (Optional)</h2>
+                    <div class="form-group">
+                        <label for="linear_api_key">Linear API Key</label>
+                        <input type="password" id="linear_api_key" name="linear_api_key" placeholder="Enter your Linear API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="default_linear_project">Default Linear Project</label>
+                        <input type="text" id="default_linear_project" name="default_linear_project" placeholder="ENG">
+                        <div class="help-text">Default project key for creating Linear issues</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Save Configuration</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('settingsForm');
+        const alert = document.getElementById('alert');
+        const loading = document.getElementById('loading');
+
+        function showAlert(message, type = 'success') {
+            alert.textContent = message;
+            alert.className = `alert ${type}`;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        function showLoading(show = true) {
+            loading.style.display = show ? 'block' : 'none';
+            form.style.display = show ? 'none' : 'block';
+        }
+
+        // Load existing configuration
+        async function loadConfig() {
+            try {
+                showLoading(true);
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                
+                // Populate form with existing values
+                Object.keys(config).forEach(key => {
+                    const input = document.getElementById(key);
+                    if (input && config[key]) {
+                        input.value = config[key];
+                    }
+                });
+                
+                showLoading(false);
+            } catch (error) {
+                showLoading(false);
+                showAlert('Failed to load configuration: ' + error.message, 'error');
+            }
+        }
+
+        // Save configuration
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                const formData = new FormData(form);
+                const config = Object.fromEntries(formData.entries());
+                
+                const response = await fetch('/api/config', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(config),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert('Configuration saved successfully!');
+                } else {
+                    showAlert(result.error || 'Failed to save configuration', 'error');
+                }
+            } catch (error) {
+                showAlert('Failed to save configuration: ' + error.message, 'error');
+            }
+        });
+
+        // Load config on page load
+        loadConfig();
+    </script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lindesk - AI-Powered Ticket Analysis</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <style>
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
+        
+        :root {
+            --primary-bg: #2d3748;
+            --primary-teal: #4fd1c7;
+            --primary-teal-dark: #319795;
+            --secondary-bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e0;
+            --success-bg: #c6f6d5;
+            --success-color: #22543d;
+            --error-bg: #fed7d7;
+            --error-color: #742a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--primary-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #1a202c 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header .logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .header p {
+            color: #cbd5e0;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: var(--primary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-teal);
+            transition: all 0.2s;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav a:hover {
+            background: var(--primary-teal);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 209, 199, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: minmax(400px, 1fr) 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .results-container {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section h2 {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-teal);
+            position: relative;
+        }
+
+        .form-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-teal);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.5;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79, 209, 199, 0.1);
+        }
+
+        .form-group .help-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .file-upload {
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: #4299e1;
+            background: #f7fafc;
+        }
+
+        .file-upload.dragover {
+            border-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-text {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .file-upload-text strong {
+            color: #4299e1;
+        }
+
+        .uploaded-file {
+            background: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .uploaded-file .filename {
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .uploaded-file .filesize {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .upload-progress {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #4299e1;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .upload-status {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(79, 209, 199, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 209, 199, 0.4);
+        }
+
+        .btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn.loading {
+            position: relative;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.success {
+            background: var(--success-bg);
+            color: var(--success-color);
+            border: 1px solid #9ae6b4;
+        }
+
+        .alert.error {
+            background: var(--error-bg);
+            color: var(--error-color);
+            border: 1px solid #fc8181;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .results-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+            white-space: pre-wrap;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .results-content h2 {
+            color: #2d3748;
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .results-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .results-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .results-content li {
+            margin: 8px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .form-container, .results-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>
+                    <img src="/logo.svg" alt="Lindesk Logo" class="logo">
+                    Lindesk
+                </h1>
+                <p>AI-powered Zendesk ticket analysis with Linear integration and Slack notifications</p>
+            </div>
+        </div>
+
+        <div class="nav">
+            <div></div>
+            <a href="/settings">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                </svg>
+                Settings
+            </a>
+        </div>
+
+        <div class="alert" id="alert"></div>
+
+        <div class="main-content">
+            <div class="form-container">
+                <form id="analysisForm">
+                    <div class="form-section">
+                        <h2>Ticket Analysis</h2>
+                        
+                        <div class="form-group">
+                            <label for="ticketId">Zendesk Ticket ID *</label>
+                            <input type="number" id="ticketId" name="ticketId" required placeholder="12345">
+                            <div class="help-text">Enter the Zendesk ticket number you want to analyze</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customPrompt">Custom AI Prompt (Optional)</label>
+                            <textarea id="customPrompt" name="customPrompt" placeholder="e.g., 'Create a brief executive summary' or 'Focus on root cause analysis'"></textarea>
+                            <div class="help-text">Override the default analysis prompt with custom instructions</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Codebase Context (Optional)</h2>
+                        
+                        <div class="form-group">
+                            <div class="file-upload" id="fileUpload">
+                                <input type="file" id="codebaseFile" name="codebase" accept=".zip,.tar,.tar.gz">
+                                <div class="file-upload-text">
+                                    <strong>Click to upload</strong> or drag and drop<br>
+                                    Codebase archive (.zip, .tar, .tar.gz) - Max 2GB<br>
+                                    <small style="color: #666;">Extracted codebase must be under 500MB for analysis</small>
+                                </div>
+                            </div>
+                            <div class="uploaded-file" id="uploadedFile">
+                                <div class="filename" id="uploadedFilename"></div>
+                                <div class="filesize" id="uploadedFilesize"></div>
+                            </div>
+                            <div class="upload-progress" id="uploadProgress">
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" id="progressBarFill"></div>
+                                </div>
+                                <div class="upload-status" id="uploadStatus">Uploading...</div>
+                            </div>
+                            <div class="help-text">Upload your codebase for contextual AI analysis (optional)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Integration Options</h2>
+                        
+                        <div class="form-group">
+                            <label for="slackChannel">Slack Channel ID (Optional)</label>
+                            <input type="text" id="slackChannel" name="slackChannel" placeholder="C0123ABC456">
+                            <div class="help-text">Post analysis results to this Slack channel</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linearProject">Linear Project Key (Optional)</label>
+                            <input type="text" id="linearProject" name="linearProject" placeholder="ENG">
+                            <div class="help-text">Create a Linear issue in this project</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="analyzeBtn">
+                        Analyze Ticket
+                    </button>
+                </form>
+            </div>
+
+            <div class="results-container">
+                <div class="results" id="results">
+                    <h2>Analysis Results</h2>
+                    <div class="results-content" id="resultsContent"></div>
+                </div>
+                <div class="empty-state" id="emptyState">
+                    <p>Analysis results will appear here after you submit a ticket for analysis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('analysisForm');
+        const alert = document.getElementById('alert');
+        const results = document.getElementById('results');
+        const resultsContent = document.getElementById('resultsContent');
+        const emptyState = document.getElementById('emptyState');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const fileUpload = document.getElementById('fileUpload');
+        const codebaseFile = document.getElementById('codebaseFile');
+        const uploadedFile = document.getElementById('uploadedFile');
+        const uploadedFilename = document.getElementById('uploadedFilename');
+        const uploadedFilesize = document.getElementById('uploadedFilesize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const uploadStatus = document.getElementById('uploadStatus');
+
+        function showAlert(message, type = 'success') {
+            alert.textContent = message;
+            alert.className = `alert ${type}`;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // File upload handling
+        fileUpload.addEventListener('click', () => codebaseFile.click());
+
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.classList.add('dragover');
+        });
+
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.classList.remove('dragover');
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
+
+        codebaseFile.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            uploadedFilename.textContent = file.name;
+            uploadedFilesize.textContent = formatBytes(file.size);
+            uploadedFile.style.display = 'block';
+        }
+
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const ticketId = document.getElementById('ticketId').value;
+            const customPrompt = document.getElementById('customPrompt').value;
+            const slackChannel = document.getElementById('slackChannel').value;
+            const linearProject = document.getElementById('linearProject').value;
+            
+            if (!ticketId) {
+                showAlert('Please enter a ticket ID', 'error');
+                return;
+            }
+
+            try {
+                // Show loading state
+                analyzeBtn.classList.add('loading');
+                analyzeBtn.disabled = true;
+                analyzeBtn.textContent = '';
+                
+                // Hide previous results
+                results.style.display = 'none';
+                emptyState.style.display = 'block';
+
+                // Upload codebase if selected
+                let codebaseUploaded = false;
+                if (codebaseFile.files.length > 0) {
+                    const file = codebaseFile.files[0];
+                    const fileSizeMB = file.size / (1024 * 1024);
+                    
+                    // Show warning for very large files
+                    if (fileSizeMB > 1000) { // 1GB
+                        const proceed = confirm(`This file is quite large (${formatBytes(file.size)}). Upload may take several minutes. Continue?`);
+                        if (!proceed) {
+                            return;
+                        }
+                    }
+                    
+                    const formData = new FormData();
+                    formData.append('codebase', file);
+                    
+                    // Show progress
+                    uploadProgress.style.display = 'block';
+                    uploadStatus.textContent = 'Uploading and extracting codebase...';
+                    
+                    try {
+                        const uploadResponse = await fetch('/api/upload-codebase', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        uploadProgress.style.display = 'none';
+                        
+                        if (uploadResponse.ok) {
+                            const result = await uploadResponse.json();
+                            codebaseUploaded = true;
+                            showAlert(result.message);
+                        } else {
+                            const error = await uploadResponse.json();
+                            showAlert('Warning: ' + error.error + ' - Analysis will continue without codebase context', 'error');
+                            // Don't stop the analysis, continue without codebase
+                        }
+                    } catch (uploadError) {
+                        uploadProgress.style.display = 'none';
+                        showAlert('Warning: Upload failed - ' + uploadError.message + ' - Analysis will continue without codebase context', 'error');
+                    }
+                }
+
+                // Analyze ticket
+                const analysisResponse = await fetch('/api/analyze-ticket', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ticketId,
+                        customPrompt: customPrompt || undefined,
+                        slackChannel: slackChannel || undefined,
+                        linearProject: linearProject || undefined
+                    }),
+                });
+                
+                const analysisResult = await analysisResponse.json();
+                
+                if (analysisResult.success) {
+                    // Extract and format the analysis results
+                    const analysis = analysisResult.result.analysis;
+                    let displayText = '';
+                    
+                    if (analysis) {
+                        // Display the title
+                        if (analysis.title) {
+                            displayText += `# ${analysis.title}\n\n`;
+                        }
+                        
+                        // Display the description (which contains the formatted analysis)
+                        if (analysis.description) {
+                            displayText += analysis.description;
+                        }
+                        
+                        // Add metadata if available
+                        if (analysis.priority) {
+                            displayText += `\n\n**Priority:** ${analysis.priority}`;
+                        }
+                        if (analysis.estimatedComplexity) {
+                            displayText += `\n**Complexity:** ${analysis.estimatedComplexity}/5`;
+                        }
+                        if (analysis.components && analysis.components.length > 0) {
+                            displayText += `\n**Components:** ${analysis.components.join(', ')}`;
+                        }
+                        
+
+                    } else {
+                        displayText = JSON.stringify(analysisResult.result, null, 2);
+                    }
+                    
+                    // Convert markdown to HTML-like formatting for display
+                    const htmlContent = displayText
+                        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+                        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                        .replace(/^\*\*(.+?)\*\*$/gm, '<strong>$1</strong>')
+                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/^- (.+)$/gm, '• $1')
+                        .replace(/^---$/gm, '─────────────────────────────────────');
+                    
+                    resultsContent.innerHTML = htmlContent;
+                    results.style.display = 'block';
+                    emptyState.style.display = 'none';
+                    showAlert('Ticket analysis completed successfully!');
+                } else {
+                    showAlert(analysisResult.error || 'Failed to analyze ticket', 'error');
+                }
+            } catch (error) {
+                showAlert('Analysis failed: ' + error.message, 'error');
+            } finally {
+                // Reset button
+                analyzeBtn.classList.remove('loading');
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = 'Analyze Ticket';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 
-export async function analyzeTicket(ticket, customPrompt = null) {
+export async function analyzeTicket(ticket, customPrompt = null, codebasePath = null) {
     const { ampApiKey, ampEndpoint } = getConfig();
 
     if (!ampApiKey) {
@@ -17,10 +17,10 @@ export async function analyzeTicket(ticket, customPrompt = null) {
         organization: ticket.organization // Pass along the organization name
     };
 
-    return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint, customPrompt);
+    return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint, customPrompt, codebasePath);
 }
 
-async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = null) {
+async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = null, codebasePath = null) {
     try {
         // Use Amp CLI instead of HTTP API
         const { spawn } = await import('child_process');
@@ -64,13 +64,20 @@ ${ticketContent.description}` :
             defaultPrompt;
 
         return new Promise((resolve, reject) => {
-            const ampProcess = spawn('npx', ['@sourcegraph/amp'], {
+            const spawnOptions = {
                 stdio: ['pipe', 'pipe', 'pipe'],
                 env: {
                     ...process.env,
                     AMP_API_KEY: apiKey
                 }
-            });
+            };
+
+            // If codebase path is provided, run Amp from that directory
+            if (codebasePath) {
+                spawnOptions.cwd = codebasePath;
+            }
+
+            const ampProcess = spawn('npx', ['@sourcegraph/amp'], spawnOptions);
 
             let output = '';
             let error = '';
