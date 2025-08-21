@@ -4,12 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lindesk - AI-Powered Ticket Analysis</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/lindesk.png">
+    <link rel="alternate icon" href="/lindesk.png">
     <style>
-        @import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
+        /* Dark mode (default) */
         :root {
+            --primary-bg: #1a202c;
+            --primary-teal: #4fd1c7;
+            --primary-teal-dark: #319795;
+            --secondary-bg: #0f1419;
+            --card-bg: #1a202c;
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --text-muted: #718096;
+            --border-color: #2d3748;
+            --border-hover: #4a5568;
+            --success-bg: #22543d;
+            --success-color: #c6f6d5;
+            --error-bg: #742a2a;
+            --error-color: #fed7d7;
+            --input-bg: #2d3748;
+            --results-bg: #2d3748;
+        }
+
+        /* Light mode */
+        body.light-mode {
             --primary-bg: #2d3748;
             --primary-teal: #4fd1c7;
             --primary-teal-dark: #319795;
@@ -24,6 +45,8 @@
             --success-color: #22543d;
             --error-bg: #fed7d7;
             --error-color: #742a2a;
+            --input-bg: #fafafa;
+            --results-bg: #f8f9fa;
         }
 
         * {
@@ -33,7 +56,7 @@
         }
 
         body {
-            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--secondary-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -73,19 +96,26 @@
 
         .header h1 {
             color: #ffffff;
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header .logo {
-            width: 48px;
-            height: 48px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.2s ease;
+        }
+
+        .header .logo:hover {
+            transform: scale(1.05);
         }
 
         .header p {
@@ -103,7 +133,13 @@
             margin-bottom: 20px;
         }
 
-        .nav a {
+        .nav-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav a, .theme-toggle {
             color: var(--primary-teal);
             text-decoration: none;
             font-weight: 600;
@@ -115,9 +151,12 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
         }
 
-        .nav a:hover {
+        .nav a:hover, .theme-toggle:hover {
             background: var(--primary-teal);
             color: white;
             transform: translateY(-1px);
@@ -191,7 +230,31 @@
             font-size: 16px;
             font-family: inherit;
             transition: all 0.2s;
-            background: #fafafa;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        /* Remove number input spinners */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Style for inputs with default values */
+        .form-group input.has-default {
+            border-color: var(--primary-teal);
+            background: var(--input-bg);
+            box-shadow: 0 0 0 1px rgba(79, 209, 199, 0.2);
+        }
+
+        .help-text.default-loaded {
+            color: var(--primary-teal);
+            font-weight: 500;
         }
 
         .form-group textarea {
@@ -203,7 +266,7 @@
         .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-teal);
-            background: white;
+            background: var(--card-bg);
             box-shadow: 0 0 0 3px rgba(79, 209, 199, 0.1);
         }
 
@@ -213,82 +276,7 @@
             margin-top: 6px;
         }
 
-        .file-upload {
-            border: 2px dashed #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
 
-        .file-upload:hover {
-            border-color: #4299e1;
-            background: #f7fafc;
-        }
-
-        .file-upload.dragover {
-            border-color: #4299e1;
-            background: #ebf8ff;
-        }
-
-        .file-upload input {
-            display: none;
-        }
-
-        .file-upload-text {
-            color: #666;
-            font-size: 16px;
-        }
-
-        .file-upload-text strong {
-            color: #4299e1;
-        }
-
-        .uploaded-file {
-            background: #e6fffa;
-            border: 1px solid #38b2ac;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .uploaded-file .filename {
-            color: #2d3748;
-            font-weight: 500;
-        }
-
-        .uploaded-file .filesize {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .upload-progress {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: #4299e1;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
-        .upload-status {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #666;
-        }
 
         .btn {
             background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
@@ -371,20 +359,21 @@
         }
 
         .results-content {
-            background: #f8f9fa;
+            background: var(--results-bg);
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #4299e1;
+            border-left: 4px solid var(--primary-teal);
             white-space: pre-wrap;
             font-family: system-ui, -apple-system, sans-serif;
             font-size: 15px;
             line-height: 1.6;
             max-height: 600px;
             overflow-y: auto;
+            color: var(--text-primary);
         }
 
         .results-content h2 {
-            color: #2d3748;
+            color: var(--text-primary);
             margin: 20px 0 10px 0;
             font-size: 18px;
             font-weight: 600;
@@ -405,7 +394,7 @@
 
         .empty-state {
             text-align: center;
-            color: #666;
+            color: var(--text-muted);
             font-style: italic;
         }
 
@@ -429,7 +418,7 @@
         <div class="header">
             <div class="header-content">
                 <h1>
-                    <img src="/logo.svg" alt="Lindesk Logo" class="logo">
+                    <img src="/lindesk.png" alt="Lindesk Logo" class="logo">
                     Lindesk
                 </h1>
                 <p>AI-powered Zendesk ticket analysis with Linear integration and Slack notifications</p>
@@ -438,13 +427,21 @@
 
         <div class="nav">
             <div></div>
-            <a href="/settings">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                </svg>
-                Settings
-            </a>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="themeIcon">
+                        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                    </svg>
+                    <span id="themeText">Light</span>
+                </button>
+                <a href="/settings">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                    Settings
+                </a>
+            </div>
         </div>
 
         <div class="alert" id="alert"></div>
@@ -472,25 +469,9 @@
                         <h2>Codebase Context (Optional)</h2>
                         
                         <div class="form-group">
-                            <div class="file-upload" id="fileUpload">
-                                <input type="file" id="codebaseFile" name="codebase" accept=".zip,.tar,.tar.gz">
-                                <div class="file-upload-text">
-                                    <strong>Click to upload</strong> or drag and drop<br>
-                                    Codebase archive (.zip, .tar, .tar.gz) - Max 2GB<br>
-                                    <small style="color: #666;">Extracted codebase must be under 500MB for analysis</small>
-                                </div>
-                            </div>
-                            <div class="uploaded-file" id="uploadedFile">
-                                <div class="filename" id="uploadedFilename"></div>
-                                <div class="filesize" id="uploadedFilesize"></div>
-                            </div>
-                            <div class="upload-progress" id="uploadProgress">
-                                <div class="progress-bar">
-                                    <div class="progress-bar-fill" id="progressBarFill"></div>
-                                </div>
-                                <div class="upload-status" id="uploadStatus">Uploading...</div>
-                            </div>
-                            <div class="help-text">Upload your codebase for contextual AI analysis (optional)</div>
+                            <label for="githubRepoUrl">GitHub Repository URL</label>
+                            <input type="url" id="githubRepoUrl" name="githubRepoUrl" placeholder="https://github.com/owner/repo">
+                            <div class="help-text" id="githubRepoHelp">Enter a GitHub repository URL for contextual AI analysis (requires GitHub token in settings)</div>
                         </div>
                     </div>
 
@@ -535,14 +516,35 @@
         const resultsContent = document.getElementById('resultsContent');
         const emptyState = document.getElementById('emptyState');
         const analyzeBtn = document.getElementById('analyzeBtn');
-        const fileUpload = document.getElementById('fileUpload');
-        const codebaseFile = document.getElementById('codebaseFile');
-        const uploadedFile = document.getElementById('uploadedFile');
-        const uploadedFilename = document.getElementById('uploadedFilename');
-        const uploadedFilesize = document.getElementById('uploadedFilesize');
-        const uploadProgress = document.getElementById('uploadProgress');
-        const progressBarFill = document.getElementById('progressBarFill');
-        const uploadStatus = document.getElementById('uploadStatus');
+        const githubRepoUrl = document.getElementById('githubRepoUrl');
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or default to dark mode
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.innerHTML = '<path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>';
+            themeText.textContent = 'Dark';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            
+            if (isLightMode) {
+                themeIcon.innerHTML = '<path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.innerHTML = '<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
 
         function showAlert(message, type = 'success') {
             alert.textContent = message;
@@ -553,46 +555,38 @@
             }, 5000);
         }
 
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        // Load default GitHub repo URL from settings
+        async function loadDefaults() {
+            try {
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                
+                if (config.default_github_repo) {
+                    githubRepoUrl.value = config.default_github_repo;
+                    githubRepoUrl.classList.add('has-default');
+                    
+                    // Update help text to show it's using default
+                    const helpText = document.getElementById('githubRepoHelp');
+                    helpText.innerHTML = `<strong>Using default repository:</strong> ${config.default_github_repo} <br><small>Change this value or update the default in <a href="/settings" style="color: var(--primary-teal);">Settings</a></small>`;
+                    helpText.classList.add('default-loaded');
+                }
+            } catch (error) {
+                // Silently fail - defaults are optional
+            }
         }
 
-        // File upload handling
-        fileUpload.addEventListener('click', () => codebaseFile.click());
+        // Load defaults on page load
+        loadDefaults();
 
-        fileUpload.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            fileUpload.classList.add('dragover');
-        });
-
-        fileUpload.addEventListener('dragleave', () => {
-            fileUpload.classList.remove('dragover');
-        });
-
-        fileUpload.addEventListener('drop', (e) => {
-            e.preventDefault();
-            fileUpload.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileSelect(files[0]);
+        // Remove default styling when user modifies the GitHub repo field
+        githubRepoUrl.addEventListener('input', () => {
+            if (githubRepoUrl.classList.contains('has-default')) {
+                githubRepoUrl.classList.remove('has-default');
+                const helpText = document.getElementById('githubRepoHelp');
+                helpText.innerHTML = 'Enter a GitHub repository URL for contextual AI analysis (requires GitHub token in settings)';
+                helpText.classList.remove('default-loaded');
             }
         });
-
-        codebaseFile.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileSelect(e.target.files[0]);
-            }
-        });
-
-        function handleFileSelect(file) {
-            uploadedFilename.textContent = file.name;
-            uploadedFilesize.textContent = formatBytes(file.size);
-            uploadedFile.style.display = 'block';
-        }
 
         // Form submission
         form.addEventListener('submit', async (e) => {
@@ -602,6 +596,7 @@
             const customPrompt = document.getElementById('customPrompt').value;
             const slackChannel = document.getElementById('slackChannel').value;
             const linearProject = document.getElementById('linearProject').value;
+            const githubRepo = document.getElementById('githubRepoUrl').value;
             
             if (!ticketId) {
                 showAlert('Please enter a ticket ID', 'error');
@@ -618,47 +613,29 @@
                 results.style.display = 'none';
                 emptyState.style.display = 'block';
 
-                // Upload codebase if selected
-                let codebaseUploaded = false;
-                if (codebaseFile.files.length > 0) {
-                    const file = codebaseFile.files[0];
-                    const fileSizeMB = file.size / (1024 * 1024);
-                    
-                    // Show warning for very large files
-                    if (fileSizeMB > 1000) { // 1GB
-                        const proceed = confirm(`This file is quite large (${formatBytes(file.size)}). Upload may take several minutes. Continue?`);
-                        if (!proceed) {
-                            return;
-                        }
-                    }
-                    
-                    const formData = new FormData();
-                    formData.append('codebase', file);
-                    
-                    // Show progress
-                    uploadProgress.style.display = 'block';
-                    uploadStatus.textContent = 'Uploading and extracting codebase...';
-                    
+                // Fetch GitHub repository if provided
+                let githubRepoFetched = false;
+                if (githubRepo) {
                     try {
-                        const uploadResponse = await fetch('/api/upload-codebase', {
+                        const githubResponse = await fetch('/api/fetch-github-repo', {
                             method: 'POST',
-                            body: formData
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ repoUrl: githubRepo })
                         });
                         
-                        uploadProgress.style.display = 'none';
-                        
-                        if (uploadResponse.ok) {
-                            const result = await uploadResponse.json();
-                            codebaseUploaded = true;
+                        if (githubResponse.ok) {
+                            const result = await githubResponse.json();
+                            githubRepoFetched = true;
                             showAlert(result.message);
                         } else {
-                            const error = await uploadResponse.json();
+                            const error = await githubResponse.json();
                             showAlert('Warning: ' + error.error + ' - Analysis will continue without codebase context', 'error');
                             // Don't stop the analysis, continue without codebase
                         }
-                    } catch (uploadError) {
-                        uploadProgress.style.display = 'none';
-                        showAlert('Warning: Upload failed - ' + uploadError.message + ' - Analysis will continue without codebase context', 'error');
+                    } catch (githubError) {
+                        showAlert('Warning: GitHub fetch failed - ' + githubError.message + ' - Analysis will continue without codebase context', 'error');
                     }
                 }
 
@@ -694,16 +671,7 @@
                             displayText += analysis.description;
                         }
                         
-                        // Add metadata if available
-                        if (analysis.priority) {
-                            displayText += `\n\n**Priority:** ${analysis.priority}`;
-                        }
-                        if (analysis.estimatedComplexity) {
-                            displayText += `\n**Complexity:** ${analysis.estimatedComplexity}/5`;
-                        }
-                        if (analysis.components && analysis.components.length > 0) {
-                            displayText += `\n**Components:** ${analysis.components.join(', ')}`;
-                        }
+
                         
 
                     } else {

@@ -53,6 +53,18 @@ export const config = new Conf({
     defaultSlackChannel: {
       type: 'string',
       default: process.env.DEFAULT_SLACK_CHANNEL || ''
+    },
+    githubToken: {
+      type: 'string',
+      default: process.env.GITHUB_TOKEN || ''
+    },
+    defaultGithubRepo: {
+      type: 'string',
+      default: process.env.DEFAULT_GITHUB_REPO || ''
+    },
+    default_git_url: {
+      type: 'string',
+      default: process.env.DEFAULT_GITHUB_REPO || ''
     }
   }
 });
@@ -68,6 +80,8 @@ export function getConfig() {
     ampPath: config.get('ampPath'),
     defaultProject: config.get('defaultProject'),
     slackToken: config.get('slackToken'),
-    defaultSlackChannel: config.get('defaultSlackChannel')
+    defaultSlackChannel: config.get('defaultSlackChannel'),
+    githubToken: config.get('githubToken'),
+    defaultGithubRepo: config.get('defaultGithubRepo')
   };
 }
