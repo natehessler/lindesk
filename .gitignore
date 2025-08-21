@@ -68,5 +68,7 @@ logs
 tmp/
 temp/
 
-# Uploads
+# Uploads and GitHub repositories
 uploads/
+uploads/github/
+lindesk/

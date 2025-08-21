@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lindesk - Settings</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/lindesk.png">
+    <link rel="alternate icon" href="/lindesk.png">
     <style>
-        @import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
+        /* Dark mode (default) */
         :root {
+            --primary-bg: #1a202c;
+            --primary-teal: #4fd1c7;
+            --primary-teal-dark: #319795;
+            --secondary-bg: #0f1419;
+            --card-bg: #1a202c;
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --text-muted: #718096;
+            --border-color: #2d3748;
+            --border-hover: #4a5568;
+            --success-bg: #22543d;
+            --success-color: #c6f6d5;
+            --error-bg: #742a2a;
+            --error-color: #fed7d7;
+            --input-bg: #2d3748;
+        }
+
+        /* Light mode */
+        body.light-mode {
             --primary-bg: #2d3748;
             --primary-teal: #4fd1c7;
             --primary-teal-dark: #319795;
@@ -24,6 +44,7 @@
             --success-color: #22543d;
             --error-bg: #fed7d7;
             --error-color: #742a2a;
+            --input-bg: #fafafa;
         }
 
         * {
@@ -33,7 +54,7 @@
         }
 
         body {
-            font-family: 'Clash Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--secondary-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -73,19 +94,26 @@
 
         .header h1 {
             color: #ffffff;
-            font-size: 32px;
+            font-size: 38px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header .logo {
-            width: 44px;
-            height: 44px;
+            width: 72px;
+            height: 72px;
             object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.2s ease;
+        }
+
+        .header .logo:hover {
+            transform: scale(1.05);
         }
 
         .header p {
@@ -96,9 +124,12 @@
 
         .nav {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .nav a {
+        .nav a, .theme-toggle {
             color: var(--primary-teal);
             text-decoration: none;
             font-weight: 600;
@@ -110,9 +141,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
         }
 
-        .nav a:hover {
+        .nav a:hover, .theme-toggle:hover {
             background: var(--primary-teal);
             color: white;
             transform: translateY(-1px);
@@ -171,13 +205,14 @@
             font-size: 16px;
             font-family: inherit;
             transition: all 0.2s;
-            background: #fafafa;
+            background: var(--input-bg);
+            color: var(--text-primary);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-teal);
-            background: white;
+            background: var(--card-bg);
             box-shadow: 0 0 0 3px rgba(79, 209, 199, 0.1);
         }
 
@@ -236,7 +271,7 @@
             display: none;
             text-align: center;
             padding: 20px;
-            color: #666;
+            color: var(--text-muted);
         }
     </style>
 </head>
@@ -245,7 +280,7 @@
         <div class="header">
             <div class="header-content">
                 <h1>
-                    <img src="/logo.svg" alt="Lindesk Logo" class="logo">
+                    <img src="/lindesk.png" alt="Lindesk Logo" class="logo">
                     Lindesk Settings
                 </h1>
                 <p>Configure your API keys and integration settings</p>
@@ -259,6 +294,12 @@
                 </svg>
                 Back to Main
             </a>
+            <button class="theme-toggle" id="themeToggle">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="themeIcon">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                </svg>
+                <span id="themeText">Light</span>
+            </button>
         </div>
 
         <div class="alert" id="alert"></div>
@@ -307,6 +348,20 @@
                 </div>
 
                 <div class="form-section">
+                    <h2>GitHub Integration (Optional)</h2>
+                    <div class="form-group">
+                        <label for="github_token">GitHub Personal Access Token</label>
+                        <input type="password" id="github_token" name="github_token" placeholder="Enter your GitHub PAT">
+                        <div class="help-text">Required for accessing GitHub repositories for codebase context</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="default_github_repo">Default GitHub Repository URL</label>
+                        <input type="url" id="default_github_repo" name="default_github_repo" placeholder="https://github.com/owner/repo">
+                        <div class="help-text">Default repository URL to pre-fill in the main form</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
                     <h2>Linear Integration (Optional)</h2>
                     <div class="form-group">
                         <label for="linear_api_key">Linear API Key</label>
@@ -328,6 +383,34 @@
         const form = document.getElementById('settingsForm');
         const alert = document.getElementById('alert');
         const loading = document.getElementById('loading');
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or default to dark mode
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.innerHTML = '<path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>';
+            themeText.textContent = 'Dark';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLightMode = document.body.classList.contains('light-mode');
+            
+            if (isLightMode) {
+                themeIcon.innerHTML = '<path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.innerHTML = '<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
 
         function showAlert(message, type = 'success') {
             alert.textContent = message;
@@ -353,8 +436,13 @@
                 // Populate form with existing values
                 Object.keys(config).forEach(key => {
                     const input = document.getElementById(key);
-                    if (input && config[key]) {
-                        input.value = config[key];
+                    if (input) {
+                        // Handle both truthy values and empty strings, but skip password fields with '***'
+                        if (config[key] && config[key] !== '***') {
+                            input.value = config[key];
+                        } else if (config[key] === '' && input.type !== 'password') {
+                            input.value = '';
+                        }
                     }
                 });
                 

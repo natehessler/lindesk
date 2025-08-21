@@ -1,7 +1,7 @@
 {
   "name": "lindesk",
   "version": "0.2.0",
-  "description": "CLI tool to analyze Zendesk tickets with AI and create Linear tickets",
+  "description": "AI-powered Zendesk ticket analysis with GitHub integration, Linear issues, and Slack notifications",
   "main": "src/index.js",
   "bin": {
     "lindesk": "./src/cli.js"

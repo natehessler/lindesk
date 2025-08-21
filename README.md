@@ -5,16 +5,17 @@ AI-powered Zendesk ticket analysis that automatically creates Linear issues and 
 ## Features
 
 - 🎫 Analyzes Zendesk tickets with full conversation history
-- 🤖 AI-powered root cause analysis and solutions
+- 🤖 AI-powered analysis with flexible, natural responses  
 - 📋 Automatically creates Linear issues
 - 💬 Posts formatted summaries to Slack
-- 🌐 Modern web interface + CLI
-- 📁 Codebase context for better analysis
+- 🌐 Modern web interface with dark mode + CLI
+- 🐙 GitHub integration for codebase context
+- ⚙️ Web-based settings management
 
 ## Prerequisites
 
 - Node.js 16+
-- API access: Zendesk, Amp, Slack (optional), Linear (optional)
+- API access: Zendesk, Amp, GitHub (optional), Slack (optional), Linear (optional)
 
 ## Quick Start
 
@@ -32,6 +33,8 @@ ZENDESK_EMAIL=your-email@example.com
 ZENDESK_TOKEN=your-zendesk-token
 AMP_API_KEY=your-amp-api-key
 # Amp uses CLI by default, no endpoint needed
+GITHUB_TOKEN=your-github-personal-access-token  # Optional
+DEFAULT_GITHUB_REPO=https://github.com/owner/repo  # Optional
 SLACK_TOKEN=xoxb-your-slack-bot-token  # Optional
 DEFAULT_SLACK_CHANNEL=C0123ABC456  # Optional
 LINEAR_API_KEY=your-linear-api-key  # Optional
@@ -48,10 +51,11 @@ npm run web
 ```
 
 **Features:**
-- Upload codebase for contextual analysis
-- Interactive ticket analysis form  
+- GitHub repository integration for contextual analysis
+- Interactive ticket analysis form with dark mode
 - Real-time results display
-- Settings configuration
+- Web-based settings configuration
+- Default repository URL settings
 
 ### Command Line
 
@@ -78,9 +82,10 @@ lindesk ticket 12345 "analyze root cause" --channel C0123ABC456
 
 ## Configuration
 
-Run `lindesk setup` and provide your API credentials:
+Configure via web interface at `http://localhost:3000/settings` or run `lindesk setup`:
 - **Zendesk**: Domain, email, API token  
 - **Amp**: API key for AI analysis
+- **GitHub**: Personal access token, default repository URL (optional)
 - **Slack**: Bot token (optional)
 - **Linear**: API key (optional)
 

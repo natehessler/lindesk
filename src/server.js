@@ -88,14 +88,16 @@ app.get('/settings', (req, res) => {
 app.get('/api/config', (req, res) => {
   try {
     const currentConfig = {
-      zendesk_domain: config.get('zendesk_domain') || '',
-      zendesk_email: config.get('zendesk_email') || '',
-      zendesk_token: config.get('zendesk_token') ? '***' : '',
-      amp_api_key: config.get('amp_api_key') ? '***' : '',
-      slack_token: config.get('slack_token') ? '***' : '',
-      default_slack_channel: config.get('default_slack_channel') || '',
-      linear_api_key: config.get('linear_api_key') ? '***' : '',
-      default_linear_project: config.get('default_linear_project') || ''
+      zendesk_domain: config.get('zendeskDomain') || '',
+      zendesk_email: config.get('zendeskEmail') || '',
+      zendesk_token: config.get('zendeskToken') ? '***' : '',
+      amp_api_key: config.get('ampApiKey') ? '***' : '',
+      slack_token: config.get('slackToken') ? '***' : '',
+      default_slack_channel: config.get('defaultSlackChannel') || '',
+      github_token: config.get('githubToken') ? '***' : '',
+      default_github_repo: config.get('defaultGithubRepo') || config.get('default_git_url') || '',
+      linear_api_key: config.get('linearApiKey') ? '***' : '',
+      default_linear_project: config.get('defaultProject') || ''
     };
     res.json(currentConfig);
   } catch (error) {
@@ -112,19 +114,26 @@ app.post('/api/config', (req, res) => {
       amp_api_key,
       slack_token,
       default_slack_channel,
+      github_token,
+      default_github_repo,
       linear_api_key,
       default_linear_project
     } = req.body;
 
     // Only update non-empty values
-    if (zendesk_domain) config.set('zendesk_domain', zendesk_domain);
-    if (zendesk_email) config.set('zendesk_email', zendesk_email);
-    if (zendesk_token && zendesk_token !== '***') config.set('zendesk_token', zendesk_token);
-    if (amp_api_key && amp_api_key !== '***') config.set('amp_api_key', amp_api_key);
-    if (slack_token && slack_token !== '***') config.set('slack_token', slack_token);
-    if (default_slack_channel) config.set('default_slack_channel', default_slack_channel);
-    if (linear_api_key && linear_api_key !== '***') config.set('linear_api_key', linear_api_key);
-    if (default_linear_project) config.set('default_linear_project', default_linear_project);
+    if (zendesk_domain) config.set('zendeskDomain', zendesk_domain);
+    if (zendesk_email) config.set('zendeskEmail', zendesk_email);
+    if (zendesk_token && zendesk_token !== '***') config.set('zendeskToken', zendesk_token);
+    if (amp_api_key && amp_api_key !== '***') config.set('ampApiKey', amp_api_key);
+    if (slack_token && slack_token !== '***') config.set('slackToken', slack_token);
+    if (default_slack_channel) config.set('defaultSlackChannel', default_slack_channel);
+    if (github_token && github_token !== '***') config.set('githubToken', github_token);
+    if (default_github_repo) {
+      config.set('defaultGithubRepo', default_github_repo);
+      config.set('default_git_url', default_github_repo); // Keep legacy key in sync
+    }
+    if (linear_api_key && linear_api_key !== '***') config.set('linearApiKey', linear_api_key);
+    if (default_linear_project) config.set('defaultProject', default_linear_project);
 
     res.json({ success: true, message: 'Configuration saved successfully' });
   } catch (error) {
@@ -238,12 +247,90 @@ app.post('/api/upload-codebase', (req, res) => {
   });
 });
 
+app.post('/api/fetch-github-repo', async (req, res) => {
+  try {
+    const { repoUrl } = req.body;
+    
+    if (!repoUrl) {
+      return res.status(400).json({ error: 'Repository URL is required' });
+    }
+
+    const githubToken = config.get('github_token');
+    if (!githubToken) {
+      return res.status(400).json({ error: 'GitHub token not configured. Please add your GitHub Personal Access Token in Settings.' });
+    }
+
+    // Parse GitHub URL to extract owner and repo
+    const githubUrlPattern = /github\.com\/([^\/]+)\/([^\/]+)/;
+    const match = repoUrl.match(githubUrlPattern);
+    
+    if (!match) {
+      return res.status(400).json({ error: 'Invalid GitHub URL. Please use format: https://github.com/owner/repo' });
+    }
+
+    const [, owner, repoName] = match;
+    const cleanRepoName = repoName.replace(/\.git$/, ''); // Remove .git suffix if present
+
+    // Create directory for GitHub repos
+    const githubDir = path.join(__dirname, '../uploads/github');
+    if (!fs.existsSync(githubDir)) {
+      fs.mkdirSync(githubDir, { recursive: true });
+    }
+
+    const repoDir = path.join(githubDir, `${owner}-${cleanRepoName}-${Date.now()}`);
+
+    // Clone the repository
+    const cloneProcess = spawn('git', ['clone', repoUrl, repoDir]);
+    
+    cloneProcess.on('close', (code) => {
+      if (code === 0) {
+        // Check repository size
+        const repoSize = getDirectorySizeSync(repoDir);
+        const maxCodebaseSize = 500 * 1024 * 1024; // 500MB limit for analysis
+        
+        if (repoSize > maxCodebaseSize) {
+          // Clean up the large repository
+          fs.rmSync(repoDir, { recursive: true, force: true });
+          return res.status(413).json({ 
+            error: `Repository is too large (${formatBytes(repoSize)}). Maximum size for analysis is ${formatBytes(maxCodebaseSize)}. Consider using a smaller repository or specific branch.` 
+          });
+        }
+        
+        // Set the latest codebase path for analysis
+        latestCodebasePath = repoDir;
+        res.json({ 
+          success: true, 
+          message: `GitHub repository cloned successfully (${formatBytes(repoSize)})`,
+          repoUrl: repoUrl,
+          localPath: repoDir,
+          size: formatBytes(repoSize)
+        });
+      } else {
+        res.status(500).json({ 
+          error: 'Failed to clone repository. Please check the URL and ensure the repository is accessible.' 
+        });
+      }
+    });
+
+    cloneProcess.on('error', (err) => {
+      res.status(500).json({ 
+        error: `Failed to clone repository: ${err.message}` 
+      });
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post('/api/analyze-ticket', async (req, res) => {
   // Set content type to ensure JSON response
   res.setHeader('Content-Type', 'application/json');
   
   try {
     const { ticketId, customPrompt, slackChannel, linearProject } = req.body;
+    console.log(`🎫 Starting analysis for ticket #${ticketId}`);
+    console.log(`📋 Request details:`, { ticketId, customPrompt: !!customPrompt, slackChannel: !!slackChannel, linearProject: !!linearProject });
 
     if (!ticketId) {
       return res.status(400).json({ error: 'Ticket ID is required' });
@@ -269,6 +356,7 @@ app.post('/api/analyze-ticket', async (req, res) => {
     }
 
     // Call the existing transfer function with codebase path if available
+    console.log(`🤖 Calling transferTicket with codebase: ${latestCodebasePath ? 'YES' : 'NO'}`);
     const result = await transferTicket(
       ticketId, 
       linearProject, 
@@ -278,6 +366,7 @@ app.post('/api/analyze-ticket', async (req, res) => {
       customPrompt,
       latestCodebasePath
     );
+    console.log(`✅ Analysis completed successfully`);
 
     res.json({ 
       success: true, 

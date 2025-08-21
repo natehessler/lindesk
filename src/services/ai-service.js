@@ -26,21 +26,21 @@ async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = nu
         const { spawn } = await import('child_process');
         const { promisify } = await import('util');
         
-        const defaultPrompt = `Analyze this complete Zendesk support ticket conversation and provide a concise, actionable analysis focused on understanding the issue, identifying root causes, and providing solutions. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
+        const defaultPrompt = `Please assist with the below issue from a customer. Analyze this complete Zendesk support ticket conversation and provide helpful, actionable guidance. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
 
-Please provide a well-structured but concise analysis. Keep each section brief and focus on the most important points:
+Feel free to structure your response in whatever format works best to clearly communicate your analysis and recommendations. Focus on being helpful and thorough.
 
 Return only a JSON object with these fields:
 
 {
   "title": "Clear, descriptive title that captures the core issue",
-  "description": "Concise analysis with proper formatting including:\n\n## Issue Analysis\n[Brief explanation of what's happening and why - 2-3 sentences max]\n\n## Root Causes\n[Top 3 most likely causes - bullet points]\n\n## Recommended Solutions\n[Top 3 solutions in order of effectiveness - bullet points]\n\n## Immediate Workarounds\n[Quick fixes if available - bullet points]\n\n## Next Steps\n[3-4 clear action items with timeline]\n\n## Impact Assessment\n[Brief impact and urgency justification - 1-2 sentences]",
+  "description": "Your analysis and recommendations - structure this however you think is most helpful",
   "priority": "Low|Medium|High|Urgent",
   "complexity": 1-5,
   "components": ["RelevantArea1", "RelevantArea2"]
 }
 
-Take your time to analyze thoroughly. Ticket #${ticketContent.id}: ${ticketContent.subject}
+Ticket #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}`;
 
