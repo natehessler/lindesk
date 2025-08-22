@@ -120,20 +120,20 @@ app.post('/api/config', (req, res) => {
       default_linear_project
     } = req.body;
 
-    // Only update non-empty values
-    if (zendesk_domain) config.set('zendeskDomain', zendesk_domain);
-    if (zendesk_email) config.set('zendeskEmail', zendesk_email);
-    if (zendesk_token && zendesk_token !== '***') config.set('zendeskToken', zendesk_token);
-    if (amp_api_key && amp_api_key !== '***') config.set('ampApiKey', amp_api_key);
-    if (slack_token && slack_token !== '***') config.set('slackToken', slack_token);
-    if (default_slack_channel) config.set('defaultSlackChannel', default_slack_channel);
-    if (github_token && github_token !== '***') config.set('githubToken', github_token);
-    if (default_github_repo) {
+    // Only update non-empty values (except allow clearing non-required fields)
+    if (zendesk_domain !== undefined) config.set('zendeskDomain', zendesk_domain);
+    if (zendesk_email !== undefined) config.set('zendeskEmail', zendesk_email);
+    if (zendesk_token && zendesk_token !== '***' && zendesk_token.trim() !== '') config.set('zendeskToken', zendesk_token);
+    if (amp_api_key && amp_api_key !== '***' && amp_api_key.trim() !== '') config.set('ampApiKey', amp_api_key);
+    if (slack_token !== undefined && slack_token !== '***') config.set('slackToken', slack_token);
+    if (default_slack_channel !== undefined) config.set('defaultSlackChannel', default_slack_channel);
+    if (github_token !== undefined && github_token !== '***') config.set('githubToken', github_token);
+    if (default_github_repo !== undefined) {
       config.set('defaultGithubRepo', default_github_repo);
       config.set('default_git_url', default_github_repo); // Keep legacy key in sync
     }
-    if (linear_api_key && linear_api_key !== '***') config.set('linearApiKey', linear_api_key);
-    if (default_linear_project) config.set('defaultProject', default_linear_project);
+    if (linear_api_key !== undefined && linear_api_key !== '***') config.set('linearApiKey', linear_api_key);
+    if (default_linear_project !== undefined) config.set('defaultProject', default_linear_project);
 
     res.json({ success: true, message: 'Configuration saved successfully' });
   } catch (error) {
@@ -279,16 +279,30 @@ app.post('/api/fetch-github-repo', async (req, res) => {
 
     const repoDir = path.join(githubDir, `${owner}-${cleanRepoName}-${Date.now()}`);
 
-    // Clone the repository
+    // Clone the repository with timeout
+    console.log(`🔄 Starting git clone: ${repoUrl} -> ${repoDir}`);
     const cloneProcess = spawn('git', ['clone', repoUrl, repoDir]);
     
+    // Add timeout for large repositories
+    const timeout = setTimeout(() => {
+      console.log(`⏰ GitHub clone timeout reached for ${repoUrl}`);
+      cloneProcess.kill();
+      res.status(408).json({ 
+        error: 'Repository cloning timed out after 2 minutes. Repository may be too large or slow to clone.' 
+      });
+    }, 120000); // 2 minutes timeout
+    
     cloneProcess.on('close', (code) => {
+      clearTimeout(timeout);
       if (code === 0) {
+        console.log(`✅ Git clone completed successfully for ${repoUrl}`);
         // Check repository size
         const repoSize = getDirectorySizeSync(repoDir);
+        console.log(`📏 Repository size: ${formatBytes(repoSize)}`);
         const maxCodebaseSize = 500 * 1024 * 1024; // 500MB limit for analysis
         
         if (repoSize > maxCodebaseSize) {
+          console.log(`❌ Repository too large: ${formatBytes(repoSize)} > ${formatBytes(maxCodebaseSize)}`);
           // Clean up the large repository
           fs.rmSync(repoDir, { recursive: true, force: true });
           return res.status(413).json({ 
@@ -298,6 +312,7 @@ app.post('/api/fetch-github-repo', async (req, res) => {
         
         // Set the latest codebase path for analysis
         latestCodebasePath = repoDir;
+        console.log(`🎯 Set codebase path: ${repoDir}`);
         res.json({ 
           success: true, 
           message: `GitHub repository cloned successfully (${formatBytes(repoSize)})`,
@@ -306,6 +321,7 @@ app.post('/api/fetch-github-repo', async (req, res) => {
           size: formatBytes(repoSize)
         });
       } else {
+        console.log(`❌ Git clone failed with code ${code} for ${repoUrl}`);
         res.status(500).json({ 
           error: 'Failed to clone repository. Please check the URL and ensure the repository is accessible.' 
         });
@@ -313,6 +329,7 @@ app.post('/api/fetch-github-repo', async (req, res) => {
     });
 
     cloneProcess.on('error', (err) => {
+      clearTimeout(timeout);
       res.status(500).json({ 
         error: `Failed to clone repository: ${err.message}` 
       });

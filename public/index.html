@@ -349,6 +349,56 @@
             border: 1px solid #fc8181;
         }
 
+        .status-display {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 15px;
+        }
+
+        .status-step .icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-step.pending {
+            color: var(--text-muted);
+        }
+
+        .status-step.running {
+            color: var(--primary-teal);
+        }
+
+        .status-step.success {
+            color: #22543d;
+        }
+
+        .status-step.error {
+            color: #742a2a;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
         .results {
             display: none;
         }
@@ -445,6 +495,26 @@
         </div>
 
         <div class="alert" id="alert"></div>
+
+        <div class="status-display" id="statusDisplay">
+            <h3 style="margin-bottom: 16px; color: var(--text-primary);">Analysis Progress</h3>
+            <div class="status-step pending" id="stepGithub">
+                <div class="icon">⏳</div>
+                <span>Fetching GitHub repository...</span>
+            </div>
+            <div class="status-step pending" id="stepZendesk">
+                <div class="icon">⏳</div>
+                <span>Retrieving Zendesk ticket...</span>
+            </div>
+            <div class="status-step pending" id="stepAmp">
+                <div class="icon">⏳</div>
+                <span>Analyzing with Amp AI...</span>
+            </div>
+            <div class="status-step pending" id="stepIntegrations">
+                <div class="icon">⏳</div>
+                <span>Processing integrations...</span>
+            </div>
+        </div>
 
         <div class="main-content">
             <div class="form-container">
@@ -555,6 +625,52 @@
             }, 5000);
         }
 
+        function updateStatus(stepId, status, message = null) {
+            const step = document.getElementById(stepId);
+            const icon = step.querySelector('.icon');
+            const text = step.querySelector('span');
+            
+            step.className = `status-step ${status}`;
+            
+            switch(status) {
+                case 'running':
+                    icon.innerHTML = '<div class="spinner"></div>';
+                    break;
+                case 'success':
+                    icon.innerHTML = '✅';
+                    break;
+                case 'error':
+                    icon.innerHTML = '❌';
+                    if (message) text.textContent = message;
+                    break;
+                case 'skipped':
+                    icon.innerHTML = '⏭️';
+                    step.className = 'status-step pending';
+                    break;
+                default:
+                    icon.innerHTML = '⏳';
+            }
+        }
+
+        function showStatusDisplay() {
+            document.getElementById('statusDisplay').style.display = 'block';
+        }
+
+        function hideStatusDisplay() {
+            document.getElementById('statusDisplay').style.display = 'none';
+            // Reset all steps to pending
+            ['stepGithub', 'stepZendesk', 'stepAmp', 'stepIntegrations'].forEach(stepId => {
+                updateStatus(stepId, 'pending');
+                const step = document.getElementById(stepId);
+                const text = step.querySelector('span');
+                // Reset to original text
+                if (stepId === 'stepGithub') text.textContent = 'Fetching GitHub repository...';
+                if (stepId === 'stepZendesk') text.textContent = 'Retrieving Zendesk ticket...';
+                if (stepId === 'stepAmp') text.textContent = 'Analyzing with Amp AI...';
+                if (stepId === 'stepIntegrations') text.textContent = 'Processing integrations...';
+            });
+        }
+
         // Load default GitHub repo URL from settings
         async function loadDefaults() {
             try {
@@ -609,37 +725,58 @@
                 analyzeBtn.disabled = true;
                 analyzeBtn.textContent = '';
                 
-                // Hide previous results
+                // Show status display and hide previous results
+                showStatusDisplay();
                 results.style.display = 'none';
                 emptyState.style.display = 'block';
 
-                // Fetch GitHub repository if provided
+                // Step 1: Fetch GitHub repository if provided
                 let githubRepoFetched = false;
                 if (githubRepo) {
+                    updateStatus('stepGithub', 'running');
                     try {
+                        // Add timeout to GitHub fetch
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 150000); // 2.5 minutes
+                        
                         const githubResponse = await fetch('/api/fetch-github-repo', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ repoUrl: githubRepo })
+                            body: JSON.stringify({ repoUrl: githubRepo }),
+                            signal: controller.signal
                         });
+                        
+                        clearTimeout(timeoutId);
                         
                         if (githubResponse.ok) {
                             const result = await githubResponse.json();
                             githubRepoFetched = true;
-                            showAlert(result.message);
+                            updateStatus('stepGithub', 'success', 'GitHub repository fetched successfully');
                         } else {
                             const error = await githubResponse.json();
+                            updateStatus('stepGithub', 'error', `GitHub fetch failed: ${error.error}`);
                             showAlert('Warning: ' + error.error + ' - Analysis will continue without codebase context', 'error');
                             // Don't stop the analysis, continue without codebase
                         }
                     } catch (githubError) {
-                        showAlert('Warning: GitHub fetch failed - ' + githubError.message + ' - Analysis will continue without codebase context', 'error');
+                        let errorMessage = githubError.message;
+                        if (githubError.name === 'AbortError') {
+                            errorMessage = 'GitHub repository clone timed out (too large or slow)';
+                        }
+                        updateStatus('stepGithub', 'error', `GitHub fetch failed: ${errorMessage}`);
+                        showAlert('Warning: GitHub fetch failed - ' + errorMessage + ' - Analysis will continue without codebase context', 'error');
                     }
+                } else {
+                    updateStatus('stepGithub', 'skipped', 'No GitHub repository provided');
                 }
 
-                // Analyze ticket
+                // Step 2: Analyze ticket
+                updateStatus('stepZendesk', 'running');
+                updateStatus('stepAmp', 'running');
+                updateStatus('stepIntegrations', 'running');
+                
                 const analysisResponse = await fetch('/api/analyze-ticket', {
                     method: 'POST',
                     headers: {
@@ -656,6 +793,10 @@
                 const analysisResult = await analysisResponse.json();
                 
                 if (analysisResult.success) {
+                    updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
+                    updateStatus('stepAmp', 'success', 'Amp AI analysis completed');
+                    updateStatus('stepIntegrations', 'success', 'Integrations processed');
+                    
                     // Extract and format the analysis results
                     const analysis = analysisResult.result.analysis;
                     let displayText = '';
@@ -690,11 +831,31 @@
                     resultsContent.innerHTML = htmlContent;
                     results.style.display = 'block';
                     emptyState.style.display = 'none';
+                    hideStatusDisplay();
                     showAlert('Ticket analysis completed successfully!');
                 } else {
-                    showAlert(analysisResult.error || 'Failed to analyze ticket', 'error');
+                    // Determine which step failed based on error message
+                    const errorMsg = analysisResult.error || 'Failed to analyze ticket';
+                    if (errorMsg.includes('Zendesk') || errorMsg.includes('ticket')) {
+                        updateStatus('stepZendesk', 'error', `Zendesk error: ${errorMsg}`);
+                        updateStatus('stepAmp', 'error', 'Cancelled due to Zendesk failure');
+                        updateStatus('stepIntegrations', 'error', 'Cancelled due to Zendesk failure');
+                    } else if (errorMsg.includes('Amp') || errorMsg.includes('AI')) {
+                        updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
+                        updateStatus('stepAmp', 'error', `Amp AI error: ${errorMsg}`);
+                        updateStatus('stepIntegrations', 'error', 'Cancelled due to AI failure');
+                    } else {
+                        updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
+                        updateStatus('stepAmp', 'success', 'Amp AI analysis completed');
+                        updateStatus('stepIntegrations', 'error', `Integration error: ${errorMsg}`);
+                    }
+                    showAlert(errorMsg, 'error');
                 }
             } catch (error) {
+                // Network or unexpected error
+                updateStatus('stepZendesk', 'error', 'Network error occurred');
+                updateStatus('stepAmp', 'error', 'Cancelled due to network error');
+                updateStatus('stepIntegrations', 'error', 'Cancelled due to network error');
                 showAlert('Analysis failed: ' + error.message, 'error');
             } finally {
                 // Reset button
