@@ -437,10 +437,15 @@
                 Object.keys(config).forEach(key => {
                     const input = document.getElementById(key);
                     if (input) {
-                        // Handle both truthy values and empty strings, but skip password fields with '***'
                         if (config[key] && config[key] !== '***') {
+                            // Regular field with actual value
                             input.value = config[key];
+                        } else if (config[key] === '***' && input.type === 'password') {
+                            // Password field with saved value - show indicator
+                            input.placeholder = '••• Saved (leave blank to keep current value)';
+                            input.value = '';
                         } else if (config[key] === '' && input.type !== 'password') {
+                            // Empty non-password field
                             input.value = '';
                         }
                     }
