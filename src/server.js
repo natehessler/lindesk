@@ -255,7 +255,7 @@ app.post('/api/fetch-github-repo', async (req, res) => {
       return res.status(400).json({ error: 'Repository URL is required' });
     }
 
-    const githubToken = config.get('github_token');
+    const githubToken = config.get('githubToken');
     if (!githubToken) {
       return res.status(400).json({ error: 'GitHub token not configured. Please add your GitHub Personal Access Token in Settings.' });
     }
