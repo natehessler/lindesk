@@ -91,11 +91,10 @@ app.get('/api/config', (req, res) => {
       zendesk_domain: config.get('zendeskDomain') || '',
       zendesk_email: config.get('zendeskEmail') || '',
       zendesk_token: config.get('zendeskToken') ? '***' : '',
-      amp_api_key: config.get('ampApiKey') ? '***' : '',
+      sourcegraph_url: config.get('sourcegraphUrl') || '',
+      sourcegraph_token: config.get('sourcegraphToken') ? '***' : '',
       slack_token: config.get('slackToken') ? '***' : '',
       default_slack_channel: config.get('defaultSlackChannel') || '',
-      github_token: config.get('githubToken') ? '***' : '',
-      default_github_repo: config.get('defaultGithubRepo') || config.get('default_git_url') || '',
       linear_api_key: config.get('linearApiKey') ? '***' : '',
       default_linear_project: config.get('defaultProject') || ''
     };
@@ -111,11 +110,10 @@ app.post('/api/config', (req, res) => {
       zendesk_domain,
       zendesk_email,
       zendesk_token,
-      amp_api_key,
+      sourcegraph_url,
+      sourcegraph_token,
       slack_token,
       default_slack_channel,
-      github_token,
-      default_github_repo,
       linear_api_key,
       default_linear_project
     } = req.body;
@@ -124,14 +122,10 @@ app.post('/api/config', (req, res) => {
     if (zendesk_domain !== undefined) config.set('zendeskDomain', zendesk_domain);
     if (zendesk_email !== undefined) config.set('zendeskEmail', zendesk_email);
     if (zendesk_token && zendesk_token !== '***' && zendesk_token.trim() !== '') config.set('zendeskToken', zendesk_token);
-    if (amp_api_key && amp_api_key !== '***' && amp_api_key.trim() !== '') config.set('ampApiKey', amp_api_key);
+    if (sourcegraph_url !== undefined) config.set('sourcegraphUrl', sourcegraph_url);
+    if (sourcegraph_token && sourcegraph_token !== '***' && sourcegraph_token.trim() !== '') config.set('sourcegraphToken', sourcegraph_token);
     if (slack_token !== undefined && slack_token !== '***') config.set('slackToken', slack_token);
     if (default_slack_channel !== undefined) config.set('defaultSlackChannel', default_slack_channel);
-    if (github_token !== undefined && github_token !== '***') config.set('githubToken', github_token);
-    if (default_github_repo !== undefined) {
-      config.set('defaultGithubRepo', default_github_repo);
-      config.set('default_git_url', default_github_repo); // Keep legacy key in sync
-    }
     if (linear_api_key !== undefined && linear_api_key !== '***') config.set('linearApiKey', linear_api_key);
     if (default_linear_project !== undefined) config.set('defaultProject', default_linear_project);
 
@@ -247,98 +241,6 @@ app.post('/api/upload-codebase', (req, res) => {
   });
 });
 
-app.post('/api/fetch-github-repo', async (req, res) => {
-  try {
-    const { repoUrl } = req.body;
-    
-    if (!repoUrl) {
-      return res.status(400).json({ error: 'Repository URL is required' });
-    }
-
-    const githubToken = config.get('githubToken');
-    if (!githubToken) {
-      return res.status(400).json({ error: 'GitHub token not configured. Please add your GitHub Personal Access Token in Settings.' });
-    }
-
-    // Parse GitHub URL to extract owner and repo
-    const githubUrlPattern = /github\.com\/([^\/]+)\/([^\/]+)/;
-    const match = repoUrl.match(githubUrlPattern);
-    
-    if (!match) {
-      return res.status(400).json({ error: 'Invalid GitHub URL. Please use format: https://github.com/owner/repo' });
-    }
-
-    const [, owner, repoName] = match;
-    const cleanRepoName = repoName.replace(/\.git$/, ''); // Remove .git suffix if present
-
-    // Create directory for GitHub repos
-    const githubDir = path.join(__dirname, '../uploads/github');
-    if (!fs.existsSync(githubDir)) {
-      fs.mkdirSync(githubDir, { recursive: true });
-    }
-
-    const repoDir = path.join(githubDir, `${owner}-${cleanRepoName}-${Date.now()}`);
-
-    // Clone the repository with timeout
-    console.log(`🔄 Starting git clone: ${repoUrl} -> ${repoDir}`);
-    const cloneProcess = spawn('git', ['clone', repoUrl, repoDir]);
-    
-    // Add timeout for large repositories
-    const timeout = setTimeout(() => {
-      console.log(`⏰ GitHub clone timeout reached for ${repoUrl}`);
-      cloneProcess.kill();
-      res.status(408).json({ 
-        error: 'Repository cloning timed out after 2 minutes. Repository may be too large or slow to clone.' 
-      });
-    }, 120000); // 2 minutes timeout
-    
-    cloneProcess.on('close', (code) => {
-      clearTimeout(timeout);
-      if (code === 0) {
-        console.log(`✅ Git clone completed successfully for ${repoUrl}`);
-        // Check repository size
-        const repoSize = getDirectorySizeSync(repoDir);
-        console.log(`📏 Repository size: ${formatBytes(repoSize)}`);
-        const maxCodebaseSize = 500 * 1024 * 1024; // 500MB limit for analysis
-        
-        if (repoSize > maxCodebaseSize) {
-          console.log(`❌ Repository too large: ${formatBytes(repoSize)} > ${formatBytes(maxCodebaseSize)}`);
-          // Clean up the large repository
-          fs.rmSync(repoDir, { recursive: true, force: true });
-          return res.status(413).json({ 
-            error: `Repository is too large (${formatBytes(repoSize)}). Maximum size for analysis is ${formatBytes(maxCodebaseSize)}. Consider using a smaller repository or specific branch.` 
-          });
-        }
-        
-        // Set the latest codebase path for analysis
-        latestCodebasePath = repoDir;
-        console.log(`🎯 Set codebase path: ${repoDir}`);
-        res.json({ 
-          success: true, 
-          message: `GitHub repository cloned successfully (${formatBytes(repoSize)})`,
-          repoUrl: repoUrl,
-          localPath: repoDir,
-          size: formatBytes(repoSize)
-        });
-      } else {
-        console.log(`❌ Git clone failed with code ${code} for ${repoUrl}`);
-        res.status(500).json({ 
-          error: 'Failed to clone repository. Please check the URL and ensure the repository is accessible.' 
-        });
-      }
-    });
-
-    cloneProcess.on('error', (err) => {
-      clearTimeout(timeout);
-      res.status(500).json({ 
-        error: `Failed to clone repository: ${err.message}` 
-      });
-    });
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 app.post('/api/analyze-ticket', async (req, res) => {
   // Set content type to ensure JSON response
@@ -359,29 +261,15 @@ app.post('/api/analyze-ticket', async (req, res) => {
     const createLinear = hasProject;
     const postToSlackChannel = hasChannel;
 
-    // Validate codebase size before analysis
-    if (latestCodebasePath) {
-      const codebaseSize = getDirectorySizeSync(latestCodebasePath);
-      const maxCodebaseSize = 500 * 1024 * 1024; // 500MB limit
-      
-      if (codebaseSize > maxCodebaseSize) {
-        return res.status(413).json({ 
-          success: false,
-          error: `Codebase is too large for analysis (${formatBytes(codebaseSize)}). Maximum size is ${formatBytes(maxCodebaseSize)}. Please upload a smaller codebase.` 
-        });
-      }
-    }
-
-    // Call the existing transfer function with codebase path if available
-    console.log(`🤖 Calling transferTicket with codebase: ${latestCodebasePath ? 'YES' : 'NO'}`);
+    // Call the existing transfer function
+    console.log(`🤖 Calling transferTicket with Deep Search`);
     const result = await transferTicket(
       ticketId, 
       linearProject, 
       slackChannel, 
       createLinear, 
       postToSlackChannel, 
-      customPrompt,
-      latestCodebasePath
+      customPrompt
     );
     console.log(`✅ Analysis completed successfully`);
 
@@ -399,15 +287,6 @@ app.post('/api/analyze-ticket', async (req, res) => {
   }
 });
 
-// Store the latest uploaded codebase path
-let latestCodebasePath = null;
-
-// Track uploaded codebase
-app.post('/api/set-codebase', (req, res) => {
-  const { extractedPath } = req.body;
-  latestCodebasePath = extractedPath;
-  res.json({ success: true, message: 'Codebase path set successfully' });
-});
 
 // Health check
 app.get('/api/health', (req, res) => {

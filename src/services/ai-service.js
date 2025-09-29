@@ -1,11 +1,11 @@
 import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 
-export async function analyzeTicket(ticket, customPrompt = null, codebasePath = null) {
-    const { ampApiKey, ampEndpoint } = getConfig();
+export async function analyzeTicket(ticket, customPrompt = null) {
+    const { sourcegraphUrl, sourcegraphToken } = getConfig();
 
-    if (!ampApiKey) {
-        throw new Error('Amp API key is required. Please set it up with "lindesk setup"');
+    if (!sourcegraphUrl || !sourcegraphToken) {
+        throw new Error('Sourcegraph configuration is required. Please set SOURCEGRAPH_URL and SOURCEGRAPH_TOKEN in settings');
     }
 
     // Prepare the ticket data for analysis - include full conversation
@@ -17,191 +17,136 @@ export async function analyzeTicket(ticket, customPrompt = null, codebasePath = 
         organization: ticket.organization // Pass along the organization name
     };
 
-    return await analyzeWithAmp(ticketContent, ampApiKey, ampEndpoint, customPrompt, codebasePath);
+    return await analyzeWithDeepSearch(ticketContent, sourcegraphUrl, sourcegraphToken, customPrompt);
 }
 
-async function analyzeWithAmp(ticketContent, apiKey, endpoint, customPrompt = null, codebasePath = null) {
+async function analyzeWithDeepSearch(ticketContent, sourcegraphUrl, sourcegraphToken, customPrompt = null) {
     try {
-        // Use Amp CLI instead of HTTP API
-        const { spawn } = await import('child_process');
-        const { promisify } = await import('util');
-        
+        // Construct the question for Deep Search
         const defaultPrompt = `Please assist with the below issue from a customer. Analyze this complete Zendesk support ticket conversation and provide helpful, actionable guidance. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
 
-Feel free to structure your response in whatever format works best to clearly communicate your analysis and recommendations. Focus on being helpful and thorough.
+You have access to the Sourcegraph codebase (github.com/sourcegraph/sourcegraph) and can research the issue thoroughly. Feel free to explore the codebase, look at relevant files, and provide comprehensive analysis based on your findings.
 
-Return only a JSON object with these fields:
-
-{
-  "title": "Clear, descriptive title that captures the core issue",
-  "description": "Your analysis and recommendations - structure this however you think is most helpful",
-  "priority": "Low|Medium|High|Urgent",
-  "complexity": 1-5,
-  "components": ["RelevantArea1", "RelevantArea2"]
-}
+Please provide a natural, helpful response that:
+- Clearly explains the issue and its context
+- Provides actionable recommendations or solutions
+- References specific code or documentation when relevant
+- Suggests next steps for resolution
 
 Ticket #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}`;
 
         // Use custom prompt if provided, otherwise use default
-        const prompt = customPrompt ? 
+        const question = customPrompt ? 
             `${customPrompt}
 
-For the following Zendesk ticket, please return your analysis in this exact JSON format:
-
-{
-  "title": "Clear, concise title for the issue",
-  "description": "Your detailed analysis and response following the instructions above",
-  "priority": "Low|Medium|High|Urgent",
-  "complexity": 1-5,
-  "components": ["Component1", "Component2"]
-}
+For the following Zendesk ticket, please provide your analysis:
 
 Ticket #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}` : 
             defaultPrompt;
 
-        return new Promise((resolve, reject) => {
-            const spawnOptions = {
-                stdio: ['pipe', 'pipe', 'pipe'],
-                env: {
-                    ...process.env,
-                    AMP_API_KEY: apiKey
-                }
-            };
-
-            // If codebase path is provided, run Amp from that directory
-            if (codebasePath) {
-                spawnOptions.cwd = codebasePath;
-            }
-
-            const ampProcess = spawn('npx', ['@sourcegraph/amp'], spawnOptions);
-
-            let output = '';
-            let error = '';
-
-            // Set a longer timeout for thorough analysis
-            const timeout = setTimeout(() => {
-                ampProcess.kill();
-                reject(new Error('Amp analysis timed out after 5 minutes'));
-            }, 300000); // 5 minutes
-
-            ampProcess.stdout.on('data', (data) => {
-                output += data.toString();
-            });
-
-            ampProcess.stderr.on('data', (data) => {
-                error += data.toString();
-            });
-
-            ampProcess.on('close', (code) => {
-                clearTimeout(timeout);
-                if (code !== 0) {
-                    reject(new Error(`Amp process exited with code ${code}: ${error}`));
-                    return;
-                }
-
-                // Process Amp output
-                
-                try {
-                    // Look for JSON content in the output - try multiple approaches
-                    let jsonContent = null;
-                    
-                    // First, try to find JSON between curly braces
-                    const jsonMatch = output.match(/\{[\s\S]*?\}/);
-                    if (jsonMatch) {
-                        try {
-                            jsonContent = JSON.parse(jsonMatch[0]);
-                        } catch (e) {
-                            // Failed to parse JSON
-                        }
-                    }
-                    
-                    // If that didn't work, try to find JSON after any "Thinking" or analysis section
-                    if (!jsonContent) {
-                        const lines = output.split('\n');
-                        let jsonStart = -1;
-                        let jsonEnd = -1;
-                        
-                        for (let i = 0; i < lines.length; i++) {
-                            const line = lines[i].trim();
-                            if (line.startsWith('{') && jsonStart === -1) {
-                                jsonStart = i;
-                            }
-                            if (line.endsWith('}') && jsonStart !== -1) {
-                                jsonEnd = i;
-                                break;
-                            }
-                        }
-                        
-                        if (jsonStart !== -1 && jsonEnd !== -1) {
-                            const jsonLines = lines.slice(jsonStart, jsonEnd + 1);
-                            try {
-                                jsonContent = JSON.parse(jsonLines.join('\n'));
-                            } catch (e) {
-                                // Failed to parse JSON lines
-                            }
-                        }
-                    }
-                    
-                    if (jsonContent) {
-                        // Successfully parsed AI analysis
-                        resolve(formatAmpResponse(jsonContent, ticketContent));
-                    } else {
-                        // Fallback: format the raw output better for Slack
-                        const cleanOutput = formatRawOutput(output.trim());
-                        resolve({
-                            title: ticketContent.subject,
-                            description: cleanOutput,
-                            priority: 'Medium',
-                            estimatedComplexity: 3,
-                            components: ['General'],
-                            originalSubject: ticketContent.subject,
-                            ticket: ticketContent // Pass the original ticket data
-                        });
-                    }
-                } catch (error) {
-                    // Error processing output
-                    reject(new Error(`Failed to process Amp response: ${error.message}`));
-                }
-            });
-
-            ampProcess.on('error', (err) => {
-                reject(new Error(`Failed to start Amp process: ${err.message}`));
-            });
-
-            // Send the prompt to Amp
-            ampProcess.stdin.write(prompt);
-            ampProcess.stdin.end();
-        });
+        // Create Deep Search conversation
+        const conversation = await createDeepSearchConversation(sourcegraphUrl, sourcegraphToken, question);
+        
+        // Poll for completion
+        const result = await pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversation.id);
+        
+        // Process the Deep Search response
+        return formatDeepSearchResponse(result, ticketContent);
+        
     } catch (error) {
-        throw new Error(`Amp analysis failed: ${error.message}`);
+        throw new Error(`Deep Search analysis failed: ${error.message}`);
     }
 }
 
-// Helper function to format Amp response into the expected Linear ticket format
-function formatAmpResponse(response, ticketContent) {
-    // Validate response has required fields
-    if (!response) {
-        throw new Error('Amp returned an empty response.');
+async function createDeepSearchConversation(sourcegraphUrl, sourcegraphToken, question) {
+    const response = await fetch(`${sourcegraphUrl}/.api/deepsearch/v1`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `token ${sourcegraphToken}`,
+            'X-Requested-With': 'lindesk 1.0.0'
+        },
+        body: JSON.stringify({ question })
+    });
+
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Failed to create Deep Search conversation: ${response.status} ${error}`);
     }
 
+    return await response.json();
+}
+
+async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversationId, maxAttempts = 30, delayMs = 2000) {
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        const response = await fetch(`${sourcegraphUrl}/.api/deepsearch/v1/${conversationId}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `token ${sourcegraphToken}`,
+                'X-Requested-With': 'lindesk 1.0.0'
+            }
+        });
+
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(`Failed to poll Deep Search conversation: ${response.status} ${error}`);
+        }
+
+        const conversation = await response.json();
+        const question = conversation.questions[0];
+        
+        if (question.status === 'completed') {
+            return conversation;
+        } else if (question.status === 'failed') {
+            throw new Error('Deep Search analysis failed');
+        }
+        
+        // Wait before next poll
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+    }
+    
+    throw new Error('Deep Search analysis timed out');
+}
+
+// Helper function to format Deep Search response into the expected Linear ticket format
+function formatDeepSearchResponse(conversation, ticketContent) {
+    const question = conversation.questions[0];
+    
+    if (!question || !question.answer) {
+        throw new Error('Deep Search returned an empty response.');
+    }
+
+    // Format the Deep Search response naturally
+    const cleanOutput = formatRawOutput(question.answer.trim());
+    
+    // Extract a title from the response or use the ticket subject
+    let title = ticketContent.subject;
+    const titleMatch = question.answer.match(/^#\s*(.+)$/m);
+    if (titleMatch) {
+        title = titleMatch[1].trim();
+    }
+    
     return {
-        title: response.title || ticketContent.subject, // Use AI-generated title or fallback to original
-        description: response.description || 'No detailed analysis provided',
-        priority: response.priority || 'Medium',
-        estimatedComplexity: response.complexity || 3,
-        components: Array.isArray(response.components) ? response.components : ['General'],
+        title: title,
+        description: cleanOutput,
+        priority: 'Medium', // Default priority since we're not parsing structured data
+        estimatedComplexity: 3, // Default complexity
+        components: ['General'], // Default component
         originalSubject: ticketContent.subject,
-        ticket: ticketContent // Pass the original ticket data for use in other services
+        ticket: ticketContent, // Pass the original ticket data for use in other services
+        sources: question.sources || [],
+        suggestedFollowups: question.suggested_followups || []
     };
 }
 
-// Helper function to format raw output for better Slack presentation
+// Helper function to format raw output for better presentation
 function formatRawOutput(rawOutput) {
-    // Remove common Amp output artifacts and format for Slack
+    // Remove common artifacts and format for better presentation
     let formatted = rawOutput
         .replace(/^[#\*\-\=]{3,}.*$/gm, '') // Remove separator lines
         .replace(/^\s*Thinking[.]*\s*$/gm, '') // Remove "Thinking..." lines
@@ -216,29 +161,13 @@ function formatRawOutput(rawOutput) {
         const truncated = formatted.substring(0, 1800);
         const lastSentence = truncated.lastIndexOf('.');
         if (lastSentence > 1000) {
-            formatted = truncated.substring(0, lastSentence + 1) + '\n\n[Analysis truncated for Slack]';
+            formatted = truncated.substring(0, lastSentence + 1) + '\n\n[Analysis truncated for display]';
         } else {
-            formatted = truncated + '...\n\n[Analysis truncated for Slack]';
+            formatted = truncated + '...\n\n[Analysis truncated for display]';
         }
     }
 
     return formatted;
-}
-
-// Helper function to validate analysis data
-function isValidAnalysis(data) {
-    // Basic field validation
-    if (!data ||
-        !data.title ||
-        typeof data.title !== 'string' ||
-        data.title.length < 10 ||
-        !data.description ||
-        typeof data.description !== 'string' ||
-        data.description.length < 100) {
-        return false;
-    }
-
-    return true;
 }
 
 // Helper function to build full conversation from ticket and comments

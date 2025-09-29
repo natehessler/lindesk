@@ -325,11 +325,16 @@
                 </div>
 
                 <div class="form-section">
-                    <h2>Amp AI Configuration</h2>
+                    <h2>Sourcegraph Deep Search Configuration</h2>
                     <div class="form-group">
-                        <label for="amp_api_key">Amp API Key</label>
-                        <input type="password" id="amp_api_key" name="amp_api_key" placeholder="Enter your Amp API key">
-                        <div class="help-text">Required for AI-powered ticket analysis</div>
+                        <label for="sourcegraph_url">Sourcegraph URL</label>
+                        <input type="url" id="sourcegraph_url" name="sourcegraph_url" placeholder="https://your-sourcegraph-instance.com">
+                        <div class="help-text">Your Sourcegraph instance URL (required for Deep Search)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sourcegraph_token">Sourcegraph Access Token</label>
+                        <input type="password" id="sourcegraph_token" name="sourcegraph_token" placeholder="Enter your Sourcegraph access token">
+                        <div class="help-text">Required for AI-powered ticket analysis with Deep Search</div>
                     </div>
                 </div>
 
@@ -347,19 +352,6 @@
                     </div>
                 </div>
 
-                <div class="form-section">
-                    <h2>GitHub Integration (Optional)</h2>
-                    <div class="form-group">
-                        <label for="github_token">GitHub Personal Access Token</label>
-                        <input type="password" id="github_token" name="github_token" placeholder="Enter your GitHub PAT">
-                        <div class="help-text">Required for accessing GitHub repositories for codebase context</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="default_github_repo">Default GitHub Repository URL</label>
-                        <input type="url" id="default_github_repo" name="default_github_repo" placeholder="https://github.com/owner/repo">
-                        <div class="help-text">Default repository URL to pre-fill in the main form</div>
-                    </div>
-                </div>
 
                 <div class="form-section">
                     <h2>Linear Integration (Optional)</h2>

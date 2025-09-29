@@ -14,14 +14,9 @@ export async function exportEnv() {
   if (config.zendeskEmail) envContent += `ZENDESK_EMAIL=${config.zendeskEmail}\n`;
   if (config.zendeskToken) envContent += `ZENDESK_TOKEN=${config.zendeskToken}\n`;
   
-  // Add Amp config if available
-  if (config.ampApiKey) envContent += `AMP_API_KEY=${config.ampApiKey}\n`;
-  if (config.ampEndpoint && config.ampEndpoint !== 'https://ampcode.com/api/v1/chat/completions') {
-    envContent += `AMP_ENDPOINT=${config.ampEndpoint}\n`;
-  }
-  if (config.ampPath && config.ampPath !== 'amp') {
-    envContent += `AMP_PATH=${config.ampPath}\n`;
-  }
+  // Add Sourcegraph config if available
+  if (config.sourcegraphUrl) envContent += `SOURCEGRAPH_URL=${config.sourcegraphUrl}\n`;
+  if (config.sourcegraphToken) envContent += `SOURCEGRAPH_TOKEN=${config.sourcegraphToken}\n`;
   
   // Add Slack config if available
   if (config.slackToken) envContent += `SLACK_TOKEN=${config.slackToken}\n`;

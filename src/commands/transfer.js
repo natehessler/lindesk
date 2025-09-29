@@ -6,7 +6,7 @@ import { createLinearIssue } from '../services/linear-service.js';
 import { postToSlack } from '../services/slack-service.js';
 import chalk from 'chalk';
 
-export async function transferTicket(ticketId, projectKey, slackChannel, createLinear = true, postToSlackChannel = false, customPrompt = null, codebasePath = null) {
+export async function transferTicket(ticketId, projectKey, slackChannel, createLinear = true, postToSlackChannel = false, customPrompt = null) {
   const config = getConfig();
   
   // Validate configuration
@@ -22,8 +22,8 @@ export async function transferTicket(ticketId, projectKey, slackChannel, createL
     throw new Error('Slack token not configured. Run "lindesk setup" first.');
   }
   
-  if (!config.ampApiKey) {
-    throw new Error('Amp API key not configured. Run "lindesk setup" first.');
+  if (!config.sourcegraphUrl || !config.sourcegraphToken) {
+    throw new Error('Sourcegraph configuration not complete. Run "lindesk setup" first.');
   }
   
   // Use default project if not specified for Linear
@@ -63,13 +63,10 @@ export async function transferTicket(ticketId, projectKey, slackChannel, createL
     console.log(chalk.gray(`Organization: ${ticket.organization}`));
   }
   
-  // Step 2: Analyze ticket with Amp AI
-  console.log(chalk.gray('Analyzing ticket with Amp AI...'));
-  if (codebasePath) {
-    console.log(chalk.gray(`Using codebase context from: ${codebasePath}`));
-  }
-  const analysis = await analyzeTicket(ticket, customPrompt, codebasePath);
-  console.log(chalk.green('✓ Amp AI analysis complete'));
+  // Step 2: Analyze ticket with Deep Search
+  console.log(chalk.gray('Analyzing ticket with Deep Search...'));
+  const analysis = await analyzeTicket(ticket, customPrompt);
+  console.log(chalk.green('✓ Deep Search analysis complete'));
   
   let issue = null;
   

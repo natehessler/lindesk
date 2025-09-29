@@ -18,13 +18,14 @@ export async function setupConfig() {
   const zendeskEmail = await rl.question('Zendesk email: ');
   const zendeskToken = await rl.question('Zendesk API token: ');
   
-  // Amp AI Configuration (moved right after Zendesk)
-  console.log('\n' + chalk.yellow('Amp AI Configuration:'));
-  console.log(chalk.gray('Configure Amp AI for ticket analysis'));
+  // Sourcegraph Deep Search Configuration (moved right after Zendesk)
+  console.log('\n' + chalk.yellow('Sourcegraph Deep Search Configuration:'));
+  console.log(chalk.gray('Configure Sourcegraph Deep Search for ticket analysis'));
   
-  const ampApiKey = await rl.question('Amp API key: ');
+  const sourcegraphUrl = await rl.question('Sourcegraph URL (e.g., https://your-sourcegraph-instance.com): ');
+  const sourcegraphToken = await rl.question('Sourcegraph access token: ');
   
-  console.log(chalk.green('✓ Amp AI configured for ticket analysis'));
+  console.log(chalk.green('✓ Sourcegraph Deep Search configured for ticket analysis'));
   
   // Ask what services they want to use
   console.log('\n' + chalk.yellow('Integration Configuration:'));
@@ -60,7 +61,8 @@ export async function setupConfig() {
   config.set('zendeskDomain', zendeskDomain);
   config.set('zendeskEmail', zendeskEmail);
   config.set('zendeskToken', zendeskToken);
-  config.set('ampApiKey', ampApiKey);
+  config.set('sourcegraphUrl', sourcegraphUrl);
+  config.set('sourcegraphToken', sourcegraphToken);
   
   // Save Linear config if configured
   if (linearApiKey) {

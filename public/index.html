@@ -498,17 +498,13 @@
 
         <div class="status-display" id="statusDisplay">
             <h3 style="margin-bottom: 16px; color: var(--text-primary);">Analysis Progress</h3>
-            <div class="status-step pending" id="stepGithub">
-                <div class="icon">⏳</div>
-                <span>Fetching GitHub repository...</span>
-            </div>
             <div class="status-step pending" id="stepZendesk">
                 <div class="icon">⏳</div>
                 <span>Retrieving Zendesk ticket...</span>
             </div>
             <div class="status-step pending" id="stepAmp">
                 <div class="icon">⏳</div>
-                <span>Analyzing with Amp AI...</span>
+                <span>Analyzing with Deep Search...</span>
             </div>
             <div class="status-step pending" id="stepIntegrations">
                 <div class="icon">⏳</div>
@@ -535,15 +531,6 @@
                         </div>
                     </div>
 
-                    <div class="form-section">
-                        <h2>Codebase Context (Optional)</h2>
-                        
-                        <div class="form-group">
-                            <label for="githubRepoUrl">GitHub Repository URL</label>
-                            <input type="url" id="githubRepoUrl" name="githubRepoUrl" placeholder="https://github.com/owner/repo">
-                            <div class="help-text" id="githubRepoHelp">Enter a GitHub repository URL for contextual AI analysis (requires GitHub token in settings)</div>
-                        </div>
-                    </div>
 
                     <div class="form-section">
                         <h2>Integration Options</h2>
@@ -586,7 +573,6 @@
         const resultsContent = document.getElementById('resultsContent');
         const emptyState = document.getElementById('emptyState');
         const analyzeBtn = document.getElementById('analyzeBtn');
-        const githubRepoUrl = document.getElementById('githubRepoUrl');
 
         // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
@@ -659,50 +645,17 @@
         function hideStatusDisplay() {
             document.getElementById('statusDisplay').style.display = 'none';
             // Reset all steps to pending
-            ['stepGithub', 'stepZendesk', 'stepAmp', 'stepIntegrations'].forEach(stepId => {
+            ['stepZendesk', 'stepAmp', 'stepIntegrations'].forEach(stepId => {
                 updateStatus(stepId, 'pending');
                 const step = document.getElementById(stepId);
                 const text = step.querySelector('span');
                 // Reset to original text
-                if (stepId === 'stepGithub') text.textContent = 'Fetching GitHub repository...';
                 if (stepId === 'stepZendesk') text.textContent = 'Retrieving Zendesk ticket...';
-                if (stepId === 'stepAmp') text.textContent = 'Analyzing with Amp AI...';
+                if (stepId === 'stepAmp') text.textContent = 'Analyzing with Deep Search...';
                 if (stepId === 'stepIntegrations') text.textContent = 'Processing integrations...';
             });
         }
 
-        // Load default GitHub repo URL from settings
-        async function loadDefaults() {
-            try {
-                const response = await fetch('/api/config');
-                const config = await response.json();
-                
-                if (config.default_github_repo) {
-                    githubRepoUrl.value = config.default_github_repo;
-                    githubRepoUrl.classList.add('has-default');
-                    
-                    // Update help text to show it's using default
-                    const helpText = document.getElementById('githubRepoHelp');
-                    helpText.innerHTML = `<strong>Using default repository:</strong> ${config.default_github_repo} <br><small>Change this value or update the default in <a href="/settings" style="color: var(--primary-teal);">Settings</a></small>`;
-                    helpText.classList.add('default-loaded');
-                }
-            } catch (error) {
-                // Silently fail - defaults are optional
-            }
-        }
-
-        // Load defaults on page load
-        loadDefaults();
-
-        // Remove default styling when user modifies the GitHub repo field
-        githubRepoUrl.addEventListener('input', () => {
-            if (githubRepoUrl.classList.contains('has-default')) {
-                githubRepoUrl.classList.remove('has-default');
-                const helpText = document.getElementById('githubRepoHelp');
-                helpText.innerHTML = 'Enter a GitHub repository URL for contextual AI analysis (requires GitHub token in settings)';
-                helpText.classList.remove('default-loaded');
-            }
-        });
 
         // Form submission
         form.addEventListener('submit', async (e) => {
@@ -712,7 +665,6 @@
             const customPrompt = document.getElementById('customPrompt').value;
             const slackChannel = document.getElementById('slackChannel').value;
             const linearProject = document.getElementById('linearProject').value;
-            const githubRepo = document.getElementById('githubRepoUrl').value;
             
             if (!ticketId) {
                 showAlert('Please enter a ticket ID', 'error');
@@ -730,49 +682,7 @@
                 results.style.display = 'none';
                 emptyState.style.display = 'block';
 
-                // Step 1: Fetch GitHub repository if provided
-                let githubRepoFetched = false;
-                if (githubRepo) {
-                    updateStatus('stepGithub', 'running');
-                    try {
-                        // Add timeout to GitHub fetch
-                        const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 150000); // 2.5 minutes
-                        
-                        const githubResponse = await fetch('/api/fetch-github-repo', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ repoUrl: githubRepo }),
-                            signal: controller.signal
-                        });
-                        
-                        clearTimeout(timeoutId);
-                        
-                        if (githubResponse.ok) {
-                            const result = await githubResponse.json();
-                            githubRepoFetched = true;
-                            updateStatus('stepGithub', 'success', 'GitHub repository fetched successfully');
-                        } else {
-                            const error = await githubResponse.json();
-                            updateStatus('stepGithub', 'error', `GitHub fetch failed: ${error.error}`);
-                            showAlert('Warning: ' + error.error + ' - Analysis will continue without codebase context', 'error');
-                            // Don't stop the analysis, continue without codebase
-                        }
-                    } catch (githubError) {
-                        let errorMessage = githubError.message;
-                        if (githubError.name === 'AbortError') {
-                            errorMessage = 'GitHub repository clone timed out (too large or slow)';
-                        }
-                        updateStatus('stepGithub', 'error', `GitHub fetch failed: ${errorMessage}`);
-                        showAlert('Warning: GitHub fetch failed - ' + errorMessage + ' - Analysis will continue without codebase context', 'error');
-                    }
-                } else {
-                    updateStatus('stepGithub', 'skipped', 'No GitHub repository provided');
-                }
-
-                // Step 2: Analyze ticket
+                // Step 1: Analyze ticket
                 updateStatus('stepZendesk', 'running');
                 updateStatus('stepAmp', 'running');
                 updateStatus('stepIntegrations', 'running');
@@ -794,7 +704,7 @@
                 
                 if (analysisResult.success) {
                     updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
-                    updateStatus('stepAmp', 'success', 'Amp AI analysis completed');
+                    updateStatus('stepAmp', 'success', 'Deep Search analysis completed');
                     updateStatus('stepIntegrations', 'success', 'Integrations processed');
                     
                     // Extract and format the analysis results
@@ -840,13 +750,13 @@
                         updateStatus('stepZendesk', 'error', `Zendesk error: ${errorMsg}`);
                         updateStatus('stepAmp', 'error', 'Cancelled due to Zendesk failure');
                         updateStatus('stepIntegrations', 'error', 'Cancelled due to Zendesk failure');
-                    } else if (errorMsg.includes('Amp') || errorMsg.includes('AI')) {
+                    } else if (errorMsg.includes('Deep Search') || errorMsg.includes('Sourcegraph') || errorMsg.includes('AI')) {
                         updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
-                        updateStatus('stepAmp', 'error', `Amp AI error: ${errorMsg}`);
+                        updateStatus('stepAmp', 'error', `Deep Search error: ${errorMsg}`);
                         updateStatus('stepIntegrations', 'error', 'Cancelled due to AI failure');
                     } else {
                         updateStatus('stepZendesk', 'success', 'Zendesk ticket retrieved successfully');
-                        updateStatus('stepAmp', 'success', 'Amp AI analysis completed');
+                        updateStatus('stepAmp', 'success', 'Deep Search analysis completed');
                         updateStatus('stepIntegrations', 'error', `Integration error: ${errorMsg}`);
                     }
                     showAlert(errorMsg, 'error');

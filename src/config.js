@@ -29,18 +29,14 @@ export const config = new Conf({
       type: 'string',
       default: process.env.LINEAR_API_KEY || ''
     },
-    // Amp is the AI provider
-    ampApiKey: {
+    // Sourcegraph Deep Search is the AI provider
+    sourcegraphUrl: {
       type: 'string',
-      default: process.env.AMP_API_KEY || ''
+      default: process.env.SOURCEGRAPH_URL || ''
     },
-    ampEndpoint: {
+    sourcegraphToken: {
       type: 'string',
-      default: process.env.AMP_ENDPOINT || 'https://ampcode.com/api/v1/chat/completions'
-    },
-    ampPath: {
-      type: 'string',
-      default: process.env.AMP_PATH || 'amp'
+      default: process.env.SOURCEGRAPH_TOKEN || ''
     },
     defaultProject: {
       type: 'string',
@@ -54,18 +50,6 @@ export const config = new Conf({
       type: 'string',
       default: process.env.DEFAULT_SLACK_CHANNEL || ''
     },
-    githubToken: {
-      type: 'string',
-      default: process.env.GITHUB_TOKEN || ''
-    },
-    defaultGithubRepo: {
-      type: 'string',
-      default: process.env.DEFAULT_GITHUB_REPO || ''
-    },
-    default_git_url: {
-      type: 'string',
-      default: process.env.DEFAULT_GITHUB_REPO || ''
-    }
   }
 });
 
@@ -75,13 +59,10 @@ export function getConfig() {
     zendeskEmail: config.get('zendeskEmail'),
     zendeskToken: config.get('zendeskToken'),
     linearApiKey: config.get('linearApiKey'),
-    ampApiKey: config.get('ampApiKey'),
-    ampEndpoint: config.get('ampEndpoint'),
-    ampPath: config.get('ampPath'),
+    sourcegraphUrl: config.get('sourcegraphUrl'),
+    sourcegraphToken: config.get('sourcegraphToken'),
     defaultProject: config.get('defaultProject'),
     slackToken: config.get('slackToken'),
-    defaultSlackChannel: config.get('defaultSlackChannel'),
-    githubToken: config.get('githubToken'),
-    defaultGithubRepo: config.get('defaultGithubRepo')
+    defaultSlackChannel: config.get('defaultSlackChannel')
   };
 }
