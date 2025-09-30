@@ -82,8 +82,12 @@ async function createDeepSearchConversation(sourcegraphUrl, sourcegraphToken, qu
     return await response.json();
 }
 
-async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversationId, maxAttempts = 30, delayMs = 2000) {
+async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversationId, maxAttempts = 60, delayMs = 3000) {
+    console.log(`🔄 Polling Deep Search conversation ${conversationId} (max ${maxAttempts} attempts, ${delayMs}ms delay)`);
+    
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        console.log(`📡 Polling attempt ${attempt + 1}/${maxAttempts}`);
+        
         const response = await fetch(`${sourcegraphUrl}/.api/deepsearch/v1/${conversationId}`, {
             headers: {
                 'Accept': 'application/json',
@@ -94,22 +98,29 @@ async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conv
 
         if (!response.ok) {
             const error = await response.text();
+            console.error(`❌ Polling failed: ${response.status} ${error}`);
             throw new Error(`Failed to poll Deep Search conversation: ${response.status} ${error}`);
         }
 
         const conversation = await response.json();
         const question = conversation.questions[0];
         
+        console.log(`📊 Question status: ${question.status}`);
+        
         if (question.status === 'completed') {
+            console.log(`✅ Deep Search analysis completed successfully`);
             return conversation;
         } else if (question.status === 'failed') {
+            console.error(`❌ Deep Search analysis failed`);
             throw new Error('Deep Search analysis failed');
         }
         
+        console.log(`⏳ Still processing... waiting ${delayMs}ms before next poll`);
         // Wait before next poll
         await new Promise(resolve => setTimeout(resolve, delayMs));
     }
     
+    console.error(`⏰ Deep Search analysis timed out after ${maxAttempts} attempts`);
     throw new Error('Deep Search analysis timed out');
 }
 
@@ -146,27 +157,15 @@ function formatDeepSearchResponse(conversation, ticketContent) {
 
 // Helper function to format raw output for better presentation
 function formatRawOutput(rawOutput) {
-    // Remove common artifacts and format for better presentation
+    // Minimal cleaning - preserve the original formatting and structure
     let formatted = rawOutput
-        .replace(/^[#\*\-\=]{3,}.*$/gm, '') // Remove separator lines
         .replace(/^\s*Thinking[.]*\s*$/gm, '') // Remove "Thinking..." lines
         .replace(/^\s*Let me[^.]*\.\s*$/gm, '') // Remove "Let me..." lines
         .replace(/^\s*I'll[^.]*\.\s*$/gm, '') // Remove "I'll..." lines
-        .replace(/^\s*Based on[^,]*,\s*/gm, '') // Remove "Based on..." starts
-        .replace(/\n{3,}/g, '\n\n') // Limit consecutive newlines
+        .replace(/\n{4,}/g, '\n\n\n') // Limit excessive consecutive newlines but preserve structure
         .trim();
 
-    // If the output is too long, truncate it with a summary
-    if (formatted.length > 2000) {
-        const truncated = formatted.substring(0, 1800);
-        const lastSentence = truncated.lastIndexOf('.');
-        if (lastSentence > 1000) {
-            formatted = truncated.substring(0, lastSentence + 1) + '\n\n[Analysis truncated for display]';
-        } else {
-            formatted = truncated + '...\n\n[Analysis truncated for display]';
-        }
-    }
-
+    // No truncation - return the full response
     return formatted;
 }
 
