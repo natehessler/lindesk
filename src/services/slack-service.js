@@ -1,32 +1,20 @@
 import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 
-/**
- * Posts a help request to Slack with a summary and next steps
- * @param {Object} analysis - The AI-generated analysis of the thread
- * @param {string} threadId - The Plain thread ID
- * @param {string} teamChannel - The Slack channel ID to post to
- * @param {string} organizationName - The organization name
- * @returns {Promise<Object>} - The Slack message response
- */
-export async function postToSlack(analysis, threadId, teamChannel, organizationName) {
-  const { slackToken } = getConfig();
+export async function postToSlack(analysis, threadId, channelId, thread) {
+  const { slackToken, plainWorkspaceId } = getConfig();
   
   if (!slackToken) {
-    throw new Error('Slack token not configured. Run "lindesk setup" first.');
+    throw new Error('Slack token not configured. Set SLACK_TOKEN environment variable.');
+  }
+  
+  if (!plainWorkspaceId) {
+    throw new Error('Plain workspace ID not configured. Set PLAIN_WORKSPACE_ID environment variable.');
   }
 
-  if (!teamChannel) {
-    throw new Error('Slack channel not specified. Use --channel option.');
-  }
-
-  const ticket = analysis.ticket || {};
-  const customerName = organizationName || ticket.organization || 'Customer';
+  const customerName = thread.organization || thread.customer?.name || 'Unknown';
+  const blocks = buildSlackBlocks(analysis, threadId, customerName, thread, plainWorkspaceId);
   
-  // Create a focused help request, not just a dump of the analysis
-  const slackBlocks = buildSlackBlocks(analysis, threadId, customerName);
-  
-  console.log('Posting help request to Slack channel...');
   const response = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -34,9 +22,9 @@ export async function postToSlack(analysis, threadId, teamChannel, organizationN
       'Authorization': `Bearer ${slackToken}`
     },
     body: JSON.stringify({
-      channel: teamChannel,
-      blocks: slackBlocks,
-      text: `Help needed: ${analysis.title || analysis.originalSubject}` // Fallback text
+      channel: channelId,
+      blocks: blocks,
+      text: `Deep Search Analysis: ${analysis.originalSubject || thread.subject}`
     })
   });
 
@@ -49,99 +37,115 @@ export async function postToSlack(analysis, threadId, teamChannel, organizationN
   return data;
 }
 
-function buildSlackBlocks(analysis, threadId, customerName) {
+function buildSlackBlocks(analysis, threadId, customerName, thread, workspaceId) {
   const blocks = [];
+  const threadUrl = `https://app.plain.com/workspace/${workspaceId}/thread/${threadId}/`;
   
-  // Header - make it clear this is a help request
+  // Header
   blocks.push({
     type: "header",
     text: {
       type: "plain_text",
-      text: `🆘 Help Needed: ${truncate(analysis.title || analysis.originalSubject, 100)}`,
+      text: `🔍 Deep Search Analysis`,
       emoji: true
     }
   });
   
-  // Context about the customer and thread
+  // Thread info
   blocks.push({
-    type: "context",
-    elements: [
+    type: "section",
+    fields: [
       {
         type: "mrkdwn",
-        text: `*Customer:* ${customerName} | *Thread:* #${threadId}`
+        text: `*Customer:*\n${customerName}`
+      },
+      {
+        type: "mrkdwn",
+        text: `*Thread:*\n<${threadUrl}|View in Plain>`
       }
     ]
   });
   
-  blocks.push({ type: "divider" });
-  
-  // Issue Summary section
-  const summary = extractIssueSummary(analysis);
   blocks.push({
     type: "section",
     text: {
       type: "mrkdwn",
-      text: `*📋 Issue Summary*\n${summary}`
+      text: `*Subject:* ${analysis.originalSubject || thread.subject || 'N/A'}`
     }
   });
   
-  // What we've found from Deep Search
-  const findings = extractKeyFindings(analysis);
-  if (findings) {
+  blocks.push({ type: "divider" });
+  
+  // Deep Search Analysis - split into chunks if needed (Slack has 3000 char limit per block)
+  const analysisText = analysis.description || 'No analysis available.';
+  const chunks = splitIntoChunks(analysisText, 2900);
+  
+  blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `*📋 Analysis*`
+    }
+  });
+  
+  chunks.forEach(chunk => {
     blocks.push({
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `*🔍 What Deep Search Found*\n${findings}`
+        text: chunk
+      }
+    });
+  });
+  
+  // Code references
+  if (analysis.sources && analysis.sources.length > 0) {
+    blocks.push({ type: "divider" });
+    
+    let sourcesText = '*📁 Relevant Code References*\n';
+    const topSources = analysis.sources.slice(0, 5);
+    topSources.forEach(source => {
+      if (source.url) {
+        sourcesText += `• <${source.url}|${source.title || 'Source'}>\n`;
+      }
+    });
+    
+    blocks.push({
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: sourcesText
       }
     });
   }
   
-  // What help is needed
-  blocks.push({
-    type: "section",
-    text: {
-      type: "mrkdwn",
-      text: `*❓ Help Needed With*\n${extractHelpNeeded(analysis)}`
-    }
-  });
+  // Suggested follow-ups
+  if (analysis.suggestedFollowups && analysis.suggestedFollowups.length > 0) {
+    blocks.push({ type: "divider" });
+    
+    let followupsText = '*💡 Suggested Follow-up Questions*\n';
+    analysis.suggestedFollowups.slice(0, 3).forEach(followup => {
+      followupsText += `• ${followup}\n`;
+    });
+    
+    blocks.push({
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: followupsText
+      }
+    });
+  }
   
-  // Suggested next steps
-  const nextSteps = extractNextSteps(analysis);
-  blocks.push({
-    type: "section",
-    text: {
-      type: "mrkdwn",
-      text: `*📝 Suggested Next Steps*\n${nextSteps}`
-    }
-  });
-  
+  // Footer
   blocks.push({ type: "divider" });
   
-  // Action buttons
-  blocks.push({
-    type: "actions",
-    elements: [
-      {
-        type: "button",
-        text: {
-          type: "plain_text",
-          text: "View in Plain",
-          emoji: true
-        },
-        url: `https://app.plain.com/thread/${threadId}`,
-        style: "primary"
-      }
-    ]
-  });
-  
-  // Footer context
   blocks.push({
     type: "context",
     elements: [
       {
         type: "mrkdwn",
-        text: "_This request was generated by Lindesk AI analysis. Full analysis available in the thread._"
+        text: `_Generated by Lindesk using Sourcegraph Deep Search_`
       }
     ]
   });
@@ -149,115 +153,28 @@ function buildSlackBlocks(analysis, threadId, customerName) {
   return blocks;
 }
 
-function extractIssueSummary(analysis) {
-  const description = analysis.description || '';
+function splitIntoChunks(text, maxLength) {
+  const chunks = [];
+  let remaining = text;
   
-  // Try to get the first paragraph that describes the issue
-  const lines = description.split('\n').filter(l => l.trim());
-  
-  for (const line of lines) {
-    // Skip headers
-    if (line.startsWith('#')) continue;
-    // Skip very short lines
-    if (line.length < 30) continue;
+  while (remaining.length > 0) {
+    if (remaining.length <= maxLength) {
+      chunks.push(remaining);
+      break;
+    }
     
-    // Clean up the line
-    let summary = line
-      .replace(/^\*\*[^*]+\*\*\s*/, '') // Remove bold prefixes
-      .replace(/^[-•]\s*/, '') // Remove bullet points
-      .trim();
+    // Find a good break point (newline or space)
+    let breakPoint = remaining.lastIndexOf('\n', maxLength);
+    if (breakPoint < maxLength / 2) {
+      breakPoint = remaining.lastIndexOf(' ', maxLength);
+    }
+    if (breakPoint < maxLength / 2) {
+      breakPoint = maxLength;
+    }
     
-    if (summary.length > 30) {
-      return truncate(summary, 500);
-    }
+    chunks.push(remaining.substring(0, breakPoint));
+    remaining = remaining.substring(breakPoint).trim();
   }
   
-  // Fallback to original subject
-  return analysis.originalSubject || 'Customer reported an issue that needs investigation.';
-}
-
-function extractKeyFindings(analysis) {
-  const description = analysis.description || '';
-  
-  // Look for root cause or key findings sections
-  const patterns = [
-    /(?:root cause|the (?:main )?(?:issue|problem) is|key finding)[:\s]*([^\n]+(?:\n[-•][^\n]+)*)/i,
-    /(?:identified|found|discovered)[:\s]*([^\n]+)/i,
-  ];
-  
-  for (const pattern of patterns) {
-    const match = description.match(pattern);
-    if (match && match[1]) {
-      return truncate(match[1].trim(), 400);
-    }
-  }
-  
-  // Look for any bullet points near the start
-  const bullets = description.match(/^[-•]\s*.+$/gm);
-  if (bullets && bullets.length > 0) {
-    return bullets.slice(0, 3).map(b => b.trim()).join('\n');
-  }
-  
-  return null;
-}
-
-function extractHelpNeeded(analysis) {
-  // Based on the analysis, determine what help is needed
-  const description = analysis.description || '';
-  
-  // Check for explicit help needed sections
-  const helpMatch = description.match(/(?:help needed|need help|require assistance)[:\s]*([^\n]+)/i);
-  if (helpMatch) {
-    return truncate(helpMatch[1].trim(), 300);
-  }
-  
-  // Generate based on content
-  const helpItems = [];
-  
-  if (description.toLowerCase().includes('bug') || description.toLowerCase().includes('error')) {
-    helpItems.push('• Confirm if this is a known issue or new bug');
-  }
-  if (description.toLowerCase().includes('config') || description.toLowerCase().includes('setting')) {
-    helpItems.push('• Verify correct configuration approach');
-  }
-  if (description.toLowerCase().includes('performance') || description.toLowerCase().includes('slow')) {
-    helpItems.push('• Review performance implications');
-  }
-  
-  if (helpItems.length === 0) {
-    helpItems.push('• Review the analysis and provide guidance');
-    helpItems.push('• Suggest best approach for customer response');
-  }
-  
-  return helpItems.join('\n');
-}
-
-function extractNextSteps(analysis) {
-  const description = analysis.description || '';
-  
-  // Look for next steps or recommendations
-  const patterns = [
-    /(?:next steps|recommendations|to resolve)[:\s]*\n((?:[-•\d].*\n?)+)/i,
-    /(?:suggest|recommend)[:\s]*\n((?:[-•\d].*\n?)+)/i,
-  ];
-  
-  for (const pattern of patterns) {
-    const match = description.match(pattern);
-    if (match && match[1]) {
-      const steps = match[1].trim().split('\n').slice(0, 4);
-      return steps.map(s => s.trim()).join('\n');
-    }
-  }
-  
-  // Default next steps
-  return `• Review analysis findings
-• Investigate identified code areas
-• Draft customer response
-• Escalate if needed`;
-}
-
-function truncate(str, maxLength) {
-  if (!str) return '';
-  if (str.length <= maxLength) return str;
-  return str.substring(0, maxLength - 3) + '...';
+  return chunks;
 }

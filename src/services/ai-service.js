@@ -22,31 +22,13 @@ export async function analyzeTicket(ticket, customPrompt = null) {
 
 async function analyzeWithDeepSearch(ticketContent, sourcegraphUrl, sourcegraphToken, customPrompt = null) {
     try {
-        // Construct the question for Deep Search
-        const defaultPrompt = `Please assist with the below issue from a customer. Analyze this complete Plain support thread conversation and provide helpful, actionable guidance. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
-
-You have access to the Sourcegraph codebase (github.com/sourcegraph/sourcegraph) and can research the issue thoroughly. Feel free to explore the codebase, look at relevant files, and provide comprehensive analysis based on your findings.
-
-Please provide a natural, helpful response that:
-- Clearly explains the issue and its context
-- Provides actionable recommendations or solutions
-- References specific code or documentation when relevant
-- Suggests next steps for resolution
+        // Simple prompt - let Deep Search do the heavy lifting
+        const question = customPrompt || 
+            `Perform a root cause analysis for this customer support issue:
 
 Thread #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}`;
-
-        // Use custom prompt if provided, otherwise use default
-        const question = customPrompt ? 
-            `${customPrompt}
-
-For the following Plain thread, please provide your analysis:
-
-Thread #${ticketContent.id}: ${ticketContent.subject}
-
-${ticketContent.description}` : 
-            defaultPrompt;
 
         // Create Deep Search conversation
         const conversation = await createDeepSearchConversation(sourcegraphUrl, sourcegraphToken, question);

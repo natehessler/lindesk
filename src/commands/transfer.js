@@ -1,55 +1,25 @@
-import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 import { analyzeTicket } from '../services/ai-service.js';
 import { getPlainThread } from '../services/plain-service.js';
-import { createLinearIssue } from '../services/linear-service.js';
 import { postToSlack } from '../services/slack-service.js';
 import chalk from 'chalk';
 
-export async function transferTicket(threadId, projectKey, slackChannel, createLinear = true, postToSlackChannel = false, customPrompt = null) {
+export async function processThread(threadId, channelId, customPrompt = null) {
   const config = getConfig();
   
   if (!config.plainApiKey) {
-    throw new Error('Plain API key not configured. Run "lindesk setup" first.');
+    throw new Error('Plain API key not configured. Set PLAIN_API_KEY environment variable.');
   }
   
-  if (createLinear && !config.linearApiKey) {
-    throw new Error('Linear API key not configured. Run "lindesk setup" first.');
-  }
-  
-  if (postToSlackChannel && !config.slackToken) {
-    throw new Error('Slack token not configured. Run "lindesk setup" first.');
+  if (!config.slackToken) {
+    throw new Error('Slack token not configured. Set SLACK_TOKEN environment variable.');
   }
   
   if (!config.sourcegraphUrl || !config.sourcegraphToken) {
-    throw new Error('Sourcegraph configuration not complete. Run "lindesk setup" first.');
+    throw new Error('Sourcegraph configuration not complete. Set SOURCEGRAPH_URL and SOURCEGRAPH_TOKEN environment variables.');
   }
   
-  let project = null;
-  if (createLinear) {
-    project = projectKey || config.defaultProject;
-    if (!project) {
-      throw new Error('No Linear project specified. Use --project option or set a default project.');
-    }
-  }
-  
-  if (postToSlackChannel && !slackChannel) {
-    slackChannel = config.defaultSlackChannel;
-    if (!slackChannel) {
-      throw new Error('No Slack channel specified. Use --channel option or set a default channel.');
-    }
-  }
-  
-  let actionDescription = '';
-  if (createLinear && postToSlackChannel) {
-    actionDescription = `Processing Plain thread #${threadId} for Linear and Slack...`;
-  } else if (createLinear) {
-    actionDescription = `Transferring Plain thread #${threadId} to Linear...`;
-  } else if (postToSlackChannel) {
-    actionDescription = `Posting Plain thread #${threadId} summary to Slack...`;
-  }
-  
-  console.log(chalk.blue(actionDescription));
+  console.log(chalk.blue(`Processing Plain thread #${threadId}...`));
   
   console.log(chalk.gray('Fetching thread from Plain...'));
   const thread = await getPlainThread(threadId);
@@ -62,49 +32,18 @@ export async function transferTicket(threadId, projectKey, slackChannel, createL
   const analysis = await analyzeTicket(thread, customPrompt);
   console.log(chalk.green('✓ Deep Search analysis complete'));
   
-  let issue = null;
-  
-  if (createLinear) {
-    console.log(chalk.gray('Creating issue in Linear...'));
-    issue = await createLinearIssue(analysis, project, threadId);
-    console.log(chalk.green('✓ Linear issue created'));
-  }
-  
-  if (postToSlackChannel) {
-    console.log(chalk.gray(`Posting summary to Slack channel ${slackChannel}...`));
-    try {
-      await postToSlack(analysis, threadId, slackChannel, thread.organization);
-      console.log(chalk.green('✓ Posted to Slack successfully'));
-    } catch (error) {
-      console.warn(chalk.yellow(`Warning: Failed to post to Slack: ${error.message}`));
-    }
-  }
+  console.log(chalk.gray(`Posting to Slack channel ${channelId}...`));
+  const result = await postToSlack(analysis, threadId, channelId, thread);
+  console.log(chalk.green('✓ Posted to Slack'));
   
   console.log('');
-  if (createLinear && issue) {
-    console.log(chalk.green(`Successfully created Linear issue: ${issue.identifier} - ${issue.title}`));
-    console.log(chalk.blue(`Linear issue URL: ${issue.url}`));
-  }
-  if (postToSlackChannel) {
-    console.log(chalk.green(`Successfully posted summary to Slack channel ${slackChannel}`));
-  }
-  console.log(chalk.gray(`Referenced Plain thread #${threadId}`));
+  console.log(chalk.green(`Successfully posted analysis to Slack channel ${channelId}`));
+  console.log(chalk.gray(`Plain thread: #${threadId}`));
   
   return { 
     success: true,
     analysis,
-    issue, 
     threadId,
-    thread: {
-      id: thread.id,
-      subject: thread.subject,
-      organization: thread.organization
-    },
-    actions: {
-      createdLinear: createLinear,
-      postedToSlack: postToSlackChannel,
-      slackChannel,
-      linearProject: project
-    }
+    channelId
   };
 }
