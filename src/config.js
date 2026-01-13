@@ -13,17 +13,9 @@ try {
 export const config = new Conf({
   projectName: 'lindesk',
   schema: {
-    zendeskDomain: {
+    plainApiKey: {
       type: 'string',
-      default: process.env.ZENDESK_DOMAIN || ''
-    },
-    zendeskEmail: {
-      type: 'string',
-      default: process.env.ZENDESK_EMAIL || ''
-    },
-    zendeskToken: {
-      type: 'string',
-      default: process.env.ZENDESK_TOKEN || ''
+      default: process.env.PLAIN_API_KEY || ''
     },
     linearApiKey: {
       type: 'string',
@@ -55,9 +47,7 @@ export const config = new Conf({
 
 export function getConfig() {
   return {
-    zendeskDomain: config.get('zendeskDomain'),
-    zendeskEmail: config.get('zendeskEmail'),
-    zendeskToken: config.get('zendeskToken'),
+    plainApiKey: config.get('plainApiKey'),
     linearApiKey: config.get('linearApiKey'),
     sourcegraphUrl: config.get('sourcegraphUrl'),
     sourcegraphToken: config.get('sourcegraphToken'),

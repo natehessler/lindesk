@@ -2,13 +2,13 @@ export class StatusManager {
     constructor(statusDisplayElement) {
         this.statusDisplay = statusDisplayElement;
         this.steps = {
-            zendesk: document.getElementById('stepZendesk'),
+            plain: document.getElementById('stepPlain'),
             amp: document.getElementById('stepAmp'),
             integrations: document.getElementById('stepIntegrations')
         };
         
         this.originalTexts = {
-            zendesk: 'Retrieving Zendesk ticket...',
+            plain: 'Retrieving Plain thread...',
             amp: 'Analyzing with Deep Search...',
             integrations: 'Processing integrations...'
         };
@@ -62,35 +62,35 @@ export class StatusManager {
     }
     
     setRunning() {
-        this.updateStep('zendesk', 'running');
+        this.updateStep('plain', 'running');
         this.updateStep('amp', 'running');
         this.updateStep('integrations', 'running');
     }
     
     setSuccess() {
-        this.updateStep('zendesk', 'success', 'Zendesk ticket retrieved successfully');
+        this.updateStep('plain', 'success', 'Plain thread retrieved successfully');
         this.updateStep('amp', 'success', 'Deep Search analysis completed');
         this.updateStep('integrations', 'success', 'Integrations processed');
     }
     
     setError(errorMsg) {
-        if (errorMsg.includes('Zendesk') || errorMsg.includes('ticket')) {
-            this.updateStep('zendesk', 'error', `Zendesk error: ${errorMsg}`);
-            this.updateStep('amp', 'error', 'Cancelled due to Zendesk failure');
-            this.updateStep('integrations', 'error', 'Cancelled due to Zendesk failure');
+        if (errorMsg.includes('Plain') || errorMsg.includes('thread')) {
+            this.updateStep('plain', 'error', `Plain error: ${errorMsg}`);
+            this.updateStep('amp', 'error', 'Cancelled due to Plain failure');
+            this.updateStep('integrations', 'error', 'Cancelled due to Plain failure');
         } else if (errorMsg.includes('Deep Search') || errorMsg.includes('Sourcegraph') || errorMsg.includes('AI')) {
-            this.updateStep('zendesk', 'success', 'Zendesk ticket retrieved successfully');
+            this.updateStep('plain', 'success', 'Plain thread retrieved successfully');
             this.updateStep('amp', 'error', `Deep Search error: ${errorMsg}`);
             this.updateStep('integrations', 'error', 'Cancelled due to AI failure');
         } else {
-            this.updateStep('zendesk', 'success', 'Zendesk ticket retrieved successfully');
+            this.updateStep('plain', 'success', 'Plain thread retrieved successfully');
             this.updateStep('amp', 'success', 'Deep Search analysis completed');
             this.updateStep('integrations', 'error', `Integration error: ${errorMsg}`);
         }
     }
     
     setNetworkError() {
-        this.updateStep('zendesk', 'error', 'Network error occurred');
+        this.updateStep('plain', 'error', 'Network error occurred');
         this.updateStep('amp', 'error', 'Cancelled due to network error');
         this.updateStep('integrations', 'error', 'Cancelled due to network error');
     }

@@ -88,9 +88,7 @@ app.get('/settings', (req, res) => {
 app.get('/api/config', (req, res) => {
   try {
     const currentConfig = {
-      zendesk_domain: config.get('zendeskDomain') || '',
-      zendesk_email: config.get('zendeskEmail') || '',
-      zendesk_token: config.get('zendeskToken') ? '***' : '',
+      plain_api_key: config.get('plainApiKey') ? '***' : '',
       sourcegraph_url: config.get('sourcegraphUrl') || '',
       sourcegraph_token: config.get('sourcegraphToken') ? '***' : '',
       slack_token: config.get('slackToken') ? '***' : '',
@@ -107,9 +105,7 @@ app.get('/api/config', (req, res) => {
 app.post('/api/config', (req, res) => {
   try {
     const {
-      zendesk_domain,
-      zendesk_email,
-      zendesk_token,
+      plain_api_key,
       sourcegraph_url,
       sourcegraph_token,
       slack_token,
@@ -119,9 +115,7 @@ app.post('/api/config', (req, res) => {
     } = req.body;
 
     // Only update non-empty values (except allow clearing non-required fields)
-    if (zendesk_domain !== undefined) config.set('zendeskDomain', zendesk_domain);
-    if (zendesk_email !== undefined) config.set('zendeskEmail', zendesk_email);
-    if (zendesk_token && zendesk_token !== '***' && zendesk_token.trim() !== '') config.set('zendeskToken', zendesk_token);
+    if (plain_api_key && plain_api_key !== '***' && plain_api_key.trim() !== '') config.set('plainApiKey', plain_api_key);
     if (sourcegraph_url !== undefined) config.set('sourcegraphUrl', sourcegraph_url);
     if (sourcegraph_token && sourcegraph_token !== '***' && sourcegraph_token.trim() !== '') config.set('sourcegraphToken', sourcegraph_token);
     if (slack_token !== undefined && slack_token !== '***') config.set('slackToken', slack_token);
@@ -242,17 +236,19 @@ app.post('/api/upload-codebase', (req, res) => {
 });
 
 
-app.post('/api/analyze-ticket', async (req, res) => {
+// Analyze Plain thread (also supports legacy /api/analyze-ticket endpoint)
+async function handleAnalyzeThread(req, res) {
   // Set content type to ensure JSON response
   res.setHeader('Content-Type', 'application/json');
   
   try {
-    const { ticketId, customPrompt, slackChannel, linearProject } = req.body;
-    console.log(`🎫 Starting analysis for ticket #${ticketId}`);
-    console.log(`📋 Request details:`, { ticketId, customPrompt: !!customPrompt, slackChannel: !!slackChannel, linearProject: !!linearProject });
+    const { ticketId, threadId, customPrompt, slackChannel, linearProject } = req.body;
+    const id = threadId || ticketId; // Support both threadId (new) and ticketId (legacy)
+    console.log(`🧵 Starting analysis for Plain thread #${id}`);
+    console.log(`📋 Request details:`, { threadId: id, customPrompt: !!customPrompt, slackChannel: !!slackChannel, linearProject: !!linearProject });
 
-    if (!ticketId) {
-      return res.status(400).json({ error: 'Ticket ID is required' });
+    if (!id) {
+      return res.status(400).json({ error: 'Thread ID is required' });
     }
 
     // Determine what actions to take
@@ -264,7 +260,7 @@ app.post('/api/analyze-ticket', async (req, res) => {
     // Call the existing transfer function
     console.log(`🤖 Calling transferTicket with Deep Search`);
     const result = await transferTicket(
-      ticketId, 
+      id, 
       linearProject, 
       slackChannel, 
       createLinear, 
@@ -275,7 +271,7 @@ app.post('/api/analyze-ticket', async (req, res) => {
 
     res.json({ 
       success: true, 
-      message: 'Ticket analyzed successfully',
+      message: 'Thread analyzed successfully',
       result: result
     });
   } catch (error) {
@@ -285,8 +281,11 @@ app.post('/api/analyze-ticket', async (req, res) => {
       error: error.message || 'An unexpected error occurred during analysis'
     });
   }
-});
+}
 
+// Register both endpoints for backward compatibility
+app.post('/api/analyze-thread', handleAnalyzeThread);
+app.post('/api/analyze-ticket', handleAnalyzeThread);
 
 // Health check
 app.get('/api/health', (req, res) => {

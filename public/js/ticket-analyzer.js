@@ -25,8 +25,8 @@ export class TicketAnalyzer {
         
         const formData = this.getFormData();
         
-        if (!formData.ticketId) {
-            this.alertManager.error('Please enter a ticket ID');
+        if (!formData.threadId) {
+            this.alertManager.error('Please enter a thread ID');
             return;
         }
 
@@ -36,7 +36,7 @@ export class TicketAnalyzer {
             this.statusManager.setRunning();
             this.hideResults();
             
-            const result = await this.analyzeTicket(formData);
+            const result = await this.analyzeThread(formData);
             
             if (result.success) {
                 this.handleSuccess(result);
@@ -52,15 +52,15 @@ export class TicketAnalyzer {
     
     getFormData() {
         return {
-            ticketId: document.getElementById('ticketId').value,
+            threadId: document.getElementById('threadId').value,
             customPrompt: document.getElementById('customPrompt').value || undefined,
             slackChannel: document.getElementById('slackChannel').value || undefined,
             linearProject: document.getElementById('linearProject').value || undefined
         };
     }
     
-    async analyzeTicket(data) {
-        const response = await fetch('/api/analyze-ticket', {
+    async analyzeThread(data) {
+        const response = await fetch('/api/analyze-thread', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -90,11 +90,11 @@ export class TicketAnalyzer {
         this.resultsContent.innerHTML = htmlContent;
         this.showResults();
         this.statusManager.hide();
-        this.alertManager.success('Ticket analysis completed successfully!');
+        this.alertManager.success('Thread analysis completed successfully!');
     }
     
     handleError(errorMsg) {
-        const message = errorMsg || 'Failed to analyze ticket';
+        const message = errorMsg || 'Failed to analyze thread';
         this.statusManager.setError(message);
         this.alertManager.error(message);
     }
@@ -107,7 +107,7 @@ export class TicketAnalyzer {
     setLoadingState(loading) {
         this.analyzeBtn.classList.toggle('loading', loading);
         this.analyzeBtn.disabled = loading;
-        this.analyzeBtn.textContent = loading ? '' : 'Analyze Ticket';
+        this.analyzeBtn.textContent = loading ? '' : 'Analyze Thread';
     }
     
     showResults() {

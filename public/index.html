@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lindesk - AI-Powered Ticket Analysis</title>
+    <title>Lindesk - AI-Powered Thread Analysis</title>
     <link rel="icon" type="image/png" href="/lindesk.png">
     <link rel="alternate icon" href="/lindesk.png">
     <link rel="stylesheet" href="/styles.css">
@@ -16,7 +16,7 @@
                     <img src="/lindesk.png" alt="Lindesk Logo" class="logo">
                     Lindesk
                 </h1>
-                <p>AI-powered Zendesk ticket analysis with Linear integration and Slack notifications</p>
+                <p>AI-powered Plain thread analysis with Linear integration and Slack notifications</p>
             </div>
         </div>
 
@@ -43,9 +43,9 @@
 
         <div class="status-display" id="statusDisplay">
             <h3 style="margin-bottom: 16px; color: var(--text-primary);">Analysis Progress</h3>
-            <div class="status-step pending" id="stepZendesk">
+            <div class="status-step pending" id="stepPlain">
                 <div class="icon">⏳</div>
-                <span>Retrieving Zendesk ticket...</span>
+                <span>Retrieving Plain thread...</span>
             </div>
             <div class="status-step pending" id="stepAmp">
                 <div class="icon">⏳</div>
@@ -61,12 +61,12 @@
             <div class="form-container">
                 <form id="analysisForm">
                     <div class="form-section">
-                        <h2>Ticket Analysis</h2>
+                        <h2>Thread Analysis</h2>
                         
                         <div class="form-group">
-                            <label for="ticketId">Zendesk Ticket ID *</label>
-                            <input type="number" id="ticketId" name="ticketId" required placeholder="12345">
-                            <div class="help-text">Enter the Zendesk ticket number you want to analyze</div>
+                            <label for="threadId">Plain Thread ID *</label>
+                            <input type="text" id="threadId" name="threadId" required placeholder="th_01ABC123XYZ">
+                            <div class="help-text">Enter the Plain thread ID you want to analyze</div>
                         </div>
 
                         <div class="form-group">
@@ -93,7 +93,7 @@
                     </div>
 
                     <button type="submit" class="btn" id="analyzeBtn">
-                        Analyze Ticket
+                        Analyze Thread
                     </button>
                 </form>
             </div>
@@ -104,7 +104,7 @@
                     <div class="results-content" id="resultsContent"></div>
                 </div>
                 <div class="empty-state" id="emptyState">
-                    <p>Analysis results will appear here after you submit a ticket for analysis.</p>
+                    <p>Analysis results will appear here after you submit a thread for analysis.</p>
                 </div>
             </div>
         </div>

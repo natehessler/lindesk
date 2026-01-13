@@ -1,25 +1,27 @@
 # Lindesk Development Guide
 
 ## Project Overview
-Lindesk is an AI-powered Zendesk ticket analysis tool with GitHub integration, Linear issue creation, and Slack notifications. It features a modern web interface with dark mode and comprehensive settings management.
+Lindesk is an AI-powered Plain thread analysis tool with GitHub integration, Linear issue creation, and Slack notifications. It features a modern web interface with dark mode and comprehensive settings management.
 
 ## Architecture
 - **Frontend**: Vanilla HTML/CSS/JavaScript with Inter font and dark mode support
 - **Backend**: Express.js server with file upload handling and GitHub integration
 - **Config**: Uses `conf` library for persistent settings storage
-- **AI**: Integrates with Amp AI for flexible ticket analysis
+- **AI**: Integrates with Sourcegraph Deep Search for flexible thread analysis
+- **Plain**: Uses Plain's GraphQL API for thread/customer data
 
 ## Key Components
 
 ### Frontend Pages
-- `public/index.html` - Main ticket analysis interface
+- `public/index.html` - Main thread analysis interface
 - `public/settings.html` - Configuration management interface
 
 ### Backend Services
 - `src/server.js` - Express server with API endpoints
 - `src/config.js` - Configuration schema and management
-- `src/services/ai-service.js` - Amp AI integration
-- `src/commands/transfer.js` - Core ticket processing logic
+- `src/services/plain-service.js` - Plain GraphQL API integration
+- `src/services/ai-service.js` - Sourcegraph Deep Search integration
+- `src/commands/transfer.js` - Core thread processing logic
 
 ## Development Commands
 
@@ -44,20 +46,31 @@ node -e "import('./src/config.js').then(m => console.log(m.getConfig()))"
 
 ### Environment Variables
 ```bash
-ZENDESK_DOMAIN=your-company.zendesk.com
-ZENDESK_EMAIL=your-email@example.com
-ZENDESK_TOKEN=your-zendesk-token
-AMP_API_KEY=your-amp-api-key
-GITHUB_TOKEN=your-github-pat  # Optional
-DEFAULT_GITHUB_REPO=https://github.com/owner/repo  # Optional
-SLACK_TOKEN=your-slack-bot-token  # Optional
-DEFAULT_SLACK_CHANNEL=C0123ABC456  # Optional
-LINEAR_API_KEY=your-linear-api-key  # Optional
-DEFAULT_LINEAR_PROJECT=TEAM  # Optional
+PLAIN_API_KEY=your-plain-api-key          # Required - Plain API key
+SOURCEGRAPH_URL=https://sourcegraph.com   # Required - Sourcegraph instance URL
+SOURCEGRAPH_TOKEN=your-sourcegraph-token  # Required - Sourcegraph access token
+SLACK_TOKEN=your-slack-bot-token          # Optional
+DEFAULT_SLACK_CHANNEL=C0123ABC456         # Optional
+LINEAR_API_KEY=your-linear-api-key        # Optional
+DEFAULT_LINEAR_PROJECT=TEAM               # Optional
 ```
 
 ### Web Configuration
 Access settings at `http://localhost:3000/settings` for a user-friendly configuration interface.
+
+## Plain API Integration
+
+Plain uses a GraphQL API:
+- **API URL**: `https://core-api.uk.plain.com/graphql/v1`
+- **Auth**: Bearer token in Authorization header
+- **Threads**: Equivalent to tickets/conversations
+- **Timeline Entries**: Messages, emails, and events within a thread
+
+### Getting a Plain API Key
+1. Go to Plain Settings → Machine Users
+2. Create a new Machine User
+3. Add an API Key with `thread:read` and `customer:read` permissions
+4. Copy the key and add it to your configuration
 
 ## Code Style
 
@@ -81,11 +94,11 @@ Access settings at `http://localhost:3000/settings` for a user-friendly configur
 
 ## Features
 
-### GitHub Integration
-- Replaces file upload with GitHub repository URL input
-- Clones repositories for codebase context
-- Validates repository size (500MB limit)
-- Supports both public and private repositories (with token)
+### Plain Integration
+- Fetches threads via GraphQL API
+- Retrieves customer and company information
+- Gets timeline entries (emails, chats, custom events)
+- Normalizes data for consistent analysis
 
 ### Theme System
 - Manual dark/light mode toggle
@@ -105,11 +118,9 @@ Access settings at `http://localhost:3000/settings` for a user-friendly configur
 - `GET /api/config` - Retrieve current configuration
 - `POST /api/config` - Save configuration
 
-### GitHub Integration  
-- `POST /api/fetch-github-repo` - Clone and validate GitHub repository
-
-### Ticket Analysis
-- `POST /api/analyze-ticket` - Analyze Zendesk ticket with optional codebase context
+### Thread Analysis
+- `POST /api/analyze-thread` - Analyze Plain thread with optional integrations
+- `POST /api/analyze-ticket` - Legacy endpoint (backward compatible)
 
 ## Troubleshooting
 
@@ -121,6 +132,11 @@ Access settings at `http://localhost:3000/settings` for a user-friendly configur
 ### Configuration Issues
 - Test config API: `curl -s localhost:3000/api/config`
 - Check config storage: `node -e "import('./src/config.js').then(m => console.log(m.config.store))"`
+
+### Plain API Issues
+- Verify API key has correct permissions (thread:read, customer:read)
+- Check thread ID format (e.g., `th_01ABC123XYZ`)
+- Test with Plain's API Explorer: https://app.plain.com/developer/api-explorer/
 
 ### Frontend Issues
 - Hard refresh browser (Cmd+Shift+R) to clear cached JavaScript

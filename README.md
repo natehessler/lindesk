@@ -1,10 +1,10 @@
 # Lindesk
 
-AI-powered Zendesk ticket analysis that automatically creates Linear issues and posts summaries to Slack. Uses Sourcegraph Deep Search to intelligently interpret ticket context and generate actionable insights.
+AI-powered Plain ticket analysis that automatically creates Linear issues and posts summaries to Slack. Uses Sourcegraph Deep Search to intelligently interpret ticket context and generate actionable insights.
 
 ## Features
 
-- 🎫 Analyzes Zendesk tickets with full conversation history
+- 🎫 Analyzes Plain tickets with full conversation history
 - 🤖 AI-powered analysis with flexible, natural responses  
 - 📋 Automatically creates Linear issues
 - 💬 Posts formatted summaries to Slack
@@ -15,7 +15,7 @@ AI-powered Zendesk ticket analysis that automatically creates Linear issues and 
 ## Prerequisites
 
 - Node.js 16+
-- API access: Zendesk, Sourcegraph, Slack (optional), Linear (optional)
+- API access: Plain, Sourcegraph, Slack (optional), Linear (optional)
 
 ## Quick Start
 
@@ -28,9 +28,7 @@ lindesk setup
 ```
 
 ```
-ZENDESK_DOMAIN=your-company.zendesk.com
-ZENDESK_EMAIL=your-email@example.com
-ZENDESK_TOKEN=your-zendesk-token
+PLAIN_API_KEY=your-plain-api-key
 SOURCEGRAPH_URL=https://your-sourcegraph-instance.com
 SOURCEGRAPH_TOKEN=your-sourcegraph-access-token
 SLACK_TOKEN=xoxb-your-slack-bot-token  # Optional
@@ -72,7 +70,7 @@ lindesk ticket 12345 "analyze root cause" --channel C0123ABC456
 
 ## How It Works
 
-1. Fetches ticket details and conversation history from Zendesk
+1. Fetches ticket details and conversation history from Plain
 2. Analyzes content using Sourcegraph Deep Search for comprehensive insights  
 3. Generates structured analysis with root causes and solutions
 4. Creates Linear issue and/or posts to Slack with formatted summary
@@ -80,7 +78,7 @@ lindesk ticket 12345 "analyze root cause" --channel C0123ABC456
 ## Configuration
 
 Configure via web interface at `http://localhost:3000/settings` or run `lindesk setup`:
-- **Zendesk**: Domain, email, API token  
+- **Plain**: API key  
 - **Sourcegraph**: Instance URL and access token for Deep Search analysis
 - **Slack**: Bot token (optional)
 - **Linear**: API key (optional)

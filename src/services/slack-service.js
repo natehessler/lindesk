@@ -2,18 +2,15 @@ import fetch from 'node-fetch';
 import { getConfig } from '../config.js';
 
 /**
- * Posts a summary of a Zendesk ticket to a Slack channel
- * @param {Object} analysis - The AI-generated analysis of the ticket
- * @param {string} ticketId - The Zendesk ticket ID
+ * Posts a help request to Slack with a summary and next steps
+ * @param {Object} analysis - The AI-generated analysis of the thread
+ * @param {string} threadId - The Plain thread ID
  * @param {string} teamChannel - The Slack channel ID to post to
- * @param {string} organizationName - The organization name from Zendesk
+ * @param {string} organizationName - The organization name
  * @returns {Promise<Object>} - The Slack message response
  */
-export async function postToSlack(analysis, ticketId, teamChannel, organizationName) {
-  // Get access to the ticket for organization information
-  const ticket = analysis.ticket;
-  // Access the ticket info for organization data
-  const { slackToken, zendeskDomain } = getConfig();
+export async function postToSlack(analysis, threadId, teamChannel, organizationName) {
+  const { slackToken } = getConfig();
   
   if (!slackToken) {
     throw new Error('Slack token not configured. Run "lindesk setup" first.');
@@ -23,102 +20,13 @@ export async function postToSlack(analysis, ticketId, teamChannel, organizationN
     throw new Error('Slack channel not specified. Use --channel option.');
   }
 
-  // Use the AI-generated title if available, otherwise fall back to generic title
-  const customerName = organizationName || ((ticket && ticket.organization) ? ticket.organization : 'Customer');
-  console.log('Using customer name for Slack message:', customerName);
+  const ticket = analysis.ticket || {};
+  const customerName = organizationName || ticket.organization || 'Customer';
   
-  // Use the AI-generated title, or fall back to generic title with customer name
-  let slackTitle = analysis.title || `Need help with below support issue for ${customerName}`;
+  // Create a focused help request, not just a dump of the analysis
+  const slackBlocks = buildSlackBlocks(analysis, threadId, customerName);
   
-  // Truncate title if it's too long for Slack header (max 150 characters)
-  if (slackTitle.length > 150) {
-    slackTitle = slackTitle.substring(0, 147) + '...';
-  }
-  
-  console.log('Using title for Slack message:', slackTitle);
-  
-  let slackBlocks = [
-    {
-      "type": "header",
-      "text": {
-        "type": "plain_text",
-        "text": slackTitle
-      }
-    },
-    {
-      "type": "divider"
-    },
-    {
-      "type": "actions",
-      "elements": [
-        {
-          "type": "button",
-          "text": {
-            "type": "plain_text",
-            "text": "View Zendesk Ticket"
-          },
-          "url": `https://${zendeskDomain}/agent/tickets/${ticketId}`
-        }
-      ]
-    }
-  ];
-
-  // Add the full analysis description as a series of message blocks
-  // Break the content into smaller chunks to fit Slack message limits
-  const fullDescription = analysis.description;
-  // Format the description for Slack
-
-  // Process the description to properly format Markdown for Slack
-  // Slack requires different markdown formatting
-  
-  // Remove any legacy sections if present
-  let descriptionWithoutRecommendations = fullDescription;
-  const recommendationsRegex = /## Engineering Recommendations[\s\S]*?(?=## |$)/;
-  descriptionWithoutRecommendations = descriptionWithoutRecommendations.replace(recommendationsRegex, '');
-  
-  // Format for Slack
-  let processedDescription = descriptionWithoutRecommendations
-    .replace(/## ([^\n]+)/g, '*$1*') // Make headers bold
-    .replace(/\*\*/g, '*')         // Replace ** with * for bold
-    .replace(/\*\*/g, '*')         // Do it again to catch any remaining
-    .replace(/\n\n/g, '\n')       // Reduce excessive newlines
-    .trim();                     // Remove trailing whitespace
-  
-  // Split the description into chunks of approximately 3000 characters
-  // This ensures we stay under Slack's message size limits
-  const MAX_CHUNK_SIZE = 2800;
-  let startIndex = 0;
-  
-  while (startIndex < processedDescription.length) {
-    // Get the next chunk of text
-    const endIndex = Math.min(startIndex + MAX_CHUNK_SIZE, processedDescription.length);
-    let chunk = processedDescription.substring(startIndex, endIndex);
-    
-    // If we're in the middle of a line, try to end at a newline
-    if (endIndex < processedDescription.length) {
-      const lastNewline = chunk.lastIndexOf('\n');
-      if (lastNewline > 0 && lastNewline > MAX_CHUNK_SIZE - 500) {
-        chunk = chunk.substring(0, lastNewline);
-        startIndex += lastNewline + 1;
-      } else {
-        startIndex = endIndex;
-      }
-    } else {
-      startIndex = endIndex;
-    }
-    
-    // Add this chunk as a section
-    slackBlocks.push({
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": chunk
-      }
-    });
-  }
-  
-  // Post message to Slack
-  console.log('Posting to Slack channel...');
+  console.log('Posting help request to Slack channel...');
   const response = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -127,13 +35,12 @@ export async function postToSlack(analysis, ticketId, teamChannel, organizationN
     },
     body: JSON.stringify({
       channel: teamChannel,
-      blocks: slackBlocks
+      blocks: slackBlocks,
+      text: `Help needed: ${analysis.title || analysis.originalSubject}` // Fallback text
     })
   });
 
   const data = await response.json();
-  
-  // Process API response
 
   if (!data.ok) {
     throw new Error(`Slack API error: ${data.error || JSON.stringify(data)}`);
@@ -142,24 +49,215 @@ export async function postToSlack(analysis, ticketId, teamChannel, organizationN
   return data;
 }
 
-/**
- * Extracts a section from the analysis description
- * @param {string} description - The full ticket description
- * @param {string} sectionName - The name of the section to extract
- * @returns {string} - The extracted section text
- */
-function extractSection(description, sectionName) {
-  if (!description) return "No information available";
+function buildSlackBlocks(analysis, threadId, customerName) {
+  const blocks = [];
   
-  // Extract section with flexible pattern matching
+  // Header - make it clear this is a help request
+  blocks.push({
+    type: "header",
+    text: {
+      type: "plain_text",
+      text: `🆘 Help Needed: ${truncate(analysis.title || analysis.originalSubject, 100)}`,
+      emoji: true
+    }
+  });
   
-  // More flexible regex that matches section headings with or without ## and variable whitespace
-  const sectionRegex = new RegExp(`(?:##\s*|\n)${sectionName}[:\s]*\n([\s\S]*?)(?=\n(?:##\s*|\n)[A-Za-z]|$)`, 'i');
-  const match = description.match(sectionRegex);
+  // Context about the customer and thread
+  blocks.push({
+    type: "context",
+    elements: [
+      {
+        type: "mrkdwn",
+        text: `*Customer:* ${customerName} | *Thread:* #${threadId}`
+      }
+    ]
+  });
   
-  if (match) {
-    return match[1].trim();
-  } else {
-    return "No information available";
+  blocks.push({ type: "divider" });
+  
+  // Issue Summary section
+  const summary = extractIssueSummary(analysis);
+  blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `*📋 Issue Summary*\n${summary}`
+    }
+  });
+  
+  // What we've found from Deep Search
+  const findings = extractKeyFindings(analysis);
+  if (findings) {
+    blocks.push({
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*🔍 What Deep Search Found*\n${findings}`
+      }
+    });
   }
+  
+  // What help is needed
+  blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `*❓ Help Needed With*\n${extractHelpNeeded(analysis)}`
+    }
+  });
+  
+  // Suggested next steps
+  const nextSteps = extractNextSteps(analysis);
+  blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `*📝 Suggested Next Steps*\n${nextSteps}`
+    }
+  });
+  
+  blocks.push({ type: "divider" });
+  
+  // Action buttons
+  blocks.push({
+    type: "actions",
+    elements: [
+      {
+        type: "button",
+        text: {
+          type: "plain_text",
+          text: "View in Plain",
+          emoji: true
+        },
+        url: `https://app.plain.com/thread/${threadId}`,
+        style: "primary"
+      }
+    ]
+  });
+  
+  // Footer context
+  blocks.push({
+    type: "context",
+    elements: [
+      {
+        type: "mrkdwn",
+        text: "_This request was generated by Lindesk AI analysis. Full analysis available in the thread._"
+      }
+    ]
+  });
+  
+  return blocks;
+}
+
+function extractIssueSummary(analysis) {
+  const description = analysis.description || '';
+  
+  // Try to get the first paragraph that describes the issue
+  const lines = description.split('\n').filter(l => l.trim());
+  
+  for (const line of lines) {
+    // Skip headers
+    if (line.startsWith('#')) continue;
+    // Skip very short lines
+    if (line.length < 30) continue;
+    
+    // Clean up the line
+    let summary = line
+      .replace(/^\*\*[^*]+\*\*\s*/, '') // Remove bold prefixes
+      .replace(/^[-•]\s*/, '') // Remove bullet points
+      .trim();
+    
+    if (summary.length > 30) {
+      return truncate(summary, 500);
+    }
+  }
+  
+  // Fallback to original subject
+  return analysis.originalSubject || 'Customer reported an issue that needs investigation.';
+}
+
+function extractKeyFindings(analysis) {
+  const description = analysis.description || '';
+  
+  // Look for root cause or key findings sections
+  const patterns = [
+    /(?:root cause|the (?:main )?(?:issue|problem) is|key finding)[:\s]*([^\n]+(?:\n[-•][^\n]+)*)/i,
+    /(?:identified|found|discovered)[:\s]*([^\n]+)/i,
+  ];
+  
+  for (const pattern of patterns) {
+    const match = description.match(pattern);
+    if (match && match[1]) {
+      return truncate(match[1].trim(), 400);
+    }
+  }
+  
+  // Look for any bullet points near the start
+  const bullets = description.match(/^[-•]\s*.+$/gm);
+  if (bullets && bullets.length > 0) {
+    return bullets.slice(0, 3).map(b => b.trim()).join('\n');
+  }
+  
+  return null;
+}
+
+function extractHelpNeeded(analysis) {
+  // Based on the analysis, determine what help is needed
+  const description = analysis.description || '';
+  
+  // Check for explicit help needed sections
+  const helpMatch = description.match(/(?:help needed|need help|require assistance)[:\s]*([^\n]+)/i);
+  if (helpMatch) {
+    return truncate(helpMatch[1].trim(), 300);
+  }
+  
+  // Generate based on content
+  const helpItems = [];
+  
+  if (description.toLowerCase().includes('bug') || description.toLowerCase().includes('error')) {
+    helpItems.push('• Confirm if this is a known issue or new bug');
+  }
+  if (description.toLowerCase().includes('config') || description.toLowerCase().includes('setting')) {
+    helpItems.push('• Verify correct configuration approach');
+  }
+  if (description.toLowerCase().includes('performance') || description.toLowerCase().includes('slow')) {
+    helpItems.push('• Review performance implications');
+  }
+  
+  if (helpItems.length === 0) {
+    helpItems.push('• Review the analysis and provide guidance');
+    helpItems.push('• Suggest best approach for customer response');
+  }
+  
+  return helpItems.join('\n');
+}
+
+function extractNextSteps(analysis) {
+  const description = analysis.description || '';
+  
+  // Look for next steps or recommendations
+  const patterns = [
+    /(?:next steps|recommendations|to resolve)[:\s]*\n((?:[-•\d].*\n?)+)/i,
+    /(?:suggest|recommend)[:\s]*\n((?:[-•\d].*\n?)+)/i,
+  ];
+  
+  for (const pattern of patterns) {
+    const match = description.match(pattern);
+    if (match && match[1]) {
+      const steps = match[1].trim().split('\n').slice(0, 4);
+      return steps.map(s => s.trim()).join('\n');
+    }
+  }
+  
+  // Default next steps
+  return `• Review analysis findings
+• Investigate identified code areas
+• Draft customer response
+• Escalate if needed`;
+}
+
+function truncate(str, maxLength) {
+  if (!str) return '';
+  if (str.length <= maxLength) return str;
+  return str.substring(0, maxLength - 3) + '...';
 }

@@ -23,7 +23,7 @@ export async function analyzeTicket(ticket, customPrompt = null) {
 async function analyzeWithDeepSearch(ticketContent, sourcegraphUrl, sourcegraphToken, customPrompt = null) {
     try {
         // Construct the question for Deep Search
-        const defaultPrompt = `Please assist with the below issue from a customer. Analyze this complete Zendesk support ticket conversation and provide helpful, actionable guidance. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
+        const defaultPrompt = `Please assist with the below issue from a customer. Analyze this complete Plain support thread conversation and provide helpful, actionable guidance. Pay special attention to any internal notes (marked as 'Internal Note') as they contain valuable context.
 
 You have access to the Sourcegraph codebase (github.com/sourcegraph/sourcegraph) and can research the issue thoroughly. Feel free to explore the codebase, look at relevant files, and provide comprehensive analysis based on your findings.
 
@@ -33,7 +33,7 @@ Please provide a natural, helpful response that:
 - References specific code or documentation when relevant
 - Suggests next steps for resolution
 
-Ticket #${ticketContent.id}: ${ticketContent.subject}
+Thread #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}`;
 
@@ -41,9 +41,9 @@ ${ticketContent.description}`;
         const question = customPrompt ? 
             `${customPrompt}
 
-For the following Zendesk ticket, please provide your analysis:
+For the following Plain thread, please provide your analysis:
 
-Ticket #${ticketContent.id}: ${ticketContent.subject}
+Thread #${ticketContent.id}: ${ticketContent.subject}
 
 ${ticketContent.description}` : 
             defaultPrompt;
@@ -82,7 +82,7 @@ async function createDeepSearchConversation(sourcegraphUrl, sourcegraphToken, qu
     return await response.json();
 }
 
-async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversationId, maxAttempts = 60, delayMs = 3000) {
+async function pollDeepSearchConversation(sourcegraphUrl, sourcegraphToken, conversationId, maxAttempts = 120, delayMs = 5000) {
     console.log(`🔄 Polling Deep Search conversation ${conversationId} (max ${maxAttempts} attempts, ${delayMs}ms delay)`);
     
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
